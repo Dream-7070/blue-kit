@@ -1,0 +1,1558 @@
+<!doctype html>
+<html lang="uz">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>blue-kit Boshlovchi Qo'llanmasi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans+Condensed:wght@600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,600;1,400&display=swap">
+<style>
+/* Layout: bitta o'qish ustuni (dala qo'llanmasi), yuqorida mundarija chiplari, vaziyatlar ochiladigan kartalar */
+:root {
+  --bg: #f2f4f6;
+  --surface: #ffffff;
+  --ink: #15202b;
+  --muted: #56636f;
+  --line: #d6dde3;
+  --accent: #1d5a86;
+  --accent-soft: #e2edf5;
+  --code-bg: #eaeff3;
+  --danger: #a8231b;
+  --danger-soft: #fbe9e7;
+  --warn: #8a5a00;
+  --warn-soft: #fbf1dc;
+  --ok: #1b6e3f;
+  --ok-soft: #e3f3e9;
+  --f-display: "IBM Plex Sans Condensed", "Arial Narrow", "Segoe UI", sans-serif;
+  --f-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", Consolas, "Cascadia Mono", monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0e1318; --surface: #151c23; --ink: #e2e8ed; --muted: #93a0ac; --line: #26313b;
+    --accent: #72b2df; --accent-soft: #152838; --code-bg: #1a232c;
+    --danger: #f08a80; --danger-soft: #2e1715; --warn: #e2b34a; --warn-soft: #2b2312;
+    --ok: #64c690; --ok-soft: #122a1c; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0e1318; --surface: #151c23; --ink: #e2e8ed; --muted: #93a0ac; --line: #26313b;
+  --accent: #72b2df; --accent-soft: #152838; --code-bg: #1a232c;
+  --danger: #f08a80; --danger-soft: #2e1715; --warn: #e2b34a; --warn-soft: #2b2312;
+  --ok: #64c690; --ok-soft: #122a1c; color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font: 16px/1.6 var(--f-body);
+  padding-inline: 16px; padding-block: 0 64px;
+}
+.wrap { max-width: 860px; margin: 0 auto; }
+h1, h2, h3 { font-family: var(--f-display); line-height: 1.2; text-wrap: balance; margin: 0; }
+h1 { font-size: 2.3rem; font-weight: 700; }
+h2 { font-size: 1.6rem; font-weight: 700; }
+h3 { font-size: 1.15rem; font-weight: 600; }
+p { margin: 0; }
+a { color: var(--accent); }
+code, kbd {
+  font-family: var(--f-mono); font-size: .88em; background: var(--code-bg);
+  padding: .08em .35em; border-radius: 4px; overflow-wrap: anywhere;
+}
+kbd { border: 1px solid var(--line); border-bottom-width: 2px; background: var(--surface); }
+b, strong { font-weight: 600; }
+
+/* sarlavha */
+.masthead { padding-block: 40px 20px; display: grid; gap: 12px; border-bottom: 1px solid var(--line); }
+.eyebrow { font: 600 .78rem/1 var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+.lede { font-size: 1.1rem; color: var(--muted); max-width: 62ch; }
+
+/* mundarija */
+.toc { display: flex; flex-wrap: wrap; gap: 8px; padding-block: 18px; }
+.toc a {
+  font-size: .88rem; text-decoration: none; color: var(--ink);
+  border: 1px solid var(--line); background: var(--surface);
+  padding: 5px 11px; border-radius: 999px;
+}
+.toc a:hover, .toc a:focus-visible { border-color: var(--accent); color: var(--accent); outline: none; }
+
+section { padding-block: 36px 8px; display: grid; gap: 16px; }
+section > h2 { display: flex; gap: 12px; align-items: baseline; }
+section > h2 .sn { font: 600 .9rem var(--f-mono); color: var(--accent); }
+.prose { display: grid; gap: 12px; max-width: 68ch; }
+ul, ol { margin: 0; padding-left: 1.3em; display: grid; gap: 6px; }
+
+/* uch ish */
+.three { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+.three > div { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; display: grid; gap: 6px; align-content: start; min-width: 0; }
+.three .k { font: 600 .78rem var(--f-mono); color: var(--accent); letter-spacing: .05em; }
+
+/* eslatma bloklari */
+.note { border-radius: 8px; padding: 12px 16px; display: grid; gap: 6px; border: 1px solid var(--line); background: var(--surface); }
+.note.danger { background: var(--danger-soft); border-color: transparent; }
+.note.danger .tag { color: var(--danger); }
+.note.warn { background: var(--warn-soft); border-color: transparent; }
+.note.warn .tag { color: var(--warn); }
+.note.ok { background: var(--ok-soft); border-color: transparent; }
+.note.ok .tag { color: var(--ok); }
+.tag { font: 600 .74rem var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+
+/* jadvallar */
+.tbl { overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
+table { border-collapse: collapse; width: 100%; font-size: .93rem; }
+th, td { text-align: left; vertical-align: top; padding: 9px 12px; border-bottom: 1px solid var(--line); }
+tr:last-child td { border-bottom: 0; }
+th { font: 600 .76rem var(--f-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); background: var(--code-bg); }
+td:first-child { font-weight: 600; white-space: nowrap; }
+td.wrap1 { white-space: normal; }
+
+/* qadamlar (haqiqiy ketma-ketlik) */
+.steps { list-style: none; padding: 0; margin: 0; display: grid; gap: 0; counter-reset: s; }
+.steps > li { counter-increment: s; display: grid; grid-template-columns: 38px 1fr; gap: 12px; padding-block: 12px; border-top: 1px solid var(--line); }
+.steps > li:first-child { border-top: 0; }
+.steps > li::before {
+  content: counter(s); font: 600 .95rem var(--f-mono); color: var(--accent);
+  width: 30px; height: 30px; border: 1.5px solid var(--accent); border-radius: 50%;
+  display: grid; place-items: center;
+}
+.steps > li > div { display: grid; gap: 6px; min-width: 0; }
+.if { font-size: .92rem; color: var(--muted); }
+.if b { color: var(--ink); }
+
+/* buyruq bloki */
+.cmd { position: relative; background: var(--code-bg); border-radius: 6px; min-width: 0; }
+.cmd pre { margin: 0; padding: 10px 70px 10px 12px; overflow-x: auto; font: .86rem/1.5 var(--f-mono); white-space: pre; }
+.cmd button {
+  position: absolute; top: 6px; right: 6px; font: 600 .72rem var(--f-mono);
+  border: 1px solid var(--line); background: var(--surface); color: var(--muted);
+  border-radius: 4px; padding: 3px 8px; cursor: pointer;
+}
+.cmd button:hover, .cmd button:focus-visible { color: var(--accent); border-color: var(--accent); outline: none; }
+
+/* katta yo'l */
+.road { display: grid; gap: 10px; }
+.road .leg { display: grid; grid-template-columns: 110px 1fr; gap: 14px; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; }
+.road .when { font: 600 .8rem/1.3 var(--f-mono); color: var(--accent); }
+.road .leg > div { display: grid; gap: 6px; min-width: 0; }
+@media (max-width: 560px) { .road .leg { grid-template-columns: 1fr; gap: 6px; } }
+
+/* vaziyatlar */
+.finder { display: grid; gap: 8px; position: sticky; top: env(safe-area-inset-top, 0px); background: var(--bg); padding-block: 10px; z-index: 2; }
+.finder input {
+  width: 100%; font: 1rem var(--f-body); padding: 10px 14px; border-radius: 8px;
+  border: 1.5px solid var(--line); background: var(--surface); color: var(--ink);
+}
+.finder input:focus { outline: none; border-color: var(--accent); }
+.finder small { color: var(--muted); }
+.group { display: grid; gap: 8px; }
+.group > h3 { padding-top: 14px; color: var(--muted); font-size: .95rem; letter-spacing: .04em; text-transform: uppercase; }
+details.sit { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; }
+details.sit[open] { border-color: var(--accent); }
+details.sit > summary {
+  cursor: pointer; list-style: none; padding: 12px 16px; display: grid; grid-template-columns: auto 1fr auto; gap: 10px; align-items: baseline;
+}
+details.sit > summary::-webkit-details-marker { display: none; }
+details.sit > summary .id { font: 600 .78rem var(--f-mono); color: var(--accent); }
+details.sit > summary .q { font-weight: 600; }
+details.sit > summary .where { font: .74rem var(--f-mono); color: var(--muted); white-space: nowrap; }
+details.sit > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; border-radius: 8px; }
+details.sit .body { padding: 0 16px 16px; display: grid; gap: 10px; min-width: 0; }
+details.sit .body ol, details.sit .body ul { gap: 5px; }
+.lbl { font: 600 .72rem var(--f-mono); letter-spacing: .07em; text-transform: uppercase; color: var(--muted); }
+.empty { color: var(--muted); padding: 12px 0; }
+@media (max-width: 560px) { details.sit > summary { grid-template-columns: auto 1fr; } details.sit > summary .where { grid-column: 2; } }
+
+.gnav { display: flex; flex-wrap: wrap; gap: 6px; }
+.gnav a { font: 600 .78rem var(--f-mono); text-decoration: none; color: var(--accent); background: var(--accent-soft); padding: 4px 10px; border-radius: 4px; }
+.gnav a:hover, .gnav a:focus-visible { outline: 1.5px solid var(--accent); }
+.gnote { color: var(--muted); font-size: .92rem; }
+dl.kv { margin: 0; display: grid; grid-template-columns: 118px 1fr; gap: 8px 14px; }
+dl.kv dt { font: 600 .72rem/1.9 var(--f-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+dl.kv dd { margin: 0; min-width: 0; }
+dl.kv dd .cmd { margin-top: 6px; }
+@media (max-width: 560px) { dl.kv { grid-template-columns: 1fr; gap: 2px; } dl.kv dd { margin-bottom: 8px; } }
+section, .group, .prose, details.sit .body, .steps > li > div, .road .leg > div, ul, ol { grid-template-columns: minmax(0, 1fr); }
+li { min-width: 0; }
+details.sit, .tbl, .cmd { min-width: 0; max-width: 100%; }
+footer { margin-top: 48px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font-size: .88rem; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+</style>
+
+<div class="wrap">
+
+<header class="masthead">
+  <span class="eyebrow">blue-kit · CTF final 5–6 oktabr 2026</span>
+  <h1>blue-kit: noldan boshlab</h1>
+  <p class="lede">Bu qo'llanma toolni hech qachon ko'rmagan odam uchun. Har bir bo'limda: qanday vaziyat bo'lsa, qaysi tugmani bosish, qaysi buyruqni yozish va natijani qanday o'qish kerak. 8-bo'limda 82 ta vaziyat bor, qidiruv bilan toping.</p>
+</header>
+
+<nav class="toc" aria-label="Mundarija">
+  <a href="#nima">1 · Bu nima</a>
+  <a href="#soz">2 · So'zlar</a>
+  <a href="#ornatish">3 · Birinchi marta</a>
+  <a href="#ishga">4 · Ishga tushirish</a>
+  <a href="#ekran">5 · Ekran xaritasi</a>
+  <a href="#rollar">6 · Rollar</a>
+  <a href="#yol">7 · Musobaqa kuni</a>
+  <a href="#vaziyat">8 · Agar … bo'lsa</a>
+  <a href="#xato">9 · Muammo chiqsa</a>
+  <a href="#qoida">10 · Oltin qoidalar</a>
+  <a href="#shpargalka">11 · Shpargalka</a>
+  <a href="#mashq">12 · Mashq</a>
+</nav>
+
+<!-- 1 -->
+<section id="nima">
+  <h2><span class="sn">01</span>Bu nima</h2>
+  <div class="prose">
+    <p><b>blue-kit</b> bitta papkadagi asboblar to'plami. Internet kerak emas, Python kerak emas. Hammasi <code>bk.exe</code> ichida.</p>
+    <p>U uchta ish qiladi:</p>
+  </div>
+  <div class="three">
+    <div><span class="k">TOPADI</span><p>Loglarni o'qiydi va hujum izlarini topadi. Har bir izga <b>ATT&amp;CK ID</b> beradi (masalan <code>T1059.001</code>). Musobaqada javob shu ID bo'ladi.</p></div>
+    <div><span class="k">TOZALAYDI</span><p>Buzilgan kompyuterdan "rasm" (snapshot) oladi, shubhali narsalarni ko'rsatadi va ularni tozalash buyruqlarini yozib beradi.</p></div>
+    <div><span class="k">YOZADI</span><p>Topilganlardan o'zbek, rus yoki ingliz tilida rasmiy hisobot tuzadi.</p></div>
+  </div>
+  <div class="note warn">
+    <span class="tag">Eng muhim gap</span>
+    <p>Tool <b>hech narsani o'zi o'chirmaydi va o'zi bloklamaydi.</b> U faqat buyruqni yozib beradi. Buyruqni siz o'qiysiz, tushunasiz va o'zingiz bajarasiz.</p>
+  </div>
+  <div class="prose">
+    <p><b>Musobaqa qanday baholanadi</b> (o'tgan yilgi format, takrorlanishi mumkin):</p>
+    <ul>
+      <li>Savolga javob sifatida ATT&amp;CK ID topshiriladi. Har savolga <b>urinishlar soni cheklangan</b>.</li>
+      <li>Hujumni <b>birinchi tuzatgan</b> jamoa ball oladi, boshqalar tuzatguncha ball yig'ilaveradi.</li>
+      <li>Xizmatlar (sayt, server) <b>ishlab turishi</b> ham ball beradi. O'chirib qo'ysangiz ball ketadi.</li>
+      <li>1-kun: phishing → buxgalter akkaunti → soxta pul o'tkazmasi. 2-kun: zavod (ICS/OT) xizmati.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 2 -->
+<section id="soz">
+  <h2><span class="sn">02</span>So'zlar lug'ati</h2>
+  <p class="prose">Qo'llanmada shu so'zlar ko'p uchraydi. Bir marta o'qib chiqing.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>So'z</th><th>Oddiy tilda</th></tr></thead>
+    <tbody>
+      <tr><td>Log</td><td class="wrap1">Kompyuter yoki server yozib boradigan kundalik: kim kirdi, qaysi dastur ishga tushdi, qayerga ulandi.</td></tr>
+      <tr><td>SIEM</td><td class="wrap1">Hamma loglar yig'iladigan markaziy tizim (QRadar, Splunk, Kibana/ELK, Wazuh…). Undan so'rov yozib log olasiz.</td></tr>
+      <tr><td>Host</td><td class="wrap1">Tarmoqdagi bitta kompyuter yoki server (masalan <code>WS07</code>, <code>web-prod-01</code>).</td></tr>
+      <tr><td>ATT&amp;CK ID</td><td class="wrap1">Hujum usulining xalqaro raqami. <code>T1059</code> ota-texnika, <code>T1059.001</code> uning sub-texnikasi (PowerShell). ICS da <code>T0xxx</code>.</td></tr>
+      <tr><td>Revoked</td><td class="wrap1">Eskirgan ID. ATT&amp;CK v19 da ko'p raqam o'zgargan. Eski ID topshirilsa urinish behuda ketadi.</td></tr>
+      <tr><td>Snapshot</td><td class="wrap1">Kompyuterning ayni daqiqadagi "rasmi": xizmatlar, vazifalar, akkauntlar, ulanishlar, jarayonlar. JSON fayl.</td></tr>
+      <tr><td>Baseline / T0</td><td class="wrap1">Solishtirish uchun birinchi snapshot. Keyingi snapshotda yangi paydo bo'lgan narsa shubhali.</td></tr>
+      <tr><td>Triage</td><td class="wrap1">Snapshotdagi narsalarni "qanchalik shubhali" bo'yicha saralash.</td></tr>
+      <tr><td>Fix / Remediation</td><td class="wrap1">Tozalash buyruqlari: BACKUP, REMOVE, VERIFY, ROLLBACK.</td></tr>
+      <tr><td>Checker</td><td class="wrap1">Tashkilotchilarning ball hisoblovchi boti. Xizmatlaringizni tashqaridan tekshiradi. <b>Uni hech qachon bloklamang.</b></td></tr>
+      <tr><td>SLA</td><td class="wrap1">Xizmat tirikmi yoki o'likmi degan kuzatuv.</td></tr>
+      <tr><td>IOC</td><td class="wrap1">Hujum belgisi: IP, domen, fayl nomi, hash.</td></tr>
+      <tr><td>Beacon / C2</td><td class="wrap1">Zararli dastur hujumchi serveriga muntazam (masalan har 60 soniyada) "men shu yerdaman" deb ulanishi.</td></tr>
+      <tr><td>Hunt</td><td class="wrap1">Tayyor qidiruv stsenariysi. Masalan <code>exfil-large-upload</code>: tashqariga katta hajm yuborilganmi.</td></tr>
+      <tr><td>Preset</td><td class="wrap1">Log formatining nomi (<code>ecs</code>, <code>qradar</code>, <code>splunk</code>…). Tool ustunlarni to'g'ri tushunishi uchun.</td></tr>
+      <tr><td>Protected</td><td class="wrap1">"Tegmang" ro'yxati: checker IP, admin akkaunt, baholanadigan xizmat.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- 3 -->
+<section id="ornatish">
+  <h2><span class="sn">03</span>Birinchi marta: o'rnatish</h2>
+  <p class="prose">Har bir jamoa a'zosining noutbugida bir marta qilinadi. 15 daqiqa. Musobaqadan <b>oldin</b> qiling.</p>
+  <ol class="steps">
+    <li><div>
+      <p><b>ZIP ni blokdan chiqaring.</b> ZIP faylga o'ng tugma → <b>Properties</b> → pastdagi <b>Unblock</b> katagini belgilang → OK.</p>
+      <p class="if"><b>Agar qilmasangiz:</b> Windows ichidagi fayllarni "internetdan kelgan" deb bloklaydi va <code>bk.exe</code> ochilmaydi.</p>
+    </div></li>
+    <li><div>
+      <p><b>Oching:</b> <code>C:\blue-kit\</code> papkasiga.</p>
+      <p class="if"><b>Qilmang:</b> Desktop, OneDrive, "Загрузки" ichiga ochish. Papka nomida bo'sh joy va kirill harf bo'lmasin. <code>data</code> papkasi <code>bk.exe</code> bilan yonma-yon turishi shart.</p>
+    </div></li>
+    <li><div>
+      <p><b>Windows Defender istisnosi.</b> Kit ichida haqiqiy hujum namunalari bor, Defender ularni o'chirib yuboradi. <b>Admin PowerShell</b> oching va yozing:</p>
+      <div class="cmd"><pre>Add-MpPreference -ExclusionPath "C:\blue-kit"</pre></div>
+      <p>Tekshirish (ro'yxatda <code>C:\blue-kit</code> chiqishi kerak):</p>
+      <div class="cmd"><pre>Get-MpPreference | Select-Object -ExpandProperty ExclusionPath</pre></div>
+      <p class="if"><b>Agar admin huquqi bo'lmasa:</b> jamoa sardoriga ayting. Istisnosiz kit "kecha ishlayotgan edi" deb jim buziladi.</p>
+    </div></li>
+    <li><div>
+      <p><b>Birinchi ishga tushirish.</b> <code>bk.exe</code> imzolanmagan. "Windows protected your PC" chiqsa: <b>More info</b> → <b>Run anyway</b>.</p>
+    </div></li>
+    <li><div>
+      <p><b>Avtomatik tekshiruv.</b> <code>TEKSHIRUV.bat</code> ni ikki marta bosing.</p>
+      <p class="if"><b>Kutilgan natija:</b> <code>NATIJA: HAMMASI JOYIDA</code> (9/9). <b>Agar XATO chiqsa:</b> 3-qadamdagi Defender istisnosini tekshiring, keyin <code>data</code> papkasi joyidami qarang.</p>
+    </div></li>
+    <li><div>
+      <p><b>Chuqur tekshiruv.</b> <code>CLI-oyna.bat</code> ni oching va yozing:</p>
+      <div class="cmd"><pre>bk.exe doctor</pre></div>
+      <p class="if"><b>Kutilgan:</b> oxirgi qatorda <code>HAMMASI JOYIDA</code>. Qaysidir qator <code>OK</code> emas bo'lsa, o'sha qator nomini jamoaga ayting.</p>
+    </div></li>
+  </ol>
+</section>
+
+<!-- 4 -->
+<section id="ishga">
+  <h2><span class="sn">04</span>Har safar ishga tushirish</h2>
+  <div class="tbl"><table>
+    <thead><tr><th>Fayl</th><th>Nima qiladi</th><th>Qachon</th></tr></thead>
+    <tbody>
+      <tr><td>WEB-UI.bat</td><td class="wrap1">Qora oyna ochiladi (server), keyin brauzerda <code>http://localhost:8000</code>. Asosiy ish shu yerda.</td><td class="wrap1">Har kuni birinchi</td></tr>
+      <tr><td>CLI-oyna.bat</td><td class="wrap1">Buyruq yozish oynasi. Papka allaqachon kit papkasi bo'ladi.</td><td class="wrap1">Buyruq kerak bo'lganda</td></tr>
+      <tr><td>TEKSHIRUV.bat</td><td class="wrap1">9 ta avtomatik tekshiruv.</td><td class="wrap1">Kit shubhali ishlasa</td></tr>
+      <tr><td>PLAYBOOK.html</td><td class="wrap1">Stsenariy bo'yicha qo'llanma (1-kun fraud, 2-kun ICS).</td><td class="wrap1">Rejalashtirishda</td></tr>
+      <tr><td>RESPONDER_QOLLANMA.md</td><td class="wrap1">Responder roli uchun batafsil qo'llanma.</td><td class="wrap1">Responder bo'lsangiz</td></tr>
+    </tbody>
+  </table></div>
+  <div class="note danger">
+    <span class="tag">Qora oynani yopmang</span>
+    <p>WEB-UI.bat ochgan qora oyna bu server. U yopilsa brauzerdagi sahifa ishlamay qoladi. Brauzerni yopish esa serverni to'xtatmaydi.</p>
+  </div>
+  <div class="prose">
+    <p><b>Brauzer eski ko'rinishda qolsa</b> (kit yangilangandan keyin): <kbd>Ctrl</kbd>+<kbd>F5</kbd>.</p>
+    <p><b>"Port band" xatosi chiqsa:</b> CLI-oyna.bat da <code>bk.exe web --port 8010</code> yozing va brauzerda <code>http://localhost:8010</code> ni oching.</p>
+    <p><b>Fayllarni qayerga qo'yish:</b> SIEM dan yuklab olingan loglar va snapshotlarni kit ichidagi <code>web-work</code> papkasiga (yoki <code>case\sana\</code> papkasiga) saqlang. Web UI dagi fayl yo'li maydonlari <code>web-work</code> ga nisbatan o'qiydi, fayl tanlash tugmasi esa istalgan joydan oladi.</p>
+    <p><b>Vaqt:</b> tool vaqtni <b>logda qanday bo'lsa, shunday</b> ko'rsatadi. Logdagi vaqt boshqa zonada bo'lsa, zonasi va yonida qavs ichida Toshkent vaqti chiqadi: <code>2026-09-18 08:00:02 UTC (Toshkent 13:00:02)</code>. Zonasiz vaqt (<code>2026-10-05 14:20:00</code>) qavssiz, o'zgarishsiz chiqadi. Hodisalar ichkarida haqiqiy vaqt bo'yicha tartiblanadi, shuning uchun har xil zonadagi loglar aralashmaydi. Zonasi yozilmagan log vaqtlari (Kibana CSV, syslog, Excel) Toshkent deb olinadi; ular boshqa zonada bo'lsa: CLI da <code>--src-tz utc</code>, web da Logs tabidagi "Zonasiz vaqtlar" tanlagichi.</p>
+    <p><b>cmd yoki PowerShell:</b> <code>CLI-oyna.bat</code> cmd oynasini ochadi. <code>bk.exe …</code> buyruqlari ikkalasida ham ishlaydi, lekin <code>(Get-ChildItem …)</code>, <code>New-Item</code>, <code>Invoke-Command</code> kabi buyruqlar faqat PowerShell da ishlaydi. Kerak bo'lsa CLI-oyna ichida <code>powershell</code> deb yozing, papka o'zgarmaydi.</p>
+    <p><b>Jamoa bilan ishlash:</b> Tracker va Playbook butun jamoa uchun bitta bo'lishi uchun web UI ni Kapitan noutbukida ochib, boshqalar unga ulanadi (<a href="#X4">X4</a>).</p>
+  </div>
+</section>
+
+<!-- 5 -->
+<section id="ekran">
+  <h2><span class="sn">05</span>Ekran xaritasi: 9 ta tab</h2>
+  <p class="prose">Web UI tepasida 9 ta tab bor. Har biri bitta ish uchun.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Tab</th><th>Nima qiladi</th><th>Qachon ochasiz</th></tr></thead>
+    <tbody>
+      <tr><td>📋 Playbook</td><td class="wrap1">Musobaqaning hamma qadamlari ro'yxati (6 faza). Qadamni "Bajarildi" deb belgilaysiz, holat saqlanadi.</td><td class="wrap1">Boshida va har qadamdan keyin</td></tr>
+      <tr><td>📖 KB (ATT&amp;CK)</td><td class="wrap1">ATT&amp;CK bazasi: matndan texnika topish, ID ni tekshirish (revoked), IOC turi, keyingi bosqich bashorati.</td><td class="wrap1">ID topshirishdan oldin har doim</td></tr>
+      <tr><td>📊 Logs Analyzer</td><td class="wrap1">Log faylni tahlil qiladi: vaqt chizig'i, texnikalar, IOC, checkerlar.</td><td class="wrap1">Log fayl qo'lingizga tushganda</td></tr>
+      <tr><td>⚡ IR Attack Chain</td><td class="wrap1">Bir nechta logdan hujumni boshidan oxirigacha bitta zanjirga yig'adi.</td><td class="wrap1">Qaysi hostlar va qaysi tartibda buzilganini bilish uchun</td></tr>
+      <tr><td>🛰 C2 Hunt</td><td class="wrap1">Firewall/proxy logidan muntazam tashqariga ulanadigan (beacon) hostlarni topadi.</td><td class="wrap1">"Hujumchi serveri qaysi?" degan savolda</td></tr>
+      <tr><td>🔍 SIEM So'rov</td><td class="wrap1">SIEM ingiz tilida tayyor qidiruv so'rovi yozib beradi (12 ta SIEM).</td><td class="wrap1">SIEM ga kirdingiz, nima qidirishni bilmaysiz</td></tr>
+      <tr><td>🛡 Responder</td><td class="wrap1">Snapshot tahlili, tozalash buyruqlari, fraud tekshiruvi, xizmat tashxisi, SLA.</td><td class="wrap1">Hostni tozalash yoki xizmatni tiklash kerak</td></tr>
+      <tr><td>🎯 CTF Tracker</td><td class="wrap1">Savollar doskasi: nomzod javob, dalil, urinishlar soni. Dublikat va limitdan ogohlantiradi.</td><td class="wrap1">Har bir javobni topshirishdan oldin va keyin</td></tr>
+      <tr><td>📑 Report Generator</td><td class="wrap1">Rasmiy hisobot (uz / ru / en).</td><td class="wrap1">Kun oxirida yoki hisobot so'ralganda</td></tr>
+    </tbody>
+  </table></div>
+  <div class="note">
+    <span class="tag">Sinab ko'rish tugmalari</span>
+    <p>Logs Analyzer, IR Attack Chain va Responder tablarida <b>⚡ Namuna</b> tugmasi bor. U tayyor misolni yuklaydi. Birinchi kuni har bir tabda shu tugmani bosib, natija qanday ko'rinishini ko'rib chiqing.</p>
+  </div>
+</section>
+
+<!-- 6 -->
+<section id="rollar">
+  <h2><span class="sn">06</span>Jamoadagi rollar</h2>
+  <div class="tbl"><table>
+    <thead><tr><th>Rol</th><th>Vazifasi</th><th>Asosiy tablar</th></tr></thead>
+    <tbody>
+      <tr><td>Hunter-1</td><td class="wrap1">Windows / Active Directory loglari</td><td class="wrap1">SIEM So'rov, Logs Analyzer, KB</td></tr>
+      <tr><td>Hunter-2</td><td class="wrap1">Linux / web / tarmoq loglari</td><td class="wrap1">SIEM So'rov, Logs Analyzer, C2 Hunt</td></tr>
+      <tr><td>Responder</td><td class="wrap1">Hostlarga kirib tozalaydi, xizmatlar tirikligini kuzatadi</td><td class="wrap1">Responder, Playbook</td></tr>
+      <tr><td>Kapitan</td><td class="wrap1">Javoblarni tekshiradi va topshiradi, vaqtni boshqaradi</td><td class="wrap1">CTF Tracker, KB, IR Attack Chain, Report</td></tr>
+    </tbody>
+  </table></div>
+  <p class="prose">Responder log tahlil qilmaydi. Hunter hostdagi narsani o'chirmaydi. ID ni faqat Kapitan topshiradi. Shunda bir ID ikki marta topshirilmaydi.</p>
+</section>
+
+<!-- 7 -->
+<section id="yol">
+  <h2><span class="sn">07</span>Musobaqa kuni: katta yo'l</h2>
+  <p class="prose">Butun kun shu tartibda o'tadi. Har bosqichning batafsili 8-bo'limdagi vaziyatlarda (havola bilan). Birinchi 15 daqiqa uchun: <a href="#S4">S4</a>.</p>
+  <div class="road">
+    <div class="leg"><span class="when">0 · Start oldidan</span><div>
+      <p>Tashkilotchilardan 5 savolni so'rang (pastda). Har bir hostdan <b>T0 snapshot</b> oling (<a href="#R1">R1</a>). Checker IP ni aniqlab "tegmang" ro'yxatiga qo'ying (<a href="#R2">R2</a>). SLA kuzatuvini alohida oynada yoqing (<a href="#F3">F3</a>).</p>
+    </div></div>
+    <div class="leg"><span class="when">1 · Log olish</span><div>
+      <p>SIEM So'rov tabida so'rov yasang, SIEM ga qo'ying, natijani CSV qilib eksport qiling (<a href="#L8">L8</a>).</p>
+    </div></div>
+    <div class="leg"><span class="when">2 · Tahlil</span><div>
+      <p>Har bir faylni Logs Analyzer da tahlil qiling (<a href="#L1">L1</a>). Natija JSON ini saqlang, u Responderga kerak.</p>
+    </div></div>
+    <div class="leg"><span class="when">3 · Zanjir</span><div>
+      <p>Hamma fayllarni IR Attack Chain ga bering: qaysi host, qaysi tartibda, qaysi texnika (<a href="#L7">L7</a>).</p>
+    </div></div>
+    <div class="leg"><span class="when">4 · Javob</span><div>
+      <p>Har bir ID ni KB da tekshiring (<a href="#J2">J2</a>), Tracker ga yozing (<a href="#J5">J5</a>), keyin topshiring.</p>
+    </div></div>
+    <div class="leg"><span class="when">5 · Tozalash</span><div>
+      <p>Buzilgan hostdan yangi snapshot → Triage → tozalash buyruqlari → BACKUP → jurnal → qo'lda bajarish → tekshirish (<a href="#R3">R3</a>, <a href="#F1">F1</a>).</p>
+    </div></div>
+    <div class="leg"><span class="when">6 · Hisobot</span><div>
+      <p>Report Generator da hisobot tuzing (<a href="#X1">X1</a>).</p>
+    </div></div>
+  </div>
+  <div class="note">
+    <span class="tag">Start oldidan tashkilotchilarga 5 savol</span>
+    <ol>
+      <li>Ota-texnika (<code>T1059</code>) qabul qilinadimi yoki faqat sub-texnika (<code>T1059.001</code>)?</li>
+      <li>Bitta savolga nechta urinish? Noto'g'ri javob uchun jarima bormi?</li>
+      <li>Qaysi xizmatlar ishlab turishi baholanadi va qaysi portdan tekshiriladi?</li>
+      <li>SIEM dan loglarni eksport qilish mumkinmi? Qaysi formatda?</li>
+      <li>ATT&amp;CK ning qaysi versiyasi bo'yicha baholanadi? (v19 da raqamlar o'zgargan.)</li>
+    </ol>
+  </div>
+</section>
+
+<!-- 8 -->
+<section id="vaziyat">
+  <h2><span class="sn">08</span>Agar … bo'lsa, nima qilaman</h2>
+  <p class="prose">Vaziyatingizni toping va kartani oching. Kartalar 7 guruhda: start va ulanish, loglar, javoblar, hujum turlari, snapshot, tozalash, jamoa ishi. Har kartada: qayerda, qadamlar, buyruq va natijani qanday o'qish.</p>
+
+  <div class="finder">
+    <label for="sit-q" class="lbl">Vaziyatni qidirish</label>
+    <input id="sit-q" type="search" placeholder="Masalan: mimikatz, kibana, rad etildi, parol, qaytib keldi, bloklash" autocomplete="off">
+    <small id="sit-count"></small>
+  </div>
+
+  <nav class="gnav" aria-label="Guruhlar">
+    <a href="#g-s">S · Start</a><a href="#g-l">L · Loglar</a><a href="#g-j">J · Javoblar</a><a href="#g-h">H · Hujum turlari</a><a href="#g-r">R · Snapshot</a><a href="#g-f">F · Tozalash</a><a href="#g-x">X · Jamoa</a>
+  </nav>
+
+  <div id="sits">
+
+  <!-- S -->
+  <div class="group" id="g-s">
+    <h3>S · Start, ulanish va tayyorgarlik</h3>
+
+    <details class="sit" id="S1"><summary><span class="id">S1</span><span class="q">Noutbukni tarmoqqa uladim, lekin SIEM yoki hostlar ochilmayapti</span><span class="where">tarmoq</span></summary><div class="body">
+      <ol>
+        <li>IP oldingizmi: <code>ipconfig</code>. <code>169.254.x.x</code> chiqsa, kabel yoki DHCP ishlamayapti. Kabelni qayta ulang, tashkilotchidan statik IP so'rang.</li>
+        <li>Tashkilotchi bergan manzilni aniq yozing: <code>https://</code> yoki <code>http://</code>, port (<code>:5601</code>, <code>:443</code>).</li>
+        <li>Brauzerda proksi yoqilmagan bo'lsin. VPN, Wi-Fi o'chiq bo'lsin (ikki tarmoq chalkashtiradi).</li>
+        <li>Sertifikat ogohlantirishi chiqsa, bu odatiy (ichki sertifikat). "Advanced" → davom eting.</li>
+        <li>Host javob beradimi: <code>ping 10.10.20.11</code>, port ochiqmi: <code>Test-NetConnection 10.10.20.11 -Port 3389</code> (PowerShell).</li>
+      </ol>
+      <p class="if">Hech biri yordam bermasa, 5 daqiqadan ko'p vaqt yo'qotmang, tashkilotchiga ayting.</p>
+    </div></details>
+
+    <details class="sit" id="S2"><summary><span class="id">S2</span><span class="q">Qaysi hostlar borligini, tarmoq xaritasini bilmayman</span><span class="where">📊 Logs + tashkilotchi</span></summary><div class="body">
+      <ul>
+        <li>Tashkilotchi bergan hujjatni (hostlar ro'yxati, IP lar, loginlar) birinchi o'qing va Tracker ga yozib qo'ying.</li>
+        <li>SIEM dan bir soatlik umumiy eksport oling va Logs Analyzer ga bering. Natijadagi <b>Hosts</b> ro'yxati tarmoqdagi hostlarni ko'rsatadi.</li>
+        <li>Snapshotlar olingach: <code>bk.exe resp discover</code> qaysi host qaysi portlarni tinglashini va kim ularga ulanishini aytadi (<a href="#R2">R2</a>).</li>
+      </ul>
+    </div></details>
+
+    <details class="sit" id="S3"><summary><span class="id">S3</span><span class="q">Qaysi xizmatlar ball uchun tekshirilishini bilmayman</span><span class="where">tashkilotchi + 📊 Logs</span></summary><div class="body">
+      <ol>
+        <li>Tashkilotchidan so'rang (7-bo'limdagi 3-savol).</li>
+        <li>Javob bo'lmasa: checker nimaga murojaat qilsa, o'sha baholanadi. Logs Analyzer natijasidagi <b>Checkers</b> IP lari qaysi host:port larga ulanganini ko'ring.</li>
+        <li><code>bk.exe resp discover … --sla-out services.yaml</code> shu ro'yxatni avtomatik yozadi (<a href="#R2">R2</a>).</li>
+      </ol>
+    </div></details>
+
+    <details class="sit" id="S4"><summary><span class="id">S4</span><span class="q">Musobaqa boshlandi. Birinchi 15 daqiqada nima qilamiz?</span><span class="where">butun jamoa</span></summary><div class="body">
+      <ol>
+        <li><b>Kapitan:</b> tashkilotchiga 5 savol, web UI ni jamoaga ochish (<a href="#X4">X4</a>), Tracker ga savollarni kiritish.</li>
+        <li><b>Responder:</b> har hostdan T0 snapshot (<a href="#R1">R1</a>), checker va xizmatlar ro'yxati (<a href="#R2">R2</a>), SLA oynasi (<a href="#F3">F3</a>).</li>
+        <li><b>Hunter-1/2:</b> SIEM ga kirish (<a href="#S1">S1</a>), birinchi eksport, Logs Analyzer (<a href="#L1">L1</a>).</li>
+      </ol>
+      <p class="if">Birinchi soatda hech narsani bloklamang va o'chirmang. Avval checker kimligini bilib oling.</p>
+    </div></details>
+
+    <details class="sit" id="S5"><summary><span class="id">S5</span><span class="q">Kit mening noutbukimda yo'q yoki yangi noutbuk berildi</span><span class="where">portable zip</span></summary><div class="body">
+      <ol>
+        <li>USB dagi <code>blue-kit-portable-*.zip</code> ni oling.</li>
+        <li>3-bo'limdagi 6 qadamni bajaring (Unblock, <code>C:\blue-kit</code>, Defender, TEKSHIRUV.bat).</li>
+        <li>Jamoa web UI si Kapitan noutbukida ochiq bo'lsa (<a href="#X4">X4</a>), o'z serveringiz shart emas: brauzerda Kapitan manzilini oching.</li>
+      </ol>
+    </div></details>
+  </div>
+
+  <!-- L -->
+  <div class="group" id="g-l">
+    <h3>L · Loglar va tahlil</h3>
+
+    <details class="sit" id="L1"><summary><span class="id">L1</span><span class="q">Menga log fayl berildi (CSV / JSON / LOG)</span><span class="where">📊 Logs Analyzer</span></summary><div class="body">
+      <ol>
+        <li><b>📊 Logs Analyzer</b> tabini oching.</li>
+        <li>Fayl tanlash tugmasi orqali faylni tanlang (yoki <code>web-work</code> dagi fayl nomini yozing).</li>
+        <li><b>🚀 Tahlilni Boshlash</b> ni bosing. 15 000 qatorli log taxminan 6 soniyada tayyor bo'ladi.</li>
+        <li>Natija chiqqach, tepadagi <b>💾 Responder uchun JSON yuklab olish</b> tugmasini bosing. Bu fayl keyin Responder va Report ga kerak.</li>
+      </ol>
+      <span class="lbl">Natijani o'qish</span>
+      <ul>
+        <li><b>Jami hodisalar</b>: nechta yozuv o'qildi.</li>
+        <li><b>Zanjirlar</b>: har bir host bo'yicha hujum ketma-ketligi. "hujum belgisi yo'q" degan hostlar toza ko'rinadi.</li>
+        <li><b>Texnikalar</b>: ATT&amp;CK ID lar. <code>high</code> ishonchlilar birinchi navbatda Kapitanga.</li>
+        <li><b>Checkers</b>: davriy (bir xil oraliqda takrorlanadigan) ulanishlar. Bu ball hisoblovchi bot ham, hujumchining C2 kanali ham bo'lishi mumkin. Yo'nalishiga qarang: tashqaridan bizning serverga kelsa, checker (bloklamang); bizning hostdan internetga ketsa, C2 nomzodi. Responder "Bridge" shu qoidani o'zi qo'llaydi (<a href="#R5">R5</a>).</li>
+      </ul>
+      <span class="lbl">CLI</span>
+      <div class="cmd"><pre>bk.exe logs analyze web-work\export.csv --json-out out\export.json --out out\export.html</pre></div>
+    </div></details>
+
+    <details class="sit" id="L2"><summary><span class="id">L2</span><span class="q">Bir nechta turli log bor (SIEM + firewall + web + pochta)</span><span class="where">📊 Logs Analyzer</span></summary><div class="body">
+      <ol>
+        <li>Fayl tanlash oynasida <kbd>Ctrl</kbd> ni bosib turib hamma fayllarni belgilang.</li>
+        <li><b>🚀 Tahlilni Boshlash</b>. Tool hammasini bitta vaqt chizig'iga birlashtiradi.</li>
+        <li>Natijadagi <b>Cross-source IOCs</b> (bir nechta manbada uchragan IP/domen) eng qimmatli qism: bir IP ham firewallda, ham web logda bo'lsa, u deyarli aniq hujumchi.</li>
+      </ol>
+      <span class="lbl">CLI</span>
+      <div class="cmd"><pre>bk.exe logs analyze siem.json@ecs firewall.csv access.log --json-out out\hammasi.json</pre></div>
+      <p class="if"><code>fayl@preset</code> shakli har bir faylga alohida format beradi.</p>
+    </div></details>
+
+    <details class="sit" id="L3"><summary><span class="id">L3</span><span class="q">Natija g'alati: host yoki IP noto'g'ri, ustunlar aralashgan</span><span class="where">CLI</span></summary><div class="body">
+      <p>Tool ustunlarni noto'g'ri tushungan. Bunga odatda format (preset) sabab bo'ladi.</p>
+      <ol>
+        <li>Fayldagi ustunlarni ko'ring: <div class="cmd"><pre>bk.exe logs columns web-work\export.csv</pre></div></li>
+        <li>Formatni aniq ko'rsatib qayta tahlil qiling: <div class="cmd"><pre>bk.exe logs analyze web-work\export.json --preset ecs --json-out out\export.json</pre></div></li>
+      </ol>
+      <div class="tbl"><table>
+        <thead><tr><th>Log qayerdan</th><th>Preset</th></tr></thead>
+        <tbody>
+          <tr><td>Elasticsearch / Kibana (ECS)</td><td><code>ecs</code></td></tr>
+          <tr><td>QRadar</td><td><code>qradar</code></td></tr>
+          <tr><td>Splunk</td><td><code>splunk</code></td></tr>
+          <tr><td>Microsoft Sentinel / Defender</td><td><code>sentinel</code></td></tr>
+          <tr><td>Wazuh</td><td><code>wazuh</code></td></tr>
+          <tr><td>ArcSight / CEF</td><td><code>cef</code></td></tr>
+          <tr><td>Graylog</td><td><code>graylog</code></td></tr>
+          <tr><td>Hayabusa CSV</td><td><code>hayabusa</code></td></tr>
+          <tr><td>EvtxECmd CSV</td><td><code>evtxecmd</code></td></tr>
+          <tr><td>Zeek</td><td><code>zeek</code></td></tr>
+          <tr><td>Linux auditd</td><td><code>auditd</code></td></tr>
+          <tr><td>Zavod / ICS</td><td><code>ics</code></td></tr>
+        </tbody>
+      </table></div>
+      <p class="if"><b>Elasticsearch JSON uchun <code>--preset ecs</code> ni doim bering.</b> Aks holda tool portni IP deb, paket sonini vaqt deb o'qishi mumkin.</p>
+    </div></details>
+
+    <details class="sit" id="L4"><summary><span class="id">L4</span><span class="q">Log juda katta (100 000+ qator) yoki faqat bir qismi kerak</span><span class="where">CLI</span></summary><div class="body">
+      <p>Tahlil tez: 15 000 hodisa taxminan <b>6 soniya</b>, IR Chain esa 3–4 soniya oladi. Undan ancha katta eksport bir necha o'n soniya olishi mumkin, oynani yopmang.</p>
+      <p>Faqat kerakli qismini tahlil qilish uchun vaqt oralig'i va/yoki host bering:</p>
+      <div class="cmd"><pre>bk.exe logs analyze fayl.csv --from "2026-10-05 14:20" --to "2026-10-05 14:40" --host WS07 --json-out out\ws07.json</pre></div>
+      <ul>
+        <li><code>--from</code> / <code>--to</code> chegaralari <b>kiradi</b> (inklyuziv). Bittasini berish ham mumkin.</li>
+        <li>Zonasiz vaqt (<code>2026-10-05 14:20</code>) <b>Toshkent vaqti</b> deb olinadi (<code>--src-tz utc</code> berilgan bo'lsa UTC). Zonali qiymat aynan hurmat qilinadi: <code>2026-10-05T09:20:00Z</code> = 14:20 Toshkent. Eng osoni: jadvaldagi vaqtni <b>zonasi bilan</b> nusxalab qo'ying (<code>2026-10-05 09:20:00 UTC</code>).</li>
+        <li>Faqat sana: <code>--to 2026-10-05</code> o'sha kunning oxirigacha, <code>--from 2026-10-05</code> 00:00 dan.</li>
+        <li><code>--host</code> aniq nom bo'yicha (katta-kichik harf farqi yo'q): <code>WS07</code> → <code>ws07</code> mos, <code>WS0</code> mos <b>emas</b>. Vaqtsiz hodisalar vaqt filtri bilan tashlab yuboriladi.</li>
+        <li>Konsolda <code>Filtr: ... -&gt; 12/15000 hodisa</code> qatori chiqadi. <code>0/...</code> bo'lsa: vaqtlar Toshkentda ekanini va <code>--src-tz</code> ni tekshiring.</li>
+        <li>Noto'g'ri qiymat (masalan <code>05.10.2026</code>) xato beradi va tahlil boshlanmaydi. Format: <code>YYYY-MM-DD HH:MM</code>.</li>
+        <li>Web UI da ham xuddi shunday: Logs tabida <b>Dan</b>, <b>Gacha</b>, <b>Host</b> maydonlari (bo'sh qoldirsangiz filtr yo'q). Natija tepasida sariq <b>🔎 Filtr</b> banneri nechta hodisa qolganini ko'rsatadi. Sigma skaneri bu maydonlarni ishlatmaydi.</li>
+      </ul>
+    </div></details>
+
+    <details class="sit" id="L5"><summary><span class="id">L5</span><span class="q">Menga .evtx (Windows event log) fayl berildi</span><span class="where">tashqi tool + CLI</span></summary><div class="body">
+      <p>blue-kit xom <code>.evtx</code> ni o'qimaydi. Avval CSV ga aylantiring:</p>
+      <div class="cmd"><pre>hayabusa.exe csv-timeline -d evtx_papka -o hb.csv</pre></div>
+      <div class="cmd"><pre>bk.exe logs analyze hb.csv --preset hayabusa --json-out out\hb.json</pre></div>
+      <p>Yoki EvtxECmd bilan:</p>
+      <div class="cmd"><pre>EvtxECmd.exe -d evtx_papka --csv . --csvf ex.csv</pre></div>
+      <div class="cmd"><pre>bk.exe logs analyze ex.csv --preset evtxecmd --json-out out\ex.json</pre></div>
+      <p class="if">Hayabusa va EvtxECmd kitga kirmaydi. Ularni musobaqadan oldin alohida o'rnatib, sinab qo'ying.</p>
+    </div></details>
+
+    <details class="sit" id="L6"><summary><span class="id">L6</span><span class="q">Menga .pcap (tarmoq yozuvi) berildi</span><span class="where">tashqi tool</span></summary><div class="body">
+      <p>blue-kit <code>.pcap</code> ni o'qimaydi. Zeek yoki TShark bilan loglarga aylantiring, keyin Zeek logini <code>--preset zeek</code> bilan tahlil qiling.</p>
+    </div></details>
+
+    <details class="sit" id="L7"><summary><span class="id">L7</span><span class="q">Qaysi hostlar buzilgan va hujum qaysi tartibda bo'lgan?</span><span class="where">⚡ IR Attack Chain</span></summary><div class="body">
+      <ol>
+        <li><b>⚡ IR Attack Chain</b> tabini oching.</li>
+        <li>Hamma log fayllarni tanlang (<kbd>Ctrl</kbd> bilan bir nechta).</li>
+        <li>Tilni <b>UZ</b> qiling va tahlilni boshlang.</li>
+        <li>Natija: buzilgan hostlar ro'yxati, bosqichma-bosqich zanjir (kirish → o'rnashish → tarqalish → o'g'irlash) va har bosqichdagi texnika.</li>
+      </ol>
+      <span class="lbl">CLI (PowerShell)</span>
+      <div class="cmd"><pre>bk.exe ir chain (Get-ChildItem case\2026-10-05\*.csv).FullName --lang uz</pre></div>
+      <p class="if">Tool <code>*.csv</code> ni o'zi ochmaydi va papka nomini qabul qilmaydi, fayllar ro'yxati kerak. <code>(Get-ChildItem …)</code> faqat PowerShell da ishlaydi (4-bo'lim).</p>
+      <p class="if"><b>Ehtiyot:</b> <code>ir chain --json</code> chiqishini Responder ning "Log Analyzer natijasi" maydoniga bermang. U yerga faqat Logs Analyzer JSON i kiradi.</p>
+    </div></details>
+
+    <details class="sit" id="L8"><summary><span class="id">L8</span><span class="q">SIEM ga kirdim, lekin nima qidirishni bilmayman</span><span class="where">🔍 SIEM So'rov</span></summary><div class="body">
+      <ol>
+        <li><b>🔍 SIEM So'rov</b> tabini oching.</li>
+        <li><b>SIEM Dialekti</b>: sizniki (QRadar, Splunk, Elastic, Kibana, Wazuh, Sentinel, Graylog, ArcSight…).</li>
+        <li><b>Kategoriya</b> va <b>Hunt stsenariysi</b>ni tanlang (quyidagi tartibda, yoki <a href="#g-h">H guruhidagi</a> hujum turiga qarab).</li>
+        <li>Kerak bo'lsa <b>Kunlar</b>, <b>Host</b>, <b>Foydalanuvchi</b>, <b>IP</b> ni to'ldiring.</li>
+        <li><b>🔍 So'rov yaratish</b> → so'rovni nusxalang → SIEM ga qo'ying → natijani eksport qiling → <a href="#L1">L1</a>.</li>
+      </ol>
+      <span class="lbl">Qaysi huntdan boshlash: zarardan orqaga</span>
+      <div class="tbl"><table>
+        <thead><tr><th>Tartib</th><th>Hunt</th><th>Savol</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td class="wrap1"><code>exfil-large-upload</code>, <code>evasion-recovery-inhibit</code></td><td class="wrap1">Zarar nima va qayerda?</td></tr>
+          <tr><td>2</td><td class="wrap1"><code>c2-rare-port</code>, <code>c2-dns-tunnel</code></td><td class="wrap1">Tashqariga nima gaplashyapti?</td></tr>
+          <tr><td>3</td><td class="wrap1"><code>lateral-admin-share</code>, <code>lateral-remote-service</code></td><td class="wrap1">Qayoqqa tarqalgan?</td></tr>
+          <tr><td>4</td><td class="wrap1"><code>persist-*</code></td><td class="wrap1">Qayerga o'rnashgan?</td></tr>
+          <tr><td>5</td><td class="wrap1"><code>exec-encoded-powershell</code>, <code>exec-office-child</code></td><td class="wrap1">Qanday bajarilgan?</td></tr>
+          <tr><td>6</td><td class="wrap1"><code>auth-bruteforce</code>, <code>auth-external-rdp</code></td><td class="wrap1">Qanday kirgan?</td></tr>
+        </tbody>
+      </table></div>
+      <span class="lbl">CLI</span>
+      <div class="cmd"><pre>bk.exe siem hunts --category network</pre></div>
+      <div class="cmd"><pre>bk.exe siem query exfil-large-upload --siem qradar --days 7</pre></div>
+      <div class="cmd"><pre>bk.exe siem pack --siem qradar --category auth --out q.txt</pre></div>
+      <p class="if"><code>siem pack</code> bir kategoriyadagi hamma so'rovni bitta faylga yozadi. Fayl nomi qoidasi: <code>case\sana\host_hunt-id_vaqt.csv</code>.</p>
+    </div></details>
+
+    <details class="sit" id="L9"><summary><span class="id">L9</span><span class="q">Logda tushunarsiz kodlangan matn bor (base64, powershell -enc, hex, URL)</span><span class="where">CLI</span></summary><div class="body">
+      <div class="cmd"><pre>bk.exe decode "cG93ZXJzaGVsbCB3aG9hbWk=" --detect</pre></div>
+      <p>Tool matnni ochadi (<code>powershell whoami</code>) va <code>--detect</code> bilan unga mos ATT&amp;CK texnikalarini ko'rsatadi. Ichma-ich kodlangan bo'lsa ham qatlamma-qatlam ochadi. Ko'p qatorli fayl uchun: <code>bk.exe decode --file matn.txt --detect</code>.</p>
+      <p class="if">Kodlangan buyruqning o'zi ham alohida texnika: <code>T1027</code> (yashirish). Ochilgan buyruq esa haqiqiy harakatni ko'rsatadi.</p>
+    </div></details>
+
+    <details class="sit" id="L10"><summary><span class="id">L10</span><span class="q">Shubhali elektron xat (.eml) bor</span><span class="where">CLI</span></summary><div class="body">
+      <div class="cmd"><pre>bk.exe mail scan xat.eml</pre></div>
+      <p>Natijada <code>PHISHING</code> chiqsa, sabablari (soxta brend, havola, ilova) ko'rsatiladi. Bu odatda 1-kunning boshlanish nuqtasi (<a href="#H1">H1</a>).</p>
+      <p class="if">Outlook dagi xatni "Save as" → <code>.eml</code> qilib saqlang. <code>.msg</code> bo'lsa, avval <code>.eml</code> ga o'tkazing.</p>
+    </div></details>
+
+    <details class="sit" id="L11"><summary><span class="id">L11</span><span class="q">Qaysidir kompyuter muntazam tashqariga ulanayotganga o'xshaydi (beacon)</span><span class="where">🛰 C2 Hunt</span></summary><div class="body">
+      <ol>
+        <li><b>🛰 C2 Hunt</b> tabida firewall yoki proxy logini tanlang (papka ham bo'ladi). Port va session_id bo'lmagan endpoint loglari ham bo'ladi (Sysmon Event 3, kollektor <code>collector_all_hosts.csv</code>): ularda har bir ulanish hodisasi alohida sessiya deb sanaladi.</li>
+        <li><b>Min. sessiya</b> 10 da qoldiring (kamida 10 marta ulangan juftliklar).</li>
+        <li>Ma'lum hujumchi IP/domenlarni pastdagi maydonga yozing. Ular <b>MA'LUM</b> deb belgilanadi.</li>
+        <li>Tahlilni boshlang.</li>
+      </ol>
+      <span class="lbl">Natijani o'qish</span>
+      <p><b>CV</b> qancha kichik bo'lsa, ulanishlar shuncha bir tekis (soatdek aniq). Bu bot ekanini bildiradi, odam bunday aniq ulanmaydi. Windows Update, antivirus kabi tanish xizmatlar allowlist bilan chiqarib tashlanadi.</p>
+      <p>Sysmon logida bayt hajmi yo'q, shuning uchun "Keepalive hajmi" sababi chiqmaydi. YUQORI daraja davriylik va kam tarqalgan manzildan keladi (masalan 300 ta ulanish, ~45s, bitta hostdan). Boshqa hostlar ham ulanadigan fon manzillari (8.8.8.8, Microsoft, CDN) odatda PAST bo'lib qoladi. Host yonidagi "(ESET, sessiya yo'q)" yozuvi faqat firewall sessiyalari bilan aralash loglarda chiqadi.</p>
+      <span class="lbl">CLI</span>
+      <div class="cmd"><pre>bk.exe hunt beacons web-work\firewall.csv --out out\beacons.html</pre></div>
+    </div></details>
+
+    <details class="sit" id="L12"><summary><span class="id">L12</span><span class="q">Sigma qoidalari bilan ikkinchi fikr olmoqchiman</span><span class="where">CLI</span></summary><div class="body">
+      <div class="cmd"><pre>bk.exe sigma scan web-work\export.json --preset ecs --level high</pre></div>
+      <p>3700+ tayyor Sigma qoidasi bilan tekshiradi. <code>--level high</code> faqat jiddiylarini qoldiradi, <code>--product windows</code> yoki <code>linux</code> bilan toraytirish mumkin. Logs Analyzer topmagan narsani ba'zan shu topadi.</p>
+    </div></details>
+
+    <details class="sit" id="L13"><summary><span class="id">L13</span><span class="q">Kibana/ELK yoki Excel CSV: vaqt noto'g'ri yoki "Timespan: N/A"</span><span class="where">eksport sozlamasi</span></summary><div class="body">
+      <p>Tool shu sana formatlarini o'qiydi:</p>
+      <ul>
+        <li><code>2026-10-05T09:14:00Z</code> yoki <code>2026-10-05 09:14:00</code></li>
+        <li>Kibana CSV: <code>Oct 5, 2026 @ 09:14:00.123</code></li>
+        <li>Rus Excel: <code>05.10.2026 09:14:00</code> (kun oydan oldin)</li>
+        <li><code>10/05/2026 09:14:00 AM</code> (AQSH) va epoch son</li>
+      </ul>
+      <div class="note warn"><span class="tag">Vaqt zonasi</span><p>Kibana CSV da vaqt <b>brauzer zonasida</b> va zonasiz yoziladi (Toshkentda odatda UTC+5). Tool zonasiz vaqtni Toshkent deb oladi, ya'ni ko'pincha to'g'ri. Kibana dagi <b>Advanced Settings → dateFormat:tz</b> UTC bo'lsa, <code>--src-tz utc</code> bering (web: "Zonasiz vaqtlar: UTC"). JSON eksportda vaqt <code>Z</code> bilan yoziladi va avtomatik to'g'ri Toshkent vaqtiga o'giriladi.</p></div>
+      <span class="lbl">Baribir "Timespan: N/A" chiqsa</span>
+      <ol>
+        <li><code>bk.exe logs columns fayl.csv</code> bilan vaqt ustuni tanilganini tekshiring.</li>
+        <li>Iloji bo'lsa JSON ko'rinishida qayta eksport qiling.</li>
+        <li>CSV ni Excel da ochib saqlamang: Excel sana va ajratgichni o'zgartiradi. Asl faylni bering.</li>
+      </ol>
+      <p class="if">Sana o'qilmasa ham texnikalar topiladi, faqat vaqt chizig'i va tartib yo'qoladi.</p>
+    </div></details>
+
+    <details class="sit" id="L14"><summary><span class="id">L14</span><span class="q">Log .xlsx, .zip yoki .gz ko'rinishida keldi</span><span class="where">qo'lda</span></summary><div class="body">
+      <ul>
+        <li><code>.zip</code> / <code>.gz</code>: avval oching (7-Zip yoki Explorer). Ichidagi <code>.csv</code>, <code>.json</code>, <code>.log</code> ni bering.</li>
+        <li><code>.xlsx</code>: Excel da <b>Save As → CSV UTF-8</b>. Sana ustunini <a href="#L13">L13</a> dagi formatlardan biriga keltiring.</li>
+        <li><code>.xml</code>: IR Attack Chain qabul qiladi (<a href="#L7">L7</a>).</li>
+      </ul>
+    </div></details>
+
+    <details class="sit" id="L15"><summary><span class="id">L15</span><span class="q">Log formati notanish (FortiGate, IIS, Exchange va boshqalar)</span><span class="where">CLI + 📖 KB</span></summary><div class="body">
+      <p>Tool yaxshi o'qiydi: SIEM eksportlari (CSV/JSON/NDJSON), Elasticsearch API javobi (<code>hits.hits</code>), apache/nginx access log, syslog, postfix, iptables, sanadan boshlanadigan qatorlar (IIS ham shunga kiradi). Qolgan formatlarda qator matni bo'yicha qisman ishlaydi.</p>
+      <ol>
+        <li>Baribir bering: <code>bk.exe logs analyze fayl.log</code>. Matndagi hujum naqshlari (buyruqlar, URL lar) topiladi.</li>
+        <li><code>bk.exe logs columns fayl</code> bilan qaysi ustunlar tanilganini ko'ring.</li>
+        <li>Topilmagan qiziq qatorni KB qidiruviga qo'ying (<a href="#J1">J1</a>).</li>
+        <li>Eng ishonchlisi: o'sha logni SIEM orqali CSV/JSON qilib eksport qilish.</li>
+      </ol>
+    </div></details>
+
+    <details class="sit" id="L16"><summary><span class="id">L16</span><span class="q">Natija juda ko'p, hamma host "shubhali" ko'rinyapti</span><span class="where">📊 Logs Analyzer</span></summary><div class="body">
+      <ul>
+        <li>Faqat <code>high</code> ishonchli texnikalardan boshlang. <code>low</code> larni oxiriga qoldiring.</li>
+        <li><b>Cross-source IOCs</b> ga qarang. Bir nechta manbada uchragan IP eng kuchli dalil.</li>
+        <li>Zanjirida ko'p bosqich bor hostlar (kirish + o'rnashish + tarqalish) oddiy shovqin emas.</li>
+        <li><code>--deep</code> ishlatmang: u juda ko'p past ishonchli natija beradi va sekin.</li>
+        <li>IT admin ishini hujum deb o'ylash oson (RDP, PowerShell Remoting). Vaqti, akkaunti, manbasi odatdagidek bo'lsa, bu normal ish bo'lishi mumkin.</li>
+      </ul>
+    </div></details>
+
+    <details class="sit" id="L17"><summary><span class="id">L17</span><span class="q">Tool hech narsa topmadi, lekin hujum borligini bilaman</span><span class="where">bir nechta yo'l</span></summary><div class="body">
+      <ol>
+        <li>Format to'g'rimi: <a href="#L3">L3</a> (preset), <a href="#L13">L13</a> (vaqt).</li>
+        <li>Sigma bilan tekshiring (<a href="#L12">L12</a>), kerak bo'lsa <code>--weak</code> bilan.</li>
+        <li>Faylda buyruq qatori (<code>CommandLine</code>, <code>process.command_line</code>) ustuni bormi? Bo'lmasa, SIEM dan shu maydonni qo'shib qayta eksport qiling. Tool asosan buyruq va URL matnidan topadi.</li>
+        <li>Boshqa hunt dan olingan eksportni sinang (<a href="#L8">L8</a>).</li>
+        <li>Oxirgi chora: <code>--deep</code> (sekin, ko'p shovqin, lekin KB ning to'liq matn qidiruvi yoqiladi).</li>
+      </ol>
+    </div></details>
+
+    <details class="sit" id="L18"><summary><span class="id">L18</span><span class="q">Bitta IP, akkaunt yoki host bo'yicha hamma narsani ko'rmoqchiman</span><span class="where">🔍 SIEM + CLI</span></summary><div class="body">
+      <ul>
+        <li>SIEM So'rov tabida <b>IP manzil</b>, <b>Foydalanuvchi</b> yoki <b>Host</b> maydonini to'ldirib so'rov yasang. So'rov faqat shu ob'ekt bo'yicha bo'ladi.</li>
+        <li>Mavjud eksportni host bo'yicha toraytirish: <code>bk.exe logs analyze fayl --host WS07</code>.</li>
+        <li>IP haqida KB nima deydi: KB tabidagi <b>IOC Aniqlash</b> (<a href="#J6">J6</a>).</li>
+      </ul>
+    </div></details>
+
+    <details class="sit" id="L19"><summary><span class="id">L19</span><span class="q">Savol vaqtni so'rayapti ("hujumchi qachon kirdi?")</span><span class="where">📊 Logs / ⚡ IR</span></summary><div class="body">
+      <ol>
+        <li>Logs Analyzer yoki IR Chain natijasidagi vaqt chizig'ida o'sha bosqichning <b>birinchi</b> yozuvini toping.</li>
+        <li>Tool vaqtni <b>logdagi kabi</b> ko'rsatadi; boshqa zonada bo'lsa yonida <code>(Toshkent …)</code>.</li>
+        <li>Javobga odatda <b>logdagi vaqt</b> kutiladi (tashkilotchi SIEM da shuni ko'radi). Stsenariy boshqa davlatda bo'lsa ham, logdagi soatni o'zgartirmang. Shubha bo'lsa tashkilotchidan so'rang va Tracker ga ikkala vaqtni yozing.</li>
+      </ol>
+    </div></details>
+  </div>
+
+  <!-- J -->
+  <div class="group" id="g-j">
+    <h3>J · ATT&amp;CK ID va javob topshirish</h3>
+
+    <details class="sit" id="J1"><summary><span class="id">J1</span><span class="q">Buyruq yoki matn bor, qaysi texnikaga to'g'ri kelishini bilmayman</span><span class="where">📖 KB</span></summary><div class="body">
+      <ol>
+        <li><b>📖 KB</b> tabining birinchi maydoniga buyruqni yozing, masalan <code>vssadmin delete shadows</code>.</li>
+        <li><b>Qidirish</b>. Mos texnikalar ishonch darajasi bilan chiqadi.</li>
+        <li>Texnika ustiga bosing: to'liq tavsif va aniqlash usuli ochiladi.</li>
+      </ol>
+      <div class="cmd"><pre>bk.exe kb search "vssadmin delete shadows"</pre></div>
+      <p class="if">ID raqami ma'lum bo'lsa, uning nomi va taktikasini ko'rish: <code>bk.exe kb id T1490</code>.</p>
+    </div></details>
+
+    <details class="sit" id="J2"><summary><span class="id">J2</span><span class="q">ID topdim. Topshirishdan oldin nima qilaman?</span><span class="where">📖 KB</span></summary><div class="body">
+      <p><b>Har doim tekshiring.</b> Bu majburiy qadam.</p>
+      <ol>
+        <li><b>📖 KB</b> tabida "Tekshirish (Validate)" maydoniga ID ni yozing (bir nechtasini vergul bilan).</li>
+        <li><b>Tekshirish (Validate)</b> ni bosing.</li>
+        <li>Agar <code>revoked</code> chiqsa, eski ID ni <b>topshirmang</b>. Replacement ustunidagi yangi ID ni topshiring.</li>
+      </ol>
+      <div class="cmd"><pre>bk.exe kb validate T1070.001 T1562.001 T0803</pre></div>
+      <div class="tbl"><table>
+        <thead><tr><th>Eski (revoked)</th><th>Yangi</th><th>Nima</th></tr></thead>
+        <tbody>
+          <tr><td><code>T1070.001</code></td><td><code>T1685.005</code></td><td class="wrap1">Windows event loglarini tozalash</td></tr>
+          <tr><td><code>T1562.001</code></td><td><code>T1685</code></td><td class="wrap1">Himoya vositalarini o'chirish</td></tr>
+          <tr><td><code>T0803</code></td><td><code>T1691.001</code></td><td class="wrap1">ICS: buyruq xabarini bloklash</td></tr>
+        </tbody>
+      </table></div>
+      <p class="if">ID larni xotiradan yoki internetdagi eski jadvaldan yozmang. v19 da ko'p raqam o'zgargan, hammasini KB orqali tekshiring. Tashkilotchi eski versiya bo'yicha baholasa (7-bo'lim, 5-savol), eski ID to'g'ri bo'lishi mumkin.</p>
+    </div></details>
+
+    <details class="sit" id="J3"><summary><span class="id">J3</span><span class="q">Ota-texnikani (T1059) yozaymi yoki sub-texnikani (T1059.001)?</span><span class="where">tashkilotchi</span></summary><div class="body">
+      <p>Buni start oldidan tashkilotchilardan so'rang (<a href="#yol">7-bo'lim</a>, 1-savol). Javobga qarab:</p>
+      <ul>
+        <li>Faqat sub-texnika qabul qilinsa: aniq sub-texnikani topshiring.</li>
+        <li>Ota-texnika ham qabul qilinsa va sub-texnikaga ishonchingiz past bo'lsa: <code>bk.exe answers rank … --prefer-parent</code> ota-texnikani oldinga chiqaradi.</li>
+      </ul>
+    </div></details>
+
+    <details class="sit" id="J4"><summary><span class="id">J4</span><span class="q">ID lar ko'p. Qaysi birini birinchi topshiraman?</span><span class="where">CLI</span></summary><div class="body">
+      <div class="cmd"><pre>bk.exe answers rank out\export.json out\hammasi.json --ledger web-work\answers.json</pre></div>
+      <p>Tool barcha tahlil natijalaridan (Logs, IR Chain, Sigma JSON lari) ID larni ishonch bo'yicha tartiblaydi va allaqachon topshirilganlarini belgilaydi. Yuqoridan pastga, ishonch kamayish tartibida topshiring.</p>
+    </div></details>
+
+    <details class="sit" id="J5"><summary><span class="id">J5</span><span class="q">Javobni yozib qo'yish va urinishlarni sanash</span><span class="where">🎯 CTF Tracker</span></summary><div class="body">
+      <ol>
+        <li><b>🎯 CTF Tracker</b> tabini oching.</li>
+        <li><b>Savol</b>: savol matni. <b>Nomzod ID</b>: masalan <code>T1190</code> yoki IP. <b>Dalil</b>: qayerda ko'rdingiz (fayl, vaqt). <b>Maks. urinish</b>: tashkilotchi aytgan son.</li>
+        <li><b>➕ Doskaga Qo'shish</b>.</li>
+        <li>Topshirgandan keyin natijani (qabul / rad) belgilang.</li>
+      </ol>
+      <p>Tool ogohlantiradi: shu javob shu savolga oldin topshirilgan bo'lsa, oxirgi urinish qolgan bo'lsa, limit tugagan bo'lsa yoki savol allaqachon qabul qilingan bo'lsa. Ogohlantirish chiqsa to'xtang va Kapitan bilan gaplashing.</p>
+      <p><b>🔄 Barcha MITRE ID'larni Tekshirish</b> tugmasi doskadagi hamma ID ni bir yo'la revoked ga tekshiradi.</p>
+      <span class="lbl">CLI</span>
+      <div class="cmd"><pre>bk.exe answers submit T1059.001 accepted --question "2-savol: bajarish usuli" --max 3</pre></div>
+    </div></details>
+
+    <details class="sit" id="J6"><summary><span class="id">J6</span><span class="q">IP, domen yoki fayl nomi ko'rdim. Bu nima?</span><span class="where">📖 KB</span></summary><div class="body">
+      <p><b>📖 KB</b> tabidagi <b>IOC Aniqlash</b> maydoniga yozing (masalan <code>198.51.100.45</code>, <code>hxxp://evil[.]com</code>, <code>cmd.exe</code>). Tool turini aniqlaydi (ichki/tashqi IP, domen, hash, fayl) va mos texnikani bog'laydi.</p>
+    </div></details>
+
+    <details class="sit" id="J7"><summary><span class="id">J7</span><span class="q">Hujumchi keyin nima qiladi? Qaysi bosqich hali topilmagan?</span><span class="where">📖 KB</span></summary><div class="body">
+      <ul>
+        <li><b>Tahlil Qilish</b> (Related): topilgan ID larni yozing, tool navbatdagi ehtimoliy texnikalarni ko'rsatadi. Keyingi qidiruvni shunga qarab tanlang.</li>
+        <li><b>Taktikalarni Tekshirish</b>: topilgan ID larni yozing, tool zanjirda qaysi bosqichlar (masalan "persistence", "exfiltration") hali bo'sh ekanini aytadi. Bo'sh bosqich = keyingi savol shu yerdan bo'lishi mumkin.</li>
+        <li>"O'xshash APT aktorlari" katagi faqat g'oya uchun. Simulyatsiyada bu attribution emas, javob sifatida topshirmang.</li>
+      </ul>
+    </div></details>
+
+    <details class="sit" id="J8"><summary><span class="id">J8</span><span class="q">Savol ATT&amp;CK ID emas: IP, domen, akkaunt, fayl nomi yoki hash so'rayapti</span><span class="where">bir nechta tab</span></summary><div class="body">
+      <div class="tbl"><table>
+        <thead><tr><th>So'ralgan</th><th>Qayerdan topiladi</th></tr></thead>
+        <tbody>
+          <tr><td>Hujumchi IP / C2</td><td class="wrap1">Logs Analyzer: IOC va Cross-source IOCs. C2 Hunt: MA'LUM va past CV li manzillar. Triage: <code>connections</code> qatorlari.</td></tr>
+          <tr><td>Domen</td><td class="wrap1">Logs IOC lari, DNS loglari, Fraud (<code>hosts</code> / DNS / proksi).</td></tr>
+          <tr><td>Akkaunt</td><td class="wrap1">Logs zanjiridagi <code>user</code>, Triage dagi <code>users</code> (yangi yoki admin bo'lgan akkaunt).</td></tr>
+          <tr><td>Fayl nomi / yo'li</td><td class="wrap1">Triage: <code>file</code>, <code>process</code>, <code>tasks</code>, <code>services</code> qatorlari. Logdagi buyruq matni.</td></tr>
+          <tr><td>Hash</td><td class="wrap1">Tozalash skriptining BACKUP qismidagi <code>Get-FileHash</code> natijasi.</td></tr>
+          <tr><td>Vaqt</td><td class="wrap1"><a href="#L19">L19</a></td></tr>
+        </tbody>
+      </table></div>
+      <p class="if">Bu javoblarni ham Tracker ga yozing. Nomzod javob maydoniga istalgan matn kiradi, urinishlar ham sanaladi.</p>
+    </div></details>
+
+    <details class="sit" id="J9"><summary><span class="id">J9</span><span class="q">Javobim rad etildi. Endi nima?</span><span class="where">🎯 Tracker + 📖 KB</span></summary><div class="body">
+      <ol>
+        <li>Tracker da <b>rad</b> deb belgilang. Shunda hech kim uni qayta topshirmaydi.</li>
+        <li>Darhol yangi ID yubormang. Sababini toping:
+          <ul>
+            <li>Ota/sub-texnika masalasimi (<a href="#J3">J3</a>)?</li>
+            <li>Savol boshqa bosqich haqidami? Savoldagi fe'lga qarang: "qanday kirdi" (initial access), "qanday saqlab qoldi" (persistence), "nima olib ketdi" (exfiltration).</li>
+            <li>Bir harakatga bir nechta texnika mos keladimi (<a href="#J10">J10</a>)?</li>
+          </ul>
+        </li>
+        <li>KB dagi <b>Tahlil Qilish</b> (Related) bilan qo'shni texnikalarni ko'ring.</li>
+        <li>Keyingi urinishni Kapitan bilan kelishib yuboring.</li>
+      </ol>
+    </div></details>
+
+    <details class="sit" id="J10"><summary><span class="id">J10</span><span class="q">Bir harakat ikki texnikaga mos keladi (masalan powershell -enc)</span><span class="where">📖 KB</span></summary><div class="body">
+      <p>Masalan <code>powershell -enc …</code> ham <code>T1059.001</code> (PowerShell bilan bajarish), ham <code>T1027</code> (yashirish). Qaysi biri to'g'ri ekanini savol belgilaydi:</p>
+      <ul>
+        <li>"Qanday ishga tushirildi?" → bajarish taktikasi → <code>T1059.001</code>.</li>
+        <li>"Qanday yashirildi?" → yashirish taktikasi → <code>T1027</code>.</li>
+      </ul>
+      <p>Texnikaning taktikasini KB da <code>bk.exe kb id T1027</code> bilan ko'ring va savoldagi bosqich bilan solishtiring.</p>
+    </div></details>
+
+    <details class="sit" id="J11"><summary><span class="id">J11</span><span class="q">Savolga bitta urinish qoldi</span><span class="where">🎯 Tracker</span></summary><div class="body">
+      <ul>
+        <li>Faqat kamida <b>ikki manba</b> tasdiqlagan javobni yuboring (masalan log + snapshot ✔ LOG, yoki ikki xil log).</li>
+        <li>KB da validate qiling (<a href="#J2">J2</a>).</li>
+        <li>Qarorni Kapitan qabul qiladi. Shoshilmang: noto'g'ri urinish uchun jarima bo'lmasa ham, savol butunlay yopiladi.</li>
+      </ul>
+    </div></details>
+  </div>
+
+  <!-- H -->
+  <div class="group" id="g-h">
+    <h3>H · Hujum turiga qarab</h3>
+    <p class="prose gnote">Logda nimani ko'rganingizga qarab kartani oching. ID lar KB da tekshirilgan, lekin topshirishdan oldin baribir <a href="#J2">validate</a> qiling va savolga mosini tanlang. <b>Qidirish</b> qatoridagi nomlar tayyor SIEM so'rovlari (hunt): ID ni <code>bk.exe siem query &lt;id&gt; --siem qradar</code> ga bering yoki 🔍 SIEM So'rov tabida tanlang (<a href="#L8">L8</a>). Kartadagi buyruq birinchi huntni ko'rsatadi, qolganlari uchun ID ni almashtiring.</p>
+
+    <details class="sit" id="H1"><summary><span class="id">H1</span><span class="q">Phishing: zararli xat, makrosli hujjat, ISO/LNK</span><span class="where">1-kun boshlanishi</span></summary><div class="body">
+      <dl class="kv">
+        <dt>Logda</dt><dd><code>WINWORD.EXE</code> yoki <code>EXCEL.EXE</code> dan <code>powershell</code>/<code>cmd</code> ishga tushgan; <code>.docm</code>, <code>.iso</code>, <code>.lnk</code>, arxiv ilova.</dd>
+        <dt>Qidirish</dt><dd>Hunt <code>exec-office-child</code>; xat bo'lsa <code>bk.exe mail scan</code> (<a href="#L10">L10</a>).<div class="cmd"><pre>bk.exe siem query exec-office-child --siem qradar --days 7</pre></div></dd>
+        <dt>ID nomzodlar</dt><dd><code>T1566.001</code> (ilovali phishing), <code>T1204.002</code> (foydalanuvchi zararli faylni ochdi).</dd>
+        <dt>Tozalash</dt><dd>Ochilgan hujjatdan keyin yaratilgan vazifa, autorun, fayllar (Triage, <a href="#R3">R3</a>). Xat ochgan foydalanuvchi parolini almashtiring.</dd>
+      </dl>
+    </div></details>
+
+    <details class="sit" id="H2"><summary><span class="id">H2</span><span class="q">Parol saralash: brute force, password spray</span><span class="where">kirish</span></summary><div class="body">
+      <dl class="kv">
+        <dt>Logda</dt><dd>Ko'p <code>4625</code> (muvaffaqiyatsiz kirish), keyin <code>4624</code>; <code>4740</code> bloklanish; Linux da <code>Failed password</code>; <code>hydra</code>.</dd>
+        <dt>Qidirish</dt><dd>Hunt <code>auth-bruteforce</code>, <code>auth-password-spray</code>, <code>auth-success-after-fail</code> (eng muhimi: kirish muvaffaqiyatli bo'lganmi), <code>auth-lockout</code> (<code>4740</code>), <code>auth-linux-ssh-bruteforce</code>.<div class="cmd"><pre>bk.exe siem query auth-bruteforce --siem qradar --days 7</pre></div></dd>
+        <dt>Logs Analyzer</dt><dd>4625 larni o'zi sanaydi, log matni shart emas: bitta IP dan (IP bo'lmasa bitta host+hisobdan) 10 daqiqada 10 va undan ko'p 4625 bo'lsa <code>T1110.001</code> high qo'yiladi. Ko'p hisobga 1–3 tadan urinish bo'lsa <code>T1110.003</code>. Shu IP dan 60 daqiqa ichida 4624 kelsa, o'sha hodisa dalilida "BRUTE-FORCE MUVAFFAQIYATLI" yoziladi. CLI chiqishida "Brute-force (4625 agregatsiyasi)" bo'limiga, JSON da <code>bruteforce</code> kalitiga qarang. Hisob nomi <code>user.name</code> bo'sh bo'lsa <code>TargetUserName</code> dan olinadi.</dd>
+        <dt>ID nomzodlar</dt><dd><code>T1110</code>, <code>T1110.001</code>, <code>T1110.003</code> (bitta parol ko'p akkauntga), muvaffaqiyatli kirilgan bo'lsa <code>T1078</code>. Kirish internetdagi IP dan bo'lsa <code>T1133</code> (External Remote Services); tool bunday 4624 da <code>T1021.001</code> ni faqat low qilib qoldiradi, chunki u lateral movement emas.</dd>
+        <dt>Tozalash</dt><dd>Buzilgan akkaunt parolini almashtiring (<a href="#F8">F8</a>). Manba IP ni bloklash mumkin, lekin avval checker emasligini tekshiring (<a href="#F7">F7</a>).</dd>
+      </dl>
+    </div></details>
+
+    <details class="sit" id="H3"><summary><span class="id">H3</span><span class="q">Web hujum: SQL injection, webshell yuklash</span><span class="where">web server</span></summary><div class="body">
+      <dl class="kv">
+        <dt>Logda</dt><dd>URL da <code>UNION SELECT</code>, <code>' OR 1=1</code>, <code>../</code>; <code>POST</code> bilan <code>.php</code>/<code>.aspx</code>/<code>.jsp</code> yuklash; <code>?cmd=</code>; skaner (nikto, sqlmap) user-agent.</dd>
+        <dt>Qidirish</dt><dd>Hunt <code>web-attack-patterns</code>; nginx/apache access logini Logs Analyzer ga bering.<div class="cmd"><pre>bk.exe siem query web-attack-patterns --siem qradar --days 7</pre></div></dd>
+        <dt>ID nomzodlar</dt><dd><code>T1190</code> (ochiq ilovani buzish), <code>T1505.003</code> (webshell), skanerlash bo'lsa <code>T1595</code>.</dd>
+        <dt>Tozalash</dt><dd>Webshell faylni Triage <code>file</code> qatori orqali karantinga oling (o'chirmasdan nomini o'zgartiradi). Web xizmat to'xtab qolmasin, SLA ga qarang (<a href="#F3">F3</a>).</dd>
+      </dl>
+    </div></details>
+
+    <details class="sit" id="H4"><summary><span class="id">H4</span><span class="q">PowerShell va tizim dasturlari orqali bajarish (LOLBin)</span><span class="where">bajarish</span></summary><div class="body">
+      <dl class="kv">
+        <dt>Logda</dt><dd><code>powershell -enc</code>, <code>IEX</code>, <code>DownloadString</code>, <code>-ep bypass</code>; <code>certutil -urlcache</code>, <code>mshta</code>, <code>rundll32</code>, <code>regsvr32 /i:</code>, <code>bitsadmin /transfer</code>; <code>fodhelper.exe</code>/<code>eventvwr.exe</code> dan ishga tushgan jarayon (UAC chetlab o'tish).</dd>
+        <dt>Qidirish</dt><dd>Hunt <code>exec-encoded-powershell</code>, <code>exec-lolbin</code>, <code>exec-uac-bypass</code>; kodlangan matn uchun <a href="#L9">L9</a>.<div class="cmd"><pre>bk.exe siem query exec-encoded-powershell --siem qradar --days 7</pre></div></dd>
+        <dt>ID nomzodlar</dt><dd><code>T1059.001</code>, <code>T1027</code>, <code>T1218</code> (tizim dasturi orqali), fayl yuklab olingan bo'lsa <code>T1105</code>, UAC chetlab o'tilgan bo'lsa <code>T1548.002</code>.</dd>
+        <dt>Tozalash</dt><dd>Yuklab olingan fayl va u yaratgan o'rnashishlar (Triage). Buyruqning o'zini "o'chirib" bo'lmaydi.</dd>
+      </dl>
+    </div></details>
+
+    <details class="sit" id="H5"><summary><span class="id">H5</span><span class="q">Parollarni o'g'irlash: LSASS, mimikatz, SAM, NTDS</span><span class="where">hisob ma'lumotlari</span></summary><div class="body">
+      <dl class="kv">
+        <dt>Logda</dt><dd><code>sekurlsa</code>, <code>procdump -ma lsass</code>, <code>comsvcs.dll MiniDump</code>, <code>reg save HKLM\SAM</code>, <code>ntdsutil</code>, Sysmon 10 (lsass ga murojaat).</dd>
+        <dt>Qidirish</dt><dd>Hunt <code>cred-lsass-access</code>, <code>cred-ntds</code>.<div class="cmd"><pre>bk.exe siem query cred-lsass-access --siem qradar --days 7</pre></div></dd>
+        <dt>ID nomzodlar</dt><dd><code>T1003.001</code> (LSASS xotirasi), <code>T1003.003</code> (NTDS).</dd>
+        <dt>Tozalash</dt><dd>Eng muhimi: o'sha hostga kirgan <b>hamma</b> akkauntning, avvalo adminning parolini almashtiring (<a href="#F8">F8</a>). Aks holda hujumchi oddiy login bilan qaytadi.</dd>
+      </dl>
+    </div></details>
+
+    <details class="sit" id="H6"><summary><span class="id">H6</span><span class="q">Kerberoasting (xizmat akkaunti chiptasi)</span><span class="where">Active Directory</span></summary><div class="body">
+      <dl class="kv">
+        <dt>Logda</dt><dd>Ko'p <code>4769</code>, shifrlash turi <code>0x17</code> (RC4); <code>Rubeus</code>, <code>GetUserSPNs</code>.</dd>
+        <dt>Qidirish</dt><dd>Hunt <code>auth-kerberoast</code>.<div class="cmd"><pre>bk.exe siem query auth-kerberoast --siem qradar --days 7</pre></div></dd>
+        <dt>ID nomzodlar</dt><dd><code>T1558.003</code>.</dd>
+        <dt>Tozalash</dt><dd>Nishon bo'lgan xizmat akkauntlari parolini uzun va murakkabiga almashtiring.</dd>
+      </dl>
+    </div></details>
+
+    <details class="sit" id="H7"><summary><span class="id">H7</span><span class="q">Tarmoq bo'ylab tarqalish: PsExec, admin share, WMI, RDP, SSH</span><span class="where">yon harakat</span></summary><div class="body">
+      <dl class="kv">
+        <dt>Logda</dt><dd><code>5140</code>/<code>5145</code> (<code>ADMIN$</code>, <code>C$</code>), <code>7045</code> da <code>PSEXESVC</code>, <code>wmic /node:</code>, <code>Enter-PSSession</code>, <code>4624</code> Logon Type 10 (RDP), <code>ssh -i</code> o'g'irlangan kalit bilan; <code>4648</code> (boshqa akkaunt paroli bilan ulanish).</dd>
+        <dt>Qidirish</dt><dd>Hunt <code>lateral-admin-share</code>, <code>lateral-remote-service</code>, <code>exec-wmi-remote</code>, <code>auth-external-rdp</code>, <code>auth-explicit-cred</code>.<div class="cmd"><pre>bk.exe siem query lateral-admin-share --siem qradar --days 7</pre></div></dd>
+        <dt>ID nomzodlar</dt><dd><code>T1021.002</code> (SMB), <code>T1569.002</code> (xizmat orqali bajarish), <code>T1570</code> (vositani ko'chirish), <code>T1047</code> (WMI), <code>T1021.001</code> (RDP), <code>T1021.004</code> (SSH).</dd>
+        <dt>Tozalash</dt><dd>Hujumchi borgan <b>har bir</b> hostdan snapshot oling va Triage qiling. Bitta hostni tozalab qo'yish yetmaydi.</dd>
+      </dl>
+    </div></details>
+
+    <details class="sit" id="H8"><summary><span class="id">H8</span><span class="q">Windows da o'rnashish: vazifa, xizmat, Run kaliti, yangi akkaunt, WMI</span><span class="where">persistence</span></summary><div class="body">
+      <dl class="kv">
+        <dt>Logda</dt><dd><code>schtasks /create</code> (<code>4698</code>), <code>sc create</code> (<code>7045</code>), <code>reg add …\Run</code>, <code>net user /add</code> (<code>4720</code>), <code>net localgroup administrators</code>, WMI obuna.</dd>
+        <dt>Qidirish</dt><dd>Hunt <code>persist-scheduled-task</code>, <code>persist-service-install</code>, <code>persist-run-key</code>, <code>persist-new-user</code>, <code>persist-admin-group</code>, <code>persist-wmi-subscription</code>.<div class="cmd"><pre>bk.exe siem query persist-scheduled-task --siem qradar --days 7</pre></div></dd>
+        <dt>ID nomzodlar</dt><dd><code>T1053.005</code>, <code>T1543.003</code>, <code>T1547.001</code>, <code>T1136.001</code>, <code>T1098</code>, <code>T1546.003</code>.</dd>
+        <dt>Tozalash</dt><dd>Responder Triage hammasini topadi va har biri uchun BACKUP/REMOVE/ROLLBACK yozadi (<a href="#F1">F1</a>). Akkaunt o'chirilmaydi, faqat disable qilinadi.</dd>
+      </dl>
+    </div></details>
+
+    <details class="sit" id="H9"><summary><span class="id">H9</span><span class="q">Linux da o'rnashish va root olish: cron, SSH kalit, sudo, SUID</span><span class="where">Linux server</span></summary><div class="body">
+      <dl class="kv">
+        <dt>Logda</dt><dd><code>crontab</code> da <code>curl … | bash</code>; <code>authorized_keys</code> ga yozish; <code>useradd</code>; <code>sudo find -exec /bin/sh</code>; <code>chmod u+s</code>; yangi systemd unit; <code>.bashrc</code>; reverse shell (<code>nc -e</code>, <code>bash -i &gt;&amp; /dev/tcp</code>).</dd>
+        <dt>Qidirish</dt><dd>auditd/syslog eksporti, <code>--preset auditd</code>; snapshot uchun <code>collect_linux.sh</code> (<a href="#R9">R9</a>).</dd>
+        <dt>ID nomzodlar</dt><dd><code>T1053.003</code> (cron), <code>T1098.004</code> (SSH kalit), <code>T1136.001</code>, <code>T1548.003</code> (sudo), <code>T1543.002</code> (systemd), kalit o'qilsa <code>T1552.004</code>.</dd>
+        <dt>Tozalash</dt><dd>Triage cron qatori, SSH kalit, SUID bit, xizmatni alohida tozalaydi. Hammasi BACKUP bilan.</dd>
+      </dl>
+    </div></details>
+
+    <details class="sit" id="H10"><summary><span class="id">H10</span><span class="q">Masofaviy boshqaruv dasturi: AnyDesk, TeamViewer, RMS, RustDesk</span><span class="where">RAT</span></summary><div class="body">
+      <dl class="kv">
+        <dt>Logda</dt><dd>Shu dasturlarning o'rnatilishi, xizmati yoki ulanishi; <code>Ammyy</code>, <code>ScreenConnect</code>.</dd>
+        <dt>Qidirish</dt><dd>💰 Fraud yoki Responder Triage (<code>remote_access_tools</code> qatori): ikkalasi ham bir xil qoida bilan topadi. SIEM da tayyor hunt yo'q.<div class="cmd"><pre>bk.exe resp fraud snap.json</pre></div></dd>
+        <dt>ID nomzodlar</dt><dd><code>T1219</code>.</dd>
+        <dt>Tozalash</dt><dd>Xizmatni to'xtatish va o'chirib qo'yish (fix skripti). Tashkilot o'zi ishlatadigan dastur bo'lishi ham mumkin: tashkilotchi yoki T0 snapshot bilan solishtiring.</dd>
+      </dl>
+    </div></details>
+
+    <details class="sit" id="H11"><summary><span class="id">H11</span><span class="q">Hujumchi serveri bilan aloqa (C2), tunnel</span><span class="where">tarmoq</span></summary><div class="body">
+      <dl class="kv">
+        <dt>Logda</dt><dd>Bir IP ga muntazam ulanish; <code>4444</code> kabi noodatiy port; DNS da juda ko'p noyob subdomen; <code>ngrok</code>, <code>chisel</code>, <code>frp</code>.</dd>
+        <dt>Qidirish</dt><dd>Hunt <code>c2-rare-port</code>, <code>c2-dns-tunnel</code>; C2 Hunt tabi (<a href="#L11">L11</a>).<div class="cmd"><pre>bk.exe siem query c2-rare-port --siem qradar --days 7</pre></div></dd>
+        <dt>ID nomzodlar</dt><dd><code>T1071.001</code> (web protokol), <code>T1071.004</code> (DNS), <code>T1571</code> (noodatiy port), <code>T1572</code> (tunnel).</dd>
+        <dt>Tozalash</dt><dd>Ulanayotgan jarayonni to'xtating (<a href="#F10">F10</a>), keyin IP ni bloklang (<a href="#F7">F7</a>). Faqat bloklash yetmaydi: dastur boshqa manzilga o'tadi.</dd>
+      </dl>
+    </div></details>
+
+    <details class="sit" id="H12"><summary><span class="id">H12</span><span class="q">Ma'lumot o'g'irlash: arxivlash, baza dampi, tashqariga yuklash</span><span class="where">exfiltration</span></summary><div class="body">
+      <dl class="kv">
+        <dt>Logda</dt><dd><code>tar -czf</code>, <code>7z a</code>, <code>rar</code>; <code>pg_dump</code>, <code>mysqldump</code>; <code>curl -F data=@…</code>, <code>curl -T</code>; katta hajmli chiquvchi trafik; bulut xizmatlari.</dd>
+        <dt>Qidirish</dt><dd>Hunt <code>exfil-large-upload</code>. Linux snapshot Triage da arxiv va bo'laklar ham chiqadi.<div class="cmd"><pre>bk.exe siem query exfil-large-upload --siem qradar --days 7</pre></div></dd>
+        <dt>ID nomzodlar</dt><dd><code>T1560.001</code> (arxivlash), <code>T1005</code> (lokal ma'lumot), <code>T1041</code> / <code>T1048</code> / <code>T1567</code> (qaysi kanal orqali ketganiga qarab).</dd>
+        <dt>Tozalash</dt><dd>Exfil manzilini bloklang (<a href="#F7">F7</a>). Arxiv fayllarni dalil sifatida saqlang, o'chirmang.</dd>
+      </dl>
+    </div></details>
+
+    <details class="sit" id="H13"><summary><span class="id">H13</span><span class="q">Ransomware: fayllar shifrlangan, zaxiralar o'chirilgan</span><span class="where">zarar</span></summary><div class="body">
+      <dl class="kv">
+        <dt>Logda</dt><dd><code>vssadmin delete shadows</code>, <code>wbadmin delete</code>, <code>bcdedit … recoveryenabled no</code>; ko'p faylning kengaytmasi o'zgargan; "README" / "DECRYPT" xat.</dd>
+        <dt>Qidirish</dt><dd>Hunt <code>evasion-recovery-inhibit</code>.<div class="cmd"><pre>bk.exe siem query evasion-recovery-inhibit --siem qradar --days 7</pre></div></dd>
+        <dt>ID nomzodlar</dt><dd><code>T1490</code> (tiklashni yo'q qilish). Shifrlashning o'zi <code>T1486</code>: Logs Analyzer buyruq satrida <code>-enc</code> / <code>-encrypt</code> / <code>--encrypt</code> + disk, share yoki VMs nishonini ko'rsa avtomatik qo'yadi (masalan <code>lock.exe -enc D:\Shares</code>). <code>powershell -enc</code> bunga kirmaydi, u base64 buyruq (<code>T1059.001</code>). Shifrlovchi boshqacha ishga tushgan bo'lsa (bayroqsiz), dalilni o'zingiz toping: kengaytmasi o'zgargan fayllar, "DECRYPT" xati.</dd>
+        <dt>Tozalash</dt><dd>Avval shifrlayotgan jarayonni to'xtating (<a href="#F10">F10</a>), keyin xizmatni tiklang (<a href="#F2">F2</a>). Hostni o'chirib-yoqmang: xotiradagi dalil yo'qoladi va xizmat uzoqroq o'lik turadi.</dd>
+      </dl>
+    </div></details>
+
+    <details class="sit" id="H14"><summary><span class="id">H14</span><span class="q">Izni yashirish: loglar tozalangan, antivirus o'chirilgan</span><span class="where">yashirinish</span></summary><div class="body">
+      <dl class="kv">
+        <dt>Logda</dt><dd><code>wevtutil cl</code>, <code>Clear-EventLog</code>, hodisa <code>1102</code> / <code>104</code>; <code>Set-MpPreference -DisableRealtimeMonitoring</code>; Linux da <code>history -c</code>, <code>rm /var/log/…</code>.</dd>
+        <dt>Qidirish</dt><dd>Hunt <code>evasion-log-cleared</code>, <code>evasion-av-disabled</code>.<div class="cmd"><pre>bk.exe siem query evasion-log-cleared --siem qradar --days 7</pre></div></dd>
+        <dt>ID nomzodlar</dt><dd><code>T1685.005</code> (Windows loglarini tozalash), <code>T1685</code> (himoyani o'chirish), <code>T1070.003</code> (buyruqlar tarixi), <code>T1070.004</code> (fayl o'chirish). Eski <code>T1070.001</code>/<code>T1562.001</code> ni topshirmang.</dd>
+        <dt>Tozalash</dt><dd>Defender ni qayta yoqish va begona istisnolarni olib tashlash fix skriptida bor. Host loglari o'chgan bo'lsa, SIEM dagi nusxaga tayaning.</dd>
+      </dl>
+    </div></details>
+
+    <details class="sit" id="H15"><summary><span class="id">H15</span><span class="q">Firibgarlik: buxgalter, 1C / Client-Bank, soxta bank sayti (1-kun)</span><span class="where">🛡 Responder → Triage + Fraud</span></summary><div class="body">
+      <ol>
+        <li>Buxgalter kompyuteridan snapshot oling va <b>Joriy Snapshot</b> ga qo'ying (bo'lsa baseline ham).</li>
+        <li><b>💰 Fraud Tekshirish</b>: masofaviy boshqaruv dasturi (AnyDesk, RMS, …), <code>hosts</code> fayldagi soxta bank manzili, soxta root sertifikat, o'zgartirilgan proksi va DNS, portproxy, o'chirilgan firewall.</li>
+        <li><b>Triage</b>: vazifa, xizmat, autorun kabi boshqa o'rnashishlar faqat shu yerda chiqadi.</li>
+      </ol>
+      <p class="if">Fraud RAT va <code>hosts</code> ni Triage bilan <b>bir xil qoida</b> bo'yicha tekshiradi, natijalar mos keladi. Lekin Fraud "toza" desa ham Triage ni yurgizing: hujumchi pul o'tkazmasi uchun vazifa yoki xizmat qoldirgan bo'lishi mumkin. Ikkalasi ham faqat o'qiydi.</p>
+      <dl class="kv">
+        <dt>ID nomzodlar</dt><dd><code>T1657</code> (moliyaviy o'g'irlik), <code>T1565.001</code> (saqlangan ma'lumotni o'zgartirish, masalan to'lov rekvizitlari), <code>T1219</code> (RAT).</dd>
+      </dl>
+      <div class="cmd"><pre>bk.exe resp triage web-work\snap_BUX-PC05.json --baseline web-work\base_BUX-PC05.json</pre></div>
+      <div class="cmd"><pre>bk.exe resp fraud web-work\snap_BUX-PC05.json --baseline web-work\base_BUX-PC05.json</pre></div>
+    </div></details>
+
+    <details class="sit" id="H16"><summary><span class="id">H16</span><span class="q">Zavod / ICS: PLC to'xtadi, HMI ishlamayapti (2-kun)</span><span class="where">🔍 SIEM + 📖 KB</span></summary><div class="body">
+      <ol>
+        <li><b>🔍 SIEM So'rov</b> da <code>ics-</code> bilan boshlanadigan huntlarni tanlang: <code>ics-plc-stop</code>, <code>ics-hmi-service-stop</code>, <code>ics-write-command</code>, <code>ics-program-download</code>, <code>ics-engineering-tool</code>. Beshalasini bitta faylga:<div class="cmd"><pre>bk.exe siem pack --siem qradar --search ics --out q_ics.txt</pre></div></li>
+        <li>Eksport qilingan logni <code>--preset ics</code> bilan tahlil qiling.</li>
+        <li>ICS texnikalari <code>T0xxx</code> ko'rinishida (<code>T0816</code>, <code>T0881</code>, <code>T0836</code>, <code>T0821</code>, <code>T0858</code>). Ularning bir qismi v19 da o'zgargan, masalan <code>T0803</code> endi <code>T1691.001</code>. <b>Hammasini KB da tekshiring</b> (<a href="#J2">J2</a>).</li>
+        <li>Xizmatni tiklash uchun <a href="#F2">F2</a> va <a href="#F3">F3</a>.</li>
+      </ol>
+    </div></details>
+
+    <details class="sit" id="H17"><summary><span class="id">H17</span><span class="q">Razvedka: whoami, nmap, net group, tarmoqni skanerlash</span><span class="where">discovery</span></summary><div class="body">
+      <dl class="kv">
+        <dt>Logda</dt><dd><code>whoami</code>, <code>systeminfo</code>, <code>ipconfig /all</code>, <code>net group "domain admins"</code>, <code>nltest /dclist</code>, <code>nmap</code>, ko'p portga qisqa ulanishlar.</dd>
+        <dt>Qidirish</dt><dd>Hunt <code>net-port-scan</code>.<div class="cmd"><pre>bk.exe siem query net-port-scan --siem qradar --days 7</pre></div></dd>
+        <dt>ID nomzodlar</dt><dd><code>T1033</code> (foydalanuvchi), <code>T1082</code> (tizim ma'lumoti), <code>T1046</code> (tarmoq xizmatlarini skanerlash).</dd>
+        <dt>Tozalash</dt><dd>Tozalanadigan narsa yo'q. Lekin razvedka qilingan host, albatta, buzilgan: undan snapshot oling.</dd>
+      </dl>
+    </div></details>
+  </div>
+
+  <!-- R -->
+  <div class="group" id="g-r">
+    <h3>R · Snapshot va triage (Responder)</h3>
+
+    <details class="sit" id="R1"><summary><span class="id">R1</span><span class="q">Musobaqa endi boshlandi, hostlarga hali tegmadik (T0 snapshot)</span><span class="where">nishon host</span></summary><div class="body">
+      <p>Har bir nishon hostdan <b>T0 snapshot</b> oling. Host toza bo'lmasa ham oling: hujumchi 2 kun davomida ishlaydi va u keyin <b>qo'shgan</b> hamma narsa T0 bilan solishtirganda aniq chiqadi.</p>
+      <ol>
+        <li><code>responder</code> papkasidagi kollektorni nishon hostga ko'chiring (<a href="#R6">R6</a>).</li>
+        <li>Nishon hostda <b>admin</b> (Linux da <code>sudo</code>) bilan ishga tushiring.</li>
+        <li>Chiqqan JSON ni o'z noutbukingizga, kit ichidagi <code>web-work</code> ga olib keling.</li>
+      </ol>
+      <span class="lbl">Windows host (admin PowerShell)</span>
+      <div class="cmd"><pre>powershell -ExecutionPolicy Bypass -File collect_windows.ps1 -Baseline -Out base_WS07.json</pre></div>
+      <span class="lbl">Linux host</span>
+      <div class="cmd"><pre>sudo bash collect_linux.sh -o base_web01.json</pre></div>
+      <p class="if">Windows kollektori 1–3 daqiqa ishlaydi. Shoshilsangiz <code>-NoDeep</code> qo'shing (fayl skanerisiz, taxminan 1 daqiqa). Nom qoidasi: <code>base_HOSTNOMI.json</code>, hammasi bitta papkada. Kollektor faqat o'qiydi, hostda hech narsani o'zgartirmaydi.</p>
+    </div></details>
+
+    <details class="sit" id="R2"><summary><span class="id">R2</span><span class="q">Checker (ball boti) IP sini bilmayman</span><span class="where">CLI (PowerShell)</span></summary><div class="body">
+      <div class="cmd"><pre>bk.exe resp discover (Get-ChildItem web-work\base_*.json).FullName --allowlist-out web-work\protected.yaml --sla-out web-work\services.yaml</pre></div>
+      <p>Tool snapshotlardan checker va monitoring agentlarini topadi va ikkita fayl yozadi:</p>
+      <ul>
+        <li><code>protected.yaml</code>: "tegmang" ro'yxati. Responder tabidagi <b>Protected</b> maydoniga beriladi.</li>
+        <li><code>services.yaml</code>: SLA kuzatuvi uchun xizmatlar ro'yxati (<a href="#F3">F3</a>).</li>
+      </ul>
+      <p>Logs Analyzer natijasi bo'lsa, <code>--from-logs out\export.json</code> qo'shing: checker aniqroq topiladi. Qo'lda qo'shish uchun <code>protected.yaml</code> ga har qatorga bittadan yozing:</p>
+      <div class="cmd"><pre>items:
+  - 10.0.0.50
+  - checker_admin</pre></div>
+      <p class="if"><b>Checker ni bloklasangiz</b> availability ballingiz nolga tushadi va buni sizga hech kim aytmaydi.</p>
+    </div></details>
+
+    <details class="sit" id="R3"><summary><span class="id">R3</span><span class="q">Host buzilgan deb gumon qilaman. Nima o'rnatilganini ko'rmoqchiman</span><span class="where">🛡 Responder</span></summary><div class="body">
+      <ol>
+        <li>Nishon hostdan <b>yangi</b> snapshot oling (endi <code>-Baseline</code> siz): <div class="cmd"><pre>powershell -ExecutionPolicy Bypass -File collect_windows.ps1 -Out snap_WS07.json</pre></div></li>
+        <li><b>🛡 Responder</b> tabida to'ldiring:
+          <ul>
+            <li><b>Joriy Snapshot</b>: <code>snap_WS07.json</code> (majburiy).</li>
+            <li><b>Baseline Snapshot</b>: <code>base_WS07.json</code> (bo'lmasa <a href="#R4">R4</a>).</li>
+            <li><b>Log Analyzer natijasi</b>: <a href="#L1">L1</a> da yuklab olingan JSON.</li>
+            <li><b>Protected</b>: <a href="#R2">R2</a> dagi ro'yxat.</li>
+          </ul>
+        </li>
+        <li><b>🔍 Triage Tahlili</b>.</li>
+      </ol>
+      <span class="lbl">Jadvalni o'qish</span>
+      <div class="tbl"><table>
+        <thead><tr><th>Ustun</th><th>Ma'nosi</th></tr></thead>
+        <tbody>
+          <tr><td>Ball</td><td class="wrap1">Qancha katta, shuncha shubhali. Jadval shu bo'yicha tartiblangan.</td></tr>
+          <tr><td>Ishonch</td><td class="wrap1"><code>high</code> / <code>med</code> / <code>low</code>. <code>low</code> larni oxiriga qoldiring.</td></tr>
+          <tr><td>Kategoriya</td><td class="wrap1">Xizmat, vazifa, akkaunt, autorun, ulanish, jarayon, fayl, cron, SSH kalit, hosts, Defender…</td></tr>
+          <tr><td>Texnikalar</td><td class="wrap1">ATT&amp;CK ID. <b>Kapitanga ayting</b>, bu topshiriladigan javob bo'lishi mumkin.</td></tr>
+          <tr><td>PROTECTED</td><td class="wrap1">Bunga tegmang.</td></tr>
+          <tr><td>✔ LOG</td><td class="wrap1">Log ham tasdiqlagan. Eng ishonchli qatorlar.</td></tr>
+        </tbody>
+      </table></div>
+      <div class="note ok"><span class="tag">Qayerdan boshlash</span><p>Yuqori ball + <code>high</code> + <b>✔ LOG</b> bir qatorda bo'lsa, bu deyarli aniq hujumchining izi. Shu qatordan boshlang.</p></div>
+      <p class="if"><b>Pastki natija maydoni bitta.</b> Boshqa tugma bosilsa eski natija o'chadi. Keraklisini oldin nusxalang yoki skrinshot qiling.</p>
+      <span class="lbl">CLI</span>
+      <div class="cmd"><pre>bk.exe resp triage web-work\snap_WS07.json --baseline web-work\base_WS07.json --from-logs out\export.json --protected web-work\protected.yaml --out out\triage_WS07.json</pre></div>
+    </div></details>
+
+    <details class="sit" id="R4"><summary><span class="id">R4</span><span class="q">Toza baseline yo'q (hamma narsa "med", nimadan boshlashni bilmayman)</span><span class="where">🛡 Responder</span></summary><div class="body">
+      <p>Baseline maydoniga shu tartibda qo'yib ko'ring:</p>
+      <ol>
+        <li><b>O'sha hostning T0 snapshoti</b> (<a href="#R1">R1</a>). Eng yaxshisi.</li>
+        <li><b>Bir xil rolli qo'shni host</b> (masalan WS07 uchun WS08). Ehtiyot: ikkalasi bir xil zararlangan bo'lsa, hujum butunlay ko'rinmay qoladi. Natija bo'm-bo'sh chiqsa, bu usulni tashlang.</li>
+        <li><b>Uyda toza VM dan olingan etalon</b> (musobaqadan oldin tayyorlanadi).</li>
+        <li><b>Hech narsa yo'q:</b> baseline maydonini bo'sh qoldiring. Tool ichki "normal ro'yxat" bilan ishlaydi. Bu holda faqat <b>✔ LOG</b> belgili qatorlardan boshlang.</li>
+      </ol>
+    </div></details>
+
+    <details class="sit" id="R5"><summary><span class="id">R5</span><span class="q">Triage da "Loglarda bor, lekin Snapshotda topilmadi" degan qizil blok chiqdi</span><span class="where">🛡 Responder</span></summary><div class="body">
+      <p>Log bu narsa bo'lganini aytyapti, snapshotda esa u yo'q. Ikki sabab bo'lishi mumkin:</p>
+      <ul>
+        <li>Hujumchi izini tozalab ketgan. Bu ham alohida ATT&amp;CK texnikasi (<a href="#H14">H14</a>), Kapitanga ayting.</li>
+        <li>Snapshot boshqa hostdan olingan. Snapshotdagi host nomini tekshiring.</li>
+      </ul>
+      <p>Ro'yxatda faqat ikki xil narsa qoladi: shubhali artefaktlar (high/medium texnikali hodisalardan, masalan brute-force IP si yoki C2) va aynan shu snapshot hostida ko'ringan artefaktlar. Boshqa hostlarniki, fon IP lari (8.8.8.8, Microsoft, CDN) va oddiy tizim fayllari (<code>svchost.exe</code>, <code>explorer.exe</code>) yashiriladi, ular "+N ta boshqa host / fon artefakti" deb sanaladi. To'liq ro'yxat CLI da <code>--json</code> bilan, <code>unmatched_other</code> kalitida.</p>
+      <p>Bridge davriy ulanishlarni yo'nalish bo'yicha ajratadi. Tashqi IP ga kamida 10 marta takrorlangan ulanish <b>C2 beacon nomzodi</b> bo'ladi: snapshotdagi shu IP ga ulanish HIGH (<code>T1071.001</code>) chiqadi va pastda "C2 beacon nomzodlari — tekshirib BLOKLANG" jadvali paydo bo'ladi. Faqat tashqaridan ichkariga keladigan davriy manba "Mumkin bo'lgan checker" ro'yxatiga tushadi.</p>
+      <p>Triage <code>recent_modified</code> da shifrlangan fayllarni (<code>.LOCKBIT</code>, <code>.locked</code>, <code>hujjat.xlsx.XXXX</code> kabi qo'sh kengaytma) va ransom xatlarini (<code>HOW_TO_DECRYPT.txt</code>, <code>RESTORE_MY_FILES.txt</code>) ham topadi: kategoriya <code>ransomware</code>, <code>T1486</code>, HIGH (<a href="#H13">H13</a>).</p>
+    </div></details>
+
+    <details class="sit" id="R6"><summary><span class="id">R6</span><span class="q">Nishon hostga qanday kiraman va faylni qanday o'tkazaman?</span><span class="where">RDP / SSH / WinRM</span></summary><div class="body">
+      <div class="tbl"><table>
+        <thead><tr><th>Usul</th><th>Kollektorni yuborish va snapshotni qaytarish</th></tr></thead>
+        <tbody>
+          <tr><td>RDP (Windows)</td><td class="wrap1"><code>mstsc</code> → hostga kiring. Faylni o'z Explorer ingizda <kbd>Ctrl</kbd>+<kbd>C</kbd>, RDP ichida <kbd>Ctrl</kbd>+<kbd>V</kbd>. Natija JSON ni xuddi shunday teskari tomonga.</td></tr>
+          <tr><td>SSH (Linux)</td><td class="wrap1"><code>scp responder\collect_linux.sh user@10.0.2.20:/tmp/</code>, keyin <code>scp user@10.0.2.20:/tmp/snap_web01.json web-work\</code></td></tr>
+          <tr><td>SSH, faylsiz</td><td class="wrap1">CLI-oyna (cmd) da: <code>ssh root@10.0.2.20 "bash -s" &lt; responder\collect_linux.sh &gt; web-work\snap_web01.json</code>. <code>sudo</code> parol so'rasa, bu usul ishlamaydi: <code>scp</code> usulidan foydalaning.</td></tr>
+          <tr><td>WinRM (PowerShell)</td><td class="wrap1"><code>Invoke-Command -ComputerName WS07 -FilePath responder\collect_windows.ps1 | Out-File -Encoding utf8 web-work\snap_WS07.json</code></td></tr>
+          <tr><td>SMB (admin)</td><td class="wrap1"><code>copy responder\collect_windows.ps1 \\WS07\C$\Windows\Temp\</code></td></tr>
+        </tbody>
+      </table></div>
+      <p class="if">Login va parolni faqat tashkilotchi bergan hujjatdan oling. Snapshot odatda 1 MB dan kichik bo'ladi.</p>
+    </div></details>
+
+    <details class="sit" id="R7"><summary><span class="id">R7</span><span class="q">Kollektor ishga tushmadi ("running scripts is disabled" va boshqa xatolar)</span><span class="where">nishon host</span></summary><div class="body">
+      <ul>
+        <li><b>"running scripts is disabled"</b>: buyruq <code>powershell -ExecutionPolicy Bypass -File …</code> bilan boshlanganiga ishonch hosil qiling. Faylni ikki marta bosib ochmang.</li>
+        <li><b>Fayl blok qilingan</b> (internetdan kelgan deb): <code>Unblock-File collect_windows.ps1</code>.</li>
+        <li><b>Hostdagi antivirus faylni o'chirdi</b>: nishon hostda himoyani o'chirmang, bu ham hujum belgisidek ko'rinadi. <code>-NoDeep</code> bilan qayta urinib ko'ring. Bo'lmasa, Kapitanga ayting.</li>
+        <li><b>Linux: <code>$'\r': command not found</code></b>: fayl Windows qator oxiri bilan saqlangan. Kitdagi asl faylni qayta ko'chiring, uni Windows muharririda ochib saqlamang.</li>
+        <li><b>Juda uzoq ishlayapti</b>: <code>-NoDeep</code> (Windows).</li>
+      </ul>
+    </div></details>
+
+    <details class="sit" id="R8"><summary><span class="id">R8</span><span class="q">Snapshot olindi, lekin juda kam narsa bor yoki ichida xatolar yozilgan</span><span class="where">nishon host</span></summary><div class="body">
+      <p>Kollektor ko'pincha <b>admin huquqisiz</b> ishga tushirilgan bo'ladi. U holda xizmat yo'llari, boshqa foydalanuvchilar jarayonlari, admin guruhi o'qilmaydi. Snapshot JSON ichidagi <code>errors</code> ro'yxatiga qarang.</p>
+      <ul>
+        <li>Windows: PowerShell ni <b>Run as administrator</b> bilan oching va qayta oling.</li>
+        <li>Linux: <code>sudo bash collect_linux.sh -o snap.json</code>.</li>
+      </ul>
+    </div></details>
+
+    <details class="sit" id="R9"><summary><span class="id">R9</span><span class="q">Nishon Linux server (web, baza)</span><span class="where">🛡 Responder</span></summary><div class="body">
+      <ol>
+        <li>Snapshot: <code>sudo bash collect_linux.sh -o snap_web01.json</code> (<a href="#R6">R6</a>).</li>
+        <li>Responder tabida Triage qiling. Linux uchun tool cron, SSH kalitlar, SUID, systemd, jarayonlar, arxiv va baza dampi kabi exfil izlarini ko'radi.</li>
+        <li>Tozalash buyruqlarida OS ni <b>Linux</b> qiling.</li>
+      </ol>
+      <p class="if">Namuna: <code>data\samples\exfil\</code> papkasida buzilgan web va baza serverining T0 va keyingi snapshotlari bor. Mashq uchun Triage ga bering.</p>
+    </div></details>
+  </div>
+
+  <!-- F -->
+  <div class="group" id="g-f">
+    <h3>F · Tozalash, tiklash va qiyin holatlar</h3>
+
+    <details class="sit" id="F1"><summary><span class="id">F1</span><span class="q">Shubhali narsani topdim, endi tozalashim kerak</span><span class="where">🛡 Responder</span></summary><div class="body">
+      <ol>
+        <li>Triage (<a href="#R3">R3</a>) qilingan bo'lsin.</li>
+        <li>O'ng kartada <b>OS</b> ni tanlang (nishon hostniki: Windows yoki Linux).</li>
+        <li><b>Full</b> katagini <b>belgilamang</b>. Shunda faqat ishonchli topilmalar kiradi va fayllar o'chirilmaydi, karantinga olinadi.</li>
+        <li><b>⚙ Tozalash Buyruqlarini Yasash</b>.</li>
+      </ol>
+      <span class="lbl">Skript 4 qismdan iborat, shu tartibda bajaring</span>
+      <ol>
+        <li><b>BACKUP</b>: o'chirishdan oldin nusxa. <b>O'tkazib yubormang.</b> Windows da avval papka yarating (<a href="#F4">F4</a>).</li>
+        <li>Jurnalga bitta qator yozing (pastda).</li>
+        <li><b>REMOVE</b>: nishon host terminalida qo'lda bajaring.</li>
+        <li><b>VERIFY</b>: haqiqatan tozalanganini tekshiring.</li>
+        <li><b>ROLLBACK</b>: xizmat buzilsa yoki noto'g'ri narsa o'chsa, shu bilan qaytaring (<a href="#F5">F5</a>).</li>
+      </ol>
+      <span class="lbl">Jurnal qatori (har bir tozalashdan OLDIN)</span>
+      <div class="cmd"><pre>vaqt (Toshkent) | host | nima qilindi | buyruq | kim
+2026-10-05 09:14 | WS07 | "UpdateChk" vazifasi o'chirildi | schtasks /delete /tn UpdateChk /f | Aziz</pre></div>
+      <p class="if">Jurnal "birinchi biz tuzatdik" degan dalil bo'ladi. Hunter "bu izni kim o'chirdi?" desa ham javob shu yerda.</p>
+      <span class="lbl">Tozalagandan keyin</span>
+      <ul>
+        <li>Yangi snapshot olib qayta Triage qiling. Tozalangan narsa jadvaldan yo'qolishi kerak.</li>
+        <li>Hujumchi ko'rgan akkauntlarning parolini almashtiring (<a href="#F8">F8</a>).</li>
+        <li>10–15 daqiqada bir o'sha joyni qayta tekshiring (<a href="#F6">F6</a>).</li>
+        <li>Playbook tabida tegishli qadamni <b>Bajarildi</b> qiling.</li>
+      </ul>
+      <span class="lbl">CLI</span>
+      <div class="cmd"><pre>bk.exe resp fix web-work\snap_WS07.json --baseline web-work\base_WS07.json --from-logs out\export.json --os windows --out fix_WS07.ps1</pre></div>
+    </div></details>
+
+    <details class="sit" id="F2"><summary><span class="id">F2</span><span class="q">Sayt yoki xizmat ishlamayapti, sababini bilmayman</span><span class="where">🛡 Responder</span></summary><div class="body">
+      <ol>
+        <li>O'sha hostdan snapshot oling va <b>Joriy Snapshot</b> ga qo'ying.</li>
+        <li>"To'xtagan servis nomi" maydoniga aniq nomni yozing: <code>nginx</code>, <code>apache2</code>, <code>sshd</code>, <code>mysql</code>, <code>postgresql</code>, <code>W3SVC</code>. Nomni bilmasangiz <a href="#F11">F11</a>.</li>
+        <li><b>🩺 Service Doctor</b>.</li>
+      </ol>
+      <p>Natija: <b>sabab → dalil → tuzatish buyrug'i</b>. Buyruqni nusxalab, nishon hostda qo'lda bajaring va jurnalga yozing.</p>
+      <div class="cmd"><pre>bk.exe resp doctor web-work\snap_web01.json nginx</pre></div>
+      <p class="if">Eng tez yo'l ko'pincha tiklash: xizmatni qayta ishga tushirish yoki toza konfigni qaytarish. Chuqur tashxisni keyinga qoldiring, ball har daqiqada ketyapti.</p>
+    </div></details>
+
+    <details class="sit" id="F3"><summary><span class="id">F3</span><span class="q">Xizmatlar tirikligini doim kuzatib turmoqchiman (SLA)</span><span class="where">CLI / 🛡 Responder</span></summary><div class="body">
+      <p><code>services.yaml</code> tayyorlang (yoki <a href="#R2">R2</a> dagi <code>--sla-out</code> faylini oling). Namuna: <code>responder\sla.example.yaml</code>.</p>
+      <div class="cmd"><pre>services:
+  - name: web
+    checks:
+      - type: tcp
+        target: 10.10.20.11:80
+      - type: http
+        url: http://10.10.20.11/</pre></div>
+      <p>Alohida oynada ishga tushiring va musobaqa davomida yopmang:</p>
+      <div class="cmd"><pre>bk.exe resp sla web-work\services.yaml --watch --interval 30</pre></div>
+      <p>Holat <b>TIRIK</b> dan <b>O'LGAN</b> ga o'tsa darhol ko'rasiz. Har tozalashdan oldin va keyin shu oynaga qarang. Web da: Responder tabidagi SLA maydoniga shu YAML ni qo'yib <b>⏱ SLA Holati</b>.</p>
+      <div class="note warn"><span class="tag">Tuzoq</span><p>Noutbukdan faqat <code>tcp</code> va <code>http</code> turlarini ishlating. <code>process</code>, <code>service</code>, <code>file_*</code> turlari nishon serverni emas, <b>sizning noutbukingizni</b> tekshiradi va hammasi "O'LGAN" chiqadi.</p></div>
+    </div></details>
+
+    <details class="sit" id="F4"><summary><span class="id">F4</span><span class="q">BACKUP buyrug'i "Could not find a part of the path" / "tizim yo'lni topa olmadi" deydi</span><span class="where">nishon host</span></summary><div class="body">
+      <p>Windows BACKUP buyruqlari nusxani <code>C:\ir\backup\</code> ga yozadi. Bu papka vazifa, xizmat va autorun uchun avtomatik yaratilmaydi. Nishon hostda birinchi tozalashdan oldin bir marta yarating:</p>
+      <div class="cmd"><pre>New-Item -ItemType Directory C:\ir\backup, C:\ir\quarantine -Force</pre></div>
+      <p>Keyin BACKUP ni qayta bajaring. <b>BACKUP o'tmaguncha REMOVE ni bajarmang.</b></p>
+    </div></details>
+
+    <details class="sit" id="F5"><summary><span class="id">F5</span><span class="q">Tozalagandan keyin xizmat yoki sayt ishlamay qoldi</span><span class="where">nishon host</span></summary><div class="body">
+      <ol>
+        <li>Darhol o'sha topilmaning <b>ROLLBACK</b> qismini bajaring.</li>
+        <li>SLA oynasida xizmat qayta <b>TIRIK</b> bo'lganini ko'ring.</li>
+        <li>Jurnalga yozing: nima qaytarildi va nega.</li>
+        <li>Keyin sababini o'ylang: o'chirilgan narsa xizmatning o'ziga kerakmidi? Uni <code>protected</code> ro'yxatiga qo'shing.</li>
+      </ol>
+      <p class="if">Shuning uchun BACKUP majburiy: ROLLBACK faqat backup bo'lsa ishlaydi.</p>
+    </div></details>
+
+    <details class="sit" id="F6"><summary><span class="id">F6</span><span class="q">Tozaladim, lekin u qaytib keldi (yana paydo bo'ldi)</span><span class="where">🛡 Responder</span></summary><div class="body">
+      <p>Hujumchida uni qayta yaratadigan boshqa mexanizm bor yoki u hali ichkarida.</p>
+      <ol>
+        <li>Yangi snapshot + Triage. Hammasiga qarang, faqat qaytgan narsaga emas: yana bir vazifa, xizmat, WMI obuna, cron yoki ishlayotgan jarayon bormi?</li>
+        <li><code>connections</code> qatorlarida tashqi IP ga ulanish bormi? Bor bo'lsa, hujumchi hali ichkarida (<a href="#F9">F9</a>).</li>
+        <li>Parollar almashtirilmagan bo'lsa, hujumchi oddiy login bilan qaytmoqda (<a href="#F8">F8</a>).</li>
+        <li>Qayta yaratayotgan jarayonni to'xtating (<a href="#F10">F10</a>), keyin qaytgan narsani qayta tozalang.</li>
+      </ol>
+    </div></details>
+
+    <details class="sit" id="F7"><summary><span class="id">F7</span><span class="q">Hujumchi IP sini bloklash kerak</span><span class="where">nishon host</span></summary><div class="body">
+      <p>Tool bloklash buyrug'ini avtomatik yozmaydi. Buni ataylab qo'lda qilasiz.</p>
+      <ol>
+        <li><b>Avval tekshiring:</b> bu IP <code>protected.yaml</code> da yoki Logs natijasidagi Checkers ro'yxatida yo'qmi? Ichki IP (<code>10.x</code>, <code>192.168.x</code>) bo'lsa, ehtimol bu hujumchi emas, buzilgan boshqa host.</li>
+        <li>Jurnalga yozing.</li>
+        <li>Bloklang:</li>
+      </ol>
+      <span class="lbl">Windows (admin PowerShell)</span>
+      <div class="cmd"><pre>New-NetFirewallRule -DisplayName "IR-block-198.51.100.45" -Direction Outbound -RemoteAddress 198.51.100.45 -Action Block
+New-NetFirewallRule -DisplayName "IR-block-198.51.100.45" -Direction Inbound -RemoteAddress 198.51.100.45 -Action Block</pre></div>
+      <span class="lbl">Qaytarish</span>
+      <div class="cmd"><pre>Remove-NetFirewallRule -DisplayName "IR-block-198.51.100.45"</pre></div>
+      <span class="lbl">Linux (root): avval qaysi firewall borligini aniqlang</span>
+      <div class="cmd"><pre>cat /etc/os-release | head -3
+ufw status; firewall-cmd --state; command -v iptables nft</pre></div>
+      <p>Faol bo'lgan firewall'ning buyrug'ini ishlating. Agar ufw yoki firewalld <b>yoqilgan</b> bo'lsa, ulardan birini ishlating: ular qayta yuklanganda qo'lda qo'shilgan iptables qoidasini o'chirib yuboradi.</p>
+      <span class="lbl">Ubuntu, ufw yoqilgan bo'lsa</span>
+      <div class="cmd"><pre>ufw insert 1 deny from 198.51.100.45
+ufw insert 1 deny out to 198.51.100.45</pre></div>
+      <span class="lbl">RHEL / Rocky / Alma, firewalld yoqilgan bo'lsa</span>
+      <div class="cmd"><pre>firewall-cmd --add-rich-rule='rule family="ipv4" source address="198.51.100.45" drop'
+firewall-cmd --direct --add-rule ipv4 filter OUTPUT 0 -d 198.51.100.45 -j DROP</pre></div>
+      <span class="lbl">Boshqa hamma holat (Debian, Alpine, iptables bor)</span>
+      <div class="cmd"><pre>iptables -I OUTPUT -d 198.51.100.45 -j DROP
+iptables -I INPUT -s 198.51.100.45 -j DROP</pre></div>
+      <span class="lbl">Minimal Debian 12+ (iptables yo'q, faqat nft)</span>
+      <div class="cmd"><pre>nft add table inet ir
+nft add chain inet ir in '{ type filter hook input priority -10; }'
+nft add chain inet ir out '{ type filter hook output priority -10; }'
+nft add rule inet ir in ip saddr 198.51.100.45 drop
+nft add rule inet ir out ip daddr 198.51.100.45 drop</pre></div>
+      <span class="lbl">Qaytarish (o'sha variant bo'yicha)</span>
+      <div class="cmd"><pre>ufw delete deny from 198.51.100.45; ufw delete deny out to 198.51.100.45
+firewall-cmd --remove-rich-rule='rule family="ipv4" source address="198.51.100.45" drop'
+firewall-cmd --direct --remove-rule ipv4 filter OUTPUT 0 -d 198.51.100.45 -j DROP
+iptables -D OUTPUT -d 198.51.100.45 -j DROP; iptables -D INPUT -s 198.51.100.45 -j DROP
+nft delete table inet ir</pre></div>
+      <p>firewalld buyruqlari <code>--permanent</code> siz yozilgan, ya'ni faqat qayta yuklashgacha amal qiladi. Musobaqa uchun shu yetadi va qaytarish ham oson.</p>
+      <p class="if">Bloklagandan keyin 1–2 daqiqa SLA oynasiga qarang. Ball tushsa, darhol qaytaring (<a href="#F12">F12</a>).</p>
+    </div></details>
+
+    <details class="sit" id="F8"><summary><span class="id">F8</span><span class="q">Akkaunt buzilgan: parolni almashtirish yoki o'chirib qo'yish</span><span class="where">nishon host</span></summary><div class="body">
+      <ul>
+        <li><b>Hujumchi yaratgan akkaunt</b>: Triage + fix skripti uni <b>disable</b> qiladi (<code>Disable-LocalUser</code>), o'chirmaydi. ROLLBACK bilan qaytarsa bo'ladi.</li>
+        <li><b>Haqiqiy xodim akkaunti</b>: o'chirmang, parolini almashtiring.</li>
+      </ul>
+      <div class="tbl"><table>
+        <thead><tr><th>Qayerda</th><th>Parolni almashtirish</th><th>Vaqtincha o'chirish</th></tr></thead>
+        <tbody>
+          <tr><td>Windows lokal</td><td class="wrap1"><code>net user ali *</code></td><td class="wrap1"><code>Disable-LocalUser -Name ali</code></td></tr>
+          <tr><td>Windows domen</td><td class="wrap1"><code>net user ali * /domain</code></td><td class="wrap1"><code>net user ali /active:no /domain</code></td></tr>
+          <tr><td>Linux</td><td class="wrap1"><code>passwd ali</code></td><td class="wrap1"><code>usermod -L -e 1 ali</code></td></tr>
+        </tbody>
+      </table></div>
+      <p class="if"><b>Linux:</b> <code>usermod -L</code> faqat parolni qulflaydi. SSH kalit bilan kirish baribir ishlayveradi. <code>-e 1</code> akkaunt muddatini tugatadi, shunda SSH kalit bilan ham kira olmaydi. Shuningdek <code>~ali/.ssh/authorized_keys</code> ni ham tekshiring. Qaytarish: <code>usermod -U -e '' ali</code>. Alpine/BusyBox da <code>usermod</code> yo'q, o'rniga <code>passwd -l ali</code> (qaytarish <code>passwd -u ali</code>) ishlating.</p>
+      <p class="if"><b>Ehtiyot:</b> o'zingiz kirib turgan akkauntni va checker akkauntini (<code>protected</code>) o'chirmang. Yangi parolni jamoaga yozma ravishda bering.</p>
+    </div></details>
+
+    <details class="sit" id="F9"><summary><span class="id">F9</span><span class="q">Hujumchi hozir ham tizimda (faol sessiya)</span><span class="where">nishon host</span></summary><div class="body">
+      <span class="lbl">Windows</span>
+      <div class="cmd"><pre>quser
+logoff 2</pre></div>
+      <p><code>quser</code> kim kirib turganini va sessiya raqamini ko'rsatadi, <code>logoff RAQAM</code> uni chiqaradi.</p>
+      <span class="lbl">Linux</span>
+      <div class="cmd"><pre>who
+pkill -KILL -t pts/1</pre></div>
+      <p>Tartib: <b>parolni almashtiring</b> (<a href="#F8">F8</a>) → sessiyani uzing → IP ni bloklang (<a href="#F7">F7</a>). Aks holda u darhol qayta kiradi.</p>
+    </div></details>
+
+    <details class="sit" id="F10"><summary><span class="id">F10</span><span class="q">Zararli jarayon ishlab turibdi</span><span class="where">🛡 Responder</span></summary><div class="body">
+      <ol>
+        <li>Triage da <code>process</code> qatorini toping (yo'li, PID, imzosi).</li>
+        <li>Fix skriptidagi BACKUP qismi faylning hashini oladi, nusxasini saqlaydi va buyruq qatorini ko'rsatadi. <b>Hashni Tracker ga yozing</b>, u javob bo'lishi mumkin (<a href="#J8">J8</a>).</li>
+        <li>REMOVE: <code>Stop-Process</code> (Linux da <code>kill -9</code>). Full belgilanmasa fayl diskda qoladi.</li>
+        <li>Jarayonni kim ishga tushirgan (vazifa, xizmat, autorun)? Uni ham tozalamasangiz, jarayon qaytadi (<a href="#F6">F6</a>).</li>
+      </ol>
+    </div></details>
+
+    <details class="sit" id="F11"><summary><span class="id">F11</span><span class="q">Qaysi xizmat to'xtaganini, uning aniq nomini bilmayman</span><span class="where">nishon host</span></summary><div class="body">
+      <span class="lbl">Windows</span>
+      <div class="cmd"><pre>Get-Service | Where-Object Status -eq Stopped | Where-Object StartType -eq Automatic</pre></div>
+      <span class="lbl">Linux</span>
+      <div class="cmd"><pre>systemctl --failed</pre></div>
+      <p>Avtomatik ishga tushishi kerak bo'lgan, lekin to'xtab turgan xizmat asosiy gumondor. Nomni <a href="#F2">Service Doctor</a> ga bering.</p>
+    </div></details>
+
+    <details class="sit" id="F12"><summary><span class="id">F12</span><span class="q">Ball tushyapti, lekin sababini bilmayman</span><span class="where">SLA + jurnal</span></summary><div class="body">
+      <ol>
+        <li>SLA oynasi: qaysi xizmat O'LGAN? → <a href="#F2">F2</a>.</li>
+        <li>Jurnal: oxirgi 15 daqiqada nima o'zgartirdik? Oxirgi bloklash yoki tozalashni ROLLBACK qiling (<a href="#F5">F5</a>).</li>
+        <li>Checker bloklanmaganmi? Firewall qoidalarini tekshiring: <code>Get-NetFirewallRule -DisplayName "IR-*"</code>.</li>
+        <li>Hujumchi xizmatni qayta buzgan bo'lishi mumkin: yangi snapshot + Triage.</li>
+      </ol>
+    </div></details>
+  </div>
+
+  <!-- X -->
+  <div class="group" id="g-x">
+    <h3>X · Jamoa ishi, vaqt va hisobot</h3>
+
+    <details class="sit" id="X1"><summary><span class="id">X1</span><span class="q">Hisobot yozishim kerak</span><span class="where">📑 Report</span></summary><div class="body">
+      <ol>
+        <li><b>📑 Report Generator</b> tabini oching.</li>
+        <li><b>Til</b>ni tanlang.</li>
+        <li><b>Logs JSON</b>: Logs Analyzer natijasi. <b>Responder Triage JSON</b>: bo'lsa triage natijasi.</li>
+        <li>Sarlavha, tashkilot, jamoa, analitik ismini yozing. Xulosa maydonini bo'sh qoldirsangiz tool o'zi yozadi.</li>
+        <li><b>📄 Professional Hisobotni Shakllantirish</b>. Brauzerda <kbd>Ctrl</kbd>+<kbd>P</kbd> → "Save as PDF".</li>
+      </ol>
+      <span class="lbl">CLI</span>
+      <div class="cmd"><pre>bk.exe ir report (Get-ChildItem case\2026-10-05\*.csv).FullName --lang uz --out report_uz.md</pre></div>
+      <p class="if">Qo'lda yuritilgan tozalash jurnalini (<a href="#F1">F1</a>) hisobotga o'zingiz qo'shing. Tool uni avtomatik olmaydi.</p>
+    </div></details>
+
+    <details class="sit" id="X2"><summary><span class="id">X2</span><span class="q">Hisobot Word (.docx) formatida kerak</span><span class="where">CLI</span></summary><div class="body">
+      <div class="cmd"><pre>bk.exe report --logs out\export.json --resp out\triage_WS07.json --answers web-work\answers.json --lang uz --docx hisobot.docx --out hisobot.html</pre></div>
+      <p>Tool sarlavha va boshqa ma'lumotlarni so'raydi. Bo'sh qoldirish uchun <kbd>Enter</kbd> bosing. <code>--answers</code> topshirilgan ID lar daftarini ham qo'shadi.</p>
+    </div></details>
+
+    <details class="sit" id="X3"><summary><span class="id">X3</span><span class="q">Keyin nima qilishni bilmayman / kim nima qilayotganini ko'rmoqchiman</span><span class="where">📋 Playbook</span></summary><div class="body">
+      <ul>
+        <li><b>📋 Playbook</b> tabi hamma qadamlarni fazalar bo'yicha ko'rsatadi. Bajarilganini <b>Bajarildi</b> deb belgilang. Holat saqlanadi.</li>
+        <li><b>Faqat majburiy</b> filtri: shoshilganda faqat eng muhim qadamlar.</li>
+        <li><b>Faqat bajarilmagan</b> filtri: nima qolganini ko'rish.</li>
+        <li>Kill-chain bosqichini <b>Tasdiqlandi</b> qilsangiz, hujumning qaysi qismi isbotlangani hisoblanadi.</li>
+      </ul>
+      <p class="if">Butun jamoa bitta Playbook ni ko'rishi uchun web UI bitta noutbukda ochilishi kerak (<a href="#X4">X4</a>).</p>
+    </div></details>
+
+    <details class="sit" id="X4"><summary><span class="id">X4</span><span class="q">Jamoa bitta Tracker va Playbook da ishlashi kerak</span><span class="where">Kapitan noutbuki</span></summary><div class="body">
+      <p>Tracker, Playbook va javoblar daftari web UI ishlayotgan noutbukning <code>web-work</code> papkasida saqlanadi. Har kim o'z serverini ochsa, har kimning doskasi alohida bo'lib qoladi.</p>
+      <ol>
+        <li>Kapitan noutbukida WEB-UI.bat o'rniga CLI-oyna.bat da yozing: <div class="cmd"><pre>bk.exe web --host 0.0.0.0 --port 8000</pre></div></li>
+        <li>Windows "Allow access" deb so'rasa, <b>Private networks</b> ni belgilab ruxsat bering.</li>
+        <li>Kapitan IP sini bilib oling: <code>ipconfig</code> (jamoa routeridagi manzil, masalan <code>192.168.1.23</code>).</li>
+        <li>Qolganlar o'z brauzerida <code>http://192.168.1.23:8000</code> ni ochadi.</li>
+      </ol>
+      <p class="if">Bu faqat jamoaning o'z routeri ichida qilinadi. Boshqa jamoalar ko'radigan umumiy tarmoqda <code>0.0.0.0</code> bilan ochmang: sahifa noutbukdagi fayllarni o'qiy oladi.</p>
+      <p class="if">Fayl tanlash tugmasi bilan yuborilgan fayllar Kapitan noutbukiga ko'chadi. Fayl yo'lini yozib bersangiz, u Kapitan noutbukidagi yo'l deb tushuniladi.</p>
+    </div></details>
+
+    <details class="sit" id="X5"><summary><span class="id">X5</span><span class="q">1-kun tugadi, ertaga davom etamiz</span><span class="where">web-work</span></summary><div class="body">
+      <ol>
+        <li>Hisobotni saqlang (<a href="#X1">X1</a>) va tozalash jurnalini nusxalang.</li>
+        <li><code>web-work</code> va <code>out</code> papkalarini USB ga nusxalang. Ichida: <code>tracker.json</code>, <code>playbook.json</code>, <code>answers.json</code>, snapshotlar, loglar.</li>
+        <li>Server oynasini yoping.</li>
+        <li>2-kun boshida: yangi nishon hostlar bo'lsa, ulardan ham T0 snapshot (<a href="#R1">R1</a>). Checker va xizmatlar ro'yxatini yangilang (<a href="#R2">R2</a>).</li>
+      </ol>
+    </div></details>
+
+    <details class="sit" id="X6"><summary><span class="id">X6</span><span class="q">Noutbuk buzildi yoki qotib qoldi</span><span class="where">zaxira</span></summary><div class="body">
+      <ol>
+        <li>Boshqa noutbukka kitni o'rnating (<a href="#S5">S5</a>).</li>
+        <li>Oxirgi zaxiradagi <code>web-work</code> papkasini kit ichiga ko'chiring. Tracker va Playbook holati qaytadi.</li>
+        <li>Shuning uchun <code>web-work</code> ni kun davomida ham har 1–2 soatda USB ga nusxalab turing.</li>
+      </ol>
+    </div></details>
+
+    <details class="sit" id="X7"><summary><span class="id">X7</span><span class="q">Ikki kishi bir ish ustida ishlab qo'ydi / kim nima qilayotgani noma'lum</span><span class="where">🎯 Tracker</span></summary><div class="body">
+      <ul>
+        <li>Ishni boshlashdan oldin Tracker da savolning <b>Status</b> maydoniga ismingizni yozing: <code>Aziz tekshiryapti</code>.</li>
+        <li>Og'zaki "men qilaman" hisoblanmaydi. Doskada yo'q ish hech kimniki emas.</li>
+        <li>Responder tozalashdan oldin Hunter ga ayting: siz o'chirayotgan narsa bilan u hozir ID ni isbotlayotgan bo'lishi mumkin.</li>
+      </ul>
+    </div></details>
+
+    <details class="sit" id="X8"><summary><span class="id">X8</span><span class="q">15 daqiqadan beri bir joyda turibman, hech narsa topilmayapti</span><span class="where">qoida</span></summary><div class="body">
+      <p>15 daqiqa ichida ID yoki harakat bermagan yo'nalishni tashlang yoki boshqa odamga bering. Keyin:</p>
+      <ul>
+        <li>KB dagi <b>Taktikalarni Tekshirish</b> bilan qaysi bosqich bo'sh ekanini ko'ring (<a href="#J7">J7</a>).</li>
+        <li>Zarardan orqaga yuring: exfil → C2 → tarqalish → o'rnashish → bajarish → kirish (<a href="#L8">L8</a>).</li>
+        <li>2–3 gipoteza yozing va faqat ularni bir-biridan <b>ajratadigan</b> dalilni qidiring.</li>
+      </ul>
+    </div></details>
+
+    <details class="sit" id="X9"><summary><span class="id">X9</span><span class="q">Tashkilotchi yangi qoida yoki yangi ma'lumot e'lon qildi</span><span class="where">Kapitan</span></summary><div class="body">
+      <ul>
+        <li>Kapitan uni Tracker ga savol sifatida yozadi. Shunda hamma ko'radi.</li>
+        <li>Yangi host yoki xizmat berilsa: T0 snapshot (<a href="#R1">R1</a>) va SLA ro'yxatiga qo'shish (<a href="#F3">F3</a>).</li>
+        <li>Yangi log berilsa: <a href="#L1">L1</a>.</li>
+        <li>Javob formati o'zgarsa (masalan ota-texnika endi qabul qilinadi): Tracker dagi kutilayotgan javoblarni qayta ko'ring.</li>
+      </ul>
+    </div></details>
+  </div>
+
+  </div>
+  <p class="empty" id="sit-empty" hidden>Bunday vaziyat topilmadi. Boshqa so'z bilan qidiring yoki <a href="#xato">9-bo'limga</a> qarang.</p>
+</section>
+
+<!-- 9 -->
+<section id="xato">
+  <h2><span class="sn">09</span>Muammo chiqsa</h2>
+  <div class="tbl"><table>
+    <thead><tr><th>Nima bo'ldi</th><th>Sababi</th><th>Nima qilish kerak</th></tr></thead>
+    <tbody>
+      <tr><td class="wrap1">"Windows protected your PC"</td><td class="wrap1">bk.exe imzolanmagan</td><td class="wrap1">More info → Run anyway</td></tr>
+      <tr><td class="wrap1">bk.exe umuman ochilmaydi</td><td class="wrap1">ZIP blokdan chiqarilmagan</td><td class="wrap1">ZIP → Properties → Unblock, qayta oching</td></tr>
+      <tr><td class="wrap1">TEKSHIRUV.bat da XATO</td><td class="wrap1">Defender fayllarni o'chirgan yoki <code>data</code> joyida emas</td><td class="wrap1">Defender istisnosini qo'ying (3-bo'lim), kitni qayta oching</td></tr>
+      <tr><td class="wrap1">Brauzerda sahifa ochilmaydi</td><td class="wrap1">Qora server oynasi yopilgan</td><td class="wrap1">WEB-UI.bat ni qayta ishga tushiring</td></tr>
+      <tr><td class="wrap1">"Port band"</td><td class="wrap1">8000-port boshqa dasturda</td><td class="wrap1"><code>bk.exe web --port 8010</code></td></tr>
+      <tr><td class="wrap1">Jamoadoshlar Kapitan web UI sini ocholmaydi</td><td class="wrap1"><code>--host 0.0.0.0</code> berilmagan yoki Windows firewall to'sgan</td><td class="wrap1"><a href="#X4">X4</a>. Firewall so'roviga "Allow" bering</td></tr>
+      <tr><td class="wrap1">Web eski ko'rinishda</td><td class="wrap1">Brauzer keshi</td><td class="wrap1"><kbd>Ctrl</kbd>+<kbd>F5</kbd></td></tr>
+      <tr><td class="wrap1">"⚡ Namuna Log" tugmasi xato beradi</td><td class="wrap1"><code>web-work\elasticsearch_export.json</code> yo'q</td><td class="wrap1">Faylni kitning <code>web-work</code> papkasiga qo'ying</td></tr>
+      <tr><td class="wrap1">CLI da <code>(Get-ChildItem …)</code> xato beradi</td><td class="wrap1">CLI-oyna.bat bu cmd, PowerShell emas</td><td class="wrap1">Oynada <code>powershell</code> deb yozing, keyin buyruqni qaytaring</td></tr>
+      <tr><td class="wrap1">Responder natijasi yo'qoldi</td><td class="wrap1">Boshqa tugma bosildi, natija maydoni bitta</td><td class="wrap1">Tugmani qayta bosing. Keyingi safar oldin nusxalang</td></tr>
+      <tr><td class="wrap1">✔ LOG ustuni hamma joyda bo'sh</td><td class="wrap1">Log maydoniga <code>ir chain</code> fayli berilgan</td><td class="wrap1">Logs Analyzer dan yuklab olingan JSON ni bering</td></tr>
+      <tr><td class="wrap1">Triage da hamma narsa <code>med</code></td><td class="wrap1">Baseline yo'q</td><td class="wrap1"><a href="#R4">R4</a></td></tr>
+      <tr><td class="wrap1">Qo'shni host baseline qilindi, natija bo'sh</td><td class="wrap1">Ikkala host bir xil zararlangan</td><td class="wrap1">T0 yoki ✔ LOG ga o'ting (<a href="#R4">R4</a>)</td></tr>
+      <tr><td class="wrap1">Snapshotda kam narsa, <code>errors</code> bor</td><td class="wrap1">Kollektor admin emas holda ishlagan</td><td class="wrap1"><a href="#R8">R8</a></td></tr>
+      <tr><td class="wrap1">BACKUP "path not found"</td><td class="wrap1"><code>C:\ir\backup</code> yo'q</td><td class="wrap1"><a href="#F4">F4</a></td></tr>
+      <tr><td class="wrap1">SLA da hamma xizmat O'LGAN</td><td class="wrap1"><code>process</code>/<code>service</code> turlari noutbukni tekshiryapti</td><td class="wrap1">Faqat <code>tcp</code> va <code>http</code> qoldiring</td></tr>
+      <tr><td class="wrap1">"Timespan: N/A", vaqt chizig'i bo'sh</td><td class="wrap1">Sana formati yoki vaqt ustuni tanilmadi</td><td class="wrap1"><a href="#L13">L13</a></td></tr>
+      <tr><td class="wrap1">Elasticsearch logida IP yoki port noto'g'ri</td><td class="wrap1">Format avtomatik noto'g'ri aniqlangan</td><td class="wrap1"><code>--preset ecs</code> (<a href="#L3">L3</a>)</td></tr>
+      <tr><td class="wrap1">Tahlil 1 daqiqadan ko'p ketyapti</td><td class="wrap1">Juda katta fayl yoki <code>--deep</code> yoqilgan (u sekin)</td><td class="wrap1">Kuting. Qisqartirish uchun Kibana da kerakli vaqt oralig'ini eksport qiling (<a href="#L4">L4</a>)</td></tr>
+      <tr><td class="wrap1">KB da ID <code>revoked</code></td><td class="wrap1">ATT&amp;CK v19 raqamlarni o'zgartirgan</td><td class="wrap1">Replacement dagi yangi ID ni topshiring</td></tr>
+      <tr><td class="wrap1">Kollektor: "running scripts is disabled"</td><td class="wrap1">PowerShell skriptlarni bloklagan</td><td class="wrap1"><a href="#R7">R7</a></td></tr>
+      <tr><td class="wrap1"><code>bk.exe report</code> "Title:" deb kutib turibdi</td><td class="wrap1">Hisobot ma'lumotini so'rayapti</td><td class="wrap1">Yozing yoki <kbd>Enter</kbd> bilan o'tkazing</td></tr>
+    </tbody>
+  </table></div>
+  <p class="prose">Jadvalda yo'q xato chiqsa: xabar matnini to'liq nusxalang (yoki skrinshot oling), qaysi tugma yoki buyruqdan keyin chiqqanini yozing va jamoaga bering.</p>
+</section>
+
+<!-- 10 -->
+<section id="qoida">
+  <h2><span class="sn">10</span>Oltin qoidalar</h2>
+  <ol class="steps">
+    <li><div><p><b>Checkerni bloklamang.</b> Uning IP si aniqlanmaguncha hech narsani bloklamang. Checker bloklansa ball jimgina nolga tushadi.</p></div></li>
+    <li><div><p><b>Tozalashdan oldin dalil.</b> Nima, to'liq yo'li, vaqti: avval jurnalga, keyin BACKUP, keyin o'chirish. Siz o'chirgan vazifa bilan Hunter hozir ID ni isbotlayotgan bo'lishi mumkin.</p></div></li>
+    <li><div><p><b>Har ID ni KB da tekshiring.</b> Urinishlar cheklangan, eski (revoked) ID urinishni behuda yeydi.</p></div></li>
+    <li><div><p><b>Xizmat o'lsa, hamma narsa to'xtaydi.</b> SLA oynasi doim ochiq tursin. Avval xizmatni tiklang, keyin tergovni davom ettiring.</p></div></li>
+    <li><div><p><b>Zarardan orqaga yuring.</b> Phishing xati logda bo'lmasligi mumkin, zarar esa aniq ko'rinadi. Oxiridan boshlang.</p></div></li>
+    <li><div><p><b>Parolni almashtirmasdan tozalash yarim ish.</b> Hujumchi ko'rgan parol bilan u oddiy login orqali qaytadi.</p></div></li>
+    <li><div><p><b>Hammasi yozuvda.</b> Javoblar Tracker da, qadamlar Playbook da, tozalash jurnalda. Og'zaki aytilgan gap hisoblanmaydi.</p></div></li>
+  </ol>
+</section>
+
+<!-- 11 -->
+<section id="shpargalka">
+  <h2><span class="sn">11</span>Bir sahifalik shpargalka</h2>
+  <div class="cmd"><pre>START OLDIDAN
+  tashkilotchiga 5 savol (ota/sub, urinishlar, xizmatlar, eksport, ATT&amp;CK versiyasi)
+  Kapitan:   bk.exe web --host 0.0.0.0     (jamoa routeri ichida)
+  har host:  collect_windows.ps1 -Baseline -Out base_HOST.json   (Linux: sudo bash collect_linux.sh -o ...)
+  bk.exe resp discover base_*.json --allowlist-out protected.yaml --sla-out services.yaml
+  bk.exe resp sla services.yaml --watch --interval 30      (alohida oyna, yopmang)
+
+LOG
+  SIEM tab  -&gt; hunt -&gt; so'rov -&gt; SIEM -&gt; eksport (JSON yaxshiroq)
+  Logs tab  -&gt; fayl -&gt; Tahlil -&gt; "Responder uchun JSON yuklab olish"
+  IR tab    -&gt; hamma fayllar -&gt; UZ -&gt; zanjir va buzilgan hostlar
+  Kibana CSV vaqti brauzer zonasida (L13);  Elastic -&gt; --preset ecs
+
+JAVOB
+  KB tab    -&gt; Validate (revoked bo'lsa yangi ID)
+  Tracker   -&gt; savol + javob + dalil + maks urinish -&gt; Kapitan topshiradi
+  rad etildi -&gt; to'xta, sababini top (J9)
+
+TOZALASH
+  collect_windows.ps1 -Out snap_HOST.json
+  Responder -&gt; snapshot + baseline + log JSON + protected -&gt; Triage
+            -&gt; yuqori ball + high + ✔LOG dan boshlang
+  New-Item -ItemType Directory C:\ir\backup -Force
+  Fix -&gt; BACKUP -&gt; jurnal -&gt; REMOVE (qo'lda) -&gt; VERIFY  (buzilsa ROLLBACK)
+  keyin: parol almashtirish -&gt; sessiyani uzish -&gt; IP bloklash (checker emasmi?)
+         qayta snapshot, Playbook da belgilash
+
+MAXSUS
+  pul/buxgalter  -&gt; Triage+Fraud xizmat o'ldi -&gt; Service Doctor
+  beacon         -&gt; C2 Hunt      base64/-enc  -&gt; bk.exe decode "..." --detect
+  .eml xat       -&gt; bk.exe mail scan   .evtx -&gt; Hayabusa -&gt; --preset hayabusa
+
+HISOBOT
+  Report tab -&gt; til + JSON lar -&gt; Shakllantirish -&gt; Ctrl+P -&gt; PDF
+  Word:  bk.exe report --logs ... --docx hisobot.docx
+  kun oxiri: web-work va out ni USB ga</pre></div>
+</section>
+
+<!-- 12 -->
+<section id="mashq">
+  <h2><span class="sn">12</span>Musobaqadan oldin mashq</h2>
+  <ol class="steps">
+    <li><div><p>Web UI ni oching. Logs Analyzer da <b>⚡ Namuna Log</b> (15 000 hodisa) ni bosing va natijani o'qing: nechta host, qaysi texnikalar, qaysi IP lar. Qaysi host buzilganini topishga harakat qiling.</p></div></li>
+    <li><div><p>IR Attack Chain da <b>⚡ Namuna</b> ni bosing. Zanjirni boshidan oxirigacha o'qib chiqing va har bosqichga H guruhidagi mos kartani toping.</p></div></li>
+    <li><div><p>Responder da <b>⚡ Namuna Snapshot</b> → <b>🔍 Triage</b> → <b>⚙ Tozalash Buyruqlarini Yasash</b> (OS: Linux). BACKUP / REMOVE / VERIFY / ROLLBACK qismlarini toping.</p></div></li>
+    <li><div><p>Responder ga <code>data\samples\exfil\snap_web-prod-01.json</code> ni joriy, <code>base_web-prod-01.json</code> ni baseline qilib bering. Baseline bilan va baselinesiz natijani solishtiring.</p></div></li>
+    <li><div><p>KB da <code>T1070.001</code> ni Validate qiling. <code>revoked</code> va <code>T1685.005</code> chiqishini ko'ring.</p></div></li>
+    <li><div><p>Tracker ga soxta savol qo'shing (maks. urinish 2), bir ID ni ikki marta kiriting va ogohlantirishni ko'ring. Keyin o'chiring.</p></div></li>
+    <li><div><p>O'z noutbukingizdan admin PowerShell da snapshot oling (<code>collect_windows.ps1 -Out test.json</code>) va Triage qiling. Haqiqiy kompyuterda natija qanday ko'rinishini biling.</p></div></li>
+    <li><div><p>Ikki noutbuk bilan <a href="#X4">X4</a> ni sinang: biri server, ikkinchisi brauzerdan Tracker ga yozsin.</p></div></li>
+    <li><div><p>Sekundomer bilan to'liq mashq: logdan birinchi tekshirilgan ID gacha, birinchi tozalashgacha va hisobotgacha qancha vaqt ketdi, yozib qo'ying.</p></div></li>
+  </ol>
+</section>
+
+<footer>
+  blue-kit boshlovchi qo'llanmasi · Batafsil: <code>PLAYBOOK_FLOW.md</code> (buyruqlar oqimi), <code>RESPONDER_QOLLANMA.md</code> (Responder roli), <code>TOZA-NOUTBUK-TEST.md</code> (o'rnatish tekshiruvi).
+</footer>
+
+</div>
+
+<script>
+(function () {
+  // Buyruq bloklariga "Nusxa" tugmasi
+  document.querySelectorAll('.cmd').forEach(function (box) {
+    var pre = box.querySelector('pre');
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.textContent = 'Nusxa';
+    btn.addEventListener('click', function () {
+      var text = pre.innerText;
+      var done = function () { btn.textContent = 'Olindi'; setTimeout(function () { btn.textContent = 'Nusxa'; }, 1400); };
+      var fallback = function () {
+        var r = document.createRange(); r.selectNodeContents(pre);
+        var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+        btn.textContent = 'Ctrl+C';
+      };
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(done, fallback);
+        } else { fallback(); }
+      } catch (e) { fallback(); }
+    });
+    box.appendChild(btn);
+  });
+
+  // Vaziyatlarni qidirish
+  var input = document.getElementById('sit-q');
+  var cards = Array.prototype.slice.call(document.querySelectorAll('details.sit'));
+  var groups = Array.prototype.slice.call(document.querySelectorAll('#sits .group'));
+  var empty = document.getElementById('sit-empty');
+  var count = document.getElementById('sit-count');
+  var norm = function (s) { return s.toLowerCase().replace(/[ʻʼ‘’`]/g, "'"); };
+  var hay = cards.map(function (c) { return norm(c.textContent); });
+  function apply() {
+    var q = norm(input.value.trim());
+    var words = q.split(/\s+/).filter(Boolean);
+    var shown = 0;
+    cards.forEach(function (c, i) {
+      var hit = words.every(function (w) { return hay[i].indexOf(w) !== -1; });
+      c.hidden = !hit;
+      if (hit) shown++;
+      if (words.length && hit && shown <= 2) c.open = true;
+      if (!words.length) c.open = false;
+    });
+    groups.forEach(function (g) { g.hidden = !g.querySelector('details.sit:not([hidden])'); });
+    empty.hidden = shown !== 0;
+    count.textContent = words.length ? shown + ' ta vaziyat topildi' : cards.length + ' ta vaziyat · kartani bosib oching';
+  }
+  input.addEventListener('input', apply);
+  apply();
+
+  // Havola orqali kelganda kartani ochish
+  function openHash() {
+    var id = location.hash.slice(1);
+    var el = id && document.getElementById(id);
+    if (el && el.tagName === 'DETAILS') { el.hidden = false; el.open = true; el.scrollIntoView(); }
+  }
+  window.addEventListener('hashchange', openHash);
+  document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+    a.addEventListener('click', function () {
+      var el = document.getElementById(a.getAttribute('href').slice(1));
+      if (el && el.tagName === 'DETAILS') {
+        if (input.value) { input.value = ''; apply(); }
+        el.hidden = false; el.open = true;
+      }
+    });
+  });
+  openHash();
+})();
+</script>

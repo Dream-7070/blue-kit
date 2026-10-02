@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<title>blue-kit cheat sheet</title>
+<style>
+  @page { size: A4; margin: 10mm; }
+  * { box-sizing: border-box; }
+  body { font-family: "Segoe UI", Arial, sans-serif; font-size: 10px; color: #111; margin: 0; padding: 8px; }
+  h1 { font-size: 17px; margin: 0 0 2px; }
+  h2 { font-size: 12px; margin: 8px 0 3px; background: #1a3d6d; color: #fff; padding: 3px 6px; border-radius: 3px; }
+  .sub { color: #555; font-size: 9px; margin-bottom: 6px; }
+  .cols { column-count: 2; column-gap: 10px; }
+  .box { break-inside: avoid; border: 1px solid #ccd; border-radius: 4px; padding: 5px 7px; margin-bottom: 7px; background: #fafbfe; }
+  code, .cmd { font-family: Consolas, monospace; background: #eef1f7; padding: 0 3px; border-radius: 2px; font-size: 9px; }
+  .cmd { display: block; padding: 2px 5px; margin: 2px 0; white-space: pre-wrap; word-break: break-all; }
+  table { border-collapse: collapse; width: 100%; font-size: 8.7px; }
+  th, td { border: 1px solid #bcc; padding: 2px 4px; text-align: left; vertical-align: top; }
+  th { background: #dde4f0; }
+  .warn { background: #fff3cd; border-color: #e0c060; }
+  .danger { background: #fde2e2; border-color: #e09090; }
+  .ok { color: #1a7a1a; font-weight: bold; }
+  .no { color: #b00; font-weight: bold; }
+  b.k { color: #1a3d6d; }
+  ul { margin: 2px 0 2px 14px; padding: 0; }
+  li { margin: 1px 0; }
+</style>
+</head>
+<body>
+<h1>blue-kit — DFIR cheat sheet</h1>
+<div class="sub">Offline blue-team toolkit · ATT&amp;CK v19.2 · AI ISHLATILMAYDI · har laptopda: <code>Add-MpPreference -ExclusionPath "&lt;papka&gt;"</code> (admin)</div>
+
+<div class="cols">
+
+  <div class="box warn">
+    <b>⚡ OLTIN QOIDA — javob topshirishdan OLDIN</b>
+    <span class="cmd">bk kb validate T1070.001 T1562.001</span>
+    revoked chiqsa → <b>yangi ID'ni</b> kirit. Urinish limiti bor, eski ID sarflama. Faqat <b>kapitan</b> topshiradi.
+  </div>
+
+  <div class="box">
+    <h2 style="margin-top:0">0 · Sozlash (bir marta)</h2>
+    <span class="cmd">bk kb build --data ".\data"</span>
+    <span class="cmd">bk kb info</span>
+    <span class="cmd">bk doctor</span>  → kit shu mashinada ishlayaptimi (9 tekshiruv)
+    <span class="cmd">bk web --port 8000</span>  → brauzer: http://localhost:8000
+    <span class="sub">Web tablari: 📋 Playbook · KB · Logs · IR · C2 Hunt · SIEM · Responder · Tracker · Report</span>
+  </div>
+
+  <div class="box">
+    <h2>📋 Playbook tabi — birinchi ochiladigan ekran</h2>
+    6 faza · 42 qadam · 7 kill-chain bosqichi · 10 qoida (C-1..C-10).
+    <ul style="margin:2px 0 2px 16px;padding:0">
+      <li>Har qadam: <b>Boshlanmagan / Jarayonda / Bajarildi / O'tkazildi / Bloklangan</b> — holat saqlanadi</li>
+      <li>Kill-chain bosqichi: <b>Noma'lum / Shubha bor / Tasdiqlandi / Rad etildi</b> + dalil maydoni</li>
+      <li>Bosqich kartasini bossang — faqat o'sha bosqich qadamlari qoladi</li>
+      <li>Yuqorida: umumiy %, majburiy qadamlar, "Keyingi qadamlar"</li>
+    </ul>
+  </div>
+
+  <div class="box">
+    <h2>1 · KB — ATT&amp;CK</h2>
+    <span class="cmd">bk kb search "&lt;buyruq&gt;"</span>
+    <span class="cmd">bk kb validate T1059.001 ...</span>
+    <span class="cmd">bk kb id T1003.001</span>
+    <span class="cmd">bk kb related T1566.001</span>
+    <span class="cmd">bk kb ioc "hxxp://evil[.]com"</span>
+    <span class="cmd">bk kb tactics T1566.001 T1003.001</span>
+    <span class="sub">--json · -n N · --domain enterprise|ics|mobile</span>
+  </div>
+
+  <div class="box">
+    <h2>2 · Log analyzer (istalgan SIEM)</h2>
+    SIEM'dan CSV/JSON eksport →
+    <span class="cmd">bk logs columns fayl.csv</span>
+    <span class="cmd">bk logs analyze fayl.csv --out r.html --json-out o.json</span>
+    <span class="sub">--preset splunk|sentinel|wazuh|qradar|auditd · --map · --src-tz utc|+HH:MM</span>
+    <span class="sub">--from "2026-10-05 14:20" --to "2026-10-05 14:40" (Toshkent) · --host WS07</span>
+    Chiqadi: timeline · ATT&amp;CK coverage · chains · <b>checker/beacon</b> · IOC
+  </div>
+
+  <div class="box">
+    <h2>3 · Responder</h2>
+    Kollektor (nishonda, read-only):
+    <span class="cmd">powershell -ep bypass -File collect_windows.ps1 -Out snap.json</span>
+    <span class="cmd">ssh user@t 'bash -s' &lt; collect_linux.sh &gt; snap.json</span>
+    Tahlil (laptopda):
+    <span class="cmd">bk resp triage snap.json --from-logs o.json [--baseline b.json]</span>
+    <span class="cmd">bk resp fix snap.json --from-logs o.json --os windows [--full]</span>
+    <span class="cmd">bk resp doctor snap.json &lt;servis&gt;</span>  <span class="cmd">bk resp fraud snap.json</span>
+    <span class="cmd">bk resp sla services.yaml --watch --interval 30</span>  ← alohida oynada, doim ochiq
+    <span class="cmd">bk resp discover base_*.json --sla-out services.yaml --allowlist-out protected.yaml</span>
+    <span class="sub">Toza baseline yo'q bo'lsa: T0 snapshot → qo'shni host → etalon VM → ✔ LOG.
+    Tool <code>knowngood.yaml</code> (OS standart) bilan baselinesiz ham ishlaydi.</span>
+  </div>
+
+  <div class="box">
+    <h2>4 · Qolgan buyruqlar</h2>
+    <span class="cmd">bk siem hunts [--category X] [--search Y]</span>  <span class="cmd">bk siem query &lt;hunt-id&gt; --siem qradar --days 7</span>
+    <span class="cmd">bk siem pack --siem qradar --category persistence --out q.txt</span>  <span class="sub">12 SIEM × 37 hunt</span>
+    <span class="cmd">bk sigma scan fayl.csv --preset qradar --json --out sigma.json</span>  <span class="sub">3700+ qoida</span>
+    <span class="cmd">bk decode --file fayl.csv --detect</span>  <span class="sub">base64 / -enc / hex / gzip</span>
+    <span class="cmd">bk mail scan xat.eml</span>  <span class="cmd">bk hunt beacons firewall.csv</span>
+    <span class="cmd">bk ir chain f1.csv f2.csv --lang uz</span>  <span class="cmd">bk ir report ... --out report_uz.md</span>
+    <span class="cmd">bk answers rank chain.json o.json --ledger answers.json</span>
+    <span class="cmd">bk answers submit T1059.001 accepted --ledger answers.json</span>  <span class="sub">urinishlar — valyuta</span>
+    <span class="sub">PowerShell: <code>bk ir chain (Get-ChildItem case\*.csv).FullName</code></span>
+  </div>
+
+  <div class="box danger">
+    <b>🛡 Remediation xavfsizligi</b>
+    <ul>
+      <li>Tool o'zi <b>bajarmaydi</b> — buyruq beradi, o'zing ko'rib ishlat</li>
+      <li>Har doim: <b>backup → o'chirish → tekshirish → rollback</b></li>
+      <li><span class="no">TEGMA:</span> checker akkaunt/IP, SSH/RDP/WinRM, checker portlari → <code>--protected</code></li>
+      <li>C2 avtomatik himoyalanmaydi; checker faqat <b>advisory</b> (qo'lda protected'ga qo'sh)</li>
+      <li>SLA: o'zgarishdan oldin/keyin <code>bk resp sla</code> — scoreboard qizarsa <b>rollback</b></li>
+      <li>Servisni butunlay o'chirma — validatsiya qo'sh (checker uni tekshiradi)</li>
+    </ul>
+  </div>
+
+  <div class="box">
+    <h2>5 · Musobaqa ish tartibi</h2>
+    <ol style="margin:2px 0 2px 16px;padding:0">
+      <li>Loglarni CSV → <code>logs analyze</code> → hujum zanjiri + IOC</li>
+      <li>Kollektor → snapshot</li>
+      <li><code>resp triage --from-logs</code> → ✔LOG topilmalar (baseline shart emas)</li>
+      <li><code>resp fix</code> → tuzat (SLA'ni tekshirib)</li>
+      <li>Buzilgan servis → <code>resp doctor</code></li>
+      <li>Har ID → <code>kb validate</code> → kapitan topshiradi</li>
+    </ol>
+    <b>Emulyatsiya:</b> tirik hujumchi yo'q, loglar = haqiqat manbai, baseline bo'lmasligi mumkin.
+  </div>
+
+  <div class="box warn">
+    <h2 style="margin-top:0">⚠ ATT&amp;CK v19 — qayta raqamlangan</h2>
+    <table>
+      <tr><th>Eski (revoked)</th><th>Yangi (v19)</th></tr>
+      <tr><td>T1070.001 Clear Win Event Logs</td><td class="ok">T1685.005</td></tr>
+      <tr><td>T1562.001 Disable/Modify Tools</td><td class="ok">T1685</td></tr>
+      <tr><td>T0803 Block Command Msg (ICS)</td><td class="ok">T1691.001</td></tr>
+    </table>
+    <b>Hech qachon xotiradan ID yozma — doim <code>kb validate</code>.</b>
+  </div>
+
+  <div class="box">
+    <h2>Adashtiriladigan ID juftliklari</h2>
+    <table>
+      <tr><th>Holat</th><th>Nomzodlar</th></tr>
+      <tr><td>PsExec</td><td>T1569.002 / T1021.002 / T1570</td></tr>
+      <tr><td>Encoded PowerShell</td><td>T1059.001 / T1027 / T1140</td></tr>
+      <tr><td>Ko'p fail→success logon</td><td>T1110.001 / .003 / T1078</td></tr>
+      <tr><td>certutil download</td><td>T1105 / T1140 / T1218</td></tr>
+      <tr><td>LSASS dump</td><td>T1003.001 / T1055</td></tr>
+      <tr><td>DCSync</td><td>T1003.006 (secretsdump -just-dc)</td></tr>
+      <tr><td>Kerberoast</td><td>T1558.003 (4769 RC4 0x17)</td></tr>
+      <tr><td>Exfil</td><td>T1041 / T1048 / T1567.002</td></tr>
+      <tr><td>Ransomware</td><td>T1486 / T1490 / T1489</td></tr>
+      <tr><td>User qo'shildi</td><td>T1136.001 / T1098</td></tr>
+      <tr><td>RAT (AnyDesk/TeamViewer)</td><td>T1219</td></tr>
+      <tr><td>Financial / to'lov</td><td>T1657 / T1565.001</td></tr>
+    </table>
+  </div>
+
+  <div class="box">
+    <h2>Windows Event ID → nima</h2>
+    <table>
+      <tr><td>4624/4625</td><td>logon OK/fail (type10=RDP, 3=net)</td></tr>
+      <tr><td>4688 / Sysmon 1</td><td>process yaratildi (cmd line!)</td></tr>
+      <tr><td>4720 / 4728,4732</td><td>user / admin guruhga</td></tr>
+      <tr><td>7045 / 4697</td><td>yangi servis</td></tr>
+      <tr><td>4698</td><td>scheduled task</td></tr>
+      <tr><td>4769 (RC4 0x17)</td><td>Kerberoast</td></tr>
+      <tr><td>4662</td><td>DCSync shubhasi</td></tr>
+      <tr><td>1102</td><td>Security log tozalandi</td></tr>
+      <tr><td>4104</td><td>PowerShell script block</td></tr>
+      <tr><td>Sysmon 3/10/11/13</td><td>net / lsass / file / registry</td></tr>
+    </table>
+  </div>
+
+  <div class="box">
+    <h2>ICS (Day-2 zavod)</h2>
+    <table>
+      <tr><td>T0881</td><td>Service Stop</td></tr>
+      <tr><td>T0816</td><td>Device Restart/Shutdown</td></tr>
+      <tr><td>T0836 / T0855</td><td>Modify param / Unauth cmd</td></tr>
+      <tr><td>T0826</td><td>Loss of Availability</td></tr>
+    </table>
+    <span class="sub">ICS ID'lar ham v19'da o'zgargan — <code>kb validate --domain ics</code></span>
+  </div>
+
+  <div class="box">
+    <h2>Linux tez tekshiruv</h2>
+    <span class="cmd">crontab -l; ls /etc/cron*; systemctl list-unit-files --state=enabled</span>
+    <span class="cmd">cat ~/.ssh/authorized_keys; awk -F: '$3==0' /etc/passwd</span>
+    <span class="cmd">find / -perm -4000 -type f 2>/dev/null; cat /etc/ld.so.preload</span>
+    <span class="cmd">ss -tlnp; ss -tnp</span>
+  </div>
+
+</div>
+</body>
+</html>

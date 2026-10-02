@@ -1,0 +1,34 @@
+- name: "Debian cron.daily anacron"
+  pattern: "CRON\\[\\d+\\]:\\s*\\(root\\)\\s*CMD\\s*\\(test -x /usr/sbin/anacron \\|\\| \\( cd / && run-parts"
+  action: drop
+  note: "OS default crontab entry"
+
+- name: "logrotate cron"
+  pattern: "CRON\\[\\d+\\]: \\(root\\) CMD \\(/usr/local/bin/logrotate /etc/logrotate\\.conf\\)"
+  action: drop
+
+- name: "apt daily systemd"
+  pattern: "systemd\\[1\\]: (Starting|Finished) Daily apt"
+  action: drop
+
+- name: "rsyslogd action resumed"
+  pattern: "rsyslogd: .*action .* resumed"
+  action: drop
+
+- name: "sshd normal disconnect"
+  pattern: "sshd\\[\\d+\\]: Received disconnect from .* disconnected by user"
+  action: drop
+
+- name: "Windows signed binary path"
+  pattern: "^[A-Za-z]:\\\\(Windows|Program Files( \\(x86\\))?)\\\\(?!(Temp|Tasks|Debug)\\\\)[^\\s]+$"
+  action: drop
+  note: "Only path with no arguments. C:\\Windows\\Temp|Tasks|Debug are user-writable malware drop dirs, not signed binaries."
+
+- name: "nginx static 2xx"
+  pattern: "\"(GET|HEAD) /(static|assets|favicon)[^\"]*\" (200|204|304)"
+  action: drop
+
+- name: "routine non-RDP logon (4624)"
+  pattern: "logon type\\W{0,8}(2|3|4|5|7|8|9|11|12|13)\\b|logged on \\(type (2|3|4|5|7|8|9|11|12|13)\\)"
+  action: downgrade
+  note: "4624 is mapped to T1021.001/T1078 unconditionally in eventmap.yaml; only LogonType 10 (RemoteInteractive/RDP) is a real lateral-movement signal on its own. Non-RDP types still show up at low confidence for deep-dive, but stop drowning normal desktop logons in medium-confidence lateral-movement noise across every host."

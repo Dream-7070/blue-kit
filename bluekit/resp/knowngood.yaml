@@ -1,0 +1,489 @@
+linux:
+  cron:
+  - apt-daily
+  - logrotate
+  - man-db
+  - update-notifier-common
+  - e2scrub_all
+  - apt-compat
+  - dpkg
+  - popularity-contest
+  - sysstat
+  - anacron
+  - 0anacron
+  - php
+  - certbot
+  - bsdmainutils
+  - mdadm
+  - apport
+  - sendmail
+  - raid-check
+  - mlocate
+  - plocate
+  - dailyjobs
+  - 0hourly
+  - crontab
+  suid:
+  - /bin/chfn
+  - /usr/bin/chfn
+  - /bin/chsh
+  - /usr/bin/chsh
+  - /bin/fusermount
+  - /usr/bin/fusermount
+  - /bin/fusermount3
+  - /usr/bin/fusermount3
+  - /bin/gpasswd
+  - /usr/bin/gpasswd
+  - /bin/mount
+  - /usr/bin/mount
+  - /bin/newgrp
+  - /usr/bin/newgrp
+  - /bin/passwd
+  - /usr/bin/passwd
+  - /bin/pkexec
+  - /usr/bin/pkexec
+  - /bin/su
+  - /usr/bin/su
+  - /bin/sudo
+  - /usr/bin/sudo
+  - /bin/umount
+  - /usr/bin/umount
+  - /bin/ping
+  - /usr/bin/ping
+  - /bin/ping6
+  - /usr/bin/ping6
+  - /bin/traceroute6.iputils
+  - /usr/bin/traceroute6.iputils
+  - /bin/ntfs-3g
+  - /usr/bin/ntfs-3g
+  - /bin/vmware-user-suid-wrapper
+  - /usr/bin/vmware-user-suid-wrapper
+  - /bin/at
+  - /usr/bin/at
+  - /usr/lib/dbus-1.0/dbus-daemon-launch-helper
+  - /usr/lib/openssh/ssh-keysign
+  - /usr/lib/policykit-1/polkit-agent-helper-1
+  - /usr/libexec/polkit-agent-helper-1
+  - /usr/lib/snapd/snap-confine
+  - /usr/lib/eject/dmcrypt-get-device
+  - /usr/sbin/pppd
+  - /usr/lib/xorg/xorg.wrap
+  - /usr/sbin/mount.nfs
+  - /usr/sbin/mount.cifs
+  - /usr/lib/chromium/chrome-sandbox
+  - /usr/bin/crontab
+  - /usr/bin/newuidmap
+  - /usr/bin/newgidmap
+  - /usr/sbin/unix_chkpwd
+  ports:
+  - 22
+  - 25
+  - 53
+  - 111
+  - 631
+  - 80
+  - 443
+  - 3306
+  - 5432
+  - 8080
+  service_paths:
+  - /usr/sbin/
+  - /usr/bin/
+  - /lib/systemd/
+  - /bin/
+  - /sbin/
+  services:
+  - sshd
+  - cron
+  - systemd-journald
+  - systemd-logind
+  - dbus
+  - rsyslog
+  - networkd-dispatcher
+  - unattended-upgrades
+  - polkit
+  - udisks2
+  - acpid
+  - apparmor
+  - apport
+  - atd
+  - avahi-daemon
+  - bluetooth
+  - console-setup
+  - cups
+  - cups-browsed
+  - fwupd
+  - gdm
+  - irqbalance
+  - keyboard-setup
+  - kmod
+  - lightdm
+  - lvm2
+  - mdadm
+  - multipathd
+  - network-manager
+  - nscd
+  - ntp
+  - open-vm-tools
+  - postfix
+  - qemu-kvm
+  - rpcbind
+  - smartd
+  - snapd
+  - sysstat
+  - ufw
+  - uuidd
+  - virtlockd
+  - virtlogd
+  - whoopsie
+  - wpa_supplicant
+  - apache2
+  - nginx
+  - mysql
+  - postgresql
+  - docker
+  - containerd
+  users:
+  - root
+  - daemon
+  - bin
+  - sys
+  - sync
+  - games
+  - man
+  - lp
+  - mail
+  - news
+  - uucp
+  - proxy
+  - www-data
+  - backup
+  - list
+  - irc
+  - gnats
+  - nobody
+  - systemd-network
+  - systemd-resolve
+  - syslog
+  - messagebus
+  - _apt
+  - lxd
+  - uuidd
+  - dnsmasq
+  - landscape
+  - pollinate
+  - sshd
+  - systemd-timesync
+version: 1
+windows:
+  autoruns:
+  - securityhealth
+  - e-imzo
+  - onedrive
+  - vmware tools
+  - vboxtray
+  - synaptics point
+  - realtek hd audio
+  - intel graphics
+  - nvidia geforce
+  - amd radeon
+  - spotify
+  - discord
+  - steam
+  - epicgameslauncher
+  - skype
+  - microsoft edge
+  - google chrome
+  - mozilla firefox
+  - adobe acrobat
+  - java update
+  # Keng tarqalgan vendor autorunlari. Nom _normalize_name() dan o'tadi
+  # (SID, {GUID}, _<hex> qo'shimchalari olib tashlanadi). Masquerade himoyasi:
+  # qiymat service_paths yoki shu nomning vendor_paths ichida bo'lishi shart.
+  - teams
+  - com.squirrel.teams.teams
+  - ciscospark
+  - ciscomeetingdaemon
+  - proton drive
+  - proton vpn
+  - googlechromeautolaunch
+  - mozilla-firefox
+  - msedge_cleanup
+  - microsoftedgeautolaunch
+  - rthdvcpl
+  - windowsdefender
+  - vmware-tray.exe
+  - vmware user process
+  - org.openvpn.client
+  - zoom
+  - slack
+  - com.squirrel.slack.slack
+  - telegram desktop
+  - dropbox
+  - googledrivefs
+  - lightshot
+  - kerio control vpn client
+  - musehub
+  - igfxtray
+  - hkcmd
+  - persistence
+  - sunjavaupdatesched
+  - itunes helper
+  - logitech download assistant
+  - adobeaamupdater-1.0
+  - adobe creative cloud
+  ports:
+  - 135
+  - 139
+  - 445
+  - 3389
+  - 5985
+  - 47001
+  - 80
+  - 443
+  service_paths:
+  - c:\windows\system32\
+  - c:\windows\syswow64\
+  - c:\program files\
+  - c:\program files (x86)\
+  - c:\windows\microsoft.net\
+  - c:\programdata\microsoft\windows defender\platform\
+  - c:\programdata\microsoft\windows defender advanced threat protection\
+  services:
+  - wuauserv
+  - spooler
+  - windefend
+  - bits
+  - lanmanserver
+  - lanmanworkstation
+  - dnscache
+  - eventlog
+  - schedule
+  - termservice
+  - winrm
+  - w32time
+  - msiserver
+  - trustedinstaller
+  - sysmain
+  - wscsvc
+  - dhcp
+  - netlogon
+  - samss
+  - rpcss
+  - appinfo
+  - bfe
+  - brokerinfrastructure
+  - cdpsvc
+  - certpropui
+  - cryptsvc
+  - dcomlaunch
+  - dosvc
+  - dps
+  - entappsvc
+  - fax
+  - fdphost
+  - fdrespub
+  - fontcache
+  - gpsvc
+  - hidserv
+  - ikeext
+  - iphlpsvc
+  - keyiso
+  - ktmrm
+  - lmhosts
+  - mpssvc
+  - mrxsmb10
+  - msdtc
+  - ncasvc
+  - ncbnetwork
+  - nlasvc
+  - nsi
+  - pcasvc
+  - plugplay
+  - policyagent
+  - profsvc
+  - seclogon
+  - sens
+  - sgrmbroker
+  - shellhwdetection
+  - sppsvc
+  - ssdpsrv
+  - stisvc
+  - tapisrv
+  - themes
+  - timebrokersvc
+  - tokenbroker
+  - trkwks
+  - upnphost
+  - useraccesslogging
+  - usermodefontcache
+  - vaultsvc
+  - vds
+  - vss
+  - w32tm
+  - wdiservicehost
+  - wdisystemhost
+  - webclient
+  - wecsvc
+  - wercplsupport
+  - wersvc
+  - wlanans
+  - wlansvc
+  - wsearch
+  - wudfsvc
+  - wwan
+  - wwansvc
+  - xboxgip
+  - xboxnetapisvc
+  - audiosrv
+  - audioendpointbuilder
+  - appvclient
+  - edgeupdate
+  - gupdate
+  - gupdatem
+  - osrss
+  - dmwappushservice
+  - diagtrack
+  - camsvc
+  - cdpusersvc
+  - cbdhsvc
+  - consentuxusersvc
+  - bcastdvrusersvc
+  - bluetoothusersvc
+  - captureservice
+  - diagnosticshub
+  - dusmsvc
+  - ehssvc
+  - icssvc
+  - kdc
+  - msiscsi
+  - netman
+  - npsvctrig
+  - nvstreamsvc
+  - p2pimsvc
+  - p2psvc
+  - pnrpsvc
+  - qwave
+  - rasauto
+  - rasman
+  - remoteaccess
+  - scardsvr
+  - sdrsvc
+  - secenter
+  - snmptrap
+  - winmgmt
+  - rpceptmapper
+  - wcspluginservice
+  - pnrpautoreg
+  - wdnissvc
+  - mdcoresvc
+  - sense
+  - securityhealthservice
+  - webthreatdefsvc
+  - nvdisplay.containerlocalsystem
+  # \appdata\ / \programdata\ ostida bo'lsa ham "shubhali papka" hisoblanmaydigan,
+  # faqat admin/TrustedInstaller yoza oladigan Microsoft papkalari.
+  standard_locations:
+  - c:\programdata\microsoft\windows defender\platform\
+  - c:\programdata\microsoft\windows defender advanced threat protection\
+  # Vazifa YO'LI (task.path) shu prefikslardan biri bilan boshlansa VA action
+  # toza bo'lsa (exe service_paths da, argumentlarda begona yo'l/URL/kodlangan
+  # buyruq yo'q) known-good. \Microsoft\Windows\ ostidagi powershell -enc kabi
+  # vazifa known-good EMAS.
+  task_prefixes:
+  - \microsoft\windows\
+  - \microsoft\xblgamesave\
+  - \microsoft\office\
+  - \microsoft\edgeupdate\
+  # Ildiz (\) yoki vendor papkasidagi vazifalar: nom normallashtiriladi, '*' = prefiks.
+  tasks:
+  - googleupdatetaskmachine*
+  - googleupdatetaskuser*
+  - microsoftedgeupdatetaskmachine*
+  - microsoftedgeupdatetaskuser*
+  - ccleanerskippuac
+  - ccleaner update
+  - dropboxupdatetaskmachine*
+  - dropboxupdatetaskuser*
+  - adobe acrobat update task
+  - adobegcinvoker-1.0
+  - onedrive reporting task
+  - onedrive standalone update task
+  - onedrive startup task
+  - onedrive per-machine standalone update task
+  - firefox background update
+  - firefox default browser agent
+  - zoomupdatetaskuser
+  - npcapwatchdog
+  - office automatic updates 2.0
+  - office clicktorun service monitor
+  - office feature updates
+  - office feature updates logon
+  - officetelemetryagentfallback2016
+  - officetelemetryagentlogon2016
+  - officebackgroundtaskhandlerlogon
+  - officebackgroundtaskhandlerregistration
+  - office performance monitor
+  users:
+  - administrator
+  - guest
+  # ichki akkauntlarning lokalizatsiya qilingan nomlari (rus Windows)
+  - администратор
+  - гость
+  - defaultaccount
+  - wdagutilityaccount
+  - krbtgt
+  - system
+  - local service
+  - network service
+  - sshd
+  - postgres
+  - mysql
+  - mssqlserver
+  - iis_iusrs
+  - iusr
+  # Foydalanuvchi profiliga o'rnatiladigan dasturlar uchun QO'SHIMCHA ruxsat
+  # etilgan papkalar (normallashtirilgan nom -> prefikslar). %localappdata% va
+  # %appdata% istalgan foydalanuvchi profiliga mos keladi. Nom tasks/autoruns
+  # ro'yxatida ham bo'lishi shart; bu yerdan tashqaridagi yo'l = masquerade.
+  vendor_paths:
+    onedrive: &onedrive
+    - '%localappdata%\microsoft\onedrive\'
+    - c:\program files\microsoft onedrive\
+    onedrive reporting task: *onedrive
+    onedrive standalone update task: *onedrive
+    onedrive startup task: *onedrive
+    onedrive per-machine standalone update task: *onedrive
+    teams:
+    - '%localappdata%\microsoft\windowsapps\msteams_'
+    - '%localappdata%\microsoft\teams\'
+    com.squirrel.teams.teams:
+    - '%localappdata%\microsoft\teams\'
+    ciscospark:
+    - '%appdata%\microsoft\windows\start menu\programs\webex\'
+    - '%localappdata%\ciscospark\'
+    - '%localappdata%\webex\'
+    - '%localappdata%\programs\cisco spark\'
+    ciscomeetingdaemon:
+    - '%localappdata%\webex\'
+    proton drive:
+    - '%localappdata%\programs\proton\drive\'
+    zoom: &zoom
+    - '%appdata%\zoom\bin\'
+    zoomupdatetaskuser: *zoom
+    slack: &slack
+    - '%localappdata%\slack\'
+    com.squirrel.slack.slack: *slack
+    telegram desktop:
+    - '%appdata%\telegram desktop\'
+    dropbox:
+    - '%appdata%\dropbox\'
+    firefox background update: &mozilla
+    - c:\programdata\mozilla-
+    firefox default browser agent: *mozilla
+    googleupdatetaskuser*:
+    - '%localappdata%\google\update\'
+    microsoftedgeupdatetaskuser*:
+    - '%localappdata%\microsoft\edgeupdate\'
+    dropboxupdatetaskuser*:
+    - '%localappdata%\dropbox\update\'

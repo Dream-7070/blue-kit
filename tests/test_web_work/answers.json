@@ -1,0 +1,4932 @@
+{
+  "entries": [
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-28T15:51:05.849021",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-28T15:51:05.851113",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-28T15:51:05.852647",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-28T15:51:05.856237",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-28T15:52:49.263597",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-28T15:52:49.265606",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-28T15:52:49.266609",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-28T15:52:49.271742",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-28T16:04:54.462447",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-28T16:04:54.464471",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-28T16:04:54.465481",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-28T16:04:54.469058",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-28T16:05:56.029137",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-28T16:05:56.030983",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-28T16:05:56.033161",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-28T16:05:56.037632",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-28T16:07:06.055714",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-28T16:07:06.057731",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-28T16:07:06.059752",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-28T16:07:06.063891",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-28T16:26:49.550922",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-28T16:26:49.552427",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-28T16:26:49.554937",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-28T16:26:49.559378",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-28T16:27:46.078790",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-28T16:27:46.079791",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-28T16:27:46.081596",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-28T16:27:46.086697",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-28T17:44:43.778948",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-28T17:44:43.781258",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-28T17:44:43.782259",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-28T17:44:43.787164",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-28T17:45:39.601326",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-28T17:45:39.603386",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-28T17:45:39.605601",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-28T17:45:39.609225",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-28T18:07:22.425513",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-28T18:07:22.427557",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-28T18:07:22.429093",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-28T18:07:22.434316",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-28T18:09:08.416472",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-28T18:09:08.417982",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-28T18:09:08.419530",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-28T18:09:08.424296",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-29T11:49:50.483150",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-29T11:49:50.485225",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-29T11:49:50.486762",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-29T11:49:50.491960",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-29T11:55:52.842032",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-29T11:55:52.844082",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-29T11:55:52.845621",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-29T11:55:52.850853",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-29T11:56:57.941955",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-29T11:56:57.944629",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-29T11:56:57.946721",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-29T11:56:57.951364",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-29T12:11:25.929803",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-29T12:11:25.931934",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-29T12:11:25.933984",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-29T12:11:25.938180",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-29T12:13:29.311062",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-29T12:13:29.313241",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-29T12:13:29.315309",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-29T12:13:29.319416",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-29T12:16:50.578103",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-29T12:16:50.580476",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-29T12:16:50.582772",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-29T12:16:50.586310",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-29T12:18:52.722332",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-29T12:18:52.724903",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-29T12:18:52.727165",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-29T12:18:52.731347",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-29T12:20:34.409240",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-29T12:20:34.411321",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-29T12:20:34.412333",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-29T12:20:34.416967",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-29T15:24:49.462125",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-29T15:24:49.464169",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-29T15:24:49.465738",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-29T15:24:49.470373",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-29T15:25:23.174737",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-29T15:25:23.176793",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-29T15:25:23.178910",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-29T15:25:23.183018",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-29T15:27:31.281346",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-29T15:27:31.283883",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-29T15:27:31.285484",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-29T15:27:31.289818",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-29T15:28:26.743367",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-29T15:28:26.745400",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-29T15:28:26.747550",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-29T15:28:26.753078",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-29T15:29:38.358408",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-29T15:29:38.360931",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-29T15:29:38.362966",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-29T15:29:38.367376",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-29T15:30:31.126712",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-29T15:30:31.128747",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-29T15:30:31.130913",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-29T15:30:31.136156",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-29T15:37:36.969223",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-29T15:37:36.973007",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-29T15:37:36.977163",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-29T15:37:36.984945",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-29T15:39:19.080152",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-29T15:39:19.083992",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-29T15:39:19.087701",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-29T15:39:19.096502",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-29T15:39:31.134320",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-29T15:39:31.137357",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-29T15:39:31.142389",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-29T15:39:31.153013",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-29T15:44:06.020626",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-29T15:44:06.024318",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-29T15:44:06.029114",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-29T15:44:06.036939",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-29T15:57:12.405136",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-29T15:57:12.409207",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-29T15:57:12.412243",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-29T15:57:12.421363",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-29T15:59:10.255209",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-29T15:59:10.259365",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-29T15:59:10.263389",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-29T15:59:10.271520",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-29T17:50:48.549405",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-29T17:50:48.551487",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-29T17:50:48.554774",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-29T17:50:48.558306",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-29T17:51:45.231887",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-29T17:51:45.235108",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-29T17:51:45.237168",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-29T17:51:45.241296",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-29T17:52:37.960079",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-29T17:52:37.961079",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-29T17:52:37.964833",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-29T17:52:37.969545",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-29T18:01:31.340399",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-29T18:01:31.343430",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-29T18:01:31.345473",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-29T18:01:31.349090",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-29T23:28:19.687447",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-29T23:28:19.690112",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-29T23:28:19.733017",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-29T23:28:19.739738",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-29T23:29:21.356362",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-29T23:29:21.365704",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-29T23:29:21.367711",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-29T23:29:21.373088",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-29T23:46:39.954957",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-29T23:46:39.957008",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-29T23:46:39.959568",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-29T23:46:39.964750",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-29T23:50:28.042841",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-29T23:50:28.045883",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-29T23:50:28.048121",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-29T23:50:28.053585",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-30T00:16:21.832302",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-30T00:16:21.835557",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-30T00:16:21.837613",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-30T00:16:21.842804",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-30T11:59:44.629164",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-30T11:59:44.632305",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-30T11:59:44.633811",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-30T11:59:44.639474",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-30T12:00:48.088556",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-30T12:00:48.090815",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-30T12:00:48.093911",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-30T12:00:48.098045",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-30T12:02:11.015792",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-30T12:02:11.017792",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-30T12:02:11.020927",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-30T12:02:11.025532",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-30T12:03:10.687303",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-30T12:03:10.690453",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-30T12:03:10.692453",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-30T12:03:10.696955",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-30T12:07:38.388990",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-30T12:07:38.391624",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-30T12:07:38.393624",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-30T12:07:38.398128",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-30T12:23:06.101768",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-30T12:23:06.104797",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-30T12:23:06.106804",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-30T12:23:06.112836",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-30T12:24:00.537728",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-30T12:24:00.540752",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-30T12:24:00.543791",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-30T12:24:00.550510",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-30T12:24:50.211891",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-30T12:24:50.213400",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-30T12:24:50.216414",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-30T12:24:50.220437",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-30T12:25:49.441013",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-30T12:25:49.443013",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-30T12:25:49.445324",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-30T12:25:49.450345",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-30T12:31:47.888920",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-30T12:31:47.891488",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-30T12:31:47.893529",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-30T12:31:47.899208",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-30T12:32:26.574571",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-30T12:32:26.577121",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-30T12:32:26.579671",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-30T12:32:26.584889",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-30T12:36:47.125515",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-30T12:36:47.128589",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-30T12:36:47.130672",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-30T12:36:47.135901",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-30T12:37:02.714109",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-30T12:37:02.716667",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-30T12:37:02.719288",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-30T12:37:02.725039",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-30T12:37:03.914445",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-30T12:37:03.917126",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-30T12:37:03.919682",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-30T12:37:03.924905",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-30T12:41:07.897846",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-30T12:41:07.900753",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-30T12:41:07.904138",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-30T12:41:07.909674",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-30T12:43:23.175331",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-30T12:43:23.178491",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-30T12:43:23.181054",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-30T12:43:23.186278",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-30T12:43:45.102695",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-30T12:43:45.105383",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-30T12:43:45.107903",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-30T12:43:45.113202",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-30T12:47:00.485304",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-30T12:47:00.488772",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-30T12:47:00.491266",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-30T12:47:00.496468",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-30T12:49:27.264242",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-30T12:49:27.266647",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-30T12:49:27.269803",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-30T12:49:27.273985",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-30T12:52:01.036024",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-30T12:52:01.039717",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-30T12:52:01.041717",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-30T12:52:01.046800",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-30T13:00:28.545897",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-30T13:00:28.548448",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-30T13:00:28.551017",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-30T13:00:28.556720",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-30T13:00:49.254834",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-30T13:00:49.257389",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-30T13:00:49.259951",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-30T13:00:49.265222",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-30T13:00:58.700199",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-30T13:00:58.702628",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-30T13:00:58.705421",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-30T13:00:58.710218",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-30T13:01:12.735432",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-30T13:01:12.738496",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-30T13:01:12.741045",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-30T13:01:12.746711",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-30T13:01:39.570955",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-30T13:01:39.572963",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-30T13:01:39.576486",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-30T13:01:39.583064",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-30T13:02:27.861735",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-30T13:02:27.864946",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-30T13:02:27.867507",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-30T13:02:27.873221",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-30T13:04:10.970974",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-30T13:04:10.974050",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-30T13:04:10.976666",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-30T13:04:10.981851",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-30T13:06:06.151569",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-30T13:06:06.154673",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-30T13:06:06.159260",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-30T13:06:06.165041",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-30T13:09:13.989285",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-30T13:09:13.991944",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-30T13:09:13.995081",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-30T13:09:14.001320",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-30T13:16:33.053966",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-30T13:16:33.056661",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-30T13:16:33.059736",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-30T13:16:33.064929",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-30T13:18:29.255103",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-30T13:18:29.258208",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-30T13:18:29.260758",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-30T13:18:29.266240",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-30T13:20:38.207669",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-30T13:20:38.210060",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-30T13:20:38.213340",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-30T13:20:38.217971",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-30T13:22:13.983558",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-30T13:22:13.987198",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-30T13:22:13.989588",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-30T13:22:13.994129",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-30T14:22:37.627013",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-30T14:22:37.628521",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-30T14:22:37.632194",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-30T14:22:37.637473",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-30T14:41:30.085647",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-30T14:41:30.088381",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-30T14:41:30.090786",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-30T14:41:30.097846",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-30T14:46:26.474921",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-30T14:46:26.479112",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-30T14:46:26.481141",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-30T14:46:26.486180",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-30T14:47:45.109971",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-30T14:47:45.112971",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-30T14:47:45.115971",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-30T14:47:45.122032",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-30T14:52:12.201615",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-30T14:52:12.204687",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-30T14:52:12.207829",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-30T14:52:12.212985",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-30T14:56:02.946961",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-30T14:56:02.950061",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-30T14:56:02.953700",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-30T14:56:02.958890",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-30T14:57:54.360180",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-30T14:57:54.362966",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-30T14:57:54.365975",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-30T14:57:54.372121",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-30T14:59:59.946880",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-30T14:59:59.949096",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-30T14:59:59.952432",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-30T14:59:59.958019",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-30T15:01:24.766084",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-30T15:01:24.770817",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-30T15:01:24.774425",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-30T15:01:24.780487",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-30T15:10:17.037593",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-30T15:10:17.040669",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-30T15:10:17.043753",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-30T15:10:17.049423",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-30T15:11:50.411458",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-30T15:11:50.414593",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-30T15:11:50.417687",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-30T15:11:50.423412",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-30T15:13:55.233922",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-30T15:13:55.237636",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-30T15:13:55.240666",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-30T15:13:55.245693",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-30T15:18:04.499491",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-30T15:18:04.503504",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-30T15:18:04.506726",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-30T15:18:04.511974",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-30T15:19:25.015391",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-30T15:19:25.018614",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-30T15:19:25.022387",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-30T15:19:25.027892",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-30T15:22:58.310334",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-30T15:22:58.313984",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-30T15:22:58.317059",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-30T15:22:58.322718",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-30T15:24:53.781873",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-30T15:24:53.785516",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-30T15:24:53.788587",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-30T15:24:53.794253",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-30T15:32:15.201229",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-30T15:32:15.204861",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-30T15:32:15.207948",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-30T15:32:15.213036",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-30T15:35:44.930751",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-30T15:35:44.934063",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-30T15:35:44.936548",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-30T15:35:44.942056",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-30T16:56:19.506816",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-30T16:56:19.513855",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-30T16:56:19.519042",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-30T16:56:19.524705",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-30T17:34:09.073467",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-30T17:34:09.077047",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-30T17:34:09.080142",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-30T17:34:09.085804",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-30T17:36:41.273995",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-30T17:36:41.277275",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-30T17:36:41.279275",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-30T17:36:41.285158",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-30T17:39:09.100204",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-30T17:39:09.103552",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-30T17:39:09.106588",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-30T17:39:09.112062",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-30T17:40:32.426098",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-30T17:40:32.429147",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-30T17:40:32.431960",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-30T17:40:32.439773",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-30T17:43:44.388751",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-30T17:43:44.392293",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-30T17:43:44.395347",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-30T17:43:44.400738",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-30T17:47:29.422099",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-30T17:47:29.425681",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-30T17:47:29.428742",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-30T17:47:29.434954",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-30T17:49:48.667053",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-30T17:49:48.670664",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-30T17:49:48.673735",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-30T17:49:48.680610",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-09-30T17:51:50.968018",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-09-30T17:51:50.971050",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-09-30T17:51:50.974427",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-09-30T17:51:50.979573",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-10-02T10:40:39.757163",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-10-02T10:40:39.761316",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-10-02T10:40:39.765102",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-10-02T10:40:39.770159",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-10-02T10:43:16.172555",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-10-02T10:43:16.175724",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-10-02T10:43:16.178740",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-10-02T10:43:16.184656",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-10-02T10:45:42.666694",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-10-02T10:45:42.669882",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-10-02T10:45:42.673460",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-10-02T10:45:42.678615",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-10-02T10:50:51.714421",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-10-02T10:50:51.717997",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-10-02T10:50:51.721629",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-10-02T10:50:51.727522",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-10-02T10:52:36.232835",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-10-02T10:52:36.236415",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-10-02T10:52:36.239999",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-10-02T10:52:36.245699",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-10-02T10:54:40.101300",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-10-02T10:54:40.104375",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-10-02T10:54:40.107397",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-10-02T10:54:40.113669",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-10-02T11:01:51.563940",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-10-02T11:01:51.567049",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-10-02T11:01:51.570710",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-10-02T11:01:51.576863",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-10-02T11:02:04.352487",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-10-02T11:02:04.356013",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-10-02T11:02:04.359031",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-10-02T11:02:04.365061",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-10-02T11:03:15.223722",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-10-02T11:03:15.227649",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-10-02T11:03:15.231229",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-10-02T11:03:15.236869",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-10-02T11:03:29.555839",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-10-02T11:03:29.559428",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-10-02T11:03:29.562493",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-10-02T11:03:29.568284",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-10-02T11:03:55.727963",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-10-02T11:03:55.731994",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-10-02T11:03:55.735006",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-10-02T11:03:55.740664",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-10-02T11:15:44.496205",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-10-02T11:15:44.499340",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-10-02T11:15:44.502369",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-10-02T11:15:44.509011",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-10-02T11:26:11.801838",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-10-02T11:26:11.805034",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-10-02T11:26:11.808548",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-10-02T11:26:11.814950",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-10-02T11:30:32.230229",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-10-02T11:30:32.233327",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-10-02T11:30:32.236833",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-10-02T11:30:32.243181",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-10-02T11:33:34.398507",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-10-02T11:33:34.401534",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-10-02T11:33:34.404540",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-10-02T11:33:34.410447",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-10-02T11:35:14.765443",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-10-02T11:35:14.769015",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-10-02T11:35:14.772590",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-10-02T11:35:14.779469",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-10-02T11:37:10.639702",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-10-02T11:37:10.643277",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-10-02T11:37:10.645829",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-10-02T11:37:10.652484",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-10-02T11:38:19.321424",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-10-02T11:38:19.325003",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-10-02T11:38:19.328601",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-10-02T11:38:19.333843",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-10-02T11:39:40.197277",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-10-02T11:39:40.201360",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-10-02T11:39:40.204480",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-10-02T11:39:40.210736",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-10-02T11:40:34.497529",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-10-02T11:40:34.501155",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-10-02T11:40:34.504752",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-10-02T11:40:34.510067",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-10-02T11:42:51.367893",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-10-02T11:42:51.372032",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-10-02T11:42:51.375095",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-10-02T11:42:51.381289",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-10-02T11:47:00.617888",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-10-02T11:47:00.622027",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-10-02T11:47:00.625526",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-10-02T11:47:00.630702",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-10-02T11:49:27.790454",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-10-02T11:49:27.794657",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-10-02T11:49:27.797682",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-10-02T11:49:27.803596",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-10-02T11:56:35.837556",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-10-02T11:56:35.841137",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-10-02T11:56:35.844715",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-10-02T11:56:35.850910",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-10-02T11:59:33.604583",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-10-02T11:59:33.607721",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-10-02T11:59:33.611816",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-10-02T11:59:33.617574",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-10-02T13:52:10.930749",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-10-02T13:52:10.934966",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-10-02T13:52:10.939104",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-10-02T13:52:10.945333",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-10-02T15:15:24.674016",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-10-02T15:15:24.678901",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-10-02T15:15:24.686013",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-10-02T15:15:24.692132",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-10-02T15:19:09.959418",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-10-02T15:19:09.963462",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-10-02T15:19:09.966483",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-10-02T15:19:09.973650",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-10-02T15:20:56.089592",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-10-02T15:20:56.097747",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-10-02T15:20:56.104148",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-10-02T15:20:56.115297",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-10-02T15:26:09.193561",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-10-02T15:26:09.198196",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-10-02T15:26:09.201760",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-10-02T15:26:09.208895",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-10-02T15:33:40.149610",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-10-02T15:33:40.153708",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-10-02T15:33:40.157824",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-10-02T15:33:40.166103",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-10-02T15:34:59.199491",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-10-02T15:34:59.204174",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-10-02T15:34:59.207870",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-10-02T15:34:59.217122",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-10-02T15:35:34.453402",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-10-02T15:35:34.457549",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-10-02T15:35:34.461644",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-10-02T15:35:34.468405",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-10-02T15:38:41.677780",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-10-02T15:38:41.680825",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-10-02T15:38:41.684982",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-10-02T15:38:41.690850",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-10-02T15:41:25.679842",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-10-02T15:41:25.683347",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-10-02T15:41:25.687124",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-10-02T15:41:25.693698",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-10-02T15:41:46.989271",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-10-02T15:41:46.992817",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-10-02T15:41:46.997364",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-10-02T15:41:47.003181",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-10-02T15:46:01.048256",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-10-02T15:46:01.052426",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-10-02T15:46:01.056044",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-10-02T15:46:01.061828",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-10-02T15:48:07.665228",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-10-02T15:48:07.669341",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-10-02T15:48:07.673176",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-10-02T15:48:07.679376",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-10-02T15:49:47.934600",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-10-02T15:49:47.938201",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-10-02T15:49:47.942901",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-10-02T15:49:47.949094",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-10-02T15:52:37.606068",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-10-02T15:52:37.609644",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-10-02T15:52:37.613743",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-10-02T15:52:37.620014",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-10-02T15:54:40.593139",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-10-02T15:54:40.597398",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-10-02T15:54:40.600977",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-10-02T15:54:40.607674",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-10-02T15:54:52.903373",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-10-02T15:54:52.906400",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-10-02T15:54:52.911290",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-10-02T15:54:52.917510",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-10-02T15:56:40.265348",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-10-02T15:56:40.269391",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-10-02T15:56:40.272844",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-10-02T15:56:40.279645",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-10-02T15:57:15.297799",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-10-02T15:57:15.302074",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-10-02T15:57:15.306186",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-10-02T15:57:15.312230",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-10-02T16:27:25.187892",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-10-02T16:27:25.191743",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-10-02T16:27:25.196188",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-10-02T16:27:25.202871",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-10-02T16:30:48.961242",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-10-02T16:30:48.965345",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-10-02T16:30:48.969538",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-10-02T16:30:48.975097",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-10-02T16:35:44.922950",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-10-02T16:35:44.927063",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-10-02T16:35:44.931082",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-10-02T16:35:44.936639",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-10-02T17:08:51.962460",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-10-02T17:08:51.966548",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-10-02T17:08:51.970688",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-10-02T17:08:51.977455",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-10-02T17:09:49.453720",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-10-02T17:09:49.457812",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-10-02T17:09:49.461999",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-10-02T17:09:49.469059",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-10-02T17:11:04.869342",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-10-02T17:11:04.873439",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-10-02T17:11:04.877547",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-10-02T17:11:04.884356",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-10-02T17:14:26.483688",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-10-02T17:14:26.488275",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-10-02T17:14:26.492855",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-10-02T17:14:26.498671",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-10-02T17:17:38.312227",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-10-02T17:17:38.317734",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-10-02T17:17:38.321642",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-10-02T17:17:38.327714",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-10-02T17:21:46.291520",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-10-02T17:21:46.295646",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-10-02T17:21:46.299657",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-10-02T17:21:46.305938",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-10-02T17:25:35.971124",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-10-02T17:25:35.976193",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-10-02T17:25:35.980447",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-10-02T17:25:35.987056",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-10-02T17:27:00.570881",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-10-02T17:27:00.575948",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-10-02T17:27:00.579617",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-10-02T17:27:00.586927",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-10-02T17:30:36.113053",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-10-02T17:30:36.118119",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-10-02T17:30:36.122172",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-10-02T17:30:36.128322",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-10-02T17:35:37.068172",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-10-02T17:35:37.072315",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-10-02T17:35:37.076361",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-10-02T17:35:37.082520",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-10-02T17:43:00.312223",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-10-02T17:43:00.316328",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-10-02T17:43:00.320450",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-10-02T17:43:00.327123",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-10-02T17:43:38.170236",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-10-02T17:43:38.174397",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-10-02T17:43:38.177967",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-10-02T17:43:38.185105",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-10-02T17:48:02.324710",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-10-02T17:48:02.328756",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-10-02T17:48:02.332880",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-10-02T17:48:02.340514",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-10-02T17:52:27.565899",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-10-02T17:52:27.570561",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-10-02T17:52:27.575226",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-10-02T17:52:27.582357",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-10-02T17:52:59.442554",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-10-02T17:52:59.446639",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-10-02T17:52:59.451092",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-10-02T17:52:59.457782",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-10-02T18:01:37.813266",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-10-02T18:01:37.818145",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-10-02T18:01:37.822765",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-10-02T18:01:37.829017",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-10-02T18:03:44.058178",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-10-02T18:03:44.062849",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-10-02T18:03:44.067429",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-10-02T18:03:44.073836",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-10-02T18:06:43.172462",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-10-02T18:06:43.177092",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-10-02T18:06:43.181229",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-10-02T18:06:43.187900",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-10-02T18:08:18.843783",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-10-02T18:08:18.848383",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-10-02T18:08:18.853032",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-10-02T18:08:18.860305",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-10-02T18:09:34.426427",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-10-02T18:09:34.434484",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-10-02T18:09:34.443137",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-10-02T18:09:34.456523",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-10-02T18:10:16.724077",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-10-02T18:10:16.729284",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-10-02T18:10:16.733385",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-10-02T18:10:16.740588",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-10-02T18:10:29.540982",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-10-02T18:10:29.545988",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-10-02T18:10:29.550492",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-10-02T18:10:29.557574",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-10-02T18:10:50.941516",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-10-02T18:10:50.946164",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-10-02T18:10:50.950852",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-10-02T18:10:50.957622",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-10-02T18:11:42.752935",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-10-02T18:11:42.757455",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-10-02T18:11:42.761500",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-10-02T18:11:42.768640",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-10-02T18:12:09.949514",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-10-02T18:12:09.953026",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-10-02T18:12:09.959139",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-10-02T18:12:09.965141",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-10-02T18:12:55.773845",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-10-02T18:12:55.777949",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-10-02T18:12:55.781997",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-10-02T18:12:55.789880",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-10-02T18:14:43.555154",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-10-02T18:14:43.559188",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-10-02T18:14:43.562721",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-10-02T18:14:43.570187",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-10-02T18:15:13.631718",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-10-02T18:15:13.635245",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-10-02T18:15:13.640085",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-10-02T18:15:13.646208",
+      "note": "Q4",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "rejected",
+      "at": "2026-10-02T18:18:50.861329",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "pending",
+      "at": "2026-10-02T18:18:50.865936",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1566.001",
+      "result": "accepted",
+      "at": "2026-10-02T18:18:50.870057",
+      "note": "Q2",
+      "by": null
+    },
+    {
+      "technique": "T1001",
+      "result": "pending",
+      "at": "2026-10-02T18:18:50.877282",
+      "note": "Q4",
+      "by": null
+    }
+  ]
+}

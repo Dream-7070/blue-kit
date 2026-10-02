@@ -1,0 +1,32 @@
+{
+  "meta": {"os": "windows", "hostname": "BUX-PC05", "collected_at": "2026-10-05T09:40:00", "collector_version": "1.0"},
+  "users": [
+    {"name": "Administrator", "enabled": true, "is_admin": true, "groups": ["Administrators"]},
+    {"name": "checker_admin", "enabled": true, "is_admin": true, "groups": ["Administrators"]},
+    {"name": "bux.aziza", "enabled": true, "is_admin": false, "groups": ["Users"]},
+    {"name": "admin", "enabled": true, "is_admin": true, "groups": ["Administrators"]}
+  ],
+  "services": [
+    {"name": "Spooler", "display": "Print Spooler", "state": "Running", "start_mode": "Auto", "binary_path": "C:\\Windows\\System32\\spoolsv.exe", "run_as": "LocalSystem"}
+  ],
+  "tasks": [
+    {"name": "GoogleUpdateTaskMachine", "path": "\\", "action": "C:\\Program Files (x86)\\Google\\Update\\GoogleUpdate.exe", "trigger": "daily", "author": "Google", "enabled": true},
+    {"name": "Updater", "path": "\\", "action": "C:\\Users\\hr.olim\\AppData\\Local\\Temp\\beacon.exe", "trigger": "onlogon", "author": "", "enabled": true}
+  ],
+  "autoruns": [
+    {"location": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run", "name": "SecurityHealth", "value": "C:\\Windows\\System32\\SecurityHealthSystray.exe"},
+    {"location": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run", "name": "Updater", "value": "C:\\Users\\hr.olim\\AppData\\Local\\Temp\\beacon.exe"}
+  ],
+  "remote_access_tools": [
+    {"name": "AnyDesk", "evidence": "process: C:\\Program Files (x86)\\AnyDesk\\AnyDesk.exe"}
+  ],
+  "hosts_file": ["91.238.50.10 ibank.example.uz"],
+  "listening_ports": [
+    {"proto": "tcp", "addr": "0.0.0.0", "port": 445, "pid": 4, "process": "System"},
+    {"proto": "tcp", "addr": "0.0.0.0", "port": 3389, "pid": 900, "process": "svchost.exe"}
+  ],
+  "connections": [
+    {"proto": "tcp", "laddr": "10.10.20.51", "lport": 49700, "raddr": "45.142.212.61", "rport": 443, "pid": 1234, "process": "beacon.exe"}
+  ],
+  "errors": []
+}

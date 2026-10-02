@@ -1,0 +1,1838 @@
+{
+ "meta": {
+  "os": "windows",
+  "hostname": "WIN11-BENIGN",
+  "collected_at": "2026-09-28T16:20:57",
+  "collector_version": "1.0",
+  "note": "Real clean Windows 11 laptop snapshot (anonymized subset). Every task/autorun/service here is benign."
+ },
+ "users": [],
+ "tasks": [
+  {
+   "author": "Adobe Systems Incorporated",
+   "name": "Adobe Acrobat Update Task",
+   "action": "C:\\Program Files (x86)\\Common Files\\Adobe\\ARM\\1.0\\AdobeARM.exe",
+   "path": "\\",
+   "trigger": "MSFT_TaskLogonTrigger; MSFT_TaskDailyTrigger",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "OneDrive Reporting Task-S-1-5-21-1111111111-2222222222-3333333333-1001",
+   "action": "%localappdata%\\Microsoft\\OneDrive\\OneDriveStandaloneUpdater.exe /reporting",
+   "path": "\\",
+   "trigger": "MSFT_TaskTimeTrigger",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "OneDrive Standalone Update Task-S-1-5-21-1111111111-2222222222-3333333333-1001",
+   "action": "%localappdata%\\Microsoft\\OneDrive\\OneDriveStandaloneUpdater.exe",
+   "path": "\\",
+   "trigger": "MSFT_TaskTimeTrigger",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "OneDrive Startup Task-S-1-5-21-1111111111-2222222222-3333333333-1001",
+   "action": "C:\\Users\\alice\\AppData\\Local\\Microsoft\\OneDrive\\26.168.0830.0006\\OneDriveLauncher.exe /startInstances",
+   "path": "\\",
+   "trigger": "MSFT_TaskLogonTrigger",
+   "enabled": true
+  },
+  {
+   "author": "WIN11-BENIGN\\alice",
+   "name": "update-S-1-5-21-1111111111-2222222222-3333333333-1001",
+   "action": "C:\\Program Files (x86)\\Skillbrains\\Updater\\Updater.exe -runmode=checkupdate",
+   "path": "\\",
+   "trigger": "MSFT_TaskDailyTrigger",
+   "enabled": true
+  },
+  {
+   "author": "Zoom Communications, Inc.",
+   "name": "ZoomUpdateTaskUser-S-1-5-21-1111111111-2222222222-3333333333-1001",
+   "action": "\"C:\\Users\\alice\\AppData\\Roaming\\Zoom\\bin\\Zoom.exe\" --action=UpdateSchedule",
+   "path": "\\",
+   "trigger": "MSFT_TaskDailyTrigger",
+   "enabled": true
+  },
+  {
+   "author": "WIN11-BENIGN\\alice",
+   "name": "RunPlatformExperienceHelperOnUnlock",
+   "action": "\"C:\\Program Files\\Google\\Chrome\\Application\\PlatformExperienceHelper\\platform_experience_helper.exe\"",
+   "path": "\\GoogleUserPEH\\",
+   "trigger": "MSFT_TaskSessionStateChangeTrigger",
+   "enabled": true
+  },
+  {
+   "author": "WIN11-BENIGN\\alice",
+   "name": "RunPlatformExperienceHelper_Daily",
+   "action": "\"C:\\Program Files\\Google\\Chrome\\Application\\PlatformExperienceHelper\\platform_experience_helper.exe\"",
+   "path": "\\GoogleUserPEH\\",
+   "trigger": "MSFT_TaskDailyTrigger",
+   "enabled": true
+  },
+  {
+   "author": "WIN11-BENIGN\\alice",
+   "name": "RunPlatformExperienceHelper_Metrics",
+   "action": "\"C:\\Program Files\\Google\\Chrome\\Application\\PlatformExperienceHelper\\platform_experience_helper.exe\" --chrome-upload-metrics",
+   "path": "\\GoogleUserPEH\\",
+   "trigger": "MSFT_TaskTimeTrigger",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Office",
+   "name": "Office Automatic Updates 2.0",
+   "action": "C:\\Program Files\\Common Files\\Microsoft Shared\\ClickToRun\\OfficeC2RClient.exe /frequentupdate SCHEDULEDTASK displaylevel=False",
+   "path": "\\Microsoft\\Office\\",
+   "trigger": "MSFT_TaskWeeklyTrigger; MSFT_TaskLogonTrigger; MSFT_TaskIdleTrigger",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Office",
+   "name": "Office ClickToRun Service Monitor",
+   "action": "C:\\Program Files\\Common Files\\Microsoft Shared\\ClickToRun\\OfficeC2RClient.exe /WatchService",
+   "path": "\\Microsoft\\Office\\",
+   "trigger": "MSFT_TaskDailyTrigger",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Office",
+   "name": "Office Feature Updates",
+   "action": "C:\\Program Files\\Microsoft Office\\root\\Office16\\sdxhelper.exe",
+   "path": "\\Microsoft\\Office\\",
+   "trigger": "MSFT_TaskDailyTrigger; MSFT_TaskDailyTrigger; MSFT_TaskDailyTrigger; MSFT_TaskDailyTrigger; MSFT_TaskDailyTrigger; MSFT_TaskDailyTrigger",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Office",
+   "name": "Office Feature Updates Logon",
+   "action": "C:\\Program Files\\Microsoft Office\\root\\Office16\\sdxhelper.exe /onlogon",
+   "path": "\\Microsoft\\Office\\",
+   "trigger": "MSFT_TaskLogonTrigger; MSFT_TaskSessionStateChangeTrigger",
+   "enabled": true
+  },
+  {
+   "author": null,
+   "name": "OfficeTelemetryAgentFallBack2016",
+   "action": "C:\\Program Files\\Microsoft Office\\root\\Office16\\msoia.exe scan upload mininterval:2880",
+   "path": "\\Microsoft\\Office\\",
+   "trigger": "MSFT_TaskLogonTrigger",
+   "enabled": true
+  },
+  {
+   "author": null,
+   "name": "OfficeTelemetryAgentLogOn2016",
+   "action": "C:\\Program Files\\Microsoft Office\\root\\Office16\\msoia.exe scan upload",
+   "path": "\\Microsoft\\Office\\",
+   "trigger": "MSFT_TaskLogonTrigger",
+   "enabled": true
+  },
+  {
+   "author": null,
+   "name": ".NET Framework NGEN v4.0.30319",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\.NET Framework\\",
+   "trigger": "",
+   "enabled": true
+  },
+  {
+   "author": null,
+   "name": ".NET Framework NGEN v4.0.30319 64",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\.NET Framework\\",
+   "trigger": "",
+   "enabled": true
+  },
+  {
+   "author": null,
+   "name": ".NET Framework NGEN v4.0.30319 64 Critical",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\.NET Framework\\",
+   "trigger": "MSFT_TaskIdleTrigger",
+   "enabled": false
+  },
+  {
+   "author": null,
+   "name": ".NET Framework NGEN v4.0.30319 Critical",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\.NET Framework\\",
+   "trigger": "MSFT_TaskIdleTrigger",
+   "enabled": false
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "RecoverabilityToastTask",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\AccountHealth\\",
+   "trigger": "MSFT_TaskSessionStateChangeTrigger",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "AD RMS Rights Policy Template Management (Automated)",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\Active Directory Rights Management Services Client\\",
+   "trigger": "MSFT_TaskDailyTrigger; MSFT_TaskLogonTrigger",
+   "enabled": false
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "AD RMS Rights Policy Template Management (Manual)",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\Active Directory Rights Management Services Client\\",
+   "trigger": "MSFT_TaskLogonTrigger",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "PolicyConverter",
+   "action": "%windir%\\system32\\appidpolicyconverter.exe",
+   "path": "\\Microsoft\\Windows\\AppID\\",
+   "trigger": "",
+   "enabled": false
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "VerifiedPublisherCertStoreCheck",
+   "action": "%windir%\\system32\\appidcertstorecheck.exe",
+   "path": "\\Microsoft\\Windows\\AppID\\",
+   "trigger": "MSFT_TaskBootTrigger",
+   "enabled": false
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "MareBackup",
+   "action": "%windir%\\system32\\compattelrunner.exe -m:aeinv.dll -f:UpdateSoftwareInventoryW invsvc; %windir%\\system32\\compattelrunner.exe -m:appraiser.dll -f:DoScheduledTelemetryRun; %windir%\\system32\\compattelrunner.exe -m:aemarebackup.dll -f:BackupMareData",
+   "path": "\\Microsoft\\Windows\\Application Experience\\",
+   "trigger": "",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "Microsoft Compatibility Appraiser Exp",
+   "action": "%windir%\\system32\\compattelrunner.exe -m:appraiser.dll -f:DoScheduledTelemetryRun express",
+   "path": "\\Microsoft\\Windows\\Application Experience\\",
+   "trigger": "MSFT_TaskTrigger",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "PcaPatchDbTask",
+   "action": "%windir%\\system32\\rundll32.exe %windir%\\system32\\PcaSvc.dll,PcaPatchSdbTask",
+   "path": "\\Microsoft\\Windows\\Application Experience\\",
+   "trigger": "MSFT_TaskTimeTrigger",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "SdbinstMergeDbTask",
+   "action": "%windir%\\system32\\sdbinst.exe -mm",
+   "path": "\\Microsoft\\Windows\\Application Experience\\",
+   "trigger": "MSFT_TaskTrigger; MSFT_TaskTrigger",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "StartupAppTask",
+   "action": "%windir%\\system32\\rundll32.exe Startupscan.dll,SusRunTask",
+   "path": "\\Microsoft\\Windows\\Application Experience\\",
+   "trigger": "",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "appuriverifierdaily",
+   "action": "%windir%\\system32\\AppHostRegistrationVerifier.exe",
+   "path": "\\Microsoft\\Windows\\ApplicationData\\",
+   "trigger": "",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "appuriverifierinstall",
+   "action": "%windir%\\system32\\AppHostRegistrationVerifier.exe",
+   "path": "\\Microsoft\\Windows\\ApplicationData\\",
+   "trigger": "MSFT_TaskTrigger",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "CleanupTemporaryState",
+   "action": "%windir%\\system32\\rundll32.exe Windows.Storage.ApplicationData.dll,CleanupTemporaryState",
+   "path": "\\Microsoft\\Windows\\ApplicationData\\",
+   "trigger": "",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "DsSvcCleanup",
+   "action": "%windir%\\system32\\dstokenclean.exe",
+   "path": "\\Microsoft\\Windows\\ApplicationData\\",
+   "trigger": "",
+   "enabled": true
+  },
+  {
+   "author": "$(@%SystemRoot%\\system32\\AppListBackupLauncher.dll,-600)",
+   "name": "Backup",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\AppListBackup\\",
+   "trigger": "",
+   "enabled": true
+  },
+  {
+   "author": "$(@%SystemRoot%\\system32\\AppListBackupLauncher.dll,-600)",
+   "name": "BackupNonMaintenance",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\AppListBackup\\",
+   "trigger": "MSFT_TaskDailyTrigger",
+   "enabled": true
+  },
+  {
+   "author": null,
+   "name": "Pre-staged app cleanup",
+   "action": "%windir%\\system32\\rundll32.exe %windir%\\system32\\AppxDeploymentClient.dll,AppxPreStageCleanupRunTask",
+   "path": "\\Microsoft\\Windows\\AppxDeploymentClient\\",
+   "trigger": "MSFT_TaskLogonTrigger",
+   "enabled": false
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "Proxy",
+   "action": "%windir%\\system32\\rundll32.exe /d acproxy.dll,PerformAutochkOperations",
+   "path": "\\Microsoft\\Windows\\Autochk\\",
+   "trigger": "MSFT_TaskBootTrigger",
+   "enabled": true
+  },
+  {
+   "author": null,
+   "name": "BitLocker Encrypt All Drives",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\BitLocker\\",
+   "trigger": "MSFT_TaskTrigger",
+   "enabled": true
+  },
+  {
+   "author": null,
+   "name": "BitLocker MDM policy Refresh",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\BitLocker\\",
+   "trigger": "MSFT_TaskTrigger",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft",
+   "name": "UninstallDeviceTask",
+   "action": "BthUdTask.exe $(Arg0)",
+   "path": "\\Microsoft\\Windows\\Bluetooth\\",
+   "trigger": "",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "BgTaskRegistrationMaintenanceTask",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\BrokerInfrastructure\\",
+   "trigger": "",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "maintenancetasks",
+   "action": "%windir%\\system32\\rundll32.exe %windir%\\system32\\CapabilityAccessManager.dll,CapabilityAccessManagerDoStoreMaintenance",
+   "path": "\\Microsoft\\Windows\\capabilityaccessmanager\\",
+   "trigger": "",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "UserTask",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\CertificateServicesClient\\",
+   "trigger": "MSFT_TaskTrigger; MSFT_TaskRegistrationTrigger; MSFT_TaskLogonTrigger; MSFT_TaskEventTrigger",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "UserTask-Roam",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\CertificateServicesClient\\",
+   "trigger": "MSFT_TaskSessionStateChangeTrigger; MSFT_TaskSessionStateChangeTrigger",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "ProactiveScan",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\Chkdsk\\",
+   "trigger": "",
+   "enabled": true
+  },
+  {
+   "author": null,
+   "name": "SyspartRepair",
+   "action": "%windir%\\system32\\bcdboot.exe %windir% /sysrepair",
+   "path": "\\Microsoft\\Windows\\Chkdsk\\",
+   "trigger": "MSFT_TaskTrigger",
+   "enabled": true
+  },
+  {
+   "author": null,
+   "name": "CreateObjectTask",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\CloudExperienceHost\\",
+   "trigger": "",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "Backup",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\CloudRestore\\",
+   "trigger": "MSFT_TaskTrigger; MSFT_TaskDailyTrigger",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "Restore",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\CloudRestore\\",
+   "trigger": "MSFT_TaskTrigger",
+   "enabled": true
+  },
+  {
+   "author": "$(@%systemRoot%\\system32\\unifiedconsent.dll,-102)",
+   "name": "UnifiedConsentSyncTask",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\ConsentUX\\UnifiedConsent\\",
+   "trigger": "MSFT_TaskTrigger; MSFT_TaskTimeTrigger",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "CmCleanup",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\Containers\\",
+   "trigger": "",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "Consolidator",
+   "action": "%SystemRoot%\\System32\\wsqmcons.exe",
+   "path": "\\Microsoft\\Windows\\Customer Experience Improvement Program\\",
+   "trigger": "MSFT_TaskTimeTrigger",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "UsbCeip",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\Customer Experience Improvement Program\\",
+   "trigger": "",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "Data Integrity Check And Scan",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\Data Integrity Scan\\",
+   "trigger": "MSFT_TaskDailyTrigger; MSFT_TaskBootTrigger",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "Data Integrity Scan",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\Data Integrity Scan\\",
+   "trigger": "",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "Data Integrity Scan for Crash Recovery",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\Data Integrity Scan\\",
+   "trigger": "MSFT_TaskTrigger",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "ScheduledDefrag",
+   "action": "%windir%\\system32\\defrag.exe -c -h -o -$",
+   "path": "\\Microsoft\\Windows\\Defrag\\",
+   "trigger": "",
+   "enabled": true
+  },
+  {
+   "author": null,
+   "name": "Device",
+   "action": "%windir%\\system32\\devicecensus.exe SystemCxt",
+   "path": "\\Microsoft\\Windows\\Device Information\\",
+   "trigger": "MSFT_TaskTimeTrigger; MSFT_TaskTrigger",
+   "enabled": true
+  },
+  {
+   "author": null,
+   "name": "Device User",
+   "action": "%windir%\\system32\\devicecensus.exe UserCxt",
+   "path": "\\Microsoft\\Windows\\Device Information\\",
+   "trigger": "MSFT_TaskLogonTrigger",
+   "enabled": true
+  },
+  {
+   "author": "$(@%SystemRoot%\\system32\\DeviceSetupManagerAPI.dll,-600)",
+   "name": "Driver Recovery on Reboot",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\Device Setup\\",
+   "trigger": "MSFT_TaskBootTrigger",
+   "enabled": false
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "RecommendedTroubleshootingScanner",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\Diagnosis\\",
+   "trigger": "MSFT_TaskTrigger; MSFT_TaskTrigger; MSFT_TaskTrigger; MSFT_TaskBootTrigger",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "Scheduled",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\Diagnosis\\",
+   "trigger": "",
+   "enabled": true
+  },
+  {
+   "author": null,
+   "name": "UnexpectedCodepath",
+   "action": "%windir%\\system32\\UCConfigTask.exe",
+   "path": "\\Microsoft\\Windows\\Diagnosis\\",
+   "trigger": "MSFT_TaskTrigger",
+   "enabled": true
+  },
+  {
+   "author": null,
+   "name": "DirectXDatabaseUpdater",
+   "action": "%windir%\\system32\\directxdatabaseupdater.exe",
+   "path": "\\Microsoft\\Windows\\DirectX\\",
+   "trigger": "MSFT_TaskLogonTrigger; MSFT_TaskTrigger",
+   "enabled": true
+  },
+  {
+   "author": null,
+   "name": "DXGIAdapterCache",
+   "action": "%windir%\\system32\\dxgiadaptercache.exe",
+   "path": "\\Microsoft\\Windows\\DirectX\\",
+   "trigger": "MSFT_TaskBootTrigger; MSFT_TaskTrigger; MSFT_TaskTrigger",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "SilentCleanup",
+   "action": "%windir%\\system32\\cleanmgr.exe /autocleanstoragesense /d %systemdrive%",
+   "path": "\\Microsoft\\Windows\\DiskCleanup\\",
+   "trigger": "",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "Microsoft-Windows-DiskDiagnosticDataCollector",
+   "action": "%windir%\\system32\\rundll32.exe dfdts.dll,DfdGetDefaultPolicyAndSMART",
+   "path": "\\Microsoft\\Windows\\DiskDiagnostic\\",
+   "trigger": "",
+   "enabled": false
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "Microsoft-Windows-DiskDiagnosticResolver",
+   "action": "%windir%\\system32\\DFDWiz.exe",
+   "path": "\\Microsoft\\Windows\\DiskDiagnostic\\",
+   "trigger": "MSFT_TaskLogonTrigger",
+   "enabled": false
+  },
+  {
+   "author": null,
+   "name": "Diagnostics",
+   "action": "%windir%\\system32\\disksnapshot.exe -z",
+   "path": "\\Microsoft\\Windows\\DiskFootprint\\",
+   "trigger": "",
+   "enabled": true
+  },
+  {
+   "author": null,
+   "name": "StorageSense",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\DiskFootprint\\",
+   "trigger": "",
+   "enabled": true
+  },
+  {
+   "author": null,
+   "name": "dusmtask",
+   "action": "%SystemRoot%\\System32\\dusmtask.exe",
+   "path": "\\Microsoft\\Windows\\DUSM\\",
+   "trigger": "MSFT_TaskTrigger",
+   "enabled": true
+  },
+  {
+   "author": null,
+   "name": "EDP App Launch Task",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\EDP\\",
+   "trigger": "MSFT_TaskTrigger",
+   "enabled": true
+  },
+  {
+   "author": null,
+   "name": "EDP Auth Task",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\EDP\\",
+   "trigger": "MSFT_TaskTrigger",
+   "enabled": true
+  },
+  {
+   "author": null,
+   "name": "EDP Inaccessible Credentials Task",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\EDP\\",
+   "trigger": "MSFT_TaskTrigger",
+   "enabled": true
+  },
+  {
+   "author": null,
+   "name": "StorageCardEncryption Task",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\EDP\\",
+   "trigger": "MSFT_TaskTrigger",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "ExploitGuard MDM policy Refresh",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\ExploitGuard\\",
+   "trigger": "MSFT_TaskTrigger; MSFT_TaskTrigger; MSFT_TaskBootTrigger",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Windows Feedback",
+   "name": "DmClient",
+   "action": "%windir%\\system32\\dmclient.exe",
+   "path": "\\Microsoft\\Windows\\Feedback\\Siuf\\",
+   "trigger": "",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Windows Feedback",
+   "name": "DmClientOnScenarioDownload",
+   "action": "%windir%\\system32\\dmclient.exe utcwnf",
+   "path": "\\Microsoft\\Windows\\Feedback\\Siuf\\",
+   "trigger": "MSFT_TaskTrigger",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "Property Definition Sync",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\File Classification Infrastructure\\",
+   "trigger": "MSFT_TaskDailyTrigger",
+   "enabled": false
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "File History (maintenance mode)",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\FileHistory\\",
+   "trigger": "",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "BootstrapUsageDataReporting",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\Flighting\\FeatureConfig\\",
+   "trigger": "MSFT_TaskTimeTrigger",
+   "enabled": false
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "GovernedFeatureUsageProcessing",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\Flighting\\FeatureConfig\\",
+   "trigger": "MSFT_TaskTrigger; MSFT_TaskTrigger",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "ReconcileConfigs",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\Flighting\\FeatureConfig\\",
+   "trigger": "MSFT_TaskTrigger",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "ReconcileFeatures",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\Flighting\\FeatureConfig\\",
+   "trigger": "MSFT_TaskTrigger; MSFT_TaskTrigger; MSFT_TaskTrigger; MSFT_TaskTrigger; MSFT_TaskTrigger",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "SafeguardsReconciliation",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\Flighting\\FeatureConfig\\",
+   "trigger": "MSFT_TaskTrigger",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "UsageDataFlushing",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\Flighting\\FeatureConfig\\",
+   "trigger": "MSFT_TaskTrigger; MSFT_TaskTrigger; MSFT_TaskTrigger",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "UsageDataReceiver",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\Flighting\\FeatureConfig\\",
+   "trigger": "MSFT_TaskTrigger",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "UsageDataReporting",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\Flighting\\FeatureConfig\\",
+   "trigger": "MSFT_TaskTrigger",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "RefreshCache",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\Flighting\\OneSettings\\",
+   "trigger": "MSFT_TaskTimeTrigger; MSFT_TaskTrigger; MSFT_TaskTrigger; MSFT_TaskTrigger",
+   "enabled": true
+  },
+  {
+   "author": null,
+   "name": "Monitoring",
+   "action": "%systemroot%\\system32\\cmd.exe /d /c %systemroot%\\system32\\hpatchmonTask.cmd",
+   "path": "\\Microsoft\\Windows\\Hotpatch\\",
+   "trigger": "MSFT_TaskBootTrigger; MSFT_TaskLogonTrigger; MSFT_TaskTimeTrigger",
+   "enabled": true
+  },
+  {
+   "author": null,
+   "name": "InputSettingsRestoreDataAvailable",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\input\\",
+   "trigger": "MSFT_TaskTrigger",
+   "enabled": true
+  },
+  {
+   "author": null,
+   "name": "LocalUserSyncDataAvailable",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\input\\",
+   "trigger": "MSFT_TaskTrigger",
+   "enabled": true
+  },
+  {
+   "author": null,
+   "name": "MouseSyncDataAvailable",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\input\\",
+   "trigger": "MSFT_TaskTrigger",
+   "enabled": true
+  },
+  {
+   "author": null,
+   "name": "PenSyncDataAvailable",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\input\\",
+   "trigger": "MSFT_TaskTrigger",
+   "enabled": true
+  },
+  {
+   "author": null,
+   "name": "RemoteMouseSyncDataAvailable",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\input\\",
+   "trigger": "MSFT_TaskTrigger",
+   "enabled": true
+  },
+  {
+   "author": null,
+   "name": "RemotePenSyncDataAvailable",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\input\\",
+   "trigger": "MSFT_TaskTrigger",
+   "enabled": true
+  },
+  {
+   "author": null,
+   "name": "RemoteTouchpadSyncDataAvailable",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\input\\",
+   "trigger": "MSFT_TaskTrigger",
+   "enabled": true
+  },
+  {
+   "author": null,
+   "name": "syncpensettings",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\input\\",
+   "trigger": "MSFT_TaskTrigger",
+   "enabled": true
+  },
+  {
+   "author": null,
+   "name": "TouchpadSyncDataAvailable",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\input\\",
+   "trigger": "MSFT_TaskTrigger",
+   "enabled": true
+  },
+  {
+   "author": null,
+   "name": "RestoreDevice",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\InstallService\\",
+   "trigger": "MSFT_TaskTrigger",
+   "enabled": true
+  },
+  {
+   "author": null,
+   "name": "ScanForUpdates",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\InstallService\\",
+   "trigger": "MSFT_TaskTimeTrigger; MSFT_TaskTrigger; MSFT_TaskTimeTrigger",
+   "enabled": true
+  },
+  {
+   "author": null,
+   "name": "ScanForUpdatesAsUser",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\InstallService\\",
+   "trigger": "",
+   "enabled": true
+  },
+  {
+   "author": null,
+   "name": "WakeUpAndContinueUpdates",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\InstallService\\",
+   "trigger": "",
+   "enabled": false
+  },
+  {
+   "author": null,
+   "name": "WakeUpAndScanForUpdates",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\InstallService\\",
+   "trigger": "MSFT_TaskTimeTrigger",
+   "enabled": false
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "Synchronize Language Settings",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\International\\",
+   "trigger": "MSFT_TaskTrigger; MSFT_TaskLogonTrigger",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "La57Cleanup",
+   "action": "%windir%\\system32\\la57setup.exe",
+   "path": "\\Microsoft\\Windows\\Kernel\\",
+   "trigger": "",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "Installation",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\LanguageComponentsInstaller\\",
+   "trigger": "MSFT_TaskLogonTrigger",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "ReconcileLanguageResources",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\LanguageComponentsInstaller\\",
+   "trigger": "MSFT_TaskLogonTrigger",
+   "enabled": true
+  },
+  {
+   "author": null,
+   "name": "Notifications",
+   "action": "%windir%\\System32\\LocationNotificationWindows.exe",
+   "path": "\\Microsoft\\Windows\\Location\\",
+   "trigger": "MSFT_TaskTrigger",
+   "enabled": true
+  },
+  {
+   "author": null,
+   "name": "WindowsActionDialog",
+   "action": "%windir%\\System32\\WindowsActionDialog.exe",
+   "path": "\\Microsoft\\Windows\\Location\\",
+   "trigger": "MSFT_TaskTrigger",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft",
+   "name": "WinSAT",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\Maintenance\\",
+   "trigger": "",
+   "enabled": true
+  },
+  {
+   "author": "$(@%SystemRoot%\\system32\\Autopilot.dll,-600)",
+   "name": "DetectHardwareChange",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\Management\\Autopilot\\",
+   "trigger": "MSFT_TaskTrigger; MSFT_TaskTrigger",
+   "enabled": false
+  },
+  {
+   "author": "$(@%SystemRoot%\\system32\\Autopilot.dll,-600)",
+   "name": "RemediateHardwareChange",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\Management\\Autopilot\\",
+   "trigger": "MSFT_TaskBootTrigger",
+   "enabled": false
+  },
+  {
+   "author": null,
+   "name": "Cellular",
+   "action": "%windir%\\system32\\ProvTool.exe /turn 7 /source CellStateChangeTask",
+   "path": "\\Microsoft\\Windows\\Management\\Provisioning\\",
+   "trigger": "MSFT_TaskTrigger",
+   "enabled": true
+  },
+  {
+   "author": null,
+   "name": "Logon",
+   "action": "%windir%\\system32\\ProvTool.exe /turn 5 /source LogonIdleTask",
+   "path": "\\Microsoft\\Windows\\Management\\Provisioning\\",
+   "trigger": "MSFT_TaskLogonTrigger",
+   "enabled": true
+  },
+  {
+   "author": null,
+   "name": "MdmDiagnosticsCleanup",
+   "action": "%windir%\\system32\\MdmDiagnosticsTool.exe /clean",
+   "path": "\\Microsoft\\Windows\\Management\\Provisioning\\",
+   "trigger": "MSFT_TaskBootTrigger",
+   "enabled": false
+  },
+  {
+   "author": null,
+   "name": "Retry",
+   "action": "%windir%\\system32\\ProvTool.exe /turn 5 /source ProvRetryTask",
+   "path": "\\Microsoft\\Windows\\Management\\Provisioning\\",
+   "trigger": "MSFT_TaskBootTrigger",
+   "enabled": false
+  },
+  {
+   "author": null,
+   "name": "RunOnReboot",
+   "action": "%windir%\\system32\\ProvTool.exe /turn 5 /source ContinueSessionTask",
+   "path": "\\Microsoft\\Windows\\Management\\Provisioning\\",
+   "trigger": "MSFT_TaskBootTrigger",
+   "enabled": false
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "MapsToastTask",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\Maps\\",
+   "trigger": "",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "MapsUpdateTask",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\Maps\\",
+   "trigger": "MSFT_TaskTimeTrigger",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "AutomaticOfflineMemoryDiagnostic",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\MemoryDiagnostic\\",
+   "trigger": "MSFT_TaskLogonTrigger",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "ProcessMemoryDiagnosticEvents",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\MemoryDiagnostic\\",
+   "trigger": "MSFT_TaskEventTrigger; MSFT_TaskEventTrigger; MSFT_TaskEventTrigger; MSFT_TaskEventTrigger",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "RunFullMemoryDiagnostic",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\MemoryDiagnostic\\",
+   "trigger": "",
+   "enabled": false
+  },
+  {
+   "author": "$(@%SystemRoot%\\system32\\MbaeParserTask.exe,-1902)",
+   "name": "MNO Metadata Parser",
+   "action": "%SystemRoot%\\System32\\MbaeParserTask.exe",
+   "path": "\\Microsoft\\Windows\\Mobile Broadband Accounts\\",
+   "trigger": "MSFT_TaskEventTrigger",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "LPRemove",
+   "action": "%windir%\\system32\\lpremove.exe",
+   "path": "\\Microsoft\\Windows\\MUI\\",
+   "trigger": "",
+   "enabled": true
+  },
+  {
+   "author": null,
+   "name": "SystemSoundsService",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\Multimedia\\",
+   "trigger": "MSFT_TaskLogonTrigger",
+   "enabled": true
+  },
+  {
+   "author": null,
+   "name": "NcsiIdentifyUserProxies",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\Network Connectivity Status Indicator\\",
+   "trigger": "MSFT_TaskLogonTrigger; MSFT_TaskSessionStateChangeTrigger; MSFT_TaskSessionStateChangeTrigger",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "WiFiTask",
+   "action": "%SystemRoot%\\System32\\WiFiTask.exe nla",
+   "path": "\\Microsoft\\Windows\\NlaSvc\\",
+   "trigger": "MSFT_TaskTrigger",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "Background Synchronization",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\Offline Files\\",
+   "trigger": "MSFT_TaskTimeTrigger",
+   "enabled": false
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "Logon Synchronization",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\Offline Files\\",
+   "trigger": "MSFT_TaskLogonTrigger",
+   "enabled": false
+  },
+  {
+   "author": null,
+   "name": "PCR Prediction Framework Firmware Update Task",
+   "action": "%windir%\\system32\\rundll32.exe %windir%\\system32\\pcrpf.dll,NotifyFirmwareUpdateStaged",
+   "path": "\\Microsoft\\Windows\\PCRPF\\",
+   "trigger": "MSFT_TaskTrigger",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "ShowFeedbackToast",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\PerformanceTrace\\",
+   "trigger": "MSFT_TaskTrigger",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "WhesvcToast",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\PerformanceTrace\\",
+   "trigger": "MSFT_TaskTrigger",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "Device Install Group Policy",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\Plug and Play\\",
+   "trigger": "MSFT_TaskTrigger",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "Device Install Reboot Required",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\Plug and Play\\",
+   "trigger": "MSFT_TaskTrigger; MSFT_TaskLogonTrigger",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "Sysprep Generalize Drivers",
+   "action": "%SystemRoot%\\System32\\drvinst.exe 6",
+   "path": "\\Microsoft\\Windows\\Plug and Play\\",
+   "trigger": "",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "AnalyzeSystem",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\Power Efficiency Diagnostics\\",
+   "trigger": "",
+   "enabled": true
+  },
+  {
+   "author": null,
+   "name": "EduPrintProv",
+   "action": "%windir%\\system32\\eduprintprov.exe",
+   "path": "\\Microsoft\\Windows\\Printing\\",
+   "trigger": "MSFT_TaskTrigger",
+   "enabled": true
+  },
+  {
+   "author": null,
+   "name": "PrinterCleanupTask",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\Printing\\",
+   "trigger": "MSFT_TaskDailyTrigger",
+   "enabled": true
+  },
+  {
+   "author": null,
+   "name": "PrintJobCleanupTask",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\Printing\\",
+   "trigger": "MSFT_TaskDailyTrigger",
+   "enabled": false
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "VerifyWinRE",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\RecoveryEnvironment\\",
+   "trigger": "",
+   "enabled": false
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "Initialization",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\ReFsDedupSvc\\",
+   "trigger": "MSFT_TaskTrigger",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "RegIdleBackup",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\Registry\\",
+   "trigger": "",
+   "enabled": true
+  },
+  {
+   "author": null,
+   "name": "OOBEFodSetup",
+   "action": "%windir%\\system32\\OOBEFodSetup.exe",
+   "path": "\\Microsoft\\Windows\\Servicing\\",
+   "trigger": "MSFT_TaskTrigger",
+   "enabled": false
+  },
+  {
+   "author": null,
+   "name": "StartComponentCleanup",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\Servicing\\",
+   "trigger": "",
+   "enabled": true
+  },
+  {
+   "author": null,
+   "name": "PITRTask",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\Setup\\",
+   "trigger": "MSFT_TaskBootTrigger; MSFT_TaskTimeTrigger",
+   "enabled": true
+  },
+  {
+   "author": null,
+   "name": "SetupRecoveryDataTask",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\Setup\\",
+   "trigger": "MSFT_TaskDailyTrigger",
+   "enabled": true
+  },
+  {
+   "author": null,
+   "name": "Account Cleanup",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\SharedPC\\",
+   "trigger": "",
+   "enabled": false
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "CreateObjectTask",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\Shell\\",
+   "trigger": "",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "FamilySafetyMonitor",
+   "action": "%windir%\\System32\\wpcmon.exe",
+   "path": "\\Microsoft\\Windows\\Shell\\",
+   "trigger": "",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "FamilySafetyRefreshTask",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\Shell\\",
+   "trigger": "MSFT_TaskTrigger",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "IndexerAutomaticMaintenance",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\Shell\\",
+   "trigger": "",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "ThemesSyncedImageDownload",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\Shell\\",
+   "trigger": "",
+   "enabled": true
+  },
+  {
+   "author": null,
+   "name": "UpdateUserPictureTask",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\Shell\\",
+   "trigger": "MSFT_TaskTrigger",
+   "enabled": true
+  },
+  {
+   "author": null,
+   "name": "UpdateUserPictureTaskContained",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\Shell\\",
+   "trigger": "MSFT_TaskTrigger",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "SvcRestartTaskLogon",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\SoftwareProtectionPlatform\\",
+   "trigger": "MSFT_TaskLogonTrigger",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "SpaceAgentTask",
+   "action": "%windir%\\system32\\SpaceAgent.exe",
+   "path": "\\Microsoft\\Windows\\SpacePort\\",
+   "trigger": "MSFT_TaskBootTrigger; MSFT_TaskTrigger",
+   "enabled": true
+  },
+  {
+   "author": "$(@%SystemRoot%\\system32\\spaceman.exe,-2)",
+   "name": "SpaceManagerTask",
+   "action": "%windir%\\system32\\spaceman.exe /Work",
+   "path": "\\Microsoft\\Windows\\SpacePort\\",
+   "trigger": "MSFT_TaskBootTrigger; MSFT_TaskTrigger",
+   "enabled": true
+  },
+  {
+   "author": "$(@%SystemRoot%\\system32\\Windows.StateRepositoryClient.dll,-600)",
+   "name": "MaintenanceTasks",
+   "action": "%windir%\\system32\\rundll32.exe %windir%\\system32\\Windows.StateRepositoryClient.dll,StateRepositoryDoMaintenanceTasks",
+   "path": "\\Microsoft\\Windows\\StateRepository\\",
+   "trigger": "",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "Storage Tiers Management Initialization",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\Storage Tiers Management\\",
+   "trigger": "MSFT_TaskTrigger",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "Storage Tiers Optimization",
+   "action": "%windir%\\system32\\defrag.exe -c -h -g -# -m 8 -i 13500",
+   "path": "\\Microsoft\\Windows\\Storage Tiers Management\\",
+   "trigger": "MSFT_TaskTimeTrigger",
+   "enabled": false
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "EnableLicenseAcquisition",
+   "action": "%SystemRoot%\\system32\\ClipRenew.exe -e",
+   "path": "\\Microsoft\\Windows\\Subscription\\",
+   "trigger": "MSFT_TaskEventTrigger; MSFT_TaskEventTrigger; MSFT_TaskTrigger",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "LicenseAcquisition",
+   "action": "%SystemRoot%\\system32\\ClipRenew.exe",
+   "path": "\\Microsoft\\Windows\\Subscription\\",
+   "trigger": "MSFT_TaskDailyTrigger; MSFT_TaskRegistrationTrigger; MSFT_TaskTrigger",
+   "enabled": false
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "PowerGridForecastTask",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\Sustainability\\",
+   "trigger": "MSFT_TaskTrigger; MSFT_TaskDailyTrigger",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "SustainabilityTelemetry",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\Sustainability\\",
+   "trigger": "",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "HybridDriveCachePrepopulate",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\Sysmain\\",
+   "trigger": "",
+   "enabled": false
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "HybridDriveCacheRebalance",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\Sysmain\\",
+   "trigger": "",
+   "enabled": false
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "ResPriStaticDbSync",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\Sysmain\\",
+   "trigger": "",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "WsSwapAssessmentTask",
+   "action": "%windir%\\system32\\rundll32.exe sysmain.dll,PfSvWsSwapAssessmentTask",
+   "path": "\\Microsoft\\Windows\\Sysmain\\",
+   "trigger": "",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "SR",
+   "action": "%windir%\\system32\\srtasks.exe ExecuteScheduledSPPCreation",
+   "path": "\\Microsoft\\Windows\\SystemRestore\\",
+   "trigger": "",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "Interactive",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\Task Manager\\",
+   "trigger": "",
+   "enabled": true
+  },
+  {
+   "author": null,
+   "name": "MsCtfMonitor",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\TextServicesFramework\\",
+   "trigger": "MSFT_TaskLogonTrigger",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "ForceSynchronizeTime",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\Time Synchronization\\",
+   "trigger": "MSFT_TaskTrigger; MSFT_TaskTrigger",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "SynchronizeTime",
+   "action": "%windir%\\system32\\sc.exe start w32time task_started",
+   "path": "\\Microsoft\\Windows\\Time Synchronization\\",
+   "trigger": "MSFT_TaskTrigger",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "SynchronizeTimeZone",
+   "action": "%windir%\\system32\\tzsync.exe",
+   "path": "\\Microsoft\\Windows\\Time Zone\\",
+   "trigger": "",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft",
+   "name": "UPnPHostConfig",
+   "action": "sc.exe config upnphost start= auto",
+   "path": "\\Microsoft\\Windows\\UPnP\\",
+   "trigger": "",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "Usb-Notifications",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\USB\\",
+   "trigger": "MSFT_TaskTrigger; MSFT_TaskTrigger; MSFT_TaskTrigger; MSFT_TaskTrigger",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "WiFiTask",
+   "action": "%SystemRoot%\\System32\\WiFiTask.exe",
+   "path": "\\Microsoft\\Windows\\WCM\\",
+   "trigger": "MSFT_TaskTrigger",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "ResolutionHost",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\WDI\\",
+   "trigger": "",
+   "enabled": true
+  },
+  {
+   "author": null,
+   "name": "Windows Defender Cache Maintenance",
+   "action": "C:\\ProgramData\\Microsoft\\Windows Defender\\Platform\\4.18.26080.4-0\\MpCmdRun.exe -IdleTask -TaskName WdCacheMaintenance",
+   "path": "\\Microsoft\\Windows\\Windows Defender\\",
+   "trigger": "",
+   "enabled": true
+  },
+  {
+   "author": null,
+   "name": "Windows Defender Cleanup",
+   "action": "C:\\ProgramData\\Microsoft\\Windows Defender\\Platform\\4.18.26080.4-0\\MpCmdRun.exe -IdleTask -TaskName WdCleanup",
+   "path": "\\Microsoft\\Windows\\Windows Defender\\",
+   "trigger": "",
+   "enabled": true
+  },
+  {
+   "author": null,
+   "name": "Windows Defender Scheduled Scan",
+   "action": "C:\\ProgramData\\Microsoft\\Windows Defender\\Platform\\4.18.26080.4-0\\MpCmdRun.exe Scan -ScheduleJob -ScanTrigger 55 -IdleScheduledJob",
+   "path": "\\Microsoft\\Windows\\Windows Defender\\",
+   "trigger": "",
+   "enabled": true
+  },
+  {
+   "author": null,
+   "name": "Windows Defender Verification",
+   "action": "C:\\ProgramData\\Microsoft\\Windows Defender\\Platform\\4.18.26080.4-0\\MpCmdRun.exe -IdleTask -TaskName WdVerification",
+   "path": "\\Microsoft\\Windows\\Windows Defender\\",
+   "trigger": "",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "QueueReporting",
+   "action": "%windir%\\system32\\wermgr.exe -upload",
+   "path": "\\Microsoft\\Windows\\Windows Error Reporting\\",
+   "trigger": "MSFT_TaskBootTrigger; MSFT_TaskTrigger; MSFT_TaskTrigger; MSFT_TaskTrigger; MSFT_TaskTimeTrigger",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "BfeOnServiceStartTypeChange",
+   "action": "%windir%\\system32\\rundll32.exe bfe.dll,BfeOnServiceStartTypeChange",
+   "path": "\\Microsoft\\Windows\\Windows Filtering Platform\\",
+   "trigger": "MSFT_TaskEventTrigger",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "UpdateLibrary",
+   "action": "\"%ProgramFiles%\\Windows Media Player\\wmpnscfg.exe\"",
+   "path": "\\Microsoft\\Windows\\Windows Media Sharing\\",
+   "trigger": "MSFT_TaskEventTrigger",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "Calibration Loader",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\WindowsColorSystem\\",
+   "trigger": "MSFT_TaskLogonTrigger; MSFT_TaskSessionStateChangeTrigger",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft Corporation.",
+   "name": "Scheduled Start",
+   "action": "%systemroot%\\System32\\sc.exe start wuauserv",
+   "path": "\\Microsoft\\Windows\\WindowsUpdate\\",
+   "trigger": "MSFT_TaskTimeTrigger; MSFT_TaskSessionStateChangeTrigger; MSFT_TaskSessionStateChangeTrigger; MSFT_TaskTrigger",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft",
+   "name": "CacheTask",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\Wininet\\",
+   "trigger": "MSFT_TaskLogonTrigger",
+   "enabled": true
+  },
+  {
+   "author": null,
+   "name": "CDSSync",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\WlanSvc\\",
+   "trigger": "MSFT_TaskTrigger",
+   "enabled": true
+  },
+  {
+   "author": null,
+   "name": "MoProfileManagement",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\WlanSvc\\",
+   "trigger": "MSFT_TaskTrigger; MSFT_TaskTrigger",
+   "enabled": true
+  },
+  {
+   "author": "Корпорация Майкрософт",
+   "name": "Work Folders Logon Synchronization",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\Work Folders\\",
+   "trigger": "MSFT_TaskLogonTrigger",
+   "enabled": true
+  },
+  {
+   "author": "Корпорация Майкрософт",
+   "name": "Work Folders Maintenance Work",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\Work Folders\\",
+   "trigger": "MSFT_TaskLogonTrigger",
+   "enabled": true
+  },
+  {
+   "author": null,
+   "name": "Automatic-Device-Join",
+   "action": "%SystemRoot%\\System32\\dsregcmd.exe $(Arg0) $(Arg1) $(Arg2)",
+   "path": "\\Microsoft\\Windows\\Workplace Join\\",
+   "trigger": "MSFT_TaskLogonTrigger; MSFT_TaskEventTrigger",
+   "enabled": false
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "Device-Sync",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\Workplace Join\\",
+   "trigger": "MSFT_TaskTrigger",
+   "enabled": false
+  },
+  {
+   "author": null,
+   "name": "Recovery-Check",
+   "action": "%SystemRoot%\\System32\\dsregcmd.exe /checkrecovery",
+   "path": "\\Microsoft\\Windows\\Workplace Join\\",
+   "trigger": "MSFT_TaskLogonTrigger; MSFT_TaskSessionStateChangeTrigger",
+   "enabled": false
+  },
+  {
+   "author": "Microsoft Corporation",
+   "name": "NotificationTask",
+   "action": "%SystemRoot%\\System32\\WiFiTask.exe wwan",
+   "path": "\\Microsoft\\Windows\\WwanSvc\\",
+   "trigger": "MSFT_TaskTrigger",
+   "enabled": true
+  },
+  {
+   "author": null,
+   "name": "OobeDiscovery",
+   "action": "",
+   "path": "\\Microsoft\\Windows\\WwanSvc\\",
+   "trigger": "MSFT_TaskTrigger; MSFT_TaskTrigger; MSFT_TaskTrigger",
+   "enabled": true
+  },
+  {
+   "author": "Microsoft",
+   "name": "XblGameSaveTask",
+   "action": "%windir%\\System32\\XblGameSaveTask.exe standby",
+   "path": "\\Microsoft\\XblGameSave\\",
+   "trigger": "MSFT_TaskIdleTrigger",
+   "enabled": true
+  },
+  {
+   "author": "Mozilla",
+   "name": "Firefox Background Update 308046B0AF4A39CB",
+   "action": "C:\\Program Files\\Mozilla Firefox\\firefox.exe --MOZ_LOG sync,prependheader,timestamp,append,maxsize:1,Dump:5 --MOZ_LOG_FILE C:\\ProgramData\\Mozilla-1de4eec8-1241-4177-a864-e594e8d1fb38\\updates\\308046B0AF4A39CB\\backgroundupdate.moz_log --backgroundtask backgroundupdate",
+   "path": "\\Mozilla\\",
+   "trigger": "MSFT_TaskTimeTrigger",
+   "enabled": true
+  },
+  {
+   "author": "Mozilla",
+   "name": "Firefox Background Update S-1-5-21-1111111111-2222222222-3333333333-1001 308046B0AF4A39CB",
+   "action": "C:\\Program Files\\Mozilla Firefox\\firefox.exe --MOZ_LOG sync,prependheader,timestamp,append,maxsize:1,Dump:5 --MOZ_LOG_FILE C:\\ProgramData\\Mozilla-1de4eec8-1241-4177-a864-e594e8d1fb38\\updates\\308046B0AF4A39CB\\backgroundupdate.moz_log --backgroundtask backgroundupdate",
+   "path": "\\Mozilla\\",
+   "trigger": "MSFT_TaskTimeTrigger",
+   "enabled": true
+  },
+  {
+   "author": "Mozilla",
+   "name": "Firefox Default Browser Agent 308046B0AF4A39CB",
+   "action": "C:\\Program Files\\Mozilla Firefox\\default-browser-agent.exe do-task \"308046B0AF4A39CB\"",
+   "path": "\\Mozilla\\",
+   "trigger": "MSFT_TaskDailyTrigger",
+   "enabled": true
+  },
+  {
+   "author": null,
+   "name": "SoftLandingCreativeManagementTask",
+   "action": "",
+   "path": "\\SoftLanding\\S-1-5-21-1111111111-2222222222-3333333333-1001\\",
+   "trigger": "MSFT_TaskTrigger; MSFT_TaskTimeTrigger; MSFT_TaskTimeTrigger",
+   "enabled": true
+  },
+  {
+   "author": null,
+   "name": "SoftLandingDeferralTask-{773dada1-c686-4fbe-a1ce-4631cf0a5460}",
+   "action": "",
+   "path": "\\SoftLanding\\S-1-5-21-1111111111-2222222222-3333333333-1001\\",
+   "trigger": "MSFT_TaskTimeTrigger",
+   "enabled": true
+  },
+  {
+   "author": null,
+   "name": "SoftLandingTriggerTask-128000000001615609-render-{05f8366f-7284-4da9-be6b-eee7f07ef3b8}",
+   "action": "",
+   "path": "\\SoftLanding\\S-1-5-21-1111111111-2222222222-3333333333-1001\\",
+   "trigger": "MSFT_TaskTimeTrigger",
+   "enabled": false
+  },
+  {
+   "author": null,
+   "name": "SoftLandingCreativeManagementTask",
+   "action": "",
+   "path": "\\SoftLanding\\S-1-5-21-1111111111-2222222222-3333333333-1002\\",
+   "trigger": "MSFT_TaskTrigger; MSFT_TaskTimeTrigger; MSFT_TaskTimeTrigger",
+   "enabled": true
+  },
+  {
+   "author": null,
+   "name": "SoftLandingDeferralTask-{a0a5c63c-0bdf-48f6-bf05-70f20f421548}",
+   "action": "",
+   "path": "\\SoftLanding\\S-1-5-21-1111111111-2222222222-3333333333-1002\\",
+   "trigger": "MSFT_TaskTimeTrigger",
+   "enabled": true
+  },
+  {
+   "author": null,
+   "name": "SoftLandingTriggerTask-128000000001615609-render-{dded8fc7-ad8a-4ab2-bedb-850d85ecf525}",
+   "action": "",
+   "path": "\\SoftLanding\\S-1-5-21-1111111111-2222222222-3333333333-1002\\",
+   "trigger": "MSFT_TaskTimeTrigger",
+   "enabled": false
+  }
+ ],
+ "autoruns": [
+  {
+   "name": "SecurityHealth",
+   "location": "HKLM:\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
+   "value": "C:\\WINDOWS\\system32\\SecurityHealthSystray.exe"
+  },
+  {
+   "name": "RTHDVCPL",
+   "location": "HKLM:\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
+   "value": "\"C:\\Program Files\\Realtek\\Audio\\HDA\\RAVCpl64.exe\" -s"
+  },
+  {
+   "name": "MuseHub",
+   "location": "HKLM:\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
+   "value": "\"C:\\Program Files\\MuseHub\\current\\MuseHub.exe\" \"----ms-protocol:ms-encodedlaunch:App?ContractId=Windows.StartupTask&TaskId=MuseHub\""
+  },
+  {
+   "name": "MFNetworkScannerSelector",
+   "location": "HKLM:\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
+   "value": "C:\\Program Files\\Canon\\Canon MF Network Scanner Selector\\CMFNSS6.EXE"
+  },
+  {
+   "name": "msedge_cleanup_{56EB18F8-B008-4CBD-B6D2-8C97FE7E9062}",
+   "location": "HKLM:\\Software\\Microsoft\\Windows\\CurrentVersion\\RunOnce",
+   "value": "\"C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\154.0.4258.37\\Installer\\setup.exe\" --msedge --channel=stable --delete-old-versions --system-level --verbose-logging --on-logon"
+  },
+  {
+   "name": "Kerio Control VPN Client",
+   "location": "HKLM:\\Software\\WOW6432Node\\Microsoft\\Windows\\CurrentVersion\\Run",
+   "value": "\"C:\\Program Files (x86)\\Kerio\\VPN Client\\kvpncgui.exe\" /tray"
+  },
+  {
+   "name": "Lightshot",
+   "location": "HKLM:\\Software\\WOW6432Node\\Microsoft\\Windows\\CurrentVersion\\Run",
+   "value": "C:\\Program Files (x86)\\Skillbrains\\lightshot\\Lightshot.exe"
+  },
+  {
+   "name": "vmware-tray.exe",
+   "location": "HKLM:\\Software\\WOW6432Node\\Microsoft\\Windows\\CurrentVersion\\Run",
+   "value": "\"C:\\Program Files (x86)\\VMware\\VMware Workstation\\vmware-tray.exe\""
+  },
+  {
+   "name": "OneDrive",
+   "location": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
+   "value": "\"C:\\Users\\alice\\AppData\\Local\\Microsoft\\OneDrive\\OneDrive.exe\" /background"
+  },
+  {
+   "name": "CiscoSpark",
+   "location": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
+   "value": "\"C:\\Users\\alice\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Webex\\Webex.lnk\" /minimized /autostartedWithWindows=true"
+  },
+  {
+   "name": "CiscoMeetingDaemon",
+   "location": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
+   "value": "\"C:\\Users\\alice\\AppData\\Local\\WebEx\\WebexHost.exe\" /daemon /runFrom=autorun"
+  },
+  {
+   "name": "Teams",
+   "location": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
+   "value": "\"C:\\Users\\alice\\AppData\\Local\\Microsoft\\WindowsApps\\MSTeams_8wekyb3d8bbwe\\ms-teams.exe\" msteams:system-initiated"
+  },
+  {
+   "name": "Steam",
+   "location": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
+   "value": "\"C:\\Program Files (x86)\\Steam\\steam.exe\" -silent"
+  },
+  {
+   "name": "GoogleChromeAutoLaunch_5F84849B2B55F3FB722B227E29B35DDB",
+   "location": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
+   "value": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --startup-foreground-launch"
+  },
+  {
+   "name": "Proton VPN",
+   "location": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
+   "value": "C:\\Program Files\\Proton\\VPN\\ProtonVPN.Launcher.exe \"----ms-protocol:ms-encodedlaunch:App?ContractId=Windows.StartupTask&TaskId=Proton%20VPN\""
+  },
+  {
+   "name": "Proton Drive",
+   "location": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
+   "value": "\"C:\\Users\\alice\\AppData\\Local\\Programs\\Proton\\Drive\\ProtonDrive.exe\" -quiet"
+  },
+  {
+   "name": "org.openvpn.client",
+   "location": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
+   "value": "\"C:\\Program Files\\OpenVPN Connect\\OpenVPNConnect.exe\" --opened-at-login"
+  },
+  {
+   "name": "Mozilla-Firefox-308046B0AF4A39CB",
+   "location": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
+   "value": "\"C:\\Program Files\\Mozilla Firefox\\firefox.exe\" -os-autostart"
+  }
+ ],
+ "services": [
+  {
+   "run_as": "LocalSystem",
+   "name": "agent_ovpnconnect",
+   "display": "OpenVPN Agent agent_ovpnconnect",
+   "binary_path": "\"C:\\Program Files\\OpenVPN Connect\\agent_ovpnconnect.exe\"",
+   "state": "Running",
+   "start_mode": "Auto"
+  },
+  {
+   "run_as": "LocalSystem",
+   "name": "MDCoreSvc",
+   "display": "Основная служба Microsoft Defender",
+   "binary_path": "\"C:\\ProgramData\\Microsoft\\Windows Defender\\Platform\\4.18.26080.4-0\\MpDefenderCoreService.exe\"",
+   "state": "Running",
+   "start_mode": "Auto"
+  },
+  {
+   "run_as": "LocalSystem",
+   "name": "NVDisplay.ContainerLocalSystem",
+   "display": "NVIDIA Display Container LS",
+   "binary_path": "C:\\WINDOWS\\System32\\DriverStore\\FileRepository\\nvmd.inf_amd64_aa54f7a758543a0a\\Display.NvContainer\\NVDisplay.Container.exe -s NVDisplay.ContainerLocalSystem -f C:\\ProgramData\\NVIDIA\\NVDisplay.ContainerLocalSystem.log -l 3 -d C:\\WINDOWS\\System32\\DriverStore\\FileRepository\\nvmd.inf_amd64_aa54f7a758543a0a\\Display.NvContainer\\plugins\\LocalSystem -r -p 30000 -cfg NVDisplay.ContainerLocalSystem\\LocalSystem /ert",
+   "state": "Running",
+   "start_mode": "Auto"
+  },
+  {
+   "run_as": "LocalSystem",
+   "name": "ProtonVPN Service",
+   "display": "ProtonVPN Service",
+   "binary_path": "\"C:\\Program Files\\Proton\\VPN\\v5.1.8\\ProtonVPNService.exe\"",
+   "state": "Stopped",
+   "start_mode": "Manual"
+  },
+  {
+   "run_as": "LocalSystem",
+   "name": "Spooler",
+   "display": "Диспетчер печати",
+   "binary_path": "C:\\WINDOWS\\System32\\spoolsv.exe",
+   "state": "Running",
+   "start_mode": "Auto"
+  },
+  {
+   "run_as": "NT AUTHORITY\\LocalService",
+   "name": "WdNisSvc",
+   "display": "Служба проверки сети антивирусной программы Microsoft Defender",
+   "binary_path": "\"C:\\ProgramData\\Microsoft\\Windows Defender\\Platform\\4.18.26080.4-0\\NisSrv.exe\"",
+   "state": "Running",
+   "start_mode": "Manual"
+  },
+  {
+   "run_as": "LocalSystem",
+   "name": "WinDefend",
+   "display": "Служба антивирусной программы Microsoft Defender",
+   "binary_path": "\"C:\\ProgramData\\Microsoft\\Windows Defender\\Platform\\4.18.26080.4-0\\MsMpEng.exe\"",
+   "state": "Running",
+   "start_mode": "Auto"
+  },
+  {
+   "run_as": "LocalSystem",
+   "name": "wuauserv",
+   "display": "Центр обновления Windows",
+   "binary_path": "C:\\WINDOWS\\system32\\svchost.exe -k netsvcs -p",
+   "state": "Stopped",
+   "start_mode": "Manual"
+  }
+ ],
+ "remote_access_tools": [],
+ "hosts_file": [],
+ "connections": [],
+ "errors": []
+}

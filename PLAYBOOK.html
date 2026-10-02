@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<title>blue-kit IR Playbook</title>
+<style>
+  @page { size: A4; margin: 12mm; }
+  * { box-sizing: border-box; }
+  body { font-family: "Segoe UI", Arial, sans-serif; font-size: 11px; color: #14181f; line-height: 1.4; margin: 0; padding: 10px; }
+  h1 { font-size: 20px; margin: 0 0 2px; color: #12305c; }
+  h2 { font-size: 14px; margin: 16px 0 6px; background: #12305c; color: #fff; padding: 4px 8px; border-radius: 3px; }
+  h3 { font-size: 12.5px; margin: 10px 0 3px; color: #12305c; border-bottom: 2px solid #cdd8ea; padding-bottom: 2px; }
+  .sub { color: #556; font-size: 10px; margin-bottom: 8px; }
+  code { font-family: Consolas, monospace; background: #eef1f7; padding: 0 3px; border-radius: 2px; }
+  .cmd { font-family: Consolas, monospace; display: block; background: #12305c; color: #e8f0ff; padding: 3px 7px; margin: 3px 0; border-radius: 3px; white-space: pre-wrap; word-break: break-word; font-size: 10px; }
+  ol, ul { margin: 3px 0 6px 18px; padding: 0; }
+  li { margin: 2px 0; }
+  .step { break-inside: avoid; border-left: 3px solid #12305c; padding: 2px 0 2px 9px; margin: 7px 0; }
+  .box { break-inside: avoid; border: 1px solid #c3cde0; border-radius: 5px; padding: 6px 9px; margin: 8px 0; background: #f8fafd; }
+  .decide { border-color: #c79000; background: #fff8e6; }
+  .danger { border-color: #c0392b; background: #fdecea; }
+  .ok { border-color: #1a7a1a; background: #eafaea; }
+  .q { font-weight: bold; color: #12305c; }
+  .role { display:inline-block; background:#dde6f4; border-radius:3px; padding:0 5px; font-size:9.5px; margin-right:3px;}
+  table { border-collapse: collapse; width: 100%; font-size: 9.5px; margin: 4px 0; }
+  th, td { border: 1px solid #bcc; padding: 3px 5px; text-align: left; vertical-align: top; }
+  th { background: #dde6f4; }
+  .pagebreak { break-before: page; }
+  .no { color:#c0392b; font-weight:bold; } .yes { color:#1a7a1a; font-weight:bold; }
+  .t { color:#556; font-size:9.5px; }
+</style>
+</head>
+<body>
+
+<h1>blue-kit — Incident Response Playbook</h1>
+<div class="sub">Offline DFIR musobaqasi · 2 kun · ATT&amp;CK v19.2 · javoblar = MITRE ID + remediation · AI TAQIQLANGAN</div>
+
+<div class="box danger">
+<b>🔑 5 OLTIN QOIDA (har doim yodda tut)</b>
+<ol>
+<li><span class="no">TEGMA:</span> checker akkaunt/IP, SSH/RDP/WinRM, checker portlari — bularni buzsang SLA ham, remediation ham 0.</li>
+<li><b>Har o'zgarishdan oldin:</b> dalil saqla (backup) → keyin o'chir → tekshir → kerak bo'lsa rollback.</li>
+<li><b>Har ID topshirishdan oldin:</b> <code>bk kb validate</code>. Revoked bo'lsa yangi ID. Urinish limiti bor.</li>
+<li><b>Faqat kapitan topshiradi.</b> Ikki kishi bir javobni kiritib urinish sarflamasin.</li>
+<li><b>Ball vaqt bo'yicha o'sadi</b> — birinchi tuzatgan yutadi. Tez triage, aniq narsani DARHOL tuzat.</li>
+</ol>
+</div>
+
+<h2>0 · Musobaqagacha (uyda, bir marta)</h2>
+<div class="step">
+<ol>
+<li>Har laptopga <code>blue-kit-dist.zip</code> ochib qo'y (bk.exe + data + responder + cheat sheet).</li>
+<li><b>Admin PowerShell:</b> <span class="cmd">Add-MpPreference -ExclusionPath "&lt;blue-kit papka&gt;"</span> keyin <code>bk.exe kb info</code> ishlashini tekshir (Defender yemasin).</li>
+<li>SSH/RDP klient (MobaXterm/Remmina), Notepad++, brauzer tayyor. USB'da zaxira nusxa.</li>
+<li>Tarmoq: laptop firewall YOQIQ, o'z laptopingni boshqa jamoalardan himoyala.</li>
+<li>AI plugin/Copilotni O'CHIR (tasodifan ishlab ketsa diskvalifikatsiya).</li>
+</ol>
+</div>
+
+<div class="step"><b>📋 Bu hujjat <u>stsenariy</u> bo'yicha — nima bo'lgan bo'lishi mumkin.</b><br>Qaysi qadam bajarildi-bajarilmadi, kill-chain ning qaysi bosqichi tasdiqlandi — buni <code>WEB-UI.bat</code> → <b>📋 Playbook</b> tabi yuritadi (6 faza, 42 qadam, holat saqlanadi). Buyruqlar ketma-ketligi: <code>PLAYBOOK_FLOW.md</code>. Responder roli: <code>RESPONDER_QOLLANMA.md</code>.</div>
+
+<h2>1 · Umumiy IR sikli (har senariy uchun)</h2>
+<table>
+<tr><th>Faza</th><th>Nima</th><th>Tool</th></tr>
+<tr><td><b>P1 Scope</b> (0–20 daq)</td><td>Qaysi host, vaqt oralig'i, index. Panika qilma, reja tuz.</td><td>Kibana Top values</td></tr>
+<tr><td><b>P2 Yig'ish</b></td><td>Loglarni CSV eksport; nishondan snapshot</td><td><code>logs columns</code>, kollektor</td></tr>
+<tr><td><b>P3 Tahlil</b></td><td>Timeline, ATT&amp;CK, IOC, kill-chain</td><td><code>logs analyze</code></td></tr>
+<tr><td><b>P4 Contain/Eradicate</b></td><td>Persistence, RAT, backdoor'ni tuzat</td><td><code>resp triage/fix</code> + SLA guard</td></tr>
+<tr><td><b>P5 Recover</b></td><td>Buzilgan servisni tikla</td><td><code>resp doctor</code>, <code>resp sla</code></td></tr>
+<tr><td><b>P6 Report</b></td><td>ID validate → kapitan topshiradi → hisobot</td><td><code>kb validate</code>, <code>report</code></td></tr>
+</table>
+
+<h3>Jamoa rollari</h3>
+<div class="t">
+<span class="role">Hunter-1</span> Windows/AD loglar &nbsp;
+<span class="role">Hunter-2</span> Linux/Web/Network loglar &nbsp;
+<span class="role">Responder</span> tizimga kirib tuzatadi &nbsp;
+<span class="role">Kapitan</span> tracker + ID topshirish + vaqt
+</div>
+<div class="box">
+<b>Tracker (umumiy jadval — web UI "Tracker" tab yoki qog'oz):</b>
+<table><tr><th>Savol</th><th>Nomzod ID</th><th>Dalil</th><th>validate?</th><th>topshirildi?</th><th>tuzatildi?</th></tr>
+<tr><td>…</td><td>…</td><td>log qatori</td><td>✔</td><td>✔</td><td>✔</td></tr></table>
+</div>
+
+<div class="box ok">
+<b>💡 Emulyatsiya rejimi (ehtimol shu bo'ladi):</b> hujum <b>o'tmişda</b> bo'lgan, tirik hujumchi yo'q, toza baseline berilmasligi mumkin. Unda <b>loglar = haqiqat manbai</b>. Ish tartibi: loglarni to'liq tahlil qil → butun IOC ro'yxatini ol → nishonda har birini qidirib tuzat. <code>resp triage --from-logs</code> baseline'siz ham ishlaydi.
+</div>
+
+<!-- ============ DAY 1 ============ -->
+<div class="pagebreak"></div>
+<h2>2 · DAY-1 PLAYBOOK — Moliyaviy firibgarlik</h2>
+<div class="sub">Namuna: phishing → HR → razvedka → buxgalter akkaunti → pul o'tkazma (Buhtrap/RTM uslubi)</div>
+
+<div class="step"><span class="q">Qadam 1 — Scope va boshlang'ich nuqta.</span>
+<ol>
+<li>Kibana: vaqt oralig'i, hostlar, <code>event.code</code> top values.</li>
+<li>Loglarni CSV eksport (Share → CSV). Ustunlar noaniq bo'lsa: <span class="cmd">bk logs columns day1.csv</span></li>
+<li><span class="cmd">bk logs analyze day1.csv --out r.html --json-out day1.json</span> → HTML'ni och.</li>
+</ol></div>
+
+<div class="step"><span class="q">Qadam 2 — Hujum zanjirini o'qi (HTML hisobot).</span>
+<ul>
+<li><b>Timeline</b> + <b>Chains</b>: qaysi hostda boshlangan? (odatda HR/reception)</li>
+<li><b>ATT&amp;CK Coverage</b>: qaysi taktika bo'sh? — o'sha yerni maqsadli qidir.</li>
+<li><b>Checker/Beacon</b>: davriy IP'larni belgila — <span class="no">tarixiy beacon = C2</span> (tuzatiladi), <span class="yes">jonli davriy = checker</span> (TEGILMAYDI).</li>
+</ul></div>
+
+<div class="box decide"><span class="q">? QAROR — buxgalter akkaunti buzilganmi</span>
+<ul>
+<li>Qidir: <code>4625</code> ko'p (brute) → <code>4624</code> success; <code>4624 type 10</code> (RDP); RAT o'rnatilishi.</li>
+<li>Ha bo'lsa → o'sha akkaunt paroli almashtiriladi (P4), va uning amallari (to'lov fayllari) tekshiriladi.</li>
+</ul></div>
+
+<div class="step"><span class="q">Qadam 3 — G'alati buyruqni ATT&amp;CK'ga bog'la.</span>
+<span class="cmd">bk kb search "&lt;logdan buyruq&gt;"</span>
+<span class="cmd">bk kb ioc "&lt;IP yoki fayl&gt;"</span>
+<span class="cmd">bk kb related T1566.001   # keyin nima kelishi mumkin</span>
+Tez-tez: T1566.001 (phishing) · T1204.002 · T1059.001 · T1105 (certutil/download) · T1003.001 (lsass) · T1110 (brute) · T1021.001 (RDP) · T1219 (AnyDesk) · T1657/T1565.001 (to'lov).
+</div>
+
+<div class="step"><span class="q">Qadam 4 — Responder: fokusli triage.</span>
+<ol>
+<li>Nishonda kollektor (read-only), Python shart emas:
+<span class="cmd">powershell -ep bypass -File collect_windows.ps1 -Out snap.json</span>
+<span class="cmd">ssh user@t 'bash -s' &lt; collect_linux.sh &gt; snap.json   # Linux</span></li>
+<li>Loglar bilan bog'lab triage (baseline bo'lsa qo'sh):
+<span class="cmd">bk resp triage snap.json --from-logs day1.json [--baseline base.json]</span>
+✔LOG belgili topilmalar = loglar tasdiqlagan, birinchi shularni tuzat.</li>
+</ol></div>
+
+<div class="box danger"><span class="q">Qadam 5 — TUZATISH tartibi (SLA'ni buzmasdan)</span>
+Har biridan oldin/keyin: <span class="cmd">bk resp sla sla.yaml   # xizmat ishlayaptimi?</span>
+<span class="cmd">bk resp fix snap.json --from-logs day1.json --os windows</span> (buyruqlarni beradi — <b>o'zing ko'rib ishlat</b>)
+<ol>
+<li>RAT (AnyDesk/TeamViewer) → to'xtat + disable</li>
+<li>Persistence: schtask, Run key, servis, WMI → backup → o'chir</li>
+<li>Buzilgan akkaunt paroli almashtir; hujumchi yaratgan userni disable/delete</li>
+<li>To'lov fayli / rekvizit / <code>hosts</code> fayl → asl holatga (backupdan)</li>
+<li><span class="no">checker akkaunt/IP</span> → <code>--protected</code> ro'yxatda, TEGMA</li>
+</ol>
+Scoreboard qizarsa → darhol <b>rollback</b> (backupdan tikla).
+</div>
+
+<div class="step"><span class="q">Qadam 6 — Topshirish va hisobot.</span>
+<span class="cmd">bk kb validate T1657 T1565.001 ...   # revoked bormi?</span>
+Kapitan trackerdan topshiradi. Kun oxirida:
+<span class="cmd">bk resp triage snap.json --from-logs day1.json --json &gt; triage.json</span>
+<span class="cmd">bk report --logs day1.json --resp triage.json --answers a.yaml --lang uz --out day1_report.html</span>
+</div>
+
+<!-- ============ DAY 2 ============ -->
+<div class="pagebreak"></div>
+<h2>3 · DAY-2 PLAYBOOK — Zavod servisi ishdan chiqqan (ICS/OT)</h2>
+<div class="sub">Diqqat: bu MITRE ATT&amp;CK <b>for ICS</b> bo'lishi mumkin (T0xxx / v19). Enterprise → OT segmentiga pivot.</div>
+
+<div class="step"><span class="q">Qadam 1 — Nima "ishlamayapti"ni aniqla.</span>
+<ol>
+<li>Kollektor → snapshot. Keyin:
+<span class="cmd">bk resp doctor snap.json &lt;servis_nomi&gt;</span></li>
+<li>Service Doctor sabablarni beradi: disabled / binary yo'q / config buzilgan / cron o'ldiryapti / port band / dependency / paket buzilgan.</li>
+</ol></div>
+
+<div class="box decide"><span class="q">? "Servis ishlamayapti" qaror daraxti</span>
+<table>
+<tr><th>Belgi</th><th>Sabab</th><th>Tuzatish</th></tr>
+<tr><td>start_mode=Disabled</td><td>o'chirilgan</td><td>enable + start</td></tr>
+<tr><td>binary_path yo'q/o'zgargan</td><td>almashtirilgan</td><td>backupdan tikla / to'g'ri yo'l</td></tr>
+<tr><td>config yaqinda o'zgargan</td><td>sabotaj</td><td>config diff → tikla → reload</td></tr>
+<tr><td>cron/task servisni o'ldiradi</td><td>watchdog</td><td>o'sha cron/taskni o'chir</td></tr>
+<tr><td>port boshqa pid'da</td><td>band qilingan</td><td>begona jarayonni to'xtat</td></tr>
+</table>
+</div>
+
+<div class="step"><span class="q">Qadam 2 — ICS ATT&amp;CK'ga bog'la.</span>
+<span class="cmd">bk kb search "modbus write" --domain ics</span>
+<span class="cmd">bk kb validate T0881 --domain ics   # ICS ID ham v19'da o'zgargan</span>
+Tez-tez: T0881 (Service Stop) · T0816 (Restart/Shutdown) · T0836/T0855 (Modify param / Unauth cmd) · T0826 (Loss of Availability).
+</div>
+
+<div class="box danger"><span class="q">Qadam 3 — Xizmatni XAVFSIZ tikla</span>
+<ol>
+<li>Config/binary → <b>backup → tikla → tekshir</b> (<code>nginx -t</code>, <code>sshd -t</code> va h.k.)</li>
+<li>Restart emas, iloji bo'lsa <b>reload</b>. Reboot faqat oxirgi chora.</li>
+<li>Funksiyani butunlay o'chirma — validatsiya qo'sh (checker uni ishlatadi).</li>
+<li>Tiklashdan keyin: <span class="cmd">bk resp sla sla.yaml   # DEGRADED emasmi?</span></li>
+<li>Watchdog qolmaganini tekshir (5–10 daq keyin qayta tekshir).</li>
+</ol></div>
+
+<div class="box ok">
+<b>1-kun → 2-kun bog'liqligi:</b> 1-kunda o'g'irlangan credential/IP/hash 2-kunda boshqa segmentga kirish uchun ishlatilishi mumkin. <b>1-kun IOC'larini saqla</b> — 2-kun birinchi shularni qidir. Kun oxirida hamma narsani eksport qil (loglar, snapshot, tracker).
+</div>
+
+<!-- ============ QUICK REFS ============ -->
+<div class="pagebreak"></div>
+<h2>4 · Tez ma'lumotnoma</h2>
+
+<h3>Adashtiriladigan ID juftliklari (shubha bo'lsa <code>bk kb id</code> bilan procedure'ni o'qi)</h3>
+<table>
+<tr><th>Holat</th><th>Nomzodlar</th></tr>
+<tr><td>PsExec</td><td>T1569.002 / T1021.002 / T1570</td></tr>
+<tr><td>Encoded PowerShell</td><td>T1059.001 / T1027 / T1140</td></tr>
+<tr><td>certutil download</td><td>T1105 / T1140</td></tr>
+<tr><td>LSASS / DCSync</td><td>T1003.001 / T1003.006</td></tr>
+<tr><td>Kerberoast (4769 RC4 0x17)</td><td>T1558.003</td></tr>
+<tr><td>Exfil</td><td>T1041 / T1048 / T1567.002</td></tr>
+<tr><td>Ransomware</td><td>T1486 / T1490 / T1489</td></tr>
+<tr><td>User qo'shildi</td><td>T1136.001 / T1098</td></tr>
+</table>
+
+<h3>⚠ v19 qayta raqamlash — doim validate</h3>
+<table>
+<tr><th>Eski (revoked)</th><th>Yangi</th></tr>
+<tr><td>T1070.001 Clear Win Event Logs</td><td class="yes">T1685.005</td></tr>
+<tr><td>T1562.001 Disable/Modify Tools</td><td class="yes">T1685</td></tr>
+<tr><td>T0803 Block Command Msg (ICS)</td><td class="yes">T1691.001</td></tr>
+</table>
+
+<h3>Tashkilotchilardan so'ra</h3>
+<ul>
+<li>Sub-technique shartmi (T1059.001 vs T1059)? Urinish limiti nechta, har savolga alohidami?</li>
+<li>Remediation qanday tekshiriladi? SLA qancha vaqtda bir? Scoreboardda ko'rinadimi?</li>
+<li>Aktiv skanerlash ruxsatmi? Router/firewall senariy qismimi?</li>
+<li>2-kun yangi tizimmi yoki 1-kun holati saqlanadimi?</li>
+</ul>
+
+<h3>2 kunlik omon qolish</h3>
+<ul>
+<li>Birinchi 30 daqiqa reja. Bitta narsaga 30–40 daqiqadan ko'p ketsa belgilab keyingiga o't.</li>
+<li>Remediation'ni oxirgi soatga qoldirma — topilma tasdiqlanishi bilan parallel tuzat.</li>
+<li>Uxlash, ovqat, suv. Charchoq xatolari ko'p ball yeydi.</li>
+<li>Boshqa jamoalar tarmog'iga tegma (diskvalifikatsiya).</li>
+</ul>
+
+<div class="box"><b>Barcha bk buyruqlari uchun → CHEATSHEET.html.</b> Web UI: <code>bk web</code> → http://localhost:8000 (KB · Logs · Responder · Tracker · Report).</div>
+
+</body>
+</html>

@@ -1,0 +1,60 @@
+{
+  "meta": {"os": "linux", "hostname": "web01", "collected_at": "2026-10-05T08:05:00+05:00", "collector_version": "1.0",
+           "note": "collect_linux.sh chiqish formatiga aynan mos (cron {user,job}, ssh {file,key}, suid {path}). Toza Ubuntu 22.04 veb-server. Hammasi benign."},
+  "users": [
+    {"name": "root", "enabled": true, "is_admin": true, "uid": 0, "shell": "/bin/bash"},
+    {"name": "daemon", "enabled": true, "is_admin": false, "uid": 1, "shell": "/usr/sbin/nologin"},
+    {"name": "www-data", "enabled": true, "is_admin": false, "uid": 33, "shell": "/usr/sbin/nologin"},
+    {"name": "sshd", "enabled": true, "is_admin": false, "uid": 110, "shell": "/usr/sbin/nologin"},
+    {"name": "admin", "enabled": true, "is_admin": false, "uid": 1000, "shell": "/bin/bash"}
+  ],
+  "services": [
+    {"name": "nginx.service", "display": "nginx.service", "state": "enabled", "start_mode": "auto", "binary_path": "", "run_as": ""},
+    {"name": "ssh.service", "display": "ssh.service", "state": "enabled", "start_mode": "auto", "binary_path": "", "run_as": ""},
+    {"name": "cron.service", "display": "cron.service", "state": "enabled", "start_mode": "auto", "binary_path": "", "run_as": ""}
+  ],
+  "tasks": [],
+  "cron": [
+    {"user": "root", "job": "/etc/cron.d/e2scrub_all"},
+    {"user": "root", "job": "/etc/cron.daily/apt-compat"},
+    {"user": "root", "job": "/etc/cron.daily/dpkg"},
+    {"user": "root", "job": "/etc/cron.daily/logrotate"},
+    {"user": "root", "job": "/etc/cron.daily/man-db"},
+    {"user": "root", "job": "/etc/cron.weekly/man-db"},
+    {"user": "root", "job": "/etc/crontab"},
+    {"user": "admin", "job": "0 3 * * * /home/admin/backup.sh >/dev/null 2>&1"}
+  ],
+  "autoruns": [
+    {"location": "/etc/profile.d/01-locale-fix.sh", "name": "file", "value": "exists"},
+    {"location": "/etc/profile.d/bash_completion.sh", "name": "file", "value": "exists"}
+  ],
+  "wmi_subscriptions": [],
+  "ssh_authorized_keys": [
+    {"file": "/home/admin/.ssh/authorized_keys", "key": "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGx3kq0Yb9vY8o2Lr1n5aT7cW2mQpE4sUu6hJ9dK0fZ admin@corp-laptop"}
+  ],
+  "listening_ports": [
+    {"proto": "tcp", "addr": "0.0.0.0", "port": 22, "pid": 0, "process": "sshd"},
+    {"proto": "tcp", "addr": "0.0.0.0", "port": 80, "pid": 0, "process": "nginx"}
+  ],
+  "connections": [],
+  "hosts_file": ["127.0.0.1 localhost", "127.0.1.1 web01", "::1 ip6-localhost ip6-loopback"],
+  "suid_files": [
+    {"path": "/usr/bin/chfn"}, {"path": "/usr/bin/chsh"}, {"path": "/usr/bin/fusermount3"},
+    {"path": "/usr/bin/gpasswd"}, {"path": "/usr/bin/mount"}, {"path": "/usr/bin/newgrp"},
+    {"path": "/usr/bin/passwd"}, {"path": "/usr/bin/pkexec"}, {"path": "/usr/bin/su"},
+    {"path": "/usr/bin/sudo"}, {"path": "/usr/bin/umount"},
+    {"path": "/usr/lib/dbus-1.0/dbus-daemon-launch-helper"}, {"path": "/usr/lib/openssh/ssh-keysign"},
+    {"path": "/usr/libexec/polkit-agent-helper-1"}, {"path": "/usr/lib/snapd/snap-confine"}
+  ],
+  "startup_items": [],
+  "remote_access_tools": [],
+  "proxy": {"environment": "", "apt": "", "http_proxy": ""},
+  "dns_servers": [{"interface": "resolv.conf", "addresses": "127.0.0.53"}],
+  "root_cas": [{"ca_certificates_crt_count": 146, "local_share": ""}],
+  "portproxy": [],
+  "firewall_profiles": [{"name": "ufw", "state": "Status: active"}],
+  "defender": {},
+  "recent_modified": [],
+  "packages_modified": [],
+  "errors": []
+}

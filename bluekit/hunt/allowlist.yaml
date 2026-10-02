@@ -1,0 +1,11 @@
+# Ma'lum benign yo'nalishlar. O'z muhitingizga moslab to'ldiring.
+cidrs:
+  - 13.107.0.0/16      # Microsoft
+  - 20.190.0.0/16      # Microsoft / Azure AD
+  - 23.32.0.0/11       # Akamai
+  - 52.96.0.0/12       # Microsoft 365
+  - 104.16.0.0/12      # Cloudflare
+  - 142.250.0.0/15     # Google
+  - 8.8.8.0/24         # Google DNS
+  - 1.1.1.0/24         # Cloudflare DNS
+note: "Bu ro'yxat ataylab qisqa. Kengaytirishdan oldin har bir CIDR ni tekshiring — keraksiz allowlist C2 ni yashiradi."

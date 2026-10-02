@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>blue-kit — DFIR &amp; Blue Team SOC Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <canvas id="cyber-canvas" class="cyber-canvas"></canvas>
+
+    <header class="app-header">
+        <div class="brand-container">
+            <div class="brand-logo">🛡</div>
+            <div class="brand-info">
+                <h1>blue-kit <span class="brand-badge">CTF APEX</span></h1>
+                <div class="brand-sub">DFIR &amp; Blue Team Autonomous Toolkit · 100% Offline</div>
+            </div>
+        </div>
+
+        <div class="header-telemetry">
+            <div class="hud-pill hud-pill-online">
+                <span class="pulse-dot"></span>
+                <span>AIR-GAPPED SOC</span>
+            </div>
+            <div class="hud-pill">
+                <span style="color:var(--neon-cyan);">⏱</span>
+                <span id="soc-clock" class="soc-clock">00:00:00</span>
+            </div>
+        </div>
+
+        <nav class="tabs">
+            <button class="tab-btn active" onclick="showTab('kb')">📖 KB (ATT&amp;CK)</button>
+            <button class="tab-btn" onclick="showTab('logs')">📊 Logs Analyzer</button>
+            <button class="tab-btn" onclick="showTab('ir')">⚡ IR Attack Chain</button>
+            <button class="tab-btn" onclick="showTab('hunt')">🛰 C2 Hunt</button>
+            <button class="tab-btn" onclick="showTab('resp')">🛡 Responder</button>
+            <button class="tab-btn" onclick="showTab('tracker')">🎯 CTF Tracker</button>
+            <button class="tab-btn" onclick="showTab('report')">📑 Report Generator</button>
+        </nav>
+    </header>
+
+    <main class="main-container">
+        <!-- ==================== KB TAB ==================== -->
+        <div id="kb" class="tab-content active">
+            <div class="hud-ribbon">
+                <div class="hud-tile">
+                    <div class="hud-tile-icon">🗺</div>
+                    <div class="hud-tile-info">
+                        <span class="hud-tile-val">14 Taktika</span>
+                        <span class="hud-tile-label">Enterprise ATT&amp;CK</span>
+                    </div>
+                </div>
+                <div class="hud-tile">
+                    <div class="hud-tile-icon">⚡</div>
+                    <div class="hud-tile-info">
+                        <span class="hud-tile-val">600+</span>
+                        <span class="hud-tile-label">Texnikalar &amp; Sub-ID</span>
+                    </div>
+                </div>
+                <div class="hud-tile">
+                    <div class="hud-tile-icon">🔍</div>
+                    <div class="hud-tile-info">
+                        <span class="hud-tile-val">SQLite FTS5</span>
+                        <span class="hud-tile-label">Tezkor Indekslangan</span>
+                    </div>
+                </div>
+                <div class="hud-tile">
+                    <div class="hud-tile-icon">🔒</div>
+                    <div class="hud-tile-info">
+                        <span class="hud-tile-val">100% Offline</span>
+                        <span class="hud-tile-label">Zero External Requests</span>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="section-title">MITRE ATT&amp;CK Bilimlar Bazasi (v19.2)</h2>
+            <div class="grid-2">
+                <div class="card card-hud">
+                    <div class="card-title">
+                        <span>🔍 Buyruq yoki Shubhali Matn Qidirish</span>
+                        <span class="brand-badge">FTS5 Search</span>
+                    </div>
+                    <p class="helper-text">Buyruq, skript yoki xabarni kiriting — tool mos ATT&amp;CK texnikalarini aniqlaydi.</p>
+                    <input type="text" id="kb-search-in" placeholder="Masalan: vssadmin delete shadows yoki whoami">
+                    <button class="btn btn-primary" onclick="kbSearch()">Qidirish</button>
+                    <div id="kb-search-out" style="margin-top: 14px;"></div>
+                </div>
+
+                <div class="card card-hud">
+                    <div class="card-title">
+                        <span>⚡ ID Tekshirish (Validate — Oltin Qoida)</span>
+                        <span class="brand-badge" style="border-color: var(--amber); color: var(--amber);">Urinishni tejang</span>
+                    </div>
+                    <p class="helper-text">Topshirishdan oldin tekshiring: agar texnika eskirgan (revoked) bo'lsa, yangi ID'ni beradi.</p>
+                    <input type="text" id="kb-val-in" placeholder="Masalan: T1070.001, T1059.001">
+                    <button class="btn btn-primary" onclick="kbValidate()">Tekshirish (Validate)</button>
+                    <div id="kb-val-out" style="margin-top: 14px;"></div>
+                </div>
+
+                <div class="card card-hud">
+                    <div class="card-title">
+                        <span>🔗 Bog'liq Texnikalar &amp; APT Profillari (Related)</span>
+                    </div>
+                    <p class="helper-text">Aniqlangan ID'larga asoslanib, navbatdagi ehtimoliy hujum bosqichlarini bashorat qiladi.</p>
+                    <input type="text" id="kb-rel-in" placeholder="Masalan: T1566.001, T1003.001">
+                    <div style="margin-bottom: 12px;">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="kb-rel-actors"> O'xshash APT aktorlarini ko'rsatish (simulyatsiyada soxta, attribution emas)
+                        </label>
+                    </div>
+                    <button class="btn btn-primary" onclick="kbRelated()">Tahlil Qilish</button>
+                    <div id="kb-rel-out" style="margin-top: 14px;"></div>
+                </div>
+
+                <div class="card card-hud">
+                    <div class="card-title">
+                        <span>🎯 IOC Tahlili (IP, Domain, URL, Hash, Path)</span>
+                    </div>
+                    <p class="helper-text">Har qanday shubhali qiymat turini aniqlaydi va mos MITRE texnikasini bog'laydi.</p>
+                    <input type="text" id="kb-ioc-in" placeholder="Masalan: hxxp://evil[.]com, 198.51.100.45, cmd.exe">
+                    <button class="btn btn-primary" onclick="kbIoc()">IOC Aniqlash</button>
+                    <div id="kb-ioc-out" style="margin-top: 14px;"></div>
+                </div>
+
+                <div class="card card-hud" style="grid-column: 1 / -1;">
+                    <div class="card-title">
+                        <span>🗺 Cyber Kill Chain Qamrovi (Tactics Coverage)</span>
+                        <span class="brand-badge">Full Matrix</span>
+                    </div>
+                    <p class="helper-text">Hujum zanjirining qaysi taktikasi to'ldirilgan va qaysilari qolib ketganini tekshiradi.</p>
+                    <div style="display: grid; grid-template-columns: 1fr auto; gap: 14px; align-items: center;">
+                        <input type="text" id="kb-tac-in" placeholder="Masalan: T1190, T1059.004, T1003.008" style="margin-bottom: 0;">
+                        <button class="btn btn-primary" onclick="kbTactics()" style="white-space: nowrap;">Taktikalarni Tekshirish</button>
+                    </div>
+                    <div id="kb-tac-out" style="margin-top: 16px;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== LOGS TAB ==================== -->
+        <div id="logs" class="tab-content">
+            <div class="hud-ribbon">
+                <div class="hud-tile">
+                    <div class="hud-tile-icon">🎯</div>
+                    <div class="hud-tile-info">
+                        <span class="hud-tile-val">Kill-Chain</span>
+                        <span class="hud-tile-label">Avtomatik Rekonstruksiya</span>
+                    </div>
+                </div>
+                <div class="hud-tile">
+                    <div class="hud-tile-icon">🛡</div>
+                    <div class="hud-tile-info">
+                        <span class="hud-tile-val">48+ Sigma</span>
+                        <span class="hud-tile-label">Detections &amp; Correlation</span>
+                    </div>
+                </div>
+                <div class="hud-tile">
+                    <div class="hud-tile-icon">📡</div>
+                    <div class="hud-tile-info">
+                        <span class="hud-tile-val">C2 Beaconing</span>
+                        <span class="hud-tile-label">Periodic Delta Detektori</span>
+                    </div>
+                </div>
+                <div class="hud-tile">
+                    <div class="hud-tile-icon">📊</div>
+                    <div class="hud-tile-info">
+                        <span class="hud-tile-val">SIEM Mapping</span>
+                        <span class="hud-tile-label">ELK / Wazuh / Sysmon / Auditd</span>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="section-title">SIEM Log Tahlilchisi &amp; Hujum Zanjiri</h2>
+            <div class="card card-hud">
+                <div class="card-title">
+                    <span>📁 Log Faylini Yuklash (CSV / JSON / NDJSON / LOG)</span>
+                    <span class="brand-badge">Auto Mapping</span>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr auto; gap: 14px; align-items: center;">
+                    <input type="text" id="log-path" placeholder="Lokal fayl yo'li (masalan: elasticsearch_export.json)" style="margin-bottom: 0;">
+                    <input type="file" id="log-file" accept=".csv,.json,.log,.tsv,.ndjson" style="margin-bottom: 0;">
+                    <button class="btn btn-primary" onclick="logAnalyze()" id="btn-log-analyze" style="white-space: nowrap;">
+                        <span>🚀 Tahlilni Boshlash</span>
+                    </button>
+                </div>
+                <div style="display:flex; gap:14px; margin-top:16px; align-items:center; flex-wrap:wrap;">
+                    <button type="button" class="btn btn-demo btn-sm" onclick="loadDemoLog()">⚡ Namuna Log: elasticsearch_export.json (15,000 log)</button>
+                    <span class="helper-text" style="margin-bottom:0;">Splunk, Elastic/Kibana, Wazuh, Sysmon, Linux Auditd, Nginx va Windows Security loglarini avtomatik qo'llab-quvvatlaydi.</span>
+                </div>
+            </div>
+            
+            <div id="log-out">
+                <div class="grid-3" style="margin-top: 20px;">
+                    <div class="card card-hud">
+                        <div class="card-title">
+                            <span>⚡ 1. Log Formatlari</span>
+                            <span class="brand-badge">Universal</span>
+                        </div>
+                        <p class="helper-text">
+                            Elasticsearch / Kibana JSON export, Splunk CSV, Wazuh alerts JSON, Windows Sysmon, Linux Auditd hamda Nginx access loglarini avtomatik taniydi va xaritalaydi.
+                        </p>
+                    </div>
+                    <div class="card card-hud">
+                        <div class="card-title">
+                            <span>🛡 2. Hujum Rekonstruksiyasi</span>
+                            <span class="brand-badge">Mitre ATT&amp;CK</span>
+                        </div>
+                        <p class="helper-text">
+                            48 dan ortiq o'rnatilgan Sigma qoidalari asosida hodisalarni saralab, Cyber Kill Chain bosqichlarini xronologik tartibda tiklaydi va C2 beacon intervallarini hisoblaydi.
+                        </p>
+                    </div>
+                    <div class="card card-hud">
+                        <div class="card-title">
+                            <span>🎯 3. Tezkor CTF Sinovi</span>
+                            <span class="brand-badge" style="color:var(--cyber-mint); border-color:var(--cyber-mint);">Tayyor</span>
+                        </div>
+                        <p class="helper-text">
+                            Yuqoridagi <b>"⚡ Namuna Log"</b> tugmasini bosing — tizimdagi 15,000 ta logdagi SQLi, Webshell va C2 beaconing hujumlarini bir zumda tahlil qilib beradi.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== INCIDENT RESPONSE TAB ==================== -->
+        <div id="ir" class="tab-content">
+            <div class="hud-ribbon">
+                <div class="hud-tile">
+                    <div class="hud-tile-icon">⚡</div>
+                    <div class="hud-tile-info">
+                        <span class="hud-tile-val">Zero-Noise</span>
+                        <span class="hud-tile-label">99.9% Fon Shovqinini Filtrlash</span>
+                    </div>
+                </div>
+                <div class="hud-tile">
+                    <div class="hud-tile-icon">🔗</div>
+                    <div class="hud-tile-info">
+                        <span class="hud-tile-val">Cross-Host</span>
+                        <span class="hud-tile-label">Ko'p Bosqichli Hujum Zanjiri</span>
+                    </div>
+                </div>
+                <div class="hud-tile">
+                    <div class="hud-tile-icon">🎯</div>
+                    <div class="hud-tile-info">
+                        <span class="hud-tile-val">MITRE + IOC</span>
+                        <span class="hud-tile-label">Texnik Dalillar &amp; Xaritalash</span>
+                    </div>
+                </div>
+                <div class="hud-tile">
+                    <div class="hud-tile-icon">📑</div>
+                    <div class="hud-tile-info">
+                        <span class="hud-tile-val">Scoring JSON</span>
+                        <span class="hud-tile-label">Hakamlar / Ball Tizimi Uchun</span>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="section-title">Incident Response (IR) Hujum Zanjiri &amp; MITRE Korrelyatsiya</h2>
+            <div class="card card-hud">
+                <div class="card-title">
+                    <span>📁 Infratuzilma Loglarini Tahlil Qilish (Multi-SIEM, QRadar/Splunk CSV, JSON, Sysmon XML, Syslog)</span>
+                    <span class="brand-badge" style="color:var(--neon-cyan); border-color:var(--neon-cyan);">Avtomatlashtirilgan IR</span>
+                </div>
+                <div id="ir-dropzone" class="ir-dropzone">
+                <div style="display: grid; grid-template-columns: 1fr 1fr 130px auto; gap: 14px; align-items: center;">
+                    <input type="text" id="ir-log-path" placeholder="Lokal fayl yo'li (yoki bir nechta: f1.csv, f2.xml)" style="margin-bottom: 0;">
+                    <input type="file" id="ir-log-file" multiple accept=".json,.ndjson,.csv,.tsv,.log,.txt,.xml" style="margin-bottom: 0;">
+                    <select id="ir-lang" style="margin-bottom: 0; padding: 10px; background: var(--bg-card); color: var(--text-main); border: 1px solid var(--border-card); border-radius: var(--radius-sm);">
+                        <option value="ru">Til: RU</option>
+                        <option value="uz">Til: UZ</option>
+                        <option value="en">Til: EN</option>
+                    </select>
+                    <button class="btn btn-primary" onclick="runIRChainAnalysis()" id="btn-ir-analyze" style="white-space: nowrap; background: linear-gradient(135deg, rgba(6, 182, 212, 0.25), rgba(16, 185, 129, 0.25)); border-color: var(--neon-cyan); color: #fff;">
+                        <span>🚀 Zanjirni Tiklash</span>
+                    </button>
+                </div>
+                <div id="ir-file-list"></div>
+                <div class="helper-text" style="margin-top:8px;">⬇ Fayllarni shu yerga sudrab tashlang (bir nechta bo'lishi mumkin) yoki tanlang. <a href="#" onclick="irClearFiles();return false;">Tozalash</a></div>
+            </div>
+                <div style="display:flex; gap:14px; margin-top:16px; align-items:center; flex-wrap:wrap;">
+                    <button type="button" class="btn btn-demo btn-sm" onclick="loadDemoIRLog()">⚡ Namuna: elasticsearch_export.json (15,000 log)</button>
+                    <span class="helper-text" style="margin-bottom:0;">Reconnaissance, SQLi, Web Shell, Reverse Shell, Sudo PrivEsc, SSH Lateral Movement va DB Exfiltration zanjirlarini 100% shovqinsiz ajratadi.</span>
+                </div>
+            </div>
+
+            <div id="ir-out">
+                <div class="grid-3" style="margin-top: 20px;">
+                    <div class="card card-hud">
+                        <div class="card-title">
+                            <span>🎯 1. Zero-Noise Filtering</span>
+                            <span class="brand-badge">Baseline</span>
+                        </div>
+                        <p class="helper-text">
+                            15,000 ta logdagi 99.9% standart tizim jarayonlari (svchost, explorer, cron logrotate, routine web) avtomatik bostirilib, faqat haqiqiy hujum zanjiri ajratiladi.
+                        </p>
+                    </div>
+                    <div class="card card-hud">
+                        <div class="card-title">
+                            <span>🔗 2. Cross-Host Korrelyatsiya</span>
+                            <span class="brand-badge">Kill-Chain</span>
+                        </div>
+                        <p class="helper-text">
+                            Hujumchining tashqi kirishidan (web-prod-01) tortib, ichki tarmoq bo'ylab lateral harakat (db-prod-02) va ma'lumotlar bazasini o'g'irlashgacha bo'lgan to'liq xronologiyani tuzadi.
+                        </p>
+                    </div>
+                    <div class="card card-hud">
+                        <div class="card-title">
+                            <span>📥 3. Hakamlar Uchun Eksport</span>
+                            <span class="brand-badge" style="color:var(--cyber-mint); border-color:var(--cyber-mint);">Ball Formati</span>
+                        </div>
+                        <p class="helper-text">
+                            Tahlil yakunida musobaqa hakamlariga topshirish uchun <b>submission.json</b> va rasmiy <b>Incident Report (Markdown)</b> hisobotini bir zumda yuklab olasiz.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="hunt" class="tab-content">
+            <h2 class="section-title">C2 Hunt — noma'lum beacon nomzodlarini xulq-atvor bo'yicha saralash</h2>
+            <div class="card card-hud">
+                <div class="card-title">
+                    <span>🛰 Firewall / proxy eksportidan noma'lum C2 nomzodlari (IOC kerak emas)</span>
+                    <span class="brand-badge" style="color:var(--neon-cyan); border-color:var(--neon-cyan);">Behavioral Hunt</span>
+                </div>
+                <div id="hunt-dropzone" class="ir-dropzone">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr auto; gap: 14px; align-items: center;">
+                        <input type="text" id="hunt-path" placeholder="Lokal fayl yoki papka yo'li" style="margin-bottom: 0;">
+                        <input type="file" id="hunt-file" multiple accept=".json,.ndjson,.csv,.tsv,.log,.txt" style="margin-bottom: 0;">
+                        <button class="btn btn-primary" onclick="runHuntBeacons()" id="hunt-btn" style="white-space: nowrap;">
+                            <span>🛰 Nomzodlarni saralash</span>
+                        </button>
+                    </div>
+                    <div id="hunt-file-list"></div>
+                    <div class="helper-text" style="margin-top:8px;">⬇ Fayllarni shu yerga sudrab tashlang yoki tanlang. <a href="#" onclick="huntClearFiles();return false;">Tozalash</a></div>
+                </div>
+
+                <div style="display:grid; grid-template-columns: 180px 180px auto; gap:14px; margin-top:16px; align-items:center;">
+                    <label class="helper-text" style="margin-bottom:0;">Min. sessiya
+                        <input type="number" id="hunt-min-sessions" value="10" min="1" style="margin-bottom:0;">
+                    </label>
+                    <label class="helper-text" style="margin-bottom:0;">Maks. host
+                        <input type="number" id="hunt-max-hosts" value="100" min="1" style="margin-bottom:0;">
+                    </label>
+                    <label class="helper-text" style="margin-bottom:0;">
+                        <input type="checkbox" id="hunt-all"> PAST darajalarni ham ko'rsatish
+                    </label>
+                </div>
+                <div style="margin-top:14px;">
+                    <label class="helper-text">Ma'lum IOC lar (har qatorda bitta IP yoki domen) — ular <b>MA'LUM</b> deb belgilanadi:</label>
+                    <textarea id="hunt-ioc" rows="3" placeholder="46.30.190.150&#10;public.example.online"></textarea>
+                </div>
+            </div>
+
+            <div id="hunt-error" class="card card-hud" style="display:none; border-color:var(--cyber-red); color:var(--cyber-red); margin-top:20px;"></div>
+
+            <div id="hunt-result" style="display:none; margin-top:20px;">
+                <div class="card card-hud">
+                    <div class="card-title">
+                        <span id="hunt-summary-title">—</span>
+                        <button class="btn btn-sm" onclick="downloadHuntJson()">📥 JSON yuklab olish</button>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="data-table" id="hunt-table">
+                            <thead>
+                                <tr>
+                                    <th>Ball</th><th>Daraja</th><th>Dst IP</th><th>Port</th><th>Host</th>
+                                    <th>Sessiya</th><th>Median</th><th>CV</th><th>O'rt.bayt</th>
+                                    <th>Maks davom</th><th>Birinchi (UTC)</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                    <p class="helper-text" id="hunt-tz-note" style="margin-top:10px;"></p>
+                    <p class="helper-text">CV = intervallar stdev/median nisbati: qancha kichik bo'lsa, davriylik shuncha aniq.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== RESPONDER TAB ==================== -->
+        <div id="resp" class="tab-content">
+            <div class="hud-ribbon">
+                <div class="hud-tile">
+                    <div class="hud-tile-icon">🛡</div>
+                    <div class="hud-tile-info">
+                        <span class="hud-tile-val">Triage Matritsa</span>
+                        <span class="hud-tile-label">Log-Bridge Korrelyatsiyasi</span>
+                    </div>
+                </div>
+                <div class="hud-tile">
+                    <div class="hud-tile-icon">⚙</div>
+                    <div class="hud-tile-info">
+                        <span class="hud-tile-val">Remediation</span>
+                        <span class="hud-tile-label">Xavfsiz Skript Generatori</span>
+                    </div>
+                </div>
+                <div class="hud-tile">
+                    <div class="hud-tile-icon">⚖</div>
+                    <div class="hud-tile-info">
+                        <span class="hud-tile-val">SLA Guard</span>
+                        <span class="hud-tile-label">Servislar Barqarorligi</span>
+                    </div>
+                </div>
+                <div class="hud-tile">
+                    <div class="hud-tile-icon">🔒</div>
+                    <div class="hud-tile-info">
+                        <span class="hud-tile-val">Zero-Destruction</span>
+                        <span class="hud-tile-label">Backup &amp; Rollback Kafolati</span>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="section-title">Responder &amp; Xavfsiz Remediation Generator</h2>
+            <div class="grid-2">
+                <div class="card card-hud">
+                    <div class="card-title">
+                        <span>📸 Snapshot &amp; Dalillarni Kiritish</span>
+                    </div>
+                    <div style="margin-bottom: 14px;">
+                        <button type="button" class="btn btn-demo btn-sm" onclick="loadDemoSnapshot()">⚡ Namuna Snapshot: Compromised Linux Web Server</button>
+                    </div>
+
+                    <label class="field-label">Joriy Snapshot (Targetdan olingan JSON):</label>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                        <input type="text" id="resp-cur" placeholder="snapshot_web_2026.json yoki JSON matn">
+                        <input type="file" id="resp-snap-file" accept=".json">
+                    </div>
+
+                    <label class="field-label">Baseline Snapshot (Toza holat — ixtiyoriy):</label>
+                    <input type="text" id="resp-base" placeholder="baseline_web.json (ixtiyoriy)">
+
+                    <label class="field-label">Log Analyzer Natijasi (Bridge — ✔LOG uchun):</label>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                        <input type="text" id="resp-logs" placeholder="out_analysis.json (ixtiyoriy)">
+                        <input type="file" id="resp-logs-file" accept=".json">
+                    </div>
+
+                    <label class="field-label">Himoyalangan elementlar (Protected YAML):</label>
+                    <textarea id="resp-prot" placeholder="- 10.0.1.1 # Checker IP&#10;- admin # Boshqaruv akkaunti"></textarea>
+
+                    <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px;">
+                        <button class="btn btn-primary" onclick="respTriage()">🔍 Triage Tahlili</button>
+                        <button class="btn btn-secondary" onclick="respFraud()">💰 Fraud Tekshirish</button>
+                        <button class="btn btn-secondary" onclick="respSla()">⏱ SLA Holati</button>
+                    </div>
+
+                    <div style="display: flex; gap: 10px; margin-top: 16px; align-items: center;">
+                        <input type="text" id="resp-doc-svc" placeholder="To'xtagan servis nomi (masalan: nginx)" style="margin-bottom: 0;">
+                        <button class="btn btn-secondary" onclick="respDoctor()" style="white-space: nowrap;">🩺 Service Doctor</button>
+                    </div>
+                </div>
+
+                <div class="card card-hud">
+                    <div class="card-title">
+                        <span>🛠 Remediation Buyruqlari Generator</span>
+                        <span class="brand-badge" style="border-color: var(--cyber-mint); color: var(--cyber-mint);">Xavfsiz: Faqat matn beradi</span>
+                    </div>
+                    <p class="helper-text">
+                        Tool nishon tizimda hech narsani avtomatik o'chirmaydi. Administrator buyruqlarni tekshirib, qo'lda ishga tushiradi (Backup → Remove → Verify → Rollback).
+                    </p>
+                    <div style="display: flex; gap: 14px; align-items: center; margin-bottom: 16px;">
+                        <select id="resp-os" style="max-width: 180px; margin-bottom: 0;">
+                            <option value="windows">Windows</option>
+                            <option value="linux">Linux</option>
+                        </select>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="resp-full"> Barcha topilmalarni kiritish (Full)
+                        </label>
+                    </div>
+                    <button class="btn btn-primary" onclick="respFix()" style="width: 100%;">⚙ Tozalash Buyruqlarini Yasash</button>
+                </div>
+            </div>
+
+            <div id="resp-out" style="margin-top: 16px;">
+                <div class="grid-3" style="margin-top: 10px;">
+                    <div class="card card-hud">
+                        <div class="card-title">
+                            <span>🛡 1. Snapshot Tahlili</span>
+                            <span class="brand-badge">Diff Engine</span>
+                        </div>
+                        <p class="helper-text">
+                            Serverdan olingan <code>snapshot.json</code> faylini tahlil qilib, shubhali servislar, anonim UID 0 foydalanuvchilar va teskari shellarni aniqlaydi.
+                        </p>
+                    </div>
+                    <div class="card card-hud">
+                        <div class="card-title">
+                            <span>⚙ 2. Remediation Skripti</span>
+                            <span class="brand-badge">Non-Destructive</span>
+                        </div>
+                        <p class="helper-text">
+                            Hech qanday buyruq avtomatik ishga tushirilmaydi. Avval zaxira (Backup), so'ng zararsizlantirish, tekshirish va ortga qaytarish buyruqlari generatsiya qilinadi.
+                        </p>
+                    </div>
+                    <div class="card card-hud">
+                        <div class="card-title">
+                            <span>⚡ 3. Tezkor Namuna</span>
+                            <span class="brand-badge" style="color:var(--cyber-mint); border-color:var(--cyber-mint);">Demo</span>
+                        </div>
+                        <p class="helper-text">
+                            Yuqoridagi <b>"⚡ Namuna Snapshot"</b> tugmasini bosing — compromised Linux server snapshotini yuklab, natijalarni ko'rsatadi.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== TRACKER TAB ==================== -->
+        <div id="tracker" class="tab-content">
+            <div class="hud-ribbon">
+                <div class="hud-tile">
+                    <div class="hud-tile-icon">🎯</div>
+                    <div class="hud-tile-info">
+                        <span class="hud-tile-val">CTF Tracker</span>
+                        <span class="hud-tile-label">Savol &amp; Dalil Doskasi</span>
+                    </div>
+                </div>
+                <div class="hud-tile">
+                    <div class="hud-tile-icon">🔄</div>
+                    <div class="hud-tile-info">
+                        <span class="hud-tile-val">Auto-Validate</span>
+                        <span class="hud-tile-label">MITRE Sub-Texnika Tekshiruvi</span>
+                    </div>
+                </div>
+                <div class="hud-tile">
+                    <div class="hud-tile-icon">📋</div>
+                    <div class="hud-tile-info">
+                        <span class="hud-tile-val">Export &amp; Sync</span>
+                        <span class="hud-tile-label">Jamoaviy Muvofiqlashtirish</span>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="section-title">CTF Savollari va Topilgan Javoblar Doskasi</h2>
+            <div class="card card-hud">
+                <div class="card-title">
+                    <span>➕ Yangi Savol / Topilma Qo'shish</span>
+                </div>
+                <div class="grid-2">
+                    <input type="text" id="trk-q" placeholder="Savol (masalan: 1-bosqichdagi xaker IP'si nima?)">
+                    <input type="text" id="trk-c" placeholder="Nomzod ID yoki Javob (masalan: T1190 yoki 198.51.100.45)">
+                </div>
+                <div class="grid-2">
+                    <input type="text" id="trk-e" placeholder="Dalil (masalan: Nikto skan loglari 08:45)">
+                    <input type="text" id="trk-s" placeholder="Status (masalan: tekshirilmoqda, topshirildi)">
+                </div>
+                <div style="display: flex; gap: 10px; margin-top: 8px;">
+                    <button class="btn btn-primary" onclick="trkAdd()">➕ Doskaga Qo'shish</button>
+                    <button class="btn btn-secondary" onclick="trkValidateAll()">🔄 Barcha MITRE ID'larni Tekshirish (Validate)</button>
+                </div>
+            </div>
+
+            <div id="trk-out"></div>
+        </div>
+
+        <!-- ==================== REPORT TAB ==================== -->
+        <div id="report" class="tab-content">
+            <div class="hud-ribbon">
+                <div class="hud-tile">
+                    <div class="hud-tile-icon">📑</div>
+                    <div class="hud-tile-info">
+                        <span class="hud-tile-val">Executive Summary</span>
+                        <span class="hud-tile-label">Boshqaruv Xulosasi</span>
+                    </div>
+                </div>
+                <div class="hud-tile">
+                    <div class="hud-tile-icon">🌐</div>
+                    <div class="hud-tile-info">
+                        <span class="hud-tile-val">3 Til</span>
+                        <span class="hud-tile-label">UZ / RU / EN Standartlari</span>
+                    </div>
+                </div>
+                <div class="hud-tile">
+                    <div class="hud-tile-icon">🖨️</div>
+                    <div class="hud-tile-info">
+                        <span class="hud-tile-val">Print-to-PDF</span>
+                        <span class="hud-tile-label">Standart HTML Eksporti</span>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="section-title">Rasmiy Hodisa Hisoboti Generatori (Incident Report)</h2>
+            <div class="card card-hud">
+                <div class="card-title">
+                    <span>📑 Hisobot Parametrlari (uz / ru / en)</span>
+                </div>
+                <div class="grid-3">
+                    <div>
+                        <label class="field-label">Hisobot Tili:</label>
+                        <select id="rep-lang">
+                            <option value="uz">O'zbekcha (uz)</option>
+                            <option value="ru">Русский (ru)</option>
+                            <option value="en">English (en)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="field-label">Logs JSON Fayli:</label>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+                            <input type="text" id="rep-logs" placeholder="out_analysis.json (ixtiyoriy)">
+                            <input type="file" id="rep-logs-file" accept=".json">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="field-label">Responder Triage JSON:</label>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+                            <input type="text" id="rep-resp" placeholder="triage_out.json (ixtiyoriy)">
+                            <input type="file" id="rep-resp-file" accept=".json">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid-3" style="margin-top: 14px;">
+                    <div>
+                        <label class="field-label">Hodisa Sarlavhasi:</label>
+                        <input type="text" id="rep-title" placeholder="Masalan: APT29 Hujumi Tahlili">
+                    </div>
+                    <div>
+                        <label class="field-label">Tashkilot Nomi:</label>
+                        <input type="text" id="rep-org" placeholder="Masalan: CyberCorp SOC">
+                    </div>
+                    <div>
+                        <label class="field-label">Jamoa / Bo'lim:</label>
+                        <input type="text" id="rep-team" placeholder="Masalan: Blue Team Alpha">
+                    </div>
+                </div>
+                <div class="grid-2">
+                    <div>
+                        <label class="field-label">Tergovchi Analitik:</label>
+                        <input type="text" id="rep-analyst" placeholder="F.I.SH (masalan: Ibrohim)">
+                    </div>
+                    <div>
+                        <label class="field-label">Sana:</label>
+                        <input type="text" id="rep-date" placeholder="Sana (bo'sh qolsa bugungi sana)">
+                    </div>
+                </div>
+
+                <label class="field-label">Boshqaruv Xulosasi (Executive Summary — bo'sh qolsa avtomatik tuziladi):</label>
+                <textarea id="rep-exec" placeholder="Bo'sh qoldirsangiz, tizim ma'lumotlardan aniq raqamli xulosa va statistikani o'zi yaratadi..."></textarea>
+
+                <label class="field-label">Xavfsizlik Tavsiyalari (Recommendations):</label>
+                <textarea id="rep-rec" placeholder="Infratuzilmani himoyalash va kelajakdagi xurujlarni oldini olish bo'yicha tavsiyalar..."></textarea>
+
+                <button class="btn btn-primary" onclick="reportGenerate()" style="margin-top: 12px; width: 100%;">📄 Professional Hisobotni Shakllantirish</button>
+            </div>
+
+            <div id="rep-out"></div>
+            <iframe id="rep-preview" style="width: 100%; height: 650px; border: 1px solid var(--border); border-radius: var(--radius-md); background: #fff; display: none; margin-top: 15px;"></iframe>
+        </div>
+    </main>
+
+    <!-- Side Drawer (Log Details) -->
+    <div id="drawer-backdrop" class="drawer-backdrop" onclick="closeDrawer()"></div>
+    <div id="event-drawer" class="drawer">
+        <div class="drawer-header">
+            <div class="drawer-title" id="drawer-title">Hodisa Tafsilotlari</div>
+            <button class="drawer-close" onclick="closeDrawer()">✖</button>
+        </div>
+        <div class="drawer-body" id="drawer-content"></div>
+    </div>
+
+    <!-- MITRE Detail Modal -->
+    <div id="modal-backdrop" class="drawer-backdrop" onclick="closeModal()"></div>
+    <div id="mitre-modal" class="card" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); width:620px; max-width:92vw; z-index:300; max-height:85vh; overflow-y:auto; box-shadow:0 15px 50px rgba(0,0,0,0.85); border-color:var(--cyan);">
+        <div class="card-title">
+            <span id="modal-title" style="color:var(--cyan); font-weight:700;">MITRE ATT&amp;CK</span>
+            <button class="action-btn" onclick="closeModal()">✖</button>
+        </div>
+        <div id="modal-body"></div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">✓ Nusxalandi!</div>
+
+    <script src="app.js"></script>
+</body>
+</html>

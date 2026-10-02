@@ -1,0 +1,50 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging temporary build files
+build/
+dist_build/
+eggs/
+.eggs/
+*.egg-info/
+
+# Scratch & temporary scripts
+scratch.py
+scratch_*.py
+scratch/
+patch*.py
+refactor*.py
+fix*.py
+apply_changes.py
+restore.py
+
+# Test outputs & logs & temp dumps
+*.log
+*.err
+*.tmp
+err.txt
+output*.txt
+debug_*.txt
+debug_out.json
+test_out.txt
+test_output.txt
+test_output_*.txt
+tests_out.txt
+test_results.txt
+result_*.txt
+logs_out.json
+blue-kit-dist.zip
+
+# Editor directories and files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db

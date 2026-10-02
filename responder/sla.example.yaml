@@ -1,0 +1,87 @@
+# ============================================================================
+#  bk resp sla — namuna konfig
+#
+#  ISHLATISH:  bk resp sla services.yaml --watch --interval 30
+#
+#  DIQQAT — tekshiruv turlari IKKI XIL OILAGA bo'linadi:
+#
+#  A) TARMOQ ORQALI (masofadan) — laptopingizdan nishon tizimga boradi.
+#     Musobaqada SIZGA KERAGI SHU. Tashkilotchining checker boti ham
+#     xuddi shunday tashqaridan ko'radi.
+#       type: tcp    -> socket ulanish  (target: host:port)
+#       type: http   -> HTTP so'rov     (url: ...)
+#
+#  B) MAHALLIY (faqat bk ishga tushgan MASHINADA) — bu tekshiruvlar
+#     laptopingizning o'zini tekshiradi, nishon serverni EMAS.
+#       type: process     -> tasklist / ps
+#       type: service     -> sc query / systemctl
+#       type: file_hash   -> lokal fayl
+#       type: file_absent -> lokal fayl
+#
+#     Ya'ni laptopda turib `type: service, name: W3SVC` yozsangiz, u
+#     SIZNING laptopingizdagi W3SVC ni qidiradi — nishon serverdagi emas.
+#     Bu tekshiruvlar faqat bk.exe ni NISHON HOSTNING O'ZIDA ishga
+#     tushirganingizda ma'noga ega (pastdagi 2-blokka qarang).
+# ============================================================================
+
+services:
+
+  # ------------------------------------------------------------------------
+  # 1) LAPTOPDAN kuzatiladigan xizmatlar — faqat tcp va http.
+  #    Musobaqa davomida ochiq oynada shu turadi.
+  # ------------------------------------------------------------------------
+  - name: web-prod-01 (tashqaridan)
+    board_name: "Poseidon"          # scoreboard dagi nomi, bo'lsa
+    checks:
+      - type: tcp
+        target: 10.10.20.11:80
+        timeout: 3
+      - type: http
+        url: http://10.10.20.11/
+        expect_status: 200
+        expect_contains: "Welcome"   # sahifa "tirik" ekanini tasdiqlaydi
+        timeout: 3
+
+  - name: db-prod-01 (tashqaridan)
+    checks:
+      - type: tcp
+        target: 10.10.20.12:5432
+        timeout: 3
+
+  - name: mail-01 (tashqaridan)
+    checks:
+      - type: tcp
+        target: 10.10.20.13:25
+      - type: tcp
+        target: 10.10.20.13:143
+        critical: false              # nokritik: yiqilsa 'degraded', 'down' emas
+
+  # ------------------------------------------------------------------------
+  # 2) FAQAT NISHON HOSTNING O'ZIDA ishga tushirilsa ma'noli.
+  #    bk.exe ni o'sha serverga ko'chirib, o'sha yerda yurgizsangiz.
+  #    Laptopdan yurgizsangiz — bu blok noto'g'ri natija beradi, o'chiring.
+  # ------------------------------------------------------------------------
+  # - name: web-prod-01 (host ichidan)
+  #   checks:
+  #     - type: service
+  #       name: W3SVC
+  #       expect_state: Running
+  #     - type: process
+  #       name: nginx
+  #     - type: file_hash
+  #       path: C:\inetpub\wwwroot\index.html
+  #       expect_sha256: "<toza holatdagi sha256>"
+  #       critical: false
+  #     - type: file_absent
+  #       path: C:\inetpub\wwwroot\shell.aspx   # webshell qaytib kelsa bilasiz
+  #       critical: false
+
+# ----------------------------------------------------------------------------
+# Eslatmalar:
+#   * critical: true (default tcp/http/process/service uchun) — yiqilsa 'down'.
+#     critical: false (default file_* uchun) — yiqilsa 'degraded'.
+#   * Nishon IP larni o'zingiz yozing yoki avtomatik yasang:
+#       bk resp discover base_*.json --sla-out services.yaml
+#   * C-1 qoidasi: checker IP ni bloklamang. Qaysi IP checker ekanini
+#     `logs analyze` chiqishidagi `checkers` ro'yxati ko'rsatadi.
+# ----------------------------------------------------------------------------

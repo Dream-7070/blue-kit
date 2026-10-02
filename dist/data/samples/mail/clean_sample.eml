@@ -1,0 +1,15 @@
+From: "IT Admin" <it@mycompany.com>
+To: employees@mycompany.com
+Subject: System maintenance this weekend
+Date: Wed, 10 May 2023 11:00:00 +0000
+Message-ID: <abcde@mycompany.com>
+Authentication-Results: spf=pass
+Content-Type: text/plain; charset="utf-8"
+
+Hi team,
+
+We will be performing routine system maintenance this weekend.
+Please ensure all your work is saved.
+
+Thanks,
+IT Admin

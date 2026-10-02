@@ -1,0 +1,25 @@
+{
+  "meta": {"os": "windows", "hostname": "BUX-PC05", "collected_at": "2026-10-04T18:00:00", "collector_version": "1.0"},
+  "users": [
+    {"name": "Administrator", "enabled": true, "is_admin": true, "groups": ["Administrators"]},
+    {"name": "checker_admin", "enabled": true, "is_admin": true, "groups": ["Administrators"]},
+    {"name": "bux.aziza", "enabled": true, "is_admin": false, "groups": ["Users"]}
+  ],
+  "services": [
+    {"name": "Spooler", "display": "Print Spooler", "state": "Running", "start_mode": "Auto", "binary_path": "C:\\Windows\\System32\\spoolsv.exe", "run_as": "LocalSystem"}
+  ],
+  "tasks": [
+    {"name": "GoogleUpdateTaskMachine", "path": "\\", "action": "C:\\Program Files (x86)\\Google\\Update\\GoogleUpdate.exe", "trigger": "daily", "author": "Google", "enabled": true}
+  ],
+  "autoruns": [
+    {"location": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run", "name": "SecurityHealth", "value": "C:\\Windows\\System32\\SecurityHealthSystray.exe"}
+  ],
+  "remote_access_tools": [],
+  "hosts_file": [],
+  "listening_ports": [
+    {"proto": "tcp", "addr": "0.0.0.0", "port": 445, "pid": 4, "process": "System"},
+    {"proto": "tcp", "addr": "0.0.0.0", "port": 3389, "pid": 900, "process": "svchost.exe"}
+  ],
+  "connections": [],
+  "errors": []
+}

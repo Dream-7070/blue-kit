@@ -1,0 +1,207 @@
+- channel: Security
+  event_id: '4688'
+  techniques: []
+  confidence: low
+- channel: Security
+  event_id: '4624'
+  techniques:
+  - T1021.001
+  - T1078
+  confidence: medium
+- channel: Security
+  event_id: '4625'
+  techniques:
+  - T1110
+  confidence: low
+- channel: Security
+  event_id: '4672'
+  techniques:
+  - T1078
+  confidence: medium
+- channel: Security
+  event_id: '4720'
+  techniques:
+  - T1136.001
+  confidence: high
+- channel: Security
+  event_id: '4728'
+  techniques:
+  - T1098
+  confidence: high
+- channel: Security
+  event_id: '4732'
+  techniques:
+  - T1098
+  confidence: high
+- channel: Security
+  event_id: '4756'
+  techniques:
+  - T1098
+  confidence: high
+- channel: Security
+  event_id: '4697'
+  techniques:
+  - T1543.003
+  - T1569.002
+  confidence: high
+- channel: Security
+  event_id: '7045'
+  techniques:
+  - T1543.003
+  - T1569.002
+  confidence: high
+- channel: System
+  event_id: '7045'
+  techniques:
+  - T1543.003
+  - T1569.002
+  confidence: high
+- channel: Security
+  event_id: '4698'
+  techniques:
+  - T1053.005
+  confidence: high
+- channel: Security
+  event_id: '1102'
+  techniques:
+  - T1685.005
+  confidence: high
+- channel: Security
+  event_id: '4769'
+  techniques:
+  - T1558.003
+  confidence: medium
+- channel: Security
+  event_id: '4662'
+  techniques:
+  - T1003.006
+  confidence: medium
+- channel: Security
+  event_id: '5140'
+  techniques:
+  - T1021.002
+  confidence: low
+- channel: Security
+  event_id: '5145'
+  techniques:
+  - T1021.002
+  confidence: low
+- channel: Security
+  event_id: '4657'
+  techniques:
+  - T1112
+  confidence: low
+- channel: Sysmon
+  event_id: '1'
+  techniques: []
+  confidence: low
+- channel: Sysmon
+  event_id: '3'
+  techniques:
+  - T1071
+  confidence: low
+- channel: Sysmon
+  event_id: '7'
+  techniques: []
+  confidence: low
+- channel: Sysmon
+  event_id: '8'
+  techniques:
+  - T1055
+  confidence: high
+- channel: Sysmon
+  event_id: '10'
+  techniques:
+  - T1003.001
+  confidence: high
+- channel: Sysmon
+  event_id: '11'
+  techniques: []
+  confidence: low
+- channel: Sysmon
+  event_id: '12'
+  techniques:
+  - T1112
+  - T1547.001
+  confidence: medium
+- channel: Sysmon
+  event_id: '13'
+  techniques:
+  - T1112
+  - T1547.001
+  confidence: medium
+- channel: Sysmon
+  event_id: '14'
+  techniques:
+  - T1112
+  - T1547.001
+  confidence: medium
+- channel: Sysmon
+  event_id: '22'
+  techniques: []
+  confidence: low
+- channel: Sysmon
+  event_id: '19'
+  techniques:
+  - T1546.003
+  confidence: high
+- channel: Sysmon
+  event_id: '20'
+  techniques:
+  - T1546.003
+  confidence: high
+- channel: Sysmon
+  event_id: '21'
+  techniques:
+  - T1546.003
+  confidence: high
+- channel: PowerShell
+  event_id: '4104'
+  techniques:
+  - T1059.001
+  confidence: medium
+- channel: Microsoft-Windows-PowerShell/Operational
+  event_id: '4104'
+  techniques:
+  - T1059.001
+  confidence: medium
+- channel: auth
+  event_id: sshd
+  techniques:
+  - T1110
+  - T1021.004
+  confidence: low
+- channel: auth
+  event_id: sudo
+  techniques:
+  - T1548.003
+  confidence: low
+- channel: auth
+  event_id: useradd
+  techniques:
+  - T1136.001
+  confidence: high
+- channel: M365/AuditLog
+  event_id: New-InboxRule
+  techniques: [T1114.003, T1564.008]
+  confidence: high
+- channel: M365/AuditLog
+  event_id: Set-InboxRule
+  techniques: [T1114.003, T1564.008]
+  confidence: high
+- channel: M365/AuditLog
+  event_id: UpdateInboxRules
+  techniques: [T1114.003, T1564.008]
+  confidence: high
+- channel: M365/AuditLog
+  event_id: Add-MailboxPermission
+  techniques: [T1098.002]
+  confidence: high
+- channel: AzureAD/AuditLog
+  event_id: Consent
+  techniques: [T1528]
+  confidence: high
+- channel: AzureAD/AuditLog
+  event_id: Consent to application
+  techniques: [T1528]
+  confidence: high

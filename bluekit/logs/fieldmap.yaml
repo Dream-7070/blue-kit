@@ -1,0 +1,335 @@
+presets:
+  ecs:
+    ts:
+    - '@timestamp'
+    - timestamp
+    host:
+    - host.name
+    - host
+    user:
+    - user.name
+    - user
+    src_ip:
+    - source.ip
+    dest_ip:
+    - destination.ip
+    event_id:
+    - event.code
+    channel:
+    - winlog.channel
+    process:
+    - process.name
+    pid:
+    - process.pid
+    ppid:
+    - process.parent.pid
+    parent_process:
+    - process.parent.name
+    command_line:
+    - process.command_line
+    message:
+    - message
+    target:
+    - winlog.event_data.TargetUserName
+    - TargetUserName
+  splunk:
+    ts:
+    - _time
+    host:
+    - host
+    user:
+    - user
+    src_ip:
+    - src
+    dest_ip:
+    - dest
+    event_id:
+    - EventCode
+    - signature_id
+    channel:
+    - source
+    - sourcetype
+    process:
+    - process
+    - process_name
+    - process_exec
+    parent_process:
+    - parent_process
+    - parent_process_name
+    command_line:
+    - CommandLine
+  sentinel:
+    ts:
+    - TimeGenerated
+    host:
+    - DeviceName
+    user:
+    - AccountName
+    src_ip:
+    - RemoteIP
+    dest_ip:
+    - LocalIP
+    event_id:
+    - EventID
+    - ActionType
+    process:
+    - FileName
+    parent_process:
+    - InitiatingProcessParentFileName
+    command_line:
+    - InitiatingProcessCommandLine
+    - ProcessCommandLine
+  wazuh:
+    ts:
+    - timestamp
+    host:
+    - agent.name
+    event_id:
+    - data.win.system.eventID
+    - rule.mitre.id
+    process:
+    - data.win.eventdata.image
+    parent_process:
+    - data.win.eventdata.parentImage
+    command_line:
+    - data.win.eventdata.commandLine
+    message:
+    - full_log
+  qradar:
+    ts:
+    - devTime
+    host:
+    - shost
+    - dhost
+    user:
+    - usrName
+    - suser
+    src_ip:
+    - src
+    dest_ip:
+    - dst
+    event_id:
+    - deviceEventClassId
+    process:
+    - proc
+    command_line:
+    - cmd
+    message:
+    - act
+  cef:
+    ts:
+    - rt
+    host:
+    - shost
+    - dhost
+    user:
+    - suser
+    src_ip:
+    - src
+    dest_ip:
+    - dst
+    event_id:
+    - deviceEventClassId
+    process:
+    - proc
+    command_line:
+    - cmd
+    message:
+    - act
+  graylog:
+    ts:
+    - timestamp
+    channel:
+    - source
+    process:
+    - _process
+    command_line:
+    - _command
+    message:
+    - message
+  hayabusa:
+    ts:
+    - Timestamp
+    host:
+    - Computer
+    event_id:
+    - EventID
+    - RuleTitle
+    channel:
+    - Channel
+    message:
+    - Details
+  evtxecmd:
+    ts:
+    - TimeCreated
+    host:
+    - Computer
+    user:
+    - UserName
+    event_id:
+    - EventId
+    channel:
+    - Channel
+    process:
+    - ExecutableInfo
+    message:
+    - MapDescription
+    - PayloadData1
+    - PayloadData2
+    - PayloadData3
+    - PayloadData4
+    - PayloadData5
+    - PayloadData6
+  zeek:
+    ts:
+    - ts
+    host:
+    - host
+    src_ip:
+    - id.orig_h
+    dest_ip:
+    - id.resp_h
+    user:
+    - uid
+    command_line:
+    - query
+    - uri
+  auditd:
+    ts:
+    - __REALTIME_TIMESTAMP
+    host:
+    - _HOSTNAME
+    user:
+    - acct
+    event_id:
+    - SYSCALL
+    - type
+    process:
+    - exe
+    - proctitle
+    command_line:
+    - comm
+    - _COMM
+    - _CMDLINE
+    message:
+    - MESSAGE
+  ics:
+    ts: [ts, timestamp, Timestamp]
+    src_ip: [id.orig_h, src_ip, source]
+    dest_ip: [id.resp_h, dst_ip, destination]
+    dest_port: [id.resp_p, dst_port]
+    host: [host, device, station, plc]
+    user: [user, operator]
+    event_id: [func, function_code, funcode, service]
+    command_line: [request, command, tag, point]
+    message: [message, info, detail]
+default:
+  ts:
+  - _time
+  - TimeCreated
+  - __REALTIME_TIMESTAMP
+  - '@timestamp'
+  - timestamp
+  - Timestamp
+  - TimeGenerated
+  - rt
+  - devTime
+  - ts
+  host:
+  - host
+  - host.name
+  - DeviceName
+  - dhost
+  - _HOSTNAME
+  - shost
+  - Computer
+  - agent.name
+  user:
+  - user.name
+  - AccountName
+  - acct
+  - user
+  - suser
+  - usrName
+  - UserName
+  - uid
+  src_ip:
+  - source.ip
+  - id.orig_h
+  - RemoteIP
+  - src
+  dest_ip:
+  - dst
+  - id.resp_h
+  - destination.ip
+  - dest
+  - LocalIP
+  event_id:
+  - signature_id
+  - rule.mitre.id
+  - event.code
+  - EventID
+  - data.win.system.eventID
+  - ActionType
+  - type
+  - EventId
+  - RuleTitle
+  - EventCode
+  - SYSCALL
+  - deviceEventClassId
+  channel:
+  - Channel
+  - sourcetype
+  - source
+  - winlog.channel
+  process:
+  - process_name
+  - proctitle
+  - data.win.eventdata.image
+  - exe
+  - process.name
+  - ExecutableInfo
+  - FileName
+  - process
+  - process_exec
+  - _process
+  - proc
+  pid:
+  - process.pid
+  ppid:
+  - process.parent.pid
+  parent_process:
+  - parent_process_name
+  - InitiatingProcessParentFileName
+  - parent_process
+  - process.parent.name
+  - data.win.eventdata.parentImage
+  command_line:
+  - _CMDLINE
+  - _COMM
+  - _command
+  - uri
+  - comm
+  - data.win.eventdata.commandLine
+  - ProcessCommandLine
+  - CommandLine
+  - process.command_line
+  - cmd
+  - query
+  - InitiatingProcessCommandLine
+  message:
+  - MESSAGE
+  - PayloadData3
+  - PayloadData6
+  - PayloadData1
+  - Details
+  - message
+  - full_log
+  - PayloadData5
+  - PayloadData2
+  - PayloadData4
+  - act
+  - MapDescription
+  target:
+  - winlog.event_data.TargetUserName
+  - TargetUserName

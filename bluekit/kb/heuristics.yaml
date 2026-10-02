@@ -1,0 +1,869 @@
+- name: Office macros/phishing
+  pattern: \.(doc|xls|ppt)m|enable content|macro
+  techniques:
+  - T1566.001
+  - T1059.005
+  weight: 0.8
+  note: Office document with macros
+- name: VBA Shell/Run
+  pattern: wscript\.shell|shell\(|vb hide
+  techniques:
+  - T1059.005
+  weight: 0.8
+  note: ''
+- name: LNK shortcut execution
+  pattern: \.lnk|IShellLink
+  techniques:
+  - T1566.002
+  - T1204.002
+  weight: 0.7
+  note: ''
+- name: ISO/IMG mounting
+  pattern: \.(iso|img|vhd)
+  techniques:
+  - T1566.001
+  - T1553.005
+  weight: 0.7
+  note: Mark of the web bypass via containers
+- name: Archive attachment
+  pattern: (?i)(?:content\.outlook|inetcache|\\downloads\\|/downloads/|attachments|thunderbird).*\.(zip|rar|7z|gz|tar)$
+  techniques:
+  - T1566.001
+  weight: 0.5
+  note: ''
+- name: PowerShell EncodedCommand
+  pattern: (?i)powershell.*(?:-enc|-e\b|-encodedcommand)|FromBase64String|-w\s+hidden\s+-enc
+  techniques:
+  - T1059.001
+  - T1027
+  weight: 0.9
+  note: ''
+- name: PowerShell DownloadString/IEX
+  pattern: (?i)iex\s*\(.*Net\.WebClient.*DownloadString
+  techniques:
+  - T1059.001
+  weight: 0.9
+  note: ''
+- name: PowerShell WebRequest cradle
+  pattern: (?i)Invoke-WebRequest|iwr.*iex
+  techniques:
+  - T1059.001
+  weight: 0.8
+  note: ''
+- name: Curl/Wget download
+  pattern: (?i)wget\s+http|curl\s+-O\s+http
+  techniques:
+  - T1105
+  weight: 0.8
+  note: ''
+- name: Curl/Wget pipe to shell
+  pattern: (?i)(curl|wget).*\|\s*(bash|sh)
+  techniques:
+  - T1105
+  - T1059.004
+  weight: 0.9
+  note: ''
+- name: Windows Command Shell (cmd)
+  pattern: (?i)\bcmd\.exe"?\s*/[ck]\b
+  techniques:
+  - T1059.003
+  weight: 0.7
+  note: ''
+- name: WScript/CScript execution
+  pattern: (?i)(wscript|cscript)\.exe
+  techniques:
+  - T1059.005
+  - T1059.007
+  weight: 0.6
+  note: ''
+- name: MSHTA execution
+  pattern: (?i)mshta\.exe\s+(http|vbscript|javascript)
+  techniques:
+  - T1218.005
+  weight: 0.9
+  note: ''
+- name: Rundll32 execution
+  pattern: (?i)rundll32\.exe.*(url\.dll|javascript|vbscript)
+  techniques:
+  - T1218.011
+  weight: 0.9
+  note: ''
+- name: Regsvr32 execution (Squiblydoo)
+  pattern: (?i)regsvr32\.exe.*(?:/i:|/s|/u).*scrobj\.dll
+  techniques:
+  - T1218.010
+  weight: 1.0
+  note: ''
+- name: Certutil download
+  pattern: (?i)certutil.*-urlcache|certutil.*-f\s+http
+  techniques:
+  - T1105
+  weight: 0.9
+  note: ''
+- name: Certutil decode
+  pattern: (?i)certutil.*-decode
+  techniques:
+  - T1140
+  weight: 0.9
+  note: ''
+- name: Bitsadmin download
+  pattern: (?i)bitsadmin.*(?:/transfer|/addfile)
+  techniques:
+  - T1197
+  - T1105
+  weight: 0.9
+  note: ''
+- name: Schtasks create
+  pattern: (?i)\bschtasks(?:\.exe)?\b.*\s/create\b
+  techniques:
+  - T1053.005
+  weight: 0.9
+  note: ''
+- name: SC service create
+  pattern: (?i)sc\.exe\s+create\s+.*binpath=
+  techniques:
+  - T1543.003
+  weight: 0.9
+  note: ''
+- name: Registry Run keys
+  pattern: (?i)Software\\Microsoft\\Windows\\CurrentVersion\\Run
+  techniques:
+  - T1547.001
+  weight: 0.9
+  note: ''
+- name: WMI Subscription
+  pattern: (?i)__EventFilter|__EventConsumer|__FilterToConsumerBinding
+  techniques:
+  - T1546.003
+  weight: 0.9
+  note: ''
+- name: New User / Net User Add
+  pattern: (?i)net\s+user\s+.*\/add
+  techniques:
+  - T1136.001
+  weight: 0.9
+  note: ''
+- name: Local Group Add (Administrators)
+  pattern: (?i)net\s+localgroup\s+Administrators\s+.*\/add
+  techniques:
+  - T1078.001
+  - T1098
+  weight: 0.9
+  note: ''
+- name: Mimikatz sekurlsa
+  pattern: (?i)sekurlsa::logonpasswords|mimikatz
+  techniques:
+  - T1003.001
+  weight: 1.0
+  note: ''
+- name: LSASS dump (procdump)
+  pattern: (?i)procdump.*-ma.*lsass
+  techniques:
+  - T1003.001
+  weight: 1.0
+  note: ''
+- name: LSASS dump (comsvcs)
+  pattern: (?i)comsvcs\.dll.*MiniDump
+  techniques:
+  - T1003.001
+  weight: 1.0
+  note: ''
+- name: Reg save SAM/SYSTEM
+  pattern: (?i)reg\s+save\s+(HKLM\\)?(SAM|SYSTEM)
+  techniques:
+  - T1003.002
+  weight: 1.0
+  note: ''
+- name: NTDSutil
+  pattern: (?i)ntdsutil.*ac i ntds.*ifm
+  techniques:
+  - T1003.003
+  weight: 1.0
+  note: ''
+- name: DCSync
+  pattern: (?i)lsadump::dcsync|secretsdump.*-just-dc|drsuapi
+  techniques:
+  - T1003.006
+  weight: 1.0
+  note: ''
+- name: Secretsdump SAM/Registry
+  pattern: (?i)secretsdump.*(sam|system|security|registry)
+  techniques:
+  - T1003.002
+  weight: 1.0
+  note: ''
+- name: Kerberoast (Rubeus)
+  pattern: (?i)rubeus.*kerberoast
+  techniques:
+  - T1558.003
+  weight: 1.0
+  note: ''
+- name: Kerberoast (GetUserSPNs)
+  pattern: (?i)GetUserSPNs\.py
+  techniques:
+  - T1558.003
+  weight: 1.0
+  note: ''
+- name: PsExec lateral movement
+  pattern: (?i)psexec(\.exe)?\s+\\
+  techniques:
+  - T1569.002
+  - T1021.002
+  weight: 0.9
+  note: ''
+- name: WMIC lateral movement
+  pattern: (?i)wmic\s+/node:.*process\s+call\s+create
+  techniques:
+  - T1047
+  weight: 0.9
+  note: ''
+- name: Impacket wmiexec/dcomexec
+  pattern: (?i)cmd(\.exe)?\s+/Q\s+/c\s.*\\\\127\.0\.0\.1\\ADMIN\$\\__\d|wmiexec\.py|dcomexec\.py
+  techniques:
+  - T1047
+  - T1021.002
+  weight: 1.0
+  note: 'Output ADMIN$\__<epoch> fayliga yoziladi; dcomexec bo''lsa T1021.003'
+- name: Impacket smbexec
+  pattern: (?i)%COMSPEC%\s+/Q\s+/c\s+echo\s|\\\\127\.0\.0\.1\\C\$\\__output|smbexec\.py|\bBTOBTO\b
+  techniques:
+  - T1569.002
+  - T1021.002
+  weight: 1.0
+  note: 'Har buyruq uchun 7045 yangi xizmat (tasodifiy nom) + execute.bat'
+- name: SharpHound/BloodHound collection
+  pattern: (?i)sharphound|invoke-bloodhound|bloodhound(\.py|-python|-ce)?\b|azurehound|_BloodHound\.zip|--?collectionmethods?\s
+  techniques:
+  - T1087.002
+  - T1069.002
+  - T1482
+  weight: 1.0
+  note: 'AD recon; ko''pincha keyingi bosqich lateral movement'
+- name: winPEAS/linPEAS privesc recon
+  pattern: (?i)(win|lin)peas|peass-ng
+  techniques:
+  - T1082
+  - T1083
+  weight: 1.0
+  note: 'PrivEsc izlash; keyingi hodisalarda huquq oshirishni qidiring'
+- name: WinRM / PSRemoting
+  pattern: (?i)Enter-PSSession|Invoke-Command\s+-ComputerName
+  techniques:
+  - T1021.006
+  weight: 0.8
+  note: ''
+- name: RDP connection
+  pattern: (?i)mstsc\.exe|termserve
+  techniques:
+  - T1021.001
+  weight: 0.7
+  note: ''
+- name: Network scanning (nmap/masscan)
+  pattern: (?i)(nmap|masscan|Advanced IP Scanner)
+  techniques:
+  - T1046
+  weight: 0.8
+  note: ''
+- name: Network share discovery
+  pattern: (?i)net\s+view(\s+/domain)?|net\s+share
+  techniques:
+  - T1135
+  weight: 0.8
+  note: ''
+- name: Domain groups discovery
+  pattern: (?i)net\s+group.*/domain
+  techniques:
+  - T1069.002
+  weight: 0.9
+  note: ''
+- name: Domain users discovery
+  pattern: (?i)net\s+user\s+/domain
+  techniques:
+  - T1087.002
+  weight: 0.9
+  note: ''
+- name: Domain trust discovery
+  pattern: (?i)nltest\s+/domain_trusts
+  techniques:
+  - T1482
+  - T1018
+  weight: 0.9
+  note: ''
+- name: nltest /dclist
+  pattern: (?i)nltest\s+/dclist
+  techniques:
+  - T1018
+  weight: 0.9
+  note: ''
+- name: System info discovery
+  pattern: (?i)whoami|ipconfig|systeminfo
+  techniques:
+  - T1033
+  - T1016
+  - T1082
+  weight: 0.5
+  note: ''
+- name: AnyDesk
+  pattern: (?i)anydesk\.exe
+  techniques:
+  - T1219
+  weight: 0.9
+  note: ''
+- name: TeamViewer
+  pattern: (?i)teamviewer
+  techniques:
+  - T1219
+  weight: 0.9
+  note: ''
+- name: RMS (Remote Manipulator System)
+  pattern: (?i)rutserv|rfusclient
+  techniques:
+  - T1219
+  weight: 0.9
+  note: ''
+- name: Ammyy Admin
+  pattern: (?i)ammyy
+  techniques:
+  - T1219
+  weight: 0.9
+  note: ''
+- name: ScreenConnect
+  pattern: (?i)screenconnect
+  techniques:
+  - T1219
+  weight: 0.9
+  note: ''
+- name: RustDesk
+  pattern: (?i)rustdesk
+  techniques:
+  - T1219
+  weight: 0.9
+  note: ''
+- name: Clipboard access
+  pattern: (?i)Get-Clipboard
+  techniques:
+  - T1115
+  weight: 0.8
+  note: ''
+- name: Keylogger / SetWindowsHookEx
+  pattern: (?i)SetWindowsHookEx|GetAsyncKeyState
+  techniques:
+  - T1056.001
+  weight: 0.9
+  note: ''
+- name: Screenshot
+  pattern: (?i)CopyFromScreen
+  techniques:
+  - T1113
+  weight: 0.8
+  note: ''
+- name: 1C to Client-Bank manipulation
+  pattern: (?i)1c_to_kl\.txt|kl_to_1c\.txt
+  techniques:
+  - T1565.001
+  - T1657
+  weight: 1.0
+  note: Financial Theft
+- name: Hosts file modification
+  pattern: (?i)(drivers\\etc\\hosts|/etc/hosts)
+  techniques:
+  - T1565.001
+  weight: 0.8
+  note: Stored Data Manipulation (e.g. redirect bank/AV domains)
+- name: VSSAdmin Delete Shadows
+  pattern: (?i)vssadmin\s+delete\s+shadows
+  techniques:
+  - T1490
+  weight: 1.0
+  note: Ransomware precursor
+- name: WBAdmin backup delete
+  pattern: (?i)wbadmin\s+delete\s+(systemstatebackup|catalog)
+  techniques:
+  - T1490
+  weight: 1.0
+  note: ''
+- name: Bcdedit recovery off
+  pattern: (?i)bcdedit\s+/set\s+.*recoveryenabled\s+no
+  techniques:
+  - T1490
+  weight: 1.0
+  note: ''
+- name: Ransomware encrypt flag (-enc/--encrypt + target)
+  pattern: ^(?!.*\b(?:powershell|pwsh)(?:\.exe)?\b)(?!.*\b(?:gpg2?|openssl|cipher|7za?|rar|winrar|ffmpeg)(?:\.exe)?\s).*(?:^|\s)(?:--?enc(?:rypt)?|/encrypt)(?:\s+|=)["']?(?:[a-z]:\\|\\\\|/(?:mnt|srv|vmfs|data|home|var|opt|share)|\S*(?:shares?|vms?|backups?|disks?|volumes?|drives?)\b|all\b|\*)
+  techniques:
+  - T1486
+  weight: 0.9
+  note: 'Binar nomiga bog''lanmagan: -enc/-encrypt/--encrypt + disk/share/VMs nishoni (lock.exe -enc D:\Shares). powershell/pwsh -enc (base64, T1059.001) va gpg/openssl/cipher/7z chiqarib tashlangan'
+- name: Clear Event Logs (wevtutil)
+  pattern: (?i)wevtutil\s+cl
+  techniques:
+  - T1685.005
+  weight: 1.0
+  note: ''
+- name: Clear Event Logs (PowerShell)
+  pattern: (?i)Clear-EventLog
+  techniques:
+  - T1685.005
+  weight: 1.0
+  note: ''
+- name: Disable Windows Defender
+  pattern: (?i)(Set-MpPreference\s+-Disable|Add-MpPreference\s+-ExclusionPath|Remove-MpPreference|DisableRealtimeMonitoring|DisableAntiSpyware|sc\s+(stop|config)\s+WinDefend)
+  techniques:
+  - T1685
+  weight: 1.0
+  note: 'Impair Defenses: Disable or Modify Tools (T1562.001 renumbered to T1685 in v19)'
+- name: Firewall changes
+  pattern: (?i)netsh\s+advfirewall\s+firewall
+  techniques:
+  - T1686
+  weight: 0.8
+  note: ''
+- name: Archive Data for Exfiltration
+  pattern: (?i)\.7z|\.rar|\.zip
+  techniques:
+  - T1560.001
+  weight: 0.6
+  note: ''
+- name: Exfiltration to cloud
+  pattern: (?i)mega\.nz|mega\.io|dropbox\.com|dropboxusercontent|transfer\.sh|drive\.google\.com|docs\.google\.com/uc|anonfiles|gofile\.io|file\.io|wetransfer|pcloud|rclone\s+(?:copy|sync|move)\b
+  techniques:
+  - T1567.002
+  weight: 0.9
+  note: ''
+- name: DNS tunneling (iodine/dnscat)
+  pattern: (?i)iodine|dnscat
+  techniques:
+  - T1071.004
+  - T1048.003
+  weight: 0.9
+  note: ''
+- name: Tunneling (ngrok/chisel/frp)
+  pattern: (?i)ngrok|chisel|frpc|plink
+  techniques:
+  - T1572
+  - T1090.001
+  weight: 0.9
+  note: ''
+- name: Linux Crontab modification
+  pattern: crontab|/etc/cron
+  techniques:
+  - T1053.003
+  weight: 0.8
+  note: ''
+- name: Linux Systemd Unit
+  pattern: systemctl.*enable|/etc/systemd/system
+  techniques:
+  - T1543.002
+  weight: 0.8
+  note: ''
+- name: Linux SSH Authorized Keys
+  pattern: authorized_keys
+  techniques:
+  - T1098.004
+  weight: 0.8
+  note: ''
+- name: Linux Useradd
+  pattern: useradd|adduser
+  techniques:
+  - T1136.001
+  weight: 0.8
+  note: ''
+- name: Linux Passwd edit
+  pattern: /etc/passwd|/etc/shadow
+  techniques:
+  - T1003.008
+  weight: 0.8
+  note: ''
+- name: Linux Sudoers edit
+  pattern: /etc/sudoers
+  techniques:
+  - T1548.003
+  weight: 0.8
+  note: ''
+- name: Linux SUID binaries
+  pattern: chmod\s+u\+s|chmod\s+[4-7][0-7]{3}
+  techniques:
+  - T1548.001
+  weight: 0.8
+  note: ''
+- name: Linux ld.so.preload
+  pattern: /etc/ld\.so\.preload
+  techniques:
+  - T1574.006
+  weight: 0.9
+  note: ''
+- name: Linux Bash Profile
+  pattern: \.bashrc|\.bash_profile
+  techniques:
+  - T1546.004
+  weight: 0.8
+  note: ''
+- name: Linux Clear History
+  pattern: history\s+-c|/dev/null.*\.bash_history
+  techniques:
+  - T1070.003
+  weight: 0.9
+  note: ''
+- name: Linux rm logs
+  pattern: rm.*-(r)?f.*/var/log
+  techniques:
+  - T1685.006
+  weight: 0.9
+  note: ''
+- name: Linux Reverse Shell (nc)
+  pattern: nc\s+-e|ncat\s+-e
+  techniques:
+  - T1059.004
+  weight: 0.9
+  note: ''
+- name: Linux Reverse Shell (bash tcp)
+  pattern: bash\s+-i.*>&\s*/dev/tcp
+  techniques:
+  - T1059.004
+  weight: 1.0
+  note: ''
+- name: Linux Python PTY
+  pattern: python.*-c.*pty\.spawn
+  techniques:
+  - T1059.006
+  weight: 0.9
+  note: ''
+- name: Webshell upload or access
+  pattern: (upload\.php.*filename=.*\.(php|jsp|aspx|ashx))|(shell\.php\?cmd=|cmd\.jsp|c99|b374k)|(\.(jsp|php|aspx|ashx)$)|(\bPOST\s+\S+\.(php|jsp|aspx|ashx)\b)
+  techniques:
+  - T1505.003
+  weight: 1.0
+  note: Webshell yuklash yoki unga murojaat (18-sent dagi keng variant tiklandi)
+- name: SQL Injection / Directory Traversal
+  pattern: (?i)union\s+select|'\s*or\s*'1'='1|\.\./|sqlmap|/etc/passwd|waitfor\s+delay|pg_sleep
+  techniques:
+  - T1190
+  weight: 1.0
+  note: ''
+- name: Brute Force (hydra)
+  pattern: (?i)hydra.*ssh|brute
+  techniques:
+  - T1110.001
+  weight: 0.9
+  note: ''
+- name: Cryptominer (XMRig)
+  pattern: (?i)xmrig|xmr-stak|cpuminer|minerd\b|nicehash|stratum\+(?:tcp|ssl)://|--donate-level|--coin[= ]\w+|\s-o\s+[\w.\-]+:\d{2,5}\b.*\s-u\s+\S+
+  techniques:
+  - T1496
+  weight: 1.0
+  note: ''
+- name: Docker socket escape
+  pattern: docker\.sock
+  techniques:
+  - T1611
+  weight: 0.9
+  note: ''
+- name: Privileged container
+  pattern: --privileged
+  techniques:
+  - T1611
+  weight: 0.9
+  note: ''
+- name: ICS Modbus write coils
+  pattern: (?i)Write Single Coil|Write Multiple Registers
+  techniques:
+  - T1692.001
+  - T0836
+  weight: 0.9
+  note: ''
+- name: ICS S7 Stop CPU
+  pattern: (?i)stop CPU|plc stop
+  techniques:
+  - T0816
+  - T0881
+  weight: 0.9
+  note: ''
+- name: ICS Program Download/Upload
+  pattern: (?i)program (download|upload)
+  techniques:
+  - T0843
+  - T0845
+  weight: 0.8
+  note: ''
+- name: ICS Change Operating Mode
+  pattern: (?i)operating mode
+  techniques:
+  - T0858
+  weight: 0.8
+  note: ''
+- name: ICS Alarm Suppression
+  pattern: (?i)alarm suppression
+  techniques:
+  - T0878
+  weight: 0.8
+  note: ''
+- name: ICS HMI/SCADA Service Stop
+  pattern: (?i)hmi.*stop|scada.*stop
+  techniques:
+  - T0881
+  weight: 0.9
+  note: ''
+- name: ICS Loss of Availability
+  pattern: (?i)loss of availability
+  techniques:
+  - T0826
+  weight: 0.8
+  note: ''
+- name: ICS Default Credentials
+  pattern: (?i)default (password|credentials)
+  techniques:
+  - T1694.001
+  weight: 0.8
+  note: ''
+- name: Mobile ADB Install
+  pattern: (?i)adb\s+install
+  techniques:
+  - T1626
+  weight: 0.8
+  note: ''
+- name: Mobile APK
+  pattern: (?i)\.apk
+  techniques:
+  - T1627
+  weight: 0.8
+  note: ''
+- name: ICS PLC Stop/Halt
+  pattern: (?i)stop\s*cpu|plc\s*stop|cpu\s*halt|run/stop
+  techniques:
+  - T0816
+  - T0881
+  weight: 0.9
+  note: ''
+- name: ICS Modbus Function Codes
+  pattern: (?i)function\s*code\s*(5|6|15|16)
+  techniques:
+  - T0836
+  - T1692.001
+  weight: 0.9
+  note: ''
+- name: ICS Write Coils/Registers
+  pattern: (?i)write\s*(single|multiple)\s*(coil|register)
+  techniques:
+  - T0836
+  - T1692.001
+  weight: 0.9
+  note: ''
+- name: ICS Setpoint Change
+  pattern: (?i)setpoint\s*chang
+  techniques:
+  - T0836
+  weight: 0.8
+  note: ''
+- name: ICS Parameter Modification
+  pattern: (?i)parameter\s*(write|modif)
+  techniques:
+  - T0836
+  weight: 0.8
+  note: ''
+- name: ICS Tag Write
+  pattern: (?i)tag\s*write
+  techniques:
+  - T0836
+  weight: 0.8
+  note: ''
+- name: ICS Program/Project Download
+  pattern: (?i)program\s*download|project\s*download
+  techniques:
+  - T0821
+  - T0843
+  weight: 0.8
+  note: ''
+- name: ICS Ladder Logic
+  pattern: (?i)ladder\s*logic
+  techniques:
+  - T0821
+  weight: 0.8
+  note: ''
+- name: ICS Firmware Update/Upload
+  pattern: (?i)firmware\s*(update|upload)
+  techniques:
+  - T0843
+  weight: 0.8
+  note: ''
+- name: ICS Engineering Tools (Siemens)
+  pattern: (?i)tia\s*portal|step\s*7
+  techniques:
+  - T0858
+  weight: 0.7
+  note: ''
+- name: ICS Engineering Tools (Rockwell/Schneider)
+  pattern: (?i)rslogix|studio\s*5000|unity\s*pro
+  techniques:
+  - T0858
+  weight: 0.7
+  note: ''
+- name: ICS Engineering Tools (CodeSys)
+  pattern: (?i)codesys
+  techniques:
+  - T0858
+  weight: 0.7
+  note: ''
+- name: ICS HMI/SCADA Stop/Fail
+  pattern: (?i)hmi.*stop|scada.*stop|wincc.*(stop|fail)|ignition.*stop
+  techniques:
+  - T0881
+  weight: 0.9
+  note: ''
+- name: ICS Protocol (Modbus/S7/DNP3)
+  pattern: (?i)\b(modbus|s7comm|dnp3)\b
+  techniques:
+  - T0885
+  - T0830
+  weight: 0.3
+  note: ''
+- name: ICS Protocol (CIP/ENIP/PROFINET/BACNET)
+  pattern: (?i)\b(enip|cip|iec-?104|bacnet|profinet)\b
+  techniques:
+  - T0885
+  - T0830
+  weight: 0.3
+  note: ''
+- name: ICS Loss of View/Control
+  pattern: (?i)loss\s*of\s*(view|control)
+  techniques:
+  - T0829
+  - T0827
+  weight: 0.9
+  note: ''
+- name: ICS Communication Loss/Fail
+  pattern: (?i)communication\s*(loss|fail)
+  techniques:
+  - T0829
+  weight: 0.8
+  note: ''
+- name: ICS WinCC/Step7/RSLinx Service
+  pattern: (?i)wincc|step7|rslinx|codesys
+  techniques:
+  - T0858
+  weight: 0.6
+  note: Matches engineering software processes or services
+- name: Exfiltration via curl/wget upload
+  pattern: \b(curl|wget)\b[^|;&]{0,200}?(-F\s+\S*=@|--form\s+\S*=@|--upload-file|--data-binary\s+@|\s-T\s+\S)
+  techniques:
+  - T1041
+  - T1567
+  weight: 0.85
+  note: Fayl tashqi manzilga POST/PUT qilinyapti (chunk-chunk yuborilsa aniq exfil)
+- name: Archive via tar/zip (exfil tayyorgarligi)
+  pattern: \btar\s+-?[a-z]*c[a-z]*f\b|\bzip\s+-r\b|\b7z\s+a\b
+  techniques:
+  - T1560.001
+  weight: 0.6
+  note: Chiqarishdan oldin ma'lumotni arxivlash
+- name: Sudo GTFOBins shell escape
+  pattern: \bsudo\b[^|;&]{0,120}\b(find|vim|vi|less|more|awk|nmap|python3?|perl|env|tar|man)\b[^|;&]{0,120}(-exec|--exec|/bin/sh|/bin/bash|\s-p\b|!sh)
+  techniques:
+  - T1548.003
+  weight: 0.85
+  note: 'Ruxsat oshirish: sudo ga ruxsat etilgan dasturdan shell chiqarish'
+- name: SSH maxfiy kalitni o'qish
+  pattern: \b(cat|cp|scp|less|more|head|tail|base64|strings)\b[^|;&]{0,120}(\.ssh/id_(rsa|dsa|ecdsa|ed25519)|/\.ssh/identity|\.pem\b)
+  techniques:
+  - T1552.004
+  weight: 0.85
+  note: Maxfiy kalit o'g'irlanyapti
+- name: SSH kalit bilan yon harakat
+  pattern: \bssh\b[^|;&]{0,80}-i\s+\S+[^|;&]{0,80}@
+  techniques:
+  - T1021.004
+  weight: 0.8
+  note: O'g'irlangan kalit bilan boshqa hostga kirish
+- name: Baza dampi (ma'lumot yig'ish)
+  pattern: \b(pg_dump|pg_dumpall|mysqldump|mongodump)\b
+  techniques:
+  - T1005
+  weight: 0.75
+  note: Ma'lumotlar bazasi eksport qilinyapti
+- name: Appliance/CGI webshell (kengaytirilgan)
+  pattern: (?i)\.(cgi|pl|py|sh)\?.{0,80}(cmd|exec|cmd_string|command|run|shell)=|(lastauthserverused|compcheckresult|sessionserver|getcomponent)\.cgi
+  techniques:
+  - T1505.003
+  weight: 0.9
+  note: Appliance (Ivanti/Citrix/F5) uslubidagi .cgi/.pl webshell — .php ro'yxatidan tashqari
+- name: Appliance auth bypass (path traversal API)
+  pattern: (?i)/api/v\d+/\S*\.\./\.\./(system|license|config|admin|maintenance|totp)
+  techniques:
+  - T1190
+  weight: 0.9
+  note: Autentifikatsiyani chetlab o'tish uchun ../../ bilan himoyalangan API ga kirish
+- name: Curl/Wget yuklash (-o yoki teskari tartib)
+  pattern: (?i)\b(curl|wget)\b[^|;&]{0,200}https?://\S+[^|;&]{0,60}\s-o\s+\S|\b(curl|wget)\b[^|;&]{0,60}\s-o\s+\S+[^|;&]{0,200}https?://
+  techniques:
+  - T1105
+  weight: 0.85
+  note: curl/wget yuklab olish — bayroq tartibi teskari yoki -o URL dan keyin
+- name: Tushirilgan yashirin faylni bajarish
+  pattern: (?<![\w/])/(tmp|dev/shm|var/tmp)/\.\w[\w.-]*(\s|$)
+  techniques:
+  - T1059.004
+  weight: 0.8
+  note: /tmp yoki /dev/shm dagi yashirin (nuqtali) faylni to'g'ridan-to'g'ri ishga tushirish
+- name: Linux log tozalash (kengaytirilgan yo'l)
+  pattern: (?i)\brm\b[^|;&]{0,40}-\w*f[^|;&]{0,120}(/var/log|/home/runtime/logs|/data/runtime/logs|sessionserver\.log|\S+\.log)\b
+  techniques:
+  - T1070.002
+  weight: 0.85
+  note: Log fayl o'chirilyapti — /var/log dan tashqari appliance log yo'llari ham
+- name: C2 nostandart port (beacon)
+  pattern: (?i)dport=(4444|1337|8443|9001|6667|31337)|beacon\b.{0,40}(4444|8443|1337)|:(4444|1337|31337)\b
+  techniques:
+  - T1571
+  weight: 0.7
+  note: Nostandart portga chiquvchi C2/beacon
+- name: Discovery — tizim/foydalanuvchi
+  pattern: (?i)\b(whoami|hostname|hostnamectl)\b|\buname\s+-\w|[=\s]id(\s|$)|\bcat\b\s+/etc/(os-release|issue|hostname)\b
+  techniques:
+  - T1082
+  - T1033
+  weight: 0.5
+  note: Discovery — id/whoami/uname/hostname
+- name: Discovery — fayl/jarayon/tarmoq
+  pattern: (?i)\bps\s+-?[eauxf]+\b|\bnetstat\s+-\w+|(?<!-)\bss\s+-\w+|\bfind\s+/\S*\s+-name|\bls\s+-la\s+/
+  techniques:
+  - T1057
+  - T1049
+  - T1083
+  weight: 0.4
+  note: Discovery — ps/netstat/ss/find/ls
+- name: Kernel thread name masquerade
+  pattern: (?i)(?:/tmp|/var/tmp|/dev/shm|/run/user/\d+|/home/[^/\s]+)/\S*?(?:kswapd\d*|kworker[\w/:.-]*|ksoftirqd\S*|kthreadd|migration/\d+|rcu_sched)\b
+  techniques:
+  - T1036.005
+  weight: 0.9
+  note: ''
+- name: Cron line to suspicious target
+  pattern: (?i)(?:^|[\s'"])(?:\*|[\d,\-/*]+)(?:\s+(?:\*|[\d,\-/*]+)){4}\s+(?:\S+\s+)?\S*(?:/tmp/|/var/tmp/|/dev/shm/|curl\s|wget\s|\|\s*(?:ba)?sh\b)
+  techniques:
+  - T1053.003
+  weight: 0.85
+  note: ''
+- name: Offline password cracking
+  pattern: (?i)(?<![\w.-])(?:hashcat(?:\.exe)?|ophcrack)(?![\w.-])|(?<![\w.-])john(?:\.exe)?\s+(?:--(?:wordlist|format|show|incremental|rules)\b|\S+\.(?:txt|hash|hashes|lst)\b)|\s-m\s+(?:13100|18200|19700)\b
+  techniques:
+  - T1110.002
+  weight: 0.9
+  note: ''
+- name: DNS TXT/NULL tunnel query
+  pattern: (?i)\b(?:dig|nslookup|host|Resolve-DnsName)\b.*?(?:\b(?:TXT|NULL|type=txt|type=null)\b.*?(?:\b[a-zA-Z0-9+/=_-]{16,}|<[^>]+>)\.[\w.-]+|(?:\b[a-zA-Z0-9+/=_-]{16,}|<[^>]+>)\.[\w.-]+.*?\b(?:TXT|NULL|type=txt|type=null)\b)
+  techniques:
+  - T1071.004
+  - T1048.003
+  weight: 0.85
+  note: ''
+- name: Remote copy to external host
+  pattern: (?i)\b(?:scp|rsync|sftp|pscp)(?:\.exe)?\b\s+(?:-\S+(?:\s+\S+)?\s+)*\S+\s+(?:\S+@)?[\w.-]+:\S*
+  techniques:
+  - T1048
+  weight: 0.8
+  note: ''
+- name: Archive from network share
+  pattern: (?i)\b(?:7z|7za|rar|winrar|robocopy|xcopy)(?:\.exe)?\b.*\s(?:\\\\[\w.$-]+\\|[d-z]:\\)
+  techniques:
+  - T1039
+  weight: 0.85
+  note: ''

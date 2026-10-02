@@ -1,0 +1,3 @@
+"""
+SIEM query generator.
+"""

@@ -1,0 +1,335 @@
+{
+ "meta": {
+  "os": "linux",
+  "hostname": "db-prod-02",
+  "collected_at": "2026-09-18T08:00:20+00:00",
+  "collector_version": "1.1",
+  "deep": {
+   "processes": 4,
+   "files_scanned": 4210,
+   "files_emitted": 0,
+   "files_truncated": false,
+   "timed_out": false
+  }
+ },
+ "processes": [
+  {
+   "pid": 1,
+   "ppid": 0,
+   "name": "systemd",
+   "path": "/usr/lib/systemd/systemd",
+   "cmdline": "/sbin/init",
+   "user": "root",
+   "start_time": "",
+   "signed": "n/a",
+   "sha256": "e0031c189e34e10d9c202fa8d75f72d3296a239164fe6b07e7dc206c7b723d98",
+   "exe_deleted": false
+  },
+  {
+   "pid": 640,
+   "ppid": 1,
+   "name": "sshd",
+   "path": "/usr/sbin/sshd",
+   "cmdline": "sshd: /usr/sbin/sshd -D",
+   "user": "root",
+   "start_time": "",
+   "signed": "n/a",
+   "sha256": "8b51ac5ca03b0a599e3951a7825c5e6028b62a6c82c9565b3d6a3660d2c7fd00",
+   "exe_deleted": false
+  },
+  {
+   "pid": 733,
+   "ppid": 1,
+   "name": "postgres",
+   "path": "/usr/lib/postgresql/14/bin/postgres",
+   "cmdline": "/usr/lib/postgresql/14/bin/postgres -D /var/lib/postgresql/14/main",
+   "user": "postgres",
+   "start_time": "",
+   "signed": "n/a",
+   "sha256": "a942b37ccfaf5a813b1432caa209a43b9d144e47ad0de1549c289c253e556cd5",
+   "exe_deleted": false
+  },
+  {
+   "pid": 701,
+   "ppid": 1,
+   "name": "cron",
+   "path": "/usr/sbin/cron",
+   "cmdline": "/usr/sbin/cron -f",
+   "user": "root",
+   "start_time": "",
+   "signed": "n/a",
+   "sha256": "c374eea599bb3c50ed4432ef57aee1263cdc3c83d1c1a3c4d7e19eef1af8439b",
+   "exe_deleted": false
+  }
+ ],
+ "suspicious_files": [
+  {
+   "path": "/usr/local/bin/pg_backup.sh",
+   "ext": "sh",
+   "size": 480,
+   "mtime": "2026-06-11T09:00:00",
+   "ctime": "2026-06-11T09:00:00",
+   "sha256": "aef45dd1a25d3545ebd824dcb0a74ea539c096ff3b45d52dd014d0fdf0121340",
+   "signed": "n/a",
+   "exe_magic": false,
+   "hidden": false,
+   "head": "#!/bin/bash\npg_dump -Fc customer_vault > /var/backups/pg/cv.dump",
+   "webshell_hint": false
+  }
+ ],
+ "users": [
+  {
+   "name": "root",
+   "enabled": true,
+   "is_admin": true,
+   "uid": 0,
+   "shell": "/bin/bash",
+   "groups": [
+    "root"
+   ]
+  },
+  {
+   "name": "daemon",
+   "enabled": false,
+   "is_admin": false,
+   "uid": 1,
+   "shell": "/usr/sbin/nologin",
+   "groups": [
+    "daemon"
+   ]
+  },
+  {
+   "name": "sshd",
+   "enabled": false,
+   "is_admin": false,
+   "uid": 110,
+   "shell": "/usr/sbin/nologin",
+   "groups": [
+    "sshd"
+   ]
+  },
+  {
+   "name": "syslog",
+   "enabled": false,
+   "is_admin": false,
+   "uid": 104,
+   "shell": "/usr/sbin/nologin",
+   "groups": [
+    "syslog"
+   ]
+  },
+  {
+   "name": "ubuntu",
+   "enabled": true,
+   "is_admin": true,
+   "uid": 1000,
+   "shell": "/bin/bash",
+   "groups": [
+    "ubuntu",
+    "sudo",
+    "adm"
+   ]
+  },
+  {
+   "name": "postgres",
+   "enabled": true,
+   "is_admin": false,
+   "uid": 115,
+   "shell": "/bin/bash",
+   "groups": [
+    "postgres"
+   ]
+  }
+ ],
+ "services": [
+  {
+   "name": "ssh.service",
+   "display": "ssh.service",
+   "state": "enabled",
+   "start_mode": "auto",
+   "binary_path": "",
+   "run_as": ""
+  },
+  {
+   "name": "cron.service",
+   "display": "cron.service",
+   "state": "enabled",
+   "start_mode": "auto",
+   "binary_path": "",
+   "run_as": ""
+  },
+  {
+   "name": "rsyslog.service",
+   "display": "rsyslog.service",
+   "state": "enabled",
+   "start_mode": "auto",
+   "binary_path": "",
+   "run_as": ""
+  },
+  {
+   "name": "ufw.service",
+   "display": "ufw.service",
+   "state": "enabled",
+   "start_mode": "auto",
+   "binary_path": "",
+   "run_as": ""
+  },
+  {
+   "name": "systemd-timesyncd.service",
+   "display": "systemd-timesyncd.service",
+   "state": "enabled",
+   "start_mode": "auto",
+   "binary_path": "",
+   "run_as": ""
+  },
+  {
+   "name": "unattended-upgrades.service",
+   "display": "unattended-upgrades.service",
+   "state": "enabled",
+   "start_mode": "auto",
+   "binary_path": "",
+   "run_as": ""
+  },
+  {
+   "name": "auditd.service",
+   "display": "auditd.service",
+   "state": "enabled",
+   "start_mode": "auto",
+   "binary_path": "",
+   "run_as": ""
+  },
+  {
+   "name": "postgresql.service",
+   "display": "postgresql.service",
+   "state": "enabled",
+   "start_mode": "auto",
+   "binary_path": "",
+   "run_as": ""
+  }
+ ],
+ "tasks": [
+  {
+   "name": "apt-daily.timer",
+   "path": "/etc/systemd/system",
+   "enabled": true,
+   "author": "system",
+   "action": "apt-daily.service",
+   "trigger": "timer"
+  },
+  {
+   "name": "logrotate.timer",
+   "path": "/etc/systemd/system",
+   "enabled": true,
+   "author": "system",
+   "action": "logrotate.service",
+   "trigger": "timer"
+  },
+  {
+   "name": "fstrim.timer",
+   "path": "/etc/systemd/system",
+   "enabled": true,
+   "author": "system",
+   "action": "fstrim.service",
+   "trigger": "timer"
+  }
+ ],
+ "cron": [
+  {
+   "user": "root",
+   "job": "/etc/crontab"
+  },
+  {
+   "user": "postgres",
+   "job": "30 1 * * * /usr/local/bin/pg_backup.sh"
+  }
+ ],
+ "autoruns": [],
+ "ssh_authorized_keys": [
+  {
+   "file": "/home/ubuntu/.ssh/authorized_keys",
+   "key": "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIadmin1 ubuntu@bastion"
+  }
+ ],
+ "listening_ports": [
+  {
+   "proto": "tcp",
+   "addr": "10.0.2.20",
+   "port": 5432,
+   "pid": 733,
+   "process": "postgres"
+  },
+  {
+   "proto": "tcp",
+   "addr": "0.0.0.0",
+   "port": 22,
+   "pid": 640,
+   "process": "sshd"
+  }
+ ],
+ "connections": [],
+ "hosts_file": [
+  "127.0.0.1 localhost"
+ ],
+ "suid_files": [
+  {
+   "path": "/usr/bin/passwd"
+  },
+  {
+   "path": "/usr/bin/sudo"
+  },
+  {
+   "path": "/usr/bin/su"
+  },
+  {
+   "path": "/usr/bin/mount"
+  },
+  {
+   "path": "/usr/bin/umount"
+  },
+  {
+   "path": "/usr/bin/chsh"
+  },
+  {
+   "path": "/usr/bin/gpasswd"
+  },
+  {
+   "path": "/usr/bin/newgrp"
+  },
+  {
+   "path": "/usr/bin/chfn"
+  },
+  {
+   "path": "/usr/bin/pkexec"
+  },
+  {
+   "path": "/usr/lib/openssh/ssh-keysign"
+  }
+ ],
+ "remote_access_tools": [],
+ "recent_modified": [],
+ "proxy": {
+  "environment": "",
+  "apt": "",
+  "http_proxy": ""
+ },
+ "dns_servers": [
+  {
+   "interface": "resolv.conf",
+   "addresses": "10.0.0.2"
+  }
+ ],
+ "root_cas": [
+  {
+   "ca_certificates_crt_count": 140,
+   "local_share": ""
+  }
+ ],
+ "portproxy": [],
+ "firewall_profiles": [
+  {
+   "name": "ufw",
+   "state": "Status: active"
+  }
+ ],
+ "errors": []
+}

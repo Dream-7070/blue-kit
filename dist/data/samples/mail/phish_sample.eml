@@ -1,0 +1,26 @@
+From: "Microsoft" <admin@bad-domain.com>
+To: victim@company.com
+Subject: Urgent: Verify your account
+Date: Wed, 10 May 2023 10:00:00 +0000
+Message-ID: <12345@bad-domain.com>
+Reply-To: attacker@evil.com
+Authentication-Results: spf=fail (sender IP is 1.2.3.4) smtp.mailfrom=bad-domain.com;
+Content-Type: multipart/mixed; boundary="BOUNDARY"
+
+--BOUNDARY
+Content-Type: text/html; charset="utf-8"
+
+<html>
+<body>
+<p>Shoshilinch: hisobingiz bloklanadi. Iltimos quyidagi ssilkaga o'ting:</p>
+<p><a href="http://xn--micrsoft-9db.com/login">microsoft.com</a></p>
+</body>
+</html>
+--BOUNDARY
+Content-Type: application/octet-stream; name="invoice.pdf.exe"
+Content-Disposition: attachment; filename="invoice.pdf.exe"
+Content-Transfer-Encoding: base64
+
+TVqQAAMAAAAEAAAA//8AALgAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAA
+--BOUNDARY--

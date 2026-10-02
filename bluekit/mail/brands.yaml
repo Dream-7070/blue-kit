@@ -1,0 +1,34 @@
+brands:
+  - {name: "Microsoft", domains: ["microsoft.com", "outlook.com", "office.com", "live.com"]}
+  - {name: "Google", domains: ["google.com", "gmail.com"]}
+  - {name: "Apple", domains: ["apple.com", "icloud.com"]}
+  - {name: "Amazon", domains: ["amazon.com", "aws.amazon.com"]}
+  - {name: "PayPal", domains: ["paypal.com"]}
+  - {name: "DHL", domains: ["dhl.com"]}
+  - {name: "FedEx", domains: ["fedex.com"]}
+  - {name: "Telegram", domains: ["telegram.org", "t.me"]}
+  - {name: "Facebook", domains: ["facebook.com", "fb.com"]}
+  - {name: "Instagram", domains: ["instagram.com"]}
+  - {name: "LinkedIn", domains: ["linkedin.com"]}
+  - {name: "Binance", domains: ["binance.com"]}
+  - {name: "Uzcard", domains: ["uzcard.uz"]}
+  - {name: "Humo", domains: ["humocard.uz"]}
+  - {name: "Click", domains: ["click.uz"]}
+  - {name: "Payme", domains: ["payme.uz"]}
+  - {name: "Beeline", domains: ["beeline.uz"]}
+  - {name: "Ucell", domains: ["ucell.uz"]}
+  - {name: "Uzum", domains: ["uzum.uz"]}
+shorteners: ["bit.ly","tinyurl.com","t.co","goo.gl","is.gd","cutt.ly","rb.gy","shorturl.at","ow.ly","buff.ly"]
+corporate_domains: []
+anonymous_mailers:
+  - anonymousemail.eu
+  - guerrillamail.com
+  - mailinator.com
+  - 10minutemail.com
+  - temp-mail.org
+  - yopmail.com
+  - protonmail.com
+  - tutanota.com
+  - emkei.cz
+  - anonymouse.org
+  - sendanonymousemail.net

