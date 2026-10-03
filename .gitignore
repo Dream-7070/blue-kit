@@ -48,3 +48,23 @@ blue-kit-dist.zip
 *~
 .DS_Store
 Thumbs.db
+
+# Maxfiy: CTF topshiriqlari, flaglar, ANSWER_KEY va real loglar (public repo ga chiqmasin)
+test/
+tests/fixtures/cases/
+dist/web-work/
+web-work/*.csv
+*.zip
+
+# Vaqtinchalik debug/sinov fayllari
+dbg*.py
+out.txt
+snap.json
+test.json
+test.txt
+test_err.txt
+test_while.sh
+tests_output.txt
+sysctl.out
+run_all_tests.py
+tests/*_work/out_*.json

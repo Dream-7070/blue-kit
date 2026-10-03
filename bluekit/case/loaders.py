@@ -24,10 +24,14 @@ def load_case(path):
         with tempfile.TemporaryDirectory() as d:
             with zipfile.ZipFile(path, 'r') as z:
                 z.extractall(d)
-            return load_folder(d)
-    if os.path.isdir(path):
-        return load_folder(path)
-    return load_challenge_json(path)
+            events, ctx = load_folder(d)
+    elif os.path.isdir(path):
+        events, ctx = load_folder(path)
+    else:
+        events, ctx = load_challenge_json(path)
+    if not events:
+        raise ValueError("Unknown format: fayldan birorta hodisa o'qilmadi (records / evidence topilmadi)")
+    return events, ctx
 
 def load_challenge_json(path):
     if not os.path.exists(path):

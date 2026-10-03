@@ -359,7 +359,8 @@ class SigmaEngine:
             
             # 1. exact match in raw
             for rk, rv in raw.items():
-                if rk.lower() == field_lower:
+                # DictReader ortiqcha ustunlarni None kalit ostiga yig'adi
+                if rk is not None and str(rk).lower() == field_lower:
                     val = str(rv)
                     matched_fields.append(field)
                     break

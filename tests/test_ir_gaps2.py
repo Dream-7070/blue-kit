@@ -55,6 +55,8 @@ class TestIRGaps2(unittest.TestCase):
         self.assertTrue(self.match_technique("7z a out.7z Z:\\Projects", "T1039"))
         self.assertTrue(self.match_technique("robocopy \\\\fs\\share C:\\t /E", "T1039"))
         self.assertFalse(self.match_technique("7z a out.7z C:\\Users\\a\\Docs", "T1039"))
+        # D: fayl serverlarda odatda LOKAL ma'lumot diski: bu T1005, T1039 emas
+        self.assertFalse(self.match_technique("7z.exe a -mx1 C:\\Windows\\Temp\\r.7z D:\\Shares\\Finance\\", "T1039"))
 
     def test_lateral_in_mitre_summary(self):
         s1 = AttackStage(stage_id=1, 

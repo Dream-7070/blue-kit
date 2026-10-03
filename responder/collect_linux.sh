@@ -3,7 +3,7 @@
 # Remote/piped execution: ssh user@host 'bash -s' < collect_linux.sh > snap.json
 
 if [ -z "${BASH_VERSION:-}" ]; then
-  echo "[!] collect_linux.sh bash talab qiladi: sudo bash collect_linux.sh -o snap.json" >&2
+  echo "[!] collect_linux.sh bash talab qiladi: sudo bash collect_linux.sh -o snap.json (bash yo'q hostda: sh collect_posix.sh -o snap.json -L logs)" >&2
   exit 2
 fi
 out="-"

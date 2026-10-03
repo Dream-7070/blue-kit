@@ -29,9 +29,12 @@ def build_incident_model(chain: AttackChain, source_name: str, total_events: int
         # Tasdiqlangan C2 kanali — kamida HIGH: hujumchi hostni masofadan boshqara oladi
         severity = "HIGH"
         conf = 90
-    else:
+    elif chain.stages:
         severity = "MEDIUM"
         conf = 80
+    else:
+        severity = "NONE"
+        conf = 0
 
     # Sarlavha zanjirdagi HAQIQIY fazalardan quriladi (oldin CTF namunasi qattiq yozilgan edi)
     _phase_order = ["Reconnaissance", "Initial Access", "Execution", "Defense Evasion",
@@ -259,6 +262,13 @@ def build_incident_model(chain: AttackChain, source_name: str, total_events: int
     for h in _rec_hosts:
         if h: recommendations["recovery"].append(f"Verify integrity of data on {h} against a known-good backup.")
         
+    # krbtgt 2x reset FAQAT DCSync / Golden Ticket dalili bo'lsa: aks holda butun domen Kerberos chiptalari bekorga uziladi (SLA)
+    _krb = sorted({s.technique_id for s in chain.stages if s.technique_id in ('T1003.006', 'T1558.001')})
+    if _krb:
+        recommendations["recovery"].append(
+            f"Reset the krbtgt password TWICE ({', '.join(_krb)} observed): "
+            "Set-ADAccountPassword -Identity krbtgt -Reset -NewPassword (ConvertTo-SecureString ([guid]::NewGuid().Guid + 'Aa1!') -AsPlainText -Force). "
+            "Run the 2nd reset only after AD replication has completed (repadmin /syncall /AdeP); all Kerberos tickets become invalid — agree with the team because of SLA checks.")
     recommendations["recovery"].append("Monitor the listed IOCs for recurrence after recovery.")
 
     return IncidentReportModel(
@@ -282,12 +292,36 @@ def build_incident_model(chain: AttackChain, source_name: str, total_events: int
         recommendations=recommendations
     )
 
+def compute_verdict(model: IncidentReportModel) -> str:
+    """Verdikt dalildan: qadam yo'q -> NO_EVIDENCE; kamida bitta CONFIRMED+HIGH qadam -> CONFIRMED_BREACH; aks holda SUSPECTED."""
+    stages = model.chain.stages if model.chain else []
+    if not stages:
+        return "NO_EVIDENCE"
+    if any(getattr(s, 'status', 'CONFIRMED') == "CONFIRMED" and (getattr(s, 'confidence', 'HIGH') or "").upper() == "HIGH" for s in stages):
+        return "CONFIRMED_BREACH"
+    return "SUSPECTED"
+
+_VERDICT_BANNER = {
+    "ru": {"CONFIRMED_BREACH": "\U0001F534 **ПОДТВЕРЖДЕНО ({sev}):** Выявлена подозрительная активность на {n} хостах.",
+           "SUSPECTED": "\U0001F7E1 **ВЕРОЯТНО ({sev}):** Есть только косвенные признаки на {n} хостах — нужна ручная проверка.",
+           "NO_EVIDENCE": "⚪ **ПРИЗНАКОВ АТАКИ НЕ НАЙДЕНО** в проанализированных логах."},
+    "uz": {"CONFIRMED_BREACH": "🔴 **TASDIQLANGAN ({sev}):** {n} ta host bo'yicha shubhali faoliyat aniqlandi.",
+           "SUSPECTED": "🟡 **EHTIMOLIY ({sev}):** {n} ta hostda faqat bilvosita belgilar bor — qo'lda tekshiring.",
+           "NO_EVIDENCE": "⚪ **HUJUM BELGISI TOPILMADI** tahlil qilingan loglarda."},
+    "en": {"CONFIRMED_BREACH": "\U0001F534 **CONFIRMED ({sev}):** Suspicious activity detected across {n} hosts.",
+           "SUSPECTED": "\U0001F7E1 **SUSPECTED ({sev}):** Only indirect indicators on {n} hosts — verify manually.",
+           "NO_EVIDENCE": "⚪ **NO ATTACK INDICATORS FOUND** in the analysed logs."},
+}
+
+def _verdict_banner(model: IncidentReportModel, lang: str) -> str:
+    return _VERDICT_BANNER[lang][compute_verdict(model)].format(sev=model.severity, n=len(model.hosts))
+
 def render_scoring_json(model: IncidentReportModel) -> str:
     """Produces clean machine-readable JSON for competition automated scoring."""
     scoring_data = {
         "case_id": model.case_id,
         "title": model.title,
-        "verdict": "CONFIRMED_BREACH",
+        "verdict": compute_verdict(model),
         "severity": model.severity,
         "confidence_score": f"{model.confidence_pct}%",
         "time_window": {
@@ -417,12 +451,14 @@ def _render_ru(model: IncidentReportModel) -> str:
     _c2 = defang_ip(model.chain.attacker_ips[0]) if model.chain.attacker_ips else None
     
     _parts = []
-    _parts.append(f"\U0001F534 **ПОДТВЕРЖДЕНО ({model.severity}):** Выявлена подозрительная активность на {len(model.hosts)} хостах.")
+    _parts.append(_verdict_banner(model, "ru"))
     if _c2:
         _parts.append(f"Внешний адрес: **{_c2}**.")
     _parts.append("Зафиксированные фазы: " + ", ".join(_phases) + ".")
     _parts.append("MITRE ATT&CK: " + ", ".join(_techs) + ".")
     _parts.append(f"Затронутые хосты: {_hosts_s}.")
+    if not model.chain.stages:
+        _parts = _parts[:1]
     _parts.append("")
     _parts.append("> Данное резюме основано только на проанализированных логах. Неохваченные фазы следует исследовать отдельно.")
     ru_summary = " ".join(_parts[:-2]) + "\n\n" + _parts[-1]
@@ -539,12 +575,14 @@ def _render_uz(model: IncidentReportModel) -> str:
         if _i.get("type") in ("domain", "url") and not _dom:
             _dom = str(_i.get("value", ""))
     _parts = []
-    _parts.append(f"🔴 **TASDIQLANGAN ({model.severity}):** {len(model.hosts)} ta host bo'yicha shubhali faoliyat aniqlandi.")
+    _parts.append(_verdict_banner(model, "uz"))
     if _c2:
         _parts.append(f"Tashqi manzil: **{_c2}**" + (f" ({_dom})" if _dom else "") + ".")
     _parts.append("Kuzatilgan bosqichlar: " + ", ".join(_phases) + ".")
     _parts.append("MITRE ATT&CK: " + ", ".join(_techs) + ".")
     _parts.append(f"Jabrlangan hostlar: {_hosts_s}.")
+    if not model.chain.stages:
+        _parts = _parts[:1]
     _parts.append("")
     _parts.append("> Ushbu xulosa faqat tahlil qilingan loglardagi dalillarga asoslanadi. "
                   "Loglar qamrab olmagan bosqichlar (dastlabki kirish yo'li, persistensiya mexanizmi, "
@@ -622,12 +660,14 @@ def _render_en(model: IncidentReportModel) -> str:
     _c2 = defang_ip(model.chain.attacker_ips[0]) if model.chain.attacker_ips else None
     
     _parts = []
-    _parts.append(f"\U0001F534 **CONFIRMED ({model.severity}):** Suspicious activity detected across {len(model.hosts)} hosts.")
+    _parts.append(_verdict_banner(model, "en"))
     if _c2:
         _parts.append(f"External address: **{_c2}**.")
     _parts.append("Observed phases: " + ", ".join(_phases) + ".")
     _parts.append("MITRE ATT&CK: " + ", ".join(_techs) + ".")
     _parts.append(f"Affected hosts: {_hosts_s}.")
+    if not model.chain.stages:
+        _parts = _parts[:1]
     _parts.append("")
     _parts.append("> This summary is based only on analyzed logs. Uncovered phases should be investigated separately.")
     en_summary = " ".join(_parts[:-2]) + "\n\n" + _parts[-1]

@@ -197,6 +197,9 @@ def flatten_dict(d, parent_key='', sep='.'):
 def get_csv_reader(f, sample, ext):
     try:
         dialect = csv.Sniffer().sniff(sample, delimiters=',;\t|')
+        # Sniffer xabardagi apostrofni (') quotechar deb oladi va qatorlarni buzadi -- eksportlarda doim "
+        dialect.quotechar = '"'
+        dialect.doublequote = True
         f.seek(0)
         reader = csv.DictReader(f, dialect=dialect)
         fieldnames = reader.fieldnames

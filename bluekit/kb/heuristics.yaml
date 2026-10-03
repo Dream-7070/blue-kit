@@ -64,7 +64,7 @@
   weight: 0.9
   note: ''
 - name: Windows Command Shell (cmd)
-  pattern: (?i)\bcmd\.exe"?\s*/[ck]\b
+  pattern: (?i)\bcmd(?:\.exe)?"?\s+/[ck]\b
   techniques:
   - T1059.003
   weight: 0.7
@@ -862,8 +862,149 @@
   weight: 0.8
   note: ''
 - name: Archive from network share
-  pattern: (?i)\b(?:7z|7za|rar|winrar|robocopy|xcopy)(?:\.exe)?\b.*\s(?:\\\\[\w.$-]+\\|[d-z]:\\)
+  pattern: (?i)\b(?:7z|7za|rar|winrar|robocopy|xcopy)(?:\.exe)?\b.*\s(?:\\\\[\w.$-]+\\|[h-z]:\\)
   techniques:
   - T1039
   weight: 0.85
+  note: ''
+- name: AS-REP roasting
+  pattern: (?i)\basreproast\b|\bGetNPUsers(?:\.py)?\b|\bAS-?REP\s*roast|\bDONT_REQ_PREAUTH\b|\bno[\s_-]?pre-?auth(?:entication)?\b|\bPre-?Auth(?:entication)?\s*(?:Type)?\W{0,4}0(?:x0)?\b
+  techniques:
+  - T1558.004
+  weight: 0.9
+  note: ''
+- name: Container breakout (host namespace)
+  pattern: (?i)\bnsenter\b[^|;&]{0,60}(?:-t|--target)[\s=]*1\b|\bchroot\s+/host\b|/proc/1/root\b|\brelease_agent\b|--pid[=\s]host\b|\bhostPID\s*:\s*true\b
+  techniques:
+  - T1611
+  weight: 0.9
+  note: ''
+- name: Kubernetes service account token read
+  pattern: (?i)/(?:var/)?run/secrets/kubernetes\.io/serviceaccount\b
+  techniques:
+  - T1552.001
+  weight: 0.8
+  note: ''
+- name: Kubernetes static pod / manifest drop
+  pattern: (?i)/etc/kubernetes/manifests/\S+
+  techniques:
+  - T1053.007
+  weight: 0.7
+  note: ''
+- name: Kubernetes RBAC escalation
+  pattern: (?i)\bclusterrolebinding\b[^|;&]{0,60}\b(?:create|patch|update)\b|\bkubectl\s+create\s+(?:cluster)?rolebinding\b
+  techniques:
+  - T1098.006
+  - T1078.004
+  weight: 0.8
+  note: ''
+- name: MSSQL xp_cmdshell / sp_configure
+  pattern: (?i)\bxp_cmdshell\b|\bsp_configure\b[^|;&]{0,60}(?:xp_cmdshell|show\s+advanced\s+options|Ole\s+Automation)
+  techniques:
+  - T1505.001
+  - T1059.003
+  weight: 0.9
+  note: ''
+- name: Token impersonation (potato/PrintSpoofer)
+  pattern: (?i)\b(?:PrintSpoofer|JuicyPotato(?:NG)?|RoguePotato|GodPotato|SweetPotato|SigmaPotato|RottenPotato|BadPotato|EfsPotato)\b
+  techniques:
+  - T1134.001
+  weight: 0.9
+  note: ''
+- name: Data destruction (DB/backup/file wipe)
+  pattern: '(?i)\bDROP\s+(?:SCHEMA|DATABASE)\b|\bTRUNCATE\s+TABLE\b|\bdel\b\s+(?:/[fsq]\s*)+\S*backup\S*|\brm\s+-\w*[rR]\w*[fF]\w*\s+(?:--no-preserve-root\s+)?(?:/|~|/\*|/var/lib/\S+|/data\S*|/srv/\S*)(?:\s|$)|\bshred\s+-\w*|\bcipher\s+/w:'
+  techniques:
+  - T1485
+  weight: 0.85
+  note: ''
+- name: Disk wipe / format
+  pattern: (?i)\bdd\s+if=/dev/(?:zero|urandom)\s+of=/dev/(?:sd|nvme|vd|xvd)\w+|\bwipefs\b|\bmkfs(?:\.\w+)?\s+/dev/\w+
+  techniques:
+  - T1561.001
+  weight: 0.85
+  note: ''
+- name: Timestomp
+  pattern: (?i)\btouch\s+(?:-\S+\s+)*-r\s+\S+\s+\S+|\btouch\s+-[a-z]*[td]\s+\S+|\.(?:Creation|LastWrite|LastAccess)Time(?:Utc)?\s*=|\bSetFileTime\b|\btimestomp\b|\bSetCreationTime\b
+  techniques:
+  - T1070.006
+  weight: 0.85
+  note: ''
+- name: Browser credential store access
+  pattern: (?i)\\User Data\\[^\\]+\\(?:Login Data|Web Data|Local State)\b|/\.(?:config/(?:google-chrome|chromium|microsoft-edge)|mozilla/firefox)/\S*(?:Login Data|logins\.json|key[34]\.db)|\\Mozilla\\Firefox\\Profiles\\\S*(?:logins\.json|key[34]\.db)|\bLogin\s+Data\b
+  techniques:
+  - T1555.003
+  weight: 0.85
+  note: ''
+- name: Browser cookie theft
+  pattern: (?i)\\User Data\\[^\\]+\\(?:Network\\)?Cookies\b|cookies\.sqlite\b|/\.(?:config/(?:google-chrome|chromium)|mozilla/firefox)/\S*Cookies
+  techniques:
+  - T1539
+  weight: 0.8
+  note: ''
+- name: GPO modification
+  pattern: (?i)\bGPO\b[^|;&]{0,60}\b(?:modif\w*|chang\w*|updat\w*|creat\w*|link\w*)\b|\bgroupPolicyContainer\b|\bgPCFileSysPath\b|\bSet-GPRegistryValue\b|\bNew-GPLink\b
+  techniques:
+  - T1484.001
+  weight: 0.85
+  note: ''
+- name: SYSVOL script staging / GPO script run
+  pattern: (?i)\\SYSVOL\\\S*\\(?:scripts|Policies)\\\S*\.(?:ps1|bat|cmd|vbs|exe|dll|msi)\b|\bgpscript\.exe\b
+  techniques:
+  - T1570
+  weight: 0.8
+  note: ''
+- name: Print spooler driver DLL abuse
+  pattern: (?i)^(?!.*(?:Signed\W{0,3}true|WHQL)).*(?:\\spool\\drivers\\\S+\.dll|\bspoolsv\.exe\b[^|;&]{0,80}\b(?:cmd|powershell)\b|PrintNightmare|CVE-2021-34527|\bRpcAddPrinterDriver|\bAddPrinterDriverEx)
+  techniques:
+  - T1068
+  weight: 0.85
+  note: ''
+- name: Credential/secret file read
+  pattern: (?i)\b(?:cat|cp|scp|less|more|head|tail|strings|grep|type|base64|curl)\b[^|;&]{0,100}(?:\.env(?:\.\w+)?|\.aws/credentials|\.pgpass|\.git-credentials|\.docker/config\.json|\.netrc)\b
+  techniques:
+  - T1552.001
+  weight: 0.8
+  note: ''
+- name: Web access to exposed secret file
+  pattern: (?i)\bGET\s+\S*/(?:\.env(?:\.\w+)?|\.git/config|\.aws/credentials|\.htpasswd|wp-config\.php\.\w+)\S*\s+HTTP/[\d.]+\W{0,3}\s+200\b
+  techniques:
+  - T1552.001
+  - T1190
+  weight: 0.7
+  note: ''
+- name: Rootkit loader (ld.so.preload / kernel module)
+  pattern: (?i)(?:>>?|\btee(?:\s+-a)?)\s*/etc/ld\.so\.preload|\blibprocesshider\b|\bdiamorphine\b|\binsmod\s+\S+\.ko\b
+  techniques:
+  - T1014
+  weight: 0.85
+  note: ''
+- name: Hidden file masquerading as system binary
+  pattern: (?<![\w.])/(?:usr/(?:local/)?(?:s?bin)|s?bin|lib(?:64)?|etc)/\.[\w.-]+
+  techniques:
+  - T1036.005
+  weight: 0.75
+  note: ''
+- name: Kernel-thread name used by a network process
+  pattern: ^\[(?:kworker|ksoftirqd|kswapd|migration|rcu_\w+|watchdog|containerd-shim|kthreadd)[\w/:.-]*\]
+  techniques:
+  - T1036.005
+  weight: 0.6
+  note: ''
+- name: SQL injection (stacked/encoded/blind)
+  pattern: (?i)['\"%]\s*(?:27)?\s*;\s*(?:exec|execute|drop|shutdown|select|insert|update|delete)\b|\bexec(?:ute)?\s+(?:master\.\.)?xp_\w+|\bsleep\s*\(\s*\d+\s*\)|\bbenchmark\s*\(|\binformation_schema\b|\bload_file\s*\(|\binto\s+(?:out|dump)file\b|\bextractvalue\s*\(|%27\s*(?:or|and|--)|\bor\s+1\s*=\s*1\b
+  techniques:
+  - T1190
+  weight: 0.85
+  note: ''
+- name: Java deserialization / JNDI injection
+  pattern: (?i)\brO0AB|\baced0005\b|\$\{jndi:(?:ldap|rmi|dns|ldaps)|\bysoserial\b|java\s*deserializ|\bProcessBuilder\b|java\.lang\.Runtime
+  techniques:
+  - T1190
+  weight: 0.85
+  note: ''
+- name: PowerShell policy bypass / hidden window
+  pattern: (?i)\b(?:powershell|pwsh)(?:\.exe)?\b[^|;&]*?\s-(?:nop|noprofile)\b[^|;&]*?\s-w(?:indowstyle)?\s+hidden|\b(?:powershell|pwsh)(?:\.exe)?\b[^|;&]*?\s-(?:ep|exec(?:utionpolicy)?)\s+(?:bypass|unrestricted)\b[^|;&]*?(?:\\\\[\w.$-]+\\|https?://|\s-c(?:ommand)?\s)
+  techniques:
+  - T1059.001
+  weight: 0.8
   note: ''

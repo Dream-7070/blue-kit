@@ -72,6 +72,17 @@ ssh user@web01 'bash -s' < responder/collect_linux.sh > base_web01.json
 
 Nom konvensiyasi: `base_<hostnomi>.json`. Bitta papkada saqlang.
 
+**Hostda bash yo'q bo'lsa** (Alpine, BusyBox, minimal konteyner, router): `collect_linux.sh` "bash talab qiladi" deb to'xtaydi.
+Shunda POSIX kollektor ishlatiladi. U faqat o'qiydi, hech narsani o'zgartirmaydi:
+```
+sh responder/collect_posix.sh -o base_web01.json -L web01_logs
+ssh user@web01 'sh -s' < responder/collect_posix.sh > base_web01.json
+```
+`-L web01_logs` (oldindan `mkdir` qiling) auth.log/secure/messages, web access log va ash/bash tarixining oxirgi 20000 qatorini nusxalaydi.
+Ularni noutbukda `bk logs analyze` / `bk ir chain` ga yoki web UI dagi Logs tabiga bering.
+Snapshot JSON esa odatdagidek `bk resp triage` ga yoki web UI dagi Responder tabiga yuklanadi.
+Cheklov: bu kollektor event CSV yozmaydi, paketlar ro'yxatini va SHA256 ni olmaydi.
+
 ### 1.1b Toza baseline bo'lmasa — zaxira tartibi
 
 `--baseline` ga **istalgan** snapshot berilishi mumkin. Shu tartibda sinang:

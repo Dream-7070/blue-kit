@@ -34,6 +34,7 @@
             <button class="tab-btn" onclick="showTab('kb')">📖 KB (ATT&amp;CK)</button>
             <button class="tab-btn" onclick="showTab('logs')">📊 Logs Analyzer</button>
             <button class="tab-btn" onclick="showTab('ir')">⚡ IR Attack Chain</button>
+            <button class="tab-btn" onclick="showTab('case')">🧩 Case Solver</button>
             <button class="tab-btn" onclick="showTab('hunt')">🛰 C2 Hunt</button>
             <button class="tab-btn" onclick="showTab('siem')">🔍 SIEM So'rov</button>
             <button class="tab-btn" onclick="showTab('resp')">🛡 Responder</button>
@@ -435,6 +436,23 @@
                     </div>
                 </div>
             </div>
+        </div>
+
+        <!-- ==================== CASE SOLVER TAB ==================== -->
+        <div id="case" class="tab-content">
+            <h2 class="section-title">🧩 Case Solver — ko'p manbali forensic topshiriq (soat siljishi + tasdiqlangan faoliyat + flag)</h2>
+            <div class="card card-hud">
+                <div class="card-title">
+                    <span>🧩 Fayl yoki yo'l kiriting</span>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr auto; gap: 14px; align-items: center;">
+                    <input type="text" id="case-path" placeholder="Challenge .json, papka yoki .zip yo'li" style="margin-bottom: 0;">
+                    <input type="file" id="case-file" accept=".json,.zip" style="margin-bottom: 0;">
+                    <button class="btn btn-primary" id="btn-case-solve" onclick="caseSolve()" style="white-space: nowrap;">🧩 Yechish</button>
+                </div>
+                <p class="helper-text" style="margin-bottom:0; margin-top:8px;">Fayl tanlansa u ishlatiladi, aks holda yo'l. CLI: bk case solve &lt;yo'l&gt; --out submission.json</p>
+            </div>
+            <div id="case-out"></div>
         </div>
 
         <div id="hunt" class="tab-content">
@@ -874,5 +892,6 @@
     <div id="toast" class="toast">✓ Nusxalandi!</div>
 
     <script src="app.js"></script>
+    <script src="case.js"></script>
 </body>
 </html>

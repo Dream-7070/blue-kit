@@ -7,6 +7,22 @@ SUCCESS_WINDOW = timedelta(minutes=60)
 SPRAY_MIN_USERS = 5
 SPRAY_MAX_PER_USER = 3
 
+def classify_failures(user_counts: dict) -> str:
+    if not user_counts:
+        return 'none'
+    n_users = len(user_counts)
+    total = sum(user_counts.values())
+    mx = max(user_counts.values())
+
+    if total < THRESHOLD and n_users < SPRAY_MIN_USERS:
+        return 'none'
+    
+    if n_users >= SPRAY_MIN_USERS and (mx <= SPRAY_MAX_PER_USER or mx <= 2 * (total / n_users)):
+        return 'spray'
+    elif total >= THRESHOLD:
+        return 'guessing'
+    return 'none'
+
 def correlate_bruteforce(events, hits_by_index, window=WINDOW, threshold=THRESHOLD,
                          success_window=SUCCESS_WINDOW) -> list:
     
@@ -92,10 +108,8 @@ def correlate_bruteforce(events, hits_by_index, window=WINDOW, threshold=THRESHO
                 if acc:
                     accounts_counter[acc.lower()] += 1
                     
-            unique_accounts = len(accounts_counter)
-            max_attempts = max(accounts_counter.values()) if accounts_counter else 0
-            
-            if unique_accounts >= SPRAY_MIN_USERS and max_attempts <= SPRAY_MAX_PER_USER:
+            cls = classify_failures(accounts_counter)
+            if cls == 'spray':
                 technique = 'T1110.003'
                 tech_name = 'Password Spraying'
             else:

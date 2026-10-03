@@ -130,6 +130,9 @@ def solve(events, ctx):
             
     ids = '|'.join(e['id'] for e in chain)
     flag = 'CTF{%s}' % hashlib.sha256(ids.encode('utf-8')).hexdigest()[:24]
+    if not chain:
+        flag = ''
+        warnings.append("zanjir bo'sh: nomzod hodisa qolmadi (baseline filtri hammasini tasdiqlangan deb oldi yoki ma'lumot yetarli emas), flag hisoblanmadi")
     
     if ctx.get('expected_stages') and len(chain) != ctx['expected_stages']:
         warnings.append('expected_stages bilan zanjir uzunligi farq qildi')
@@ -162,7 +165,7 @@ def solve(events, ctx):
     for tkt in selected_tkts:
         grp = groups[tkt]
         ac = grp[0]['attrs'].get('actor_class', '')
-        actions = list(set(e['action'] for e in grp))
+        actions = sorted(set(e['action'] for e in grp))
         nets = []
         for e in grp:
             for v in e['attrs'].values():
@@ -172,7 +175,7 @@ def solve(events, ctx):
                         in_net = bool(B['nets'] and any(ip in n for n in B['nets']) or v in B['ips'])
                         nets.append({"ip": v, "in_approved_network": in_net})
                     except: pass
-        nets = [dict(t) for t in {tuple(d.items()) for d in nets}]
+        nets = [dict(t) for t in sorted({tuple(d.items()) for d in nets})]
         ip_note = ("IP lar approved_network da" if all(n['in_approved_network'] for n in nets) else "DIQQAT: approved_network dan tashqari IP bor") if nets else "IP yo'q"
         reason = f"{tkt} diapazonda, actor_class={ac} tasdiqlangan, {ip_note}"
         lookalike_groups.append({
@@ -224,11 +227,10 @@ def solve(events, ctx):
         elif k == 'detections':
             acts_seen = set()
             sub[k] = []
-            ranges_str = ', '.join([f"{p}-{lo}..{hi}" for p, lo, hi in B['ranges']] + list(B['singles']))
-            cls_str = ', '.join(B['classes']) if B['classes'] else "yo'q"
+            ranges_str = ', '.join([f"{p}-{lo}..{hi}" for p, lo, hi in B['ranges']] + sorted(B['singles']))
+            cls_str = ', '.join(sorted(B['classes'])) if B['classes'] else "yo'q"
             nets_str = ', '.join(str(n) for n in B['nets']) if B['nets'] else "yo'q"
             fpc = f"diapazon: {ranges_str}, actor_class: {cls_str}, approved_network: {nets_str}"
-            
             for e in chain:
                 act = e['action']
                 if act not in acts_seen:
@@ -243,12 +245,12 @@ def solve(events, ctx):
                 for v in sorted(set.union(*[ident_values(e) for e in chain])) if chain else []:
                     srcs = {e['source']: e['id'] for e in chain if v in ident_values(e)}
                     if len(srcs) >= 2:
-                        ids = list(srcs.values())
+                        ids2 = list(srcs.values())
                         sub[k].append({
                             "name": "Identifikator ko'p manbada",
-                            "logic": f"'{v}' identifikatori baseline ticketsiz ≥ 2 manbada",
+                            "logic": f"'{v}' identifikatori baseline ticketsiz >= 2 manbada",
                             "false_positive_control": fpc,
-                            "example_event_id": f"{ids[0]}, {ids[1]}"
+                            "example_event_id": f"{ids2[0]}, {ids2[1]}"
                         })
                         break
             if len(sub[k]) < 3:

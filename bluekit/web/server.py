@@ -441,6 +441,9 @@ class WebKitHandler(BaseHTTPRequestHandler):
             res = resp_fraud(cur, bas, kb)
             self.end_json(res)
             
+        elif path == '/api/case/solve':
+            from bluekit.web.case_api import handle_case_solve
+            handle_case_solve(self, data)
         elif path == '/api/ir/chain':
             from bluekit.ir.correlator import load_events_from_files, correlate_incident
             from bluekit.ir.report import build_incident_model, render_scoring_json, render_markdown_report

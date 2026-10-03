@@ -4,7 +4,7 @@ import ipaddress
 from typing import Dict, Any, List, Set
 import re
 
-from bluekit.netutil import is_external_ip
+from bluekit.netutil import is_external_ip, is_internal_ip
 
 MAX_ACTORS_PER_HOST_TECH = 3
 
@@ -83,7 +83,9 @@ def fallback_stages(raw_events: List[Dict[str, Any]], handled_idx: Set[int], kb,
                 'event_id': event_id,
                 'command_line': c['cmd'] or None,
                 'message': msg,
-                'src_ip': c['src_ip']
+                'src_ip': c['src_ip'],
+                # detect.py jarayon nomini ham qidiradi (AnyDesk.exe -> T1219)
+                'process': c['proc_name'] or None
             }
             
             if not ev['command_line'] and not ev['message']:
@@ -96,6 +98,9 @@ def fallback_stages(raw_events: List[Dict[str, Any]], handled_idx: Set[int], kb,
                     continue
                     
                 tech = hit['technique']
+                # Masofaviy boshqaruv vositasi ikki ichki host orasida (src va dst ichki) -- IT yordam, C2 emas
+                if tech == 'T1219' and is_internal_ip(c['src_ip']) and (not c['dst_ip'] or is_internal_ip(c['dst_ip'])):
+                    continue
                 host = c['host']
                 cur_actor = _actor(c['user'] or '')
                 key = (host, tech, cur_actor)

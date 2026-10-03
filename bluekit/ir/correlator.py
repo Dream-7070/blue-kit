@@ -5,6 +5,8 @@ from datetime import datetime
 import ipaddress
 from typing import List, Dict, Any, Tuple, Optional
 from bluekit.ir.models import AttackStage, AttackChain
+from bluekit.ir.webauth import web_auth_stages
+from bluekit.ir.proctree import process_tree_stages
 
 from bluekit.netutil import is_external_ip
 from urllib.parse import unquote_plus
@@ -402,6 +404,115 @@ def is_benign_noise(c: Dict[str, Any]) -> bool:
 
     return False
 
+
+def _bruteforce_stages(raw_events):
+    from bluekit.logs.bruteforce import WINDOW, THRESHOLD, SPRAY_MIN_USERS, SPRAY_MAX_PER_USER
+    from bluekit.logs.parse import parse_ts
+    from bluekit.ir.models import AttackStage
+    stages_list = []
+    handled_set = set()
+    
+    attempts = {}
+    
+    for i, evt in enumerate(raw_events):
+        c = extract_canonical(evt)
+        eid = str(get_nested(evt, 'event.code') or evt.get('EventID') or evt.get('event_id') or evt.get('event_code') or get_nested(evt, 'winlog.event_id') or '').strip()
+        ts_str = c['timestamp']
+        if not ts_str:
+            continue
+        ts = parse_ts(ts_str)
+        if not ts:
+            continue
+            
+        user = None
+        src_ip = None
+        is_fail = False
+        
+        if eid == '4625':
+            is_fail = True
+            user = get_nested(evt, 'winlog.event_data.TargetUserName') or evt.get('TargetUserName') or c['user']
+            src_ip = c['src_ip'] or get_nested(evt, 'winlog.event_data.IpAddress') or ''
+        else:
+            msg = c['message'] or c['cmd'] or ''
+            m_lin = re.search(r'Failed (?:password|publickey) for (?:invalid user )?(\S+) from ([0-9a-fA-F:.]+)', msg)
+            if not m_lin:
+                m_lin = re.search(r'authentication failure;.*?rhost=([0-9a-fA-F:.]+)(?:.*?user=(\S+))?', msg)
+                if m_lin:
+                    src_ip = m_lin.group(1)
+                    user = m_lin.group(2) or c['user']
+                    is_fail = True
+            else:
+                user = m_lin.group(1)
+                src_ip = m_lin.group(2)
+                is_fail = True
+                
+        if is_fail:
+            if not src_ip or src_ip in ('-', '127.0.0.1', '::1', ''):
+                key = (c['host'], user)
+            else:
+                key = src_ip
+                
+            if key not in attempts:
+                attempts[key] = []
+            attempts[key].append((ts, user, i, c))
+            
+    for key, items in attempts.items():
+        items.sort(key=lambda x: x[0])
+        n = len(items)
+        for start_idx in range(n):
+            start_ts = items[start_idx][0]
+            end_idx = start_idx
+            users = set()
+            idx_list = []
+            while end_idx < n and (items[end_idx][0] - start_ts).total_seconds() <= (WINDOW.total_seconds() if hasattr(WINDOW, 'total_seconds') else WINDOW):
+                users.add(items[end_idx][1])
+                idx_list.append(items[end_idx][2])
+                end_idx += 1
+                
+            count = end_idx - start_idx
+            num_users = len(users)
+            
+            if count >= THRESHOLD or num_users >= SPRAY_MIN_USERS:
+                user_counts = {}
+                for idx in range(start_idx, end_idx):
+                    u = items[idx][1]
+                    user_counts[u] = user_counts.get(u, 0) + 1
+                
+                from bluekit.logs.bruteforce import classify_failures
+                cls = classify_failures(user_counts)
+                
+                if cls in ('spray', 'guessing'):
+                    is_spray = (cls == 'spray')
+                    tech_id = "T1110.003" if is_spray else "T1110.001"
+                    tech_name = "Brute Force: Password Spraying" if is_spray else "Brute Force: Password Guessing"
+                    
+                    ip = key if isinstance(key, str) else ''
+                    ev_msg = f"{count} ta muvaffaqiyatsiz kirish, {num_users} ta noyob foydalanuvchi, manba {ip}"
+                    sorted_users = sorted(list(users))[:10]
+                    first_item = items[start_idx][3]
+                    last_ts_str = items[end_idx-1][3]['timestamp']
+                    
+                    stage = AttackStage(
+                        stage_id="TEMP",
+                        timestamp=first_item['timestamp'],
+                        host=first_item['host'],
+                        phase="Credential Access",
+                        technique_id=tech_id,
+                        technique_name=tech_name,
+                        confidence="HIGH",
+                        status="CONFIRMED",
+                        evidence=ev_msg,
+                        iocs=_clean({'src_ip': ip, 'users': sorted_users, 'attempts': count, 'last_seen': last_ts_str}),
+                        source_dataset=first_item['dataset']
+                    )
+                    stages_list.append((stage, ip))
+                    for i in idx_list:
+                        handled_set.add(i)
+                    break 
+                
+    return stages_list, handled_set
+
+
 def correlate_incident(raw_events: List[Dict[str, Any]], kb=None, heuristic_fallback=True) -> AttackChain:
     """Analyzes raw events, strips noise, extracts attack stages and MITRE techniques."""
     stages: List[AttackStage] = []
@@ -602,8 +713,267 @@ def correlate_incident(raw_events: List[Dict[str, Any]], kb=None, heuristic_fall
             source_dataset="qradar"
         ))
 
-    # Detailed event evaluation
+
     handled_idx = set()
+    # Brute-force pre-scan
+    bf_stages, bf_handled = _bruteforce_stages(raw_events)
+    for st, ip in bf_stages:
+        st.stage_id = f"S{len(stages)+1:02d}"
+        stages.append(st)
+        if ip and _is_external(ip):
+            attacker_ips.add(ip)
+        if st.host:
+            hosts_involved.add(st.host)
+    handled_idx.update(bf_handled)
+
+    wa_stages, wa_handled = web_auth_stages(raw_events, extract_canonical, _is_external)
+    for st, ip in wa_stages:
+        st.stage_id = f"S{len(stages)+1:02d}"
+        stages.append(st)
+        if ip and _is_external(ip):
+            attacker_ips.add(ip)
+        if st.host:
+            hosts_involved.add(st.host)
+    handled_idx.update(wa_handled)
+
+    pt_stages, pt_handled = process_tree_stages(raw_events, extract_canonical)
+    for st, ip in pt_stages:
+        st.stage_id = f"S{len(stages)+1:02d}"
+        stages.append(st)
+        if ip and _is_external(ip):
+            attacker_ips.add(ip)
+        if st.host:
+            hosts_involved.add(st.host)
+    handled_idx.update(pt_handled)
+
+    # DNS pre-scan
+    def _dns_label_suspicious(name):
+        labels = [l for l in name.split('.') if l]
+        if len(name) >= 100: return True
+        for l in labels:
+            if len(l) >= 30: return True
+            if re.match(r'^[0-9a-f]{16,}$', l, re.I): return True
+            if re.match(r'^[a-z2-7]{20,}=*$', l, re.I): return True
+        return False
+
+    dns_data = {}
+    for _i, evt in enumerate(raw_events):
+        c = extract_canonical(evt)
+        qname = get_nested(evt, 'dns.question.name') or evt.get('QueryName') or evt.get('query') or evt.get('qname') or evt.get('dns_query') or get_nested(evt, 'question.name')
+        qtype = get_nested(evt, 'dns.question.type') or evt.get('qtype') or evt.get('QueryType')
+        
+        _pb = (c['proc_name'] or '').lower().split('/')[-1].split('\\')[-1].replace('.exe', '')
+        _eid = str(get_nested(evt, 'event.code') or evt.get('EventID') or evt.get('event_id') or evt.get('event_code') or '').strip()
+        # matndan so'rov ajratish faqat DNS kontekstida (server/klient jarayoni, dns dataset, Sysmon 22): oddiy buyruqdagi "a file.txt" so'rov emas
+        _dns_ctx = _pb in {'named', 'bind', 'dnsmasq', 'unbound', 'dns', 'coredns', 'pdns_server', 'dig', 'nslookup', 'host', 'drill', 'kdig'} or 'dns' in (c['dataset'] or '').lower() or _eid == '22'
+        if (not qname or not qtype) and _dns_ctx:
+            text = (c['cmd'] or '') + ' ' + (c['message'] or '')
+            m_bind = re.search(r'query:\s+(\S+)\s+IN\s+([A-Z]+)', text)
+            if m_bind:
+                qname, qtype = m_bind.group(1), m_bind.group(2)
+            else:
+                m_gen = re.search(r'\b(A|AAAA|TXT|CNAME|MX|NULL|ANY|SRV)\s+((?:[\w-]+\.)+[a-zA-Z][\w-]*)\b', text)
+                if m_gen:
+                    qtype, qname = m_gen.group(1), m_gen.group(2)
+                    
+        if qname and isinstance(qname, str):
+            qname = qname.lower().rstrip('.')
+            if re.match(r'^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$', qname) or qname.endswith('.in-addr.arpa'):
+                continue
+                
+            labels = [l for l in qname.split('.') if l]
+            if len(labels) >= 2:
+                base = f"{labels[-2]}.{labels[-1]}"
+                sub = '.'.join(labels[:-2])
+                
+                proc_base = (c['proc_name'] or '').lower().split('/')[-1].split('\\')[-1].replace('.exe', '')
+                ds = (c['dataset'] or '').lower()
+                is_dns_server = proc_base in {'named', 'bind', 'dnsmasq', 'unbound', 'dns', 'coredns', 'pdns_server'} or 'dns' in ds
+                
+                client_ip = ''
+                if is_dns_server:
+                    if c['src_ip'] and not _is_external(c['src_ip']):
+                        client_ip = c['src_ip']
+                    elif c['dst_ip'] and not _is_external(c['dst_ip']):
+                        client_ip = c['dst_ip']
+                    client_host = ip_to_host.get(client_ip) or c['host']
+                else:
+                    client_host = c['host']
+                    client_ip = c['src_ip']
+                    
+                if not client_host:
+                    continue
+                    
+                key = (client_host, base)
+                if key not in dns_data:
+                    dns_data[key] = {'subs': set(), 'txt_subs': set(), 'suspicious': 0, 'first_ts': c['timestamp'], 'sample': qname, 'indices': set(), 'client_ip': client_ip}
+                    
+                if sub:
+                    dns_data[key]['subs'].add(sub)
+                dns_data[key]['indices'].add(_i)
+                
+                if str(qtype).upper() in ('TXT', 'NULL'):
+                    if not any(l.startswith('_') for l in sub.split('.')):
+                        if sub: dns_data[key]['txt_subs'].add(sub)
+                        
+                if _dns_label_suspicious(qname):
+                    dns_data[key]['suspicious'] += 1
+
+    for (m_host, base), data in dns_data.items():
+        n_sub = len(data['subs'])
+        n_txt = len(data['txt_subs'])
+        susp = data['suspicious']
+        client_ip = data['client_ip']
+        sample = data['sample']
+        
+        flagged = False
+        t1071_conf = None
+        exfil = False
+        
+        if n_sub >= 20:
+            flagged = True
+            t1071_conf = "HIGH"
+            exfil = True
+        elif n_txt >= 3 or susp >= 1:
+            flagged = True
+            t1071_conf = "MEDIUM"
+            
+        if flagged:
+            evidence = f"{base}: {n_sub} noyob subdomen, {n_txt} TXT, namuna {sample}"
+            iocs = _clean({'domain': base, 'client': client_ip, 'unique_subdomains': n_sub, 'txt_queries': n_txt, 'sample': sample})
+            
+            stages.append(AttackStage(
+                stage_id=f"S{len(stages)+1:02d}",
+                timestamp=data['first_ts'],
+                host=m_host,
+                phase="Command and Control",
+                technique_id="T1071.004",
+                technique_name="Application Layer Protocol: DNS",
+                confidence=t1071_conf,
+                status="CONFIRMED",
+                evidence=evidence,
+                iocs=iocs,
+                source_dataset="dns_prescan"
+            ))
+            hosts_involved.add(m_host)
+            handled_idx.update(data['indices'])
+            
+            if exfil:
+                stages.append(AttackStage(
+                    stage_id=f"S{len(stages)+1:02d}",
+                    timestamp=data['first_ts'],
+                    host=m_host,
+                    phase="Exfiltration",
+                    technique_id="T1048.003",
+                    technique_name="Exfiltration Over Alternative Protocol: Exfiltration Over Unencrypted Non-C2 Protocol",
+                    confidence="HIGH",
+                    status="CONFIRMED",
+                    evidence=evidence,
+                    iocs=iocs.copy(),
+                    source_dataset="dns_prescan"
+                ))
+
+    # T1039 Tarmoq papkasi pre-scan
+    share_data = {}
+    from bluekit.logs.parse import parse_ts
+    for _i, evt in enumerate(raw_events):
+        c = extract_canonical(evt)
+        eid = str(get_nested(evt, 'event.code') or evt.get('EventID') or evt.get('event_id') or evt.get('event_code') or get_nested(evt, 'winlog.event_id') or '').strip()
+        if eid not in ('5140', '5145'):
+            continue
+            
+        share_name = get_nested(evt, 'winlog.event_data.ShareName') or evt.get('ShareName') or evt.get('share_name')
+        rel_target = get_nested(evt, 'winlog.event_data.RelativeTargetName') or evt.get('RelativeTargetName') or evt.get('ObjectName')
+        
+        text = (c['message'] or '') + ' ' + (c['cmd'] or '')
+        if not share_name:
+            m_unc = re.search(r'\\{1,2}([^\\\s]+)\\([^\\\s]+)(?:\\(\S+))?', text)
+            if m_unc:
+                share_name = f"\\\\{m_unc.group(1)}\\{m_unc.group(2)}"
+                if not rel_target: rel_target = m_unc.group(3) or ''
+                
+        if not share_name:
+            continue
+            
+        s_clean = share_name
+        if s_clean.startswith('\\'):
+            parts = [p for p in s_clean.split('\\') if p]
+            if len(parts) >= 2:
+                s_clean = parts[1]
+            elif len(parts) == 1:
+                s_clean = parts[0]
+                
+        if s_clean.upper() in ('IPC$', 'ADMIN$') or re.match(r'^[A-Za-z]\$$', s_clean):
+            continue
+            
+        host = c['host']
+        user = c['user']
+        key = (host, user, s_clean)
+        
+        ts_val = parse_ts(c['timestamp'])
+        if not ts_val:
+            continue
+            
+        if key not in share_data:
+            share_data[key] = []
+        share_data[key].append({'ts': ts_val, 'ts_raw': c['timestamp'], 'file': rel_target, 'ip': c['src_ip'], 'idx': _i})
+        
+    for key, items in share_data.items():
+        items.sort(key=lambda x: x['ts'])
+        m_host, m_user, m_share = key
+        
+        max_unique = 0
+        bulk = False
+        n = len(items)
+        for i in range(n):
+            unique_files = set()
+            start_ts = items[i]['ts']
+            for j in range(i, n):
+                if (items[j]['ts'] - start_ts).total_seconds() <= 600:
+                    unique_files.add(items[j]['file'])
+                else:
+                    break
+            if len(unique_files) >= 20:
+                bulk = True
+                max_unique = max(max_unique, len(unique_files))
+                
+        if max_unique == 0:
+            max_unique = len(set(x['file'] for x in items))
+            
+        conf = None
+        evidence = ""
+        
+        if bulk:
+            conf = "HIGH"
+            evidence = f"{m_user} \\\\{m_host}\\{m_share} dan {max_unique} ta fayl o'qidi (10 daq ichida)"
+        else:
+            all_files = " ".join(str(x['file']) for x in items)
+            if re.search(r'(?:finance|payroll|salary|\bhr\b|human.?resources|confidential|secret|legal|passwords?|board|merger)', m_share + ' ' + all_files, re.I):
+                conf = "MEDIUM"
+                evidence = "Sensitive share/file accessed"
+                
+        if conf:
+            sample_file = items[0]['file']
+            client = items[0]['ip']
+            first_ts = items[0]['ts_raw']
+            
+            stages.append(AttackStage(
+                stage_id=f"S{len(stages)+1:02d}",
+                timestamp=first_ts,
+                host=m_host,
+                phase="Collection",
+                technique_id="T1039",
+                technique_name="Data from Network Shared Drive",
+                confidence=conf,
+                status="CONFIRMED",
+                evidence=evidence,
+                iocs=_clean({'share': m_share, 'user': m_user, 'src_ip': client, 'files': max_unique, 'sample': sample_file}),
+                source_dataset="share_prescan"
+            ))
+            if m_host: hosts_involved.add(m_host)
+            for x in items: handled_idx.add(x['idx'])
+
+    # Detailed event evaluation (handled_idx yuqorida e'lon qilingan: brute-force indekslari saqlansin)
     for _i, evt in enumerate(raw_events):
         _n0 = len(stages)
         _pass_to_fallback = False
@@ -626,6 +996,75 @@ def correlate_incident(raw_events: List[Dict[str, Any]], kb=None, heuristic_fall
         cmd_lower = (cmd or '').lower()
         msg_lower = (msg or '').lower()
         full_text = f"{proc_lower} {cmd_lower} {msg_lower}"
+        proc_base = proc_lower.split('/')[-1].split('\\')[-1].replace('.exe', '')
+
+        # T1048 nusxalash vositasi tashqi IP ga
+        if proc_base in {'scp', 'rsync', 'sftp', 'pscp', 'winscp'}:
+            dst = c['dst_ip']
+            # Tashqi IP ga nusxalashning o'zi (offsite backup) dalil emas: hajm >=100MB, shu hostda oldin
+            # arxiv/yig'ish qadami yoki manzil allaqachon hujumchi IP si bo'lsagina T1048
+            _m_sz = re.search(r'(\d+(?:\.\d+)?)\s*([KMGT]?)i?B\b', f"{msg} {cmd}", re.I)
+            _mult = {'': 1, 'K': 1 << 10, 'M': 1 << 20, 'G': 1 << 30, 'T': 1 << 40}
+            _bytes = float(_m_sz.group(1)) * _mult.get(_m_sz.group(2).upper(), 1) if _m_sz else 0
+            _staged = any(s.host == host and s.technique_id in {'T1560', 'T1560.001', 'T1005', 'T1039', 'T1119', 'T1530'} for s in stages)
+            if dst and _is_external(dst) and (_bytes >= 100 * (1 << 20) or _staged or dst in attacker_ips):
+                exfil_ips.add(dst)
+                if host: hosts_involved.add(host)
+                existing = next((s for s in reversed(stages) if s.technique_id == "T1048" and s.host == host and s.iocs.get('dst_ip') == dst), None)
+                size_match = re.search(r'(\d+(?:\.\d+)?\s*(?:[KMGT]i?B|bytes))', f"{msg} {cmd}", re.I)
+                size_str = size_match.group(1) if size_match else None
+                
+                if existing:
+                    existing.iocs['count'] = existing.iocs.get('count', 1) + 1
+                    if size_str:
+                        existing.iocs['size'] = size_str
+                else:
+                    iocs_alert = {'dst_ip': dst, 'count': 1}
+                    if size_str:
+                        iocs_alert['size'] = size_str
+                    stages.append(AttackStage(
+                        stage_id=f"S{len(stages)+1:02d}",
+                        timestamp=ts,
+                        host=host,
+                        phase="Exfiltration",
+                        technique_id="T1048",
+                        technique_name="Exfiltration Over Alternative Protocol",
+                        confidence="HIGH",
+                        status="CONFIRMED",
+                        evidence=f"Outbound transfer via {proc_base} to {dst}",
+                        iocs=_clean(iocs_alert),
+                        source_dataset=ds
+                    ))
+
+        # T1566.002 Brauzerdan skript
+        parent_val = get_nested(evt, 'process.parent.name') or evt.get('ParentImage') or evt.get('parent_process') or ''
+        if isinstance(parent_val, dict):
+            parent_val = parent_val.get('name') or ''
+        parent_base = str(parent_val).lower().split('/')[-1].split('\\')[-1].replace('.exe', '')
+
+        if parent_base in {'chrome', 'msedge', 'firefox', 'iexplore', 'brave', 'opera'} and proc_base in {'mshta', 'powershell', 'pwsh', 'wscript', 'cscript', 'rundll32', 'regsvr32'}:
+            if re.search(r'https?://', cmd, re.I):
+                if host: hosts_involved.add(host)
+                if user: compromised_users.add(user)
+                m_url_ip = re.search(r'https?://(\d+\.\d+\.\d+\.\d+)', cmd, re.I)
+                if m_url_ip and _is_external(m_url_ip.group(1)):
+                    attacker_ips.add(m_url_ip.group(1))
+                
+                existing_phish = next((s for s in reversed(stages) if s.technique_id == "T1566.002" and s.host == host and s.iocs.get('user') == user), None)
+                if not existing_phish:
+                    stages.append(AttackStage(
+                        stage_id=f"S{len(stages)+1:02d}",
+                        timestamp=ts,
+                        host=host,
+                        phase="Initial Access",
+                        technique_id="T1566.002",
+                        technique_name="Phishing: Spearphishing Link",
+                        confidence="HIGH",
+                        status="CONFIRMED",
+                        evidence=f"Browser {parent_base} spawned {proc_base} with URL",
+                        iocs=_clean({"cmd": cmd, "user": user, "parent": parent_base, "process": proc_base}),
+                        source_dataset=ds
+                    ))
 
         # 1. Suricata / Network IDS Exfiltration & C2
         if 'suricata' in ds or 'eve' in ds:
@@ -701,6 +1140,20 @@ def correlate_incident(raw_events: List[Dict[str, Any]], kb=None, heuristic_fall
                 iocs=_clean({"cmd": cmd, "user": user}),
                 source_dataset=ds
             ))
+            if re.search(r'\bnet1?\s+group\b|get-adgroup(?:member)?\b|\bnet1?\s+localgroup\b.*\/domain', cmd_lower):
+                stages.append(AttackStage(
+                    stage_id=f"S{len(stages)+1:02d}",
+                    timestamp=ts,
+                    host=host,
+                    phase="Discovery",
+                    technique_id="T1069.002",
+                    technique_name="Permission Groups Discovery: Domain Groups",
+                    confidence="HIGH",
+                    status="CONFIRMED",
+                    evidence=cmd or msg,
+                    iocs=_clean({"cmd": cmd, "user": user}),
+                    source_dataset=ds
+                ))
 
         # 3. Execution & Reverse Shells (T1059.006, T1218.005, T1548.003, T1105)
         if re.search(r'(?:bash\s+-i\s+>&|pty\.spawn|socket\.socket|\bnc\b\s+(?:-[a-zA-Z0-9]+\s+)*[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+|\/bin\/(?:ba)?sh\s+-i)', cmd):
@@ -1067,21 +1520,6 @@ def correlate_incident(raw_events: List[Dict[str, Any]], kb=None, heuristic_fall
                 iocs=_clean({"cmd": cmd, "user": user, "process": c['proc_name']}),
                 source_dataset=ds
             ))
-        elif 'password spray' in msg_lower or 'spray 43 accounts' in msg_lower:
-            if host: hosts_involved.add(host)
-            stages.append(AttackStage(
-                stage_id=f"S{len(stages)+1:02d}",
-                timestamp=ts,
-                host=host,
-                phase="Credential Access",
-                technique_id="T1110.003",
-                technique_name="Brute Force: Password Spraying",
-                confidence="HIGH",
-                status="CONFIRMED",
-                evidence=msg or cmd,
-                iocs=_clean({"host": host, "target": msg}),
-                source_dataset=ds
-            ))
         elif (str(c.get('raw', {}).get('event.code')) == '4769' or str(c.get('raw', {}).get('EventID')) == '4769' or 'kerberoast' in msg_lower) and ('0x17' in str(c.get('raw', {})) or '0x17' in msg_lower):
             if host: hosts_involved.add(host)
             stages.append(AttackStage(
@@ -1418,21 +1856,6 @@ def correlate_incident(raw_events: List[Dict[str, Any]], kb=None, heuristic_fall
                 iocs=_clean({"cmd": cmd, "user": user}),
                 source_dataset=ds
             ))
-        elif 'service rnstage installed' in cmd_lower or 'ransomware staging service' in msg_lower or 'locker_stage' in cmd_lower:
-            if host: hosts_involved.add(host)
-            stages.append(AttackStage(
-                stage_id=f"S{len(stages)+1:02d}",
-                timestamp=ts,
-                host=host,
-                phase="Persistence",
-                technique_id="T1543.003",
-                technique_name="Create or Modify System Process: Windows Service",
-                confidence="HIGH",
-                status="CONFIRMED",
-                evidence=cmd or msg,
-                iocs=_clean({"cmd": cmd, "user": user, "process": c['proc_name']}),
-                source_dataset=ds
-            ))
 
         # 11. Command and Control (RAT Beacons & Outbound Connections)
         dst_ip_val = c.get('dst_ip') or ''
@@ -1534,197 +1957,247 @@ def correlate_incident(raw_events: List[Dict[str, Any]], kb=None, heuristic_fall
                                             handled_idx.add(_i)
                                         break
 
-        # 12. Cloud & Identity / M365 / Entra / OAuth / Token Abuse (Scenarios 04, 08, 09)
-        is_cloud_audit = any(ch in str(host).upper() for ch in ['ENTRA', 'M365', 'EXCHANGE', 'SHAREPOINT', 'SP-AUDIT', 'MAIL-AUDIT', 'GRAPHAPI', 'IDP-LOG', 'IDP']) or any(cp in proc_lower for cp in ['oauth', 'graphapi', 'exchange', 'cloudauth', 'cloudadmin'])
-        if is_cloud_audit:
-            if any(k in msg_lower or k in cmd_lower for k in ['impossible travel', 'session token used without mfa', 'successful token sign-in', 'refresh_token grant']):
-                if c['dst_ip'] and _is_external(c['dst_ip']):
-                    attacker_ips.add(c['dst_ip'])
-                if host: hosts_involved.add(host)
+        # 12. Cloud / M365 / Entra (umumiy: real operatsiya nomlari)
+        op_field = str(evt.get('Operation') or evt.get('operation') or get_nested(evt,'event.action') or evt.get('activityDisplayName') or evt.get('OperationName') or get_nested(evt,'properties.operationName') or '').lower()
+        ctext = ' '.join([op_field, cmd_lower, msg_lower])
+        wl = str(evt.get('Workload') or evt.get('workload') or '').lower()
+        remote = src_ip if _is_external(src_ip) else (c['dst_ip'] if _is_external(c['dst_ip']) else None)
+        already = {s.technique_id for s in stages[_n0:]}
+
+        def _cloud_agg(tid, tname, phase, conf, ioc_dict, evidence_str):
+            if tid in already:
+                handled_idx.add(_i)
+                return
+            found = False
+            for s in stages:
+                if s.technique_id == tid and s.iocs.get('user') == user:
+                    s.iocs['count'] = s.iocs.get('count', 1) + 1
+                    if ts and ts < (s.timestamp or ts):
+                        s.iocs['last_seen'] = s.iocs.get('last_seen') or s.timestamp
+                        s.timestamp = ts
+                    elif ts and ts > (s.iocs.get('last_seen') or ""):
+                        s.iocs['last_seen'] = ts
+                    found = True
+                    handled_idx.add(_i)
+                    break
+            if not found:
                 stages.append(AttackStage(
-                    stage_id=f"S{len(stages)+1:02d}",
-                    timestamp=ts,
-                    host=host,
-                    phase="Initial Access",
-                    technique_id="T1078.004",
-                    technique_name="Valid Accounts: Cloud Accounts",
-                    confidence="HIGH",
-                    status="CONFIRMED",
-                    evidence=msg or cmd,
-                    iocs=_clean({"user": user, "host": host, "c2_ip": c['dst_ip']}),
-                    source_dataset=ds
+                    stage_id=f"S{len(stages)+1:02d}", timestamp=ts, host=host, phase=phase,
+                    technique_id=tid, technique_name=tname, confidence=conf, status="CONFIRMED",
+                    evidence=evidence_str, iocs=_clean(ioc_dict), source_dataset=ds
                 ))
-            elif any(k in msg_lower or k in cmd_lower for k in ['user consent phishing', 'malicious oauth consent', 'consent to app', 'scopes mail.read']):
-                if c['dst_ip'] and _is_external(c['dst_ip']):
-                    attacker_ips.add(c['dst_ip'])
-                if host: hosts_involved.add(host)
+            if host: hosts_involved.add(host)
+
+        ev_cloud = msg or cmd or op_field
+        matched_5 = False
+
+        if re.search(r'\bconsent(?:ed)?\s+(?:to\s+)?app(?:lication)?\b|\bconsent\s+app\b|add delegated permission grant|add app role assignment(?: grant)? to (?:user|service principal)|oauth2permissiongrant', ctext, re.I):
+            if remote: attacker_ips.add(remote)
+            if user: compromised_users.add(user)
+            risky_scopes = re.findall(r'mail\.read|mail\.readwrite|mail\.send|files\.read\.all|files\.readwrite\.all|sites\.read\.all|sites\.readwrite\.all|offline_access|directory\.readwrite\.all', ctext, re.I)
+            conf = "HIGH" if risky_scopes else "MEDIUM"
+            m_app = re.search(r"'([^']+)'", ctext) or re.search(r'"([^"]+)"', ctext)
+            m_app2 = re.search(r'app(?:lication)?\s+([\w .-]+?)\s+(?:scope|with|\(|$)', ctext, re.I)
+            app_name = m_app.group(1) if m_app else (m_app2.group(1).strip() if m_app2 else None)
+            ioc_dict = {"user": user, "app": app_name, "scopes": risky_scopes, "src_ip": remote}
+            _cloud_agg("T1528", "Steal Application Access Token", "Credential Access", conf, ioc_dict, ev_cloud)
+            if risky_scopes and not re.search(r'isadminconsent["\s:=]*true|\badmin\s+consent\b', ctext, re.I):
+                _cloud_agg("T1566.002", "Phishing: Spearphishing Link", "Initial Access", "MEDIUM", ioc_dict, ev_cloud)
+
+        if re.search(r'\b(?:new|set)-inboxrule\b|updateinboxrules|\b(?:create|new|add)\s+inbox\s+rule\b', ctext, re.I):
+            if remote: attacker_ips.add(remote)
+            if user: compromised_users.add(user)
+            has_fwd = re.search(r'forward|redirect', ctext, re.I)
+            has_hide = re.search(r'\bmove\b|delete|markasread|mark read|\brss\b|junk|archive|hidden folder|hide', ctext, re.I)
+            if has_fwd:
+                _cloud_agg("T1114.003", "Email Collection: Email Forwarding Rule", "Collection", "HIGH", {"user": user}, ev_cloud)
+            if has_hide:
+                _cloud_agg("T1564.008", "Hide Artifacts: Email Hiding Rules", "Defense Evasion", "HIGH", {"user": user}, ev_cloud)
+            if not has_fwd and not has_hide:
+                _cloud_agg("T1564.008", "Hide Artifacts: Email Hiding Rules", "Defense Evasion", "MEDIUM", {"user": user}, ev_cloud)
+
+        if re.search(r'set-mailbox\b.*(?:forwardingsmtpaddress|forwardingaddress|delivertomailboxandforward)', ctext, re.I):
+            if remote: attacker_ips.add(remote)
+            if user: compromised_users.add(user)
+            _cloud_agg("T1114.003", "Email Collection: Email Forwarding Rule", "Collection", "HIGH", {"user": user}, ev_cloud)
+
+        if re.search(r'add-mailboxpermission|add-recipientpermission|add-mailboxfolderpermission|set-mailboxfolderpermission|add-adpermission', ctext, re.I):
+            _cloud_agg("T1098.002", "Account Manipulation: Additional Email Delegate Permissions", "Persistence", "HIGH", {"user": user}, ev_cloud)
+
+        if re.search(r'mailitemsaccessed|search-mailbox|new-compliancesearch|/me/messages|/users/[^/\s]+/messages|\blist\s+messages\b|\bdownload\s+attachment\b', ctext, re.I):
+            if remote: attacker_ips.add(remote)
+            if user: compromised_users.add(user)
+            _cloud_agg("T1114.002", "Email Collection: Remote Email Collection", "Collection", "MEDIUM", {"user": user}, ev_cloud)
+            matched_5 = True
+
+        if not matched_5 and re.search(r'filedownloaded|filesyncdownloadedfull|\bdownload\b\s+\S+\.(?:xlsx?|docx?|pptx?|pdf|csv|zip|7z|txt)\b', ctext, re.I):
+            if remote: attacker_ips.add(remote)
+            if user: compromised_users.add(user)
+            if 'sharepoint' in wl or '/sites/' in ctext:
+                _cloud_agg("T1213.002", "Data from Information Repositories: Sharepoint", "Collection", "HIGH", {"user": user}, ev_cloud)
+            else:
+                _cloud_agg("T1530", "Data from Cloud Storage", "Collection", "HIGH", {"user": user}, ev_cloud)
+
+        if re.search(r'/me/drive/root|/drives/[^/\s]+/root|/sites/[^/\s]+/drive|/children\b|\blist\s+(?:files|folders|drive)\b', ctext, re.I):
+            _cloud_agg("T1619", "Cloud Storage Object Discovery", "Discovery", "MEDIUM", {"user": user}, ev_cloud)
+
+        if re.search(r'impossible travel|atypical travel|unfamiliar sign-?in|anonymous ip address|token replay', ctext, re.I) or (re.search(r'refresh[_ ]token', ctext, re.I) and re.search(r'mfa not (?:requested|performed|satisfied)|without mfa|singlefactorauthentication', ctext, re.I) and remote):
+            if remote: attacker_ips.add(remote)
+            if user: compromised_users.add(user)
+            _cloud_agg("T1078.004", "Valid Accounts: Cloud Accounts", "Initial Access", "HIGH", {"user": user, "src_ip": remote}, ev_cloud)
+
+        if re.search(r'get-azureaduser|get-mguser|get-msoluser|/v1\.0/users\b|/beta/users\b|\blist\s+users\b', ctext, re.I):
+            _cloud_agg("T1087.004", "Account Discovery: Cloud Account", "Discovery", "MEDIUM", {"user": user}, ev_cloud)
+        # 13. Konteyner API va kriptomayner (umumiy)
+        text = cmd_lower if cmd_lower else msg_lower
+        proc_base = proc_lower.split('/')[-1].split('\\')[-1].replace('.exe', '')
+        
+        is_container = False
+        is_priv = '--privileged' in text or '-v /:/' in text or '--pid=host' in text or '--net=host' in text
+        if re.search(r'/(?:v[\d.]+/)?containers/create\b|/api/v1/namespaces/[^/\s]+/pods\b', text):
+            is_container = True
+        elif proc_base in {'docker', 'podman', 'kubectl', 'crictl', 'nerdctl'} and re.search(r'\b(?:run|create)\b', text) and is_priv:
+            is_container = True
+            
+        if is_container:
+            if host: hosts_involved.add(host)
+            ev_str = msg or cmd
+            if is_priv or 'privileged=true' in text:
+                ev_str += " (privileged)"
+                
+            found_1610 = False
+            for st in stages:
+                if st.technique_id == "T1610" and st.host == host:
+                    st.iocs['count'] = st.iocs.get('count', 1) + 1
+                    found_1610 = True
+                    break
+            if not found_1610:
                 stages.append(AttackStage(
-                    stage_id=f"S{len(stages)+1:02d}",
-                    timestamp=ts,
-                    host=host,
-                    phase="Initial Access / Persistence",
-                    technique_id="T1566.002",
-                    technique_name="Phishing: Spearphishing Consent / Malicious OAuth",
-                    confidence="HIGH",
-                    status="CONFIRMED",
-                    evidence=msg or cmd,
-                    iocs=_clean({"user": user, "host": host, "c2_ip": c['dst_ip']}),
-                    source_dataset=ds
+                    stage_id=f"S{len(stages)+1:02d}", timestamp=ts, host=host, phase="Execution",
+                    technique_id="T1610", technique_name="Deploy Container", confidence="HIGH",
+                    status="CONFIRMED", evidence=ev_str, iocs=_clean({"host": host, "user": user, "count": 1}), source_dataset=ds
                 ))
-            elif any(k in msg_lower or k in cmd_lower for k in ['onedrive enumeration', '/me/drive/root', 'mailbox search', 'mail attachment downloaded', 'sharepoint file downloaded', 'file downloaded', 'download deals', 'bulk download executive files']):
-                if host: hosts_involved.add(host)
-                if 'onedrive enumeration' in msg_lower or '/me/drive' in cmd_lower:
-                    tech_id = "T1083"
-                    tech_name = "File and Directory Discovery: Cloud Storage"
-                    phase_name = "Discovery"
-                else:
-                    tech_id = "T1530" if 'file downloaded' in msg_lower or 'deals' in cmd_lower else ("T1114" if 'mail' in msg_lower else "T1213.002")
-                    tech_name = "Data from Cloud Storage: File Download" if 'file downloaded' in msg_lower or 'deals' in cmd_lower else ("Email Collection" if 'mail' in msg_lower else "Data from Information Repositories: SharePoint")
-                    phase_name = "Collection"
+            
+            atk_ip = src_ip if _is_external(src_ip) else (c['dst_ip'] if _is_external(c['dst_ip']) else None)
+            if atk_ip and re.search(r'/(?:v[\d.]+/)?containers/create\b|/api/v1/namespaces/[^/\s]+/pods\b', text):
+                attacker_ips.add(atk_ip)
+                found_1190 = False
+                for st in stages:
+                    if st.technique_id == "T1190" and st.host == host and st.iocs.get('src_ip') == atk_ip:
+                        st.iocs['count'] = st.iocs.get('count', 1) + 1
+                        found_1190 = True
+                        break
+                if not found_1190:
+                    stages.append(AttackStage(
+                        stage_id=f"S{len(stages)+1:02d}", timestamp=ts, host=host, phase="Initial Access",
+                        technique_id="T1190", technique_name="Exploit Public-Facing Application", confidence="HIGH",
+                        status="CONFIRMED", evidence="Unauthenticated container API access", iocs=_clean({"host": host, "src_ip": atk_ip, "count": 1}), source_dataset=ds
+                    ))
+                    
+        is_miner = False
+        pool_ip = None
+        if re.search(r'\b(?:xmrig|xmr-stak|minerd|cpuminer|ccminer|nbminer|t-rex|lolminer|phoenixminer|nanominer|srbminer|gminer|teamredminer)\b', proc_base + ' ' + text):
+            is_miner = True
+        elif re.search(r'stratum(?:\+tcp|\+ssl|2\+tcp)?://', text):
+            is_miner = True
+        elif re.search(r'\s-o\s+\S+:(?:3333|4444|5555|7777|14433|14444|45560|45700)\b', text) and (' -u ' in text or '--donate-level' in text or ' -a ' in text or '--coin' in text):
+            is_miner = True
+        elif 'miner' in proc_base and c.get('dst_port') in {3333, 4444, 5555, 7777, 14433, 14444, 45560, 45700, '3333', '4444', '5555', '7777', '14433', '14444', '45560', '45700'}:
+            is_miner = True
+            
+        if is_miner:
+            if host: hosts_involved.add(host)
+            pool = c['dst_ip']
+            m_pool = re.search(r'\s-o\s+([^:]+):', text)
+            if m_pool:
+                pool = m_pool.group(1)
+            if pool and _is_external(pool):
+                attacker_ips.add(pool)
+            
+            found_1496 = False
+            for st in stages:
+                if st.technique_id == "T1496" and st.host == host:
+                    st.iocs['count'] = st.iocs.get('count', 1) + 1
+                    found_1496 = True
+                    break
+            if not found_1496:
                 stages.append(AttackStage(
-                    stage_id=f"S{len(stages)+1:02d}",
-                    timestamp=ts,
-                    host=host,
-                    phase=phase_name,
-                    technique_id=tech_id,
-                    technique_name=tech_name,
-                    confidence="HIGH",
-                    status="CONFIRMED",
-                    evidence=msg or cmd,
-                    iocs=_clean({"user": user, "cmd": cmd}),
-                    source_dataset=ds
-                ))
-            elif any(k in msg_lower or k in cmd_lower for k in ['mailbox forwarding persistence', 'mail rule persistence', 'inbox rule created', 'create inbox rule', 'forward to external address', 'new-inboxrule forward']):
-                if host: hosts_involved.add(host)
-                stages.append(AttackStage(
-                    stage_id=f"S{len(stages)+1:02d}",
-                    timestamp=ts,
-                    host=host,
-                    phase="Persistence",
-                    technique_id="T1114.002",
-                    technique_name="Email Collection: Remote Email Forwarding Rule",
-                    confidence="HIGH",
-                    status="CONFIRMED",
-                    evidence=msg or cmd,
-                    iocs=_clean({"user": user, "cmd": cmd}),
-                    source_dataset=ds
-                ))
-            elif any(k in msg_lower or k in cmd_lower for k in ['password sign-in denied', 'legacy password grant denied', 'credential reset initiated by attacker', 'app-only refresh token', 'password compromise not observed']):
-                if host: hosts_involved.add(host)
-                stages.append(AttackStage(
-                    stage_id=f"S{len(stages)+1:02d}",
-                    timestamp=ts,
-                    host=host,
-                    phase="Credential Access",
-                    technique_id="T1528",
-                    technique_name="Steal Application Access Token: Denied Legacy Auth",
-                    confidence="HIGH",
-                    status="CONFIRMED",
-                    evidence=msg or cmd,
-                    iocs=_clean({"user": user, "cmd": cmd}),
-                    source_dataset=ds
+                    stage_id=f"S{len(stages)+1:02d}", timestamp=ts, host=host, phase="Impact",
+                    technique_id="T1496", technique_name="Resource Hijacking", confidence="HIGH",
+                    status="CONFIRMED", evidence=msg or cmd, iocs=_clean({"host": host, "pool": pool, "count": 1}), source_dataset=ds
                 ))
 
-        # 13. Docker API, Container Attacks & Linux Cryptomining (Scenario 07)
-        if 'docker' in str(host).lower() or 'docker' in proc_lower or 'container' in msg_lower or 'stratum' in msg_lower or 'miner' in proc_lower:
-            if any(k in msg_lower or k in cmd_lower for k in ['docker api create', 'unauthenticated docker api', 'containers/create', 'container started']):
-                if host: hosts_involved.add(host)
-                stages.append(AttackStage(
-                    stage_id=f"S{len(stages)+1:02d}",
-                    timestamp=ts,
-                    host=host,
-                    phase="Initial Access / Execution",
-                    technique_id="T1610",
-                    technique_name="Deploy Container",
-                    confidence="HIGH",
-                    status="CONFIRMED",
-                    evidence=msg or cmd,
-                    iocs=_clean({"host": host, "user": user}),
-                    source_dataset=ds
-                ))
-            elif any(k in msg_lower or k in cmd_lower for k in ['cryptominer process', 'stratum-like connection', 'resource anomaly cpu 99%']):
-                if c['dst_ip']: attacker_ips.add(c['dst_ip'])
-                if host: hosts_involved.add(host)
-                stages.append(AttackStage(
-                    stage_id=f"S{len(stages)+1:02d}",
-                    timestamp=ts,
-                    host=host,
-                    phase="Impact",
-                    technique_id="T1496",
-                    technique_name="Resource Hijacking: Network Cryptomining",
-                    confidence="HIGH",
-                    status="CONFIRMED",
-                    evidence=msg or cmd,
-                    iocs=_clean({"host": host, "dst_ip": c['dst_ip']}),
-                    source_dataset=ds
-                ))
-            elif any(k in msg_lower or k in cmd_lower for k in ['/etc/cron.d/', 'cron persistence', 'container restart']):
-                if host: hosts_involved.add(host)
-                stages.append(AttackStage(
-                    stage_id=f"S{len(stages)+1:02d}",
-                    timestamp=ts,
-                    host=host,
-                    phase="Persistence",
-                    technique_id="T1053.003",
-                    technique_name="Scheduled Task/Job: Cron",
-                    confidence="HIGH",
-                    status="CONFIRMED",
-                    evidence=msg or cmd,
-                    iocs=_clean({"host": host, "cmd": cmd}),
-                    source_dataset=ds
-                ))
 
-        # 14. DNS Tunneling & Exfiltration (Scenario 08)
-        if 'dns' in str(host).lower() or 'named' in proc_lower or 'dnscat' in proc_lower or 'dns tunnel' in msg_lower or 'txt queries' in msg_lower:
-            if any(k in msg_lower or k in cmd_lower for k in ['dns tunnel chunk', '122 txt queries', 'dnscat', 'exfil-lab']):
-                if host: hosts_involved.add(host)
+        # 14. DNS tunnel vositasi (umumiy)
+        proc_base = proc_lower.split('/')[-1].split('\\')[-1].replace('.exe', '')
+        if proc_base in {'dnscat', 'dnscat2', 'iodine', 'iodined', 'dns2tcp', 'dns2tcpc', 'dnscapy', 'dnsexfiltrator'} or re.search(r'\b(?:dnscat2?|iodined?|dns2tcpc?|start-dnscat2|dnscat2\.ps1)\b', cmd_lower):
+            if host: hosts_involved.add(host)
+            found_1071 = False
+            for st in stages:
+                if st.technique_id == "T1071.004" and st.host == host:
+                    st.iocs['count'] = st.iocs.get('count', 1) + 1
+                    found_1071 = True
+                    break
+            if not found_1071:
                 stages.append(AttackStage(
                     stage_id=f"S{len(stages)+1:02d}",
                     timestamp=ts,
                     host=host,
-                    phase="Exfiltration",
-                    technique_id="T1048.003",
-                    technique_name="Exfiltration Over Alternative Protocol: Exfiltration Over Unencrypted Non-C2 Protocol (DNS)",
+                    phase="Command and Control",
+                    technique_id="T1071.004",
+                    technique_name="Application Layer Protocol: DNS",
                     confidence="HIGH",
                     status="CONFIRMED",
-                    evidence=msg or cmd,
+                    evidence=cmd or msg,
                     iocs=_clean({"host": host, "process": c['proc_name'], "query": cmd}),
                     source_dataset=ds
                 ))
 
         # 15. Insider Exfiltration, DLP & Log Clearing (Scenario 05)
-        if any(k in msg_lower for k in ['read 327 employee files', 'hr-confidential', 'unauthorized mass file copy']):
+        usb_dev = False
+        _eid_usb = str(get_nested(evt, 'event.code') or evt.get('EventID') or evt.get('event_id') or evt.get('event_code') or get_nested(evt, 'winlog.event_id') or '').strip()
+        _chan_usb = str(get_nested(evt, 'winlog.channel') or evt.get('Channel') or evt.get('channel') or '').lower()
+        usb_text = str(get_nested(evt,'winlog.event_data.ClassName') or '') + ' ' + str(evt.get('DeviceDescription') or '') + ' ' + full_text
+        if _eid_usb == '6416' and re.search(r'diskdrive|\bdisk\b|mass storage|removable|\bwpd\b', usb_text, re.I):
+            usb_dev = True
+        elif _eid_usb in ('2003', '2100', '2102') and 'driverframeworks' in _chan_usb:
+            usb_dev = True
+        elif _eid_usb in ('400', '410', '20001', '20003') and 'usbstor' in full_text:
+            usb_dev = True
+        elif re.search(r'\busbstor\b', full_text):
+            usb_dev = True
+            
+        usb_copy = bool(re.search(r'\b(?:copy|copied|write|wrote|xcopy|robocopy|move)\b', full_text) and re.search(r'\bremovable\s+(?:media|drive|disk|storage|device)\b', full_text))
+        
+        if usb_dev or usb_copy:
             if host: hosts_involved.add(host)
-            stages.append(AttackStage(
-                stage_id=f"S{len(stages)+1:02d}",
-                timestamp=ts,
-                host=host,
-                phase="Collection",
-                technique_id="T1039",
-                technique_name="Data from Network Shared Drive",
-                confidence="HIGH",
-                status="CONFIRMED",
-                evidence=msg or cmd,
-                iocs=_clean({"host": host, "user": user}),
-                source_dataset=ds
-            ))
-        elif any(k in msg_lower or k in cmd_lower for k in ['usb inserted', 'synth-usb', 'usbstor', 'copy hr_docs.7z to removable media', 'usb exfil blocked']):
-            if host: hosts_involved.add(host)
-            stages.append(AttackStage(
-                stage_id=f"S{len(stages)+1:02d}",
-                timestamp=ts,
-                host=host,
-                phase="Exfiltration",
-                technique_id="T1052.001",
-                technique_name="Exfiltration Over Physical Medium: USB Removable Media",
-                confidence="HIGH",
-                status="CONFIRMED",
-                evidence=msg or cmd,
-                iocs=_clean({"host": host, "user": user, "cmd": cmd}),
-                source_dataset=ds
-            ))
-        elif any(k in msg_lower or k in cmd_lower for k in ['rclone.exe', 'cloud upload 188331002 bytes', 'upload completed to personal cloud', 'cloud exfil confirmed']):
-            if c['dst_ip']: attacker_ips.add(c['dst_ip'])
+            conf = "HIGH" if usb_copy else "MEDIUM"
+            ev_msg = cmd or msg or "USB qurilma ulandi"
+            
+            found_usb = False
+            for st in stages:
+                if st.technique_id == "T1052.001" and st.host == host and st.iocs.get('user') == user:
+                    st.iocs['count'] = st.iocs.get('count', 1) + 1
+                    if conf == "HIGH":
+                        st.confidence = "HIGH"
+                    found_usb = True
+                    break
+            if not found_usb:
+                stages.append(AttackStage(
+                    stage_id=f"S{len(stages)+1:02d}",
+                    timestamp=ts,
+                    host=host,
+                    phase="Exfiltration",
+                    technique_id="T1052.001",
+                    technique_name="Exfiltration Over Physical Medium: USB Removable Media",
+                    confidence=conf,
+                    status="CONFIRMED",
+                    evidence=ev_msg,
+                    iocs=_clean({"host": host, "user": user, "cmd": cmd}),
+                    source_dataset=ds
+                ))
+        elif proc_base in {'rclone', 'megacmd', 'mega-put', 'megatools', 'gdrive', 'dropbox_uploader', 'azcopy', 'gsutil', 's3cmd'} or re.search(r'\b(?:rclone\s+(?:copy|sync|move)|aws\s+s3\s+(?:cp|sync|mv)|gsutil\s+(?:cp|rsync)|azcopy\s+(?:copy|sync)|mega-put|megaput)\b', text):
+            if c['dst_ip'] and _is_external(c['dst_ip']): attacker_ips.add(c['dst_ip'])
             if host: hosts_involved.add(host)
             stages.append(AttackStage(
                 stage_id=f"S{len(stages)+1:02d}",
@@ -1754,70 +2227,86 @@ def correlate_incident(raw_events: List[Dict[str, Any]], kb=None, heuristic_fall
                 iocs=_clean({"host": host, "user": user, "cmd": cmd}),
                 source_dataset=ds
             ))
-
-        # 16. Backup Compromise & Repository Tampering (Scenario 10)
-        if 'backup' in msg_lower or 'backupctl' in cmd_lower or 'delete restore-set' in cmd_lower or 'retention lock' in msg_lower or 'bkp_cfg.tgz' in cmd_lower or 'rdp logon type 10' in msg_lower:
+        # 16. Backup tampering va arxivlash (umumiy)
+        text = cmd_lower if cmd_lower else msg_lower
+        proc_base = proc_lower.split('/')[-1].split('\\')[-1].replace('.exe', '')
+        
+        is_backup_del = bool(re.search(r'wbadmin\s+delete\s+(?:catalog|systemstatebackup|backup)|bcdedit\b.*recoveryenabled\s+no|bcdedit\b.*bootstatuspolicy\s+ignoreallfailures|wmic\s+shadowcopy\s+delete|vssadmin\b.*resize\s+shadowstorage|\brestic\b.*\bforget\b|\bborg\s+(?:delete|prune)\b|remove-vbr(?:backup|restorepoint)|\btmutil\s+delete|\bzfs\s+destroy\b.*@|btrfs\s+subvolume\s+delete|lvremove\b.*snap', text, re.I))
+        if not is_backup_del and proc_base in {'backupctl', 'restic', 'borg', 'veeamconfig', 'bconsole', 'wbadmin', 'duplicity', 'rclone'}:
+            if re.search(r'\b(?:delete|remove|purge|prune|forget|expire)\b', text) and re.search(r'\b(?:backup|snapshot|restore[- ]?point|restore[- ]?set|archive|repositor\w*|daily|weekly|monthly)\b', text):
+                is_backup_del = True
+                
+        if is_backup_del:
             if host: hosts_involved.add(host)
-            if 'rdp logon type 10' in msg_lower:
-                if c['src_ip']: attacker_ips.add(c['src_ip'])
+            stages.append(AttackStage(
+                stage_id=f"S{len(stages)+1:02d}", timestamp=ts, host=host, phase="Impact",
+                technique_id="T1490", technique_name="Inhibit System Recovery", confidence="HIGH",
+                status="CONFIRMED", evidence=msg or cmd, iocs=_clean({'cmd': cmd, 'user': user, 'process': c['proc_name']}), source_dataset=ds
+            ))
+            
+        is_backup_disc = bool(re.search(r'\b(?:restic\s+snapshots|borg\s+list|wbadmin\s+get\s+versions|vssadmin\s+list\s+shadows|get-vbr(?:backup|restorepoint)|tmutil\s+listbackups)\b', text))
+        if not is_backup_disc and proc_base in {'backupctl', 'restic', 'borg', 'veeamconfig', 'bconsole', 'wbadmin', 'duplicity', 'rclone'}:
+            if re.search(r'\b(?:list|ls|show|get)\b', text) and re.search(r'\b(?:repositor\w*|restore[- ]?points?|snapshots?|backups?|jobs?)\b', text):
+                is_backup_disc = True
+                
+        if is_backup_disc:
+            if host: hosts_involved.add(host)
+            stages.append(AttackStage(
+                stage_id=f"S{len(stages)+1:02d}", timestamp=ts, host=host, phase="Discovery",
+                technique_id="T1083", technique_name="File and Directory Discovery", confidence="MEDIUM",
+                status="CONFIRMED", evidence=msg or cmd, iocs=_clean({'cmd': cmd, 'user': user, 'process': c['proc_name']}), source_dataset=ds
+            ))
+            
+        if proc_base in {'tar', '7z', '7za', '7zr', 'zip', 'rar', 'winrar', 'gzip', 'bzip2', 'xz', 'zstd', 'makecab'} and re.search(r'\.(?:tgz|tar|tar\.gz|tbz2?|zip|7z|rar|gz|bz2|xz|zst|cab)\b', text):
+            has_archive = any(s.host == host and s.technique_id == "T1560.001" and (s.timestamp or '') == ts for s in stages)
+            if not has_archive:
+                if host: hosts_involved.add(host)
                 stages.append(AttackStage(
-                    stage_id=f"S{len(stages)+1:02d}",
-                    timestamp=ts,
-                    host=host,
-                    phase="Initial Access",
-                    technique_id="T1133",
-                    technique_name="External Remote Services: RDP Logon",
-                    confidence="HIGH",
-                    status="CONFIRMED",
-                    evidence=msg,
-                    iocs=_clean({"src_ip": c['src_ip'], "user": user}),
-                    source_dataset=ds
+                    stage_id=f"S{len(stages)+1:02d}", timestamp=ts, host=host, phase="Collection",
+                    technique_id="T1560.001", technique_name="Archive Collected Data: Archive via Utility", confidence="HIGH",
+                    status="CONFIRMED", evidence=msg or cmd, iocs=_clean({'cmd': cmd, 'user': user, 'process': c['proc_name']}), source_dataset=ds
                 ))
-            elif 'backup discovery' in msg_lower or 'list repositories' in cmd_lower:
-                stages.append(AttackStage(
-                    stage_id=f"S{len(stages)+1:02d}",
-                    timestamp=ts,
-                    host=host,
-                    phase="Discovery",
-                    technique_id="T1083",
-                    technique_name="File and Directory Discovery: Backup Discovery",
-                    confidence="HIGH",
-                    status="CONFIRMED",
-                    evidence=msg or cmd,
-                    iocs=_clean({"cmd": cmd, "user": user}),
-                    source_dataset=ds
-                ))
-            elif 'delete requested' in msg_lower or 'delete restore-set' in cmd_lower or 'delete blocked' in msg_lower:
-                stages.append(AttackStage(
-                    stage_id=f"S{len(stages)+1:02d}",
-                    timestamp=ts,
-                    host=host,
-                    phase="Impact",
-                    technique_id="T1490",
-                    technique_name="Inhibit System Recovery: Backup Deletion Attempt",
-                    confidence="HIGH",
-                    status="CONFIRMED",
-                    evidence=msg or cmd,
-                    iocs=_clean({"cmd": cmd, "user": user}),
-                    source_dataset=ds
-                ))
-            elif 'bkp_cfg.tgz' in cmd_lower or 'collection staged' in msg_lower:
-                stages.append(AttackStage(
-                    stage_id=f"S{len(stages)+1:02d}",
-                    timestamp=ts,
-                    host=host,
-                    phase="Collection",
-                    technique_id="T1560.001",
-                    technique_name="Archive Collected Data: Archive via Utility",
-                    confidence="HIGH",
-                    status="CONFIRMED",
-                    evidence=cmd or msg,
-                    iocs=_clean({"cmd": cmd, "user": user}),
-                    source_dataset=ds
-                ))
+
 
         if len(stages) > _n0 and not _pass_to_fallback:
             handled_idx.add(_i)
+
+    # DNS eksfiltratsiyasi bog'lanishi
+    for host_iter in list(hosts_involved):
+        t1071_stages = [s for s in stages if s.technique_id == "T1071.004" and s.host == host_iter]
+        if not t1071_stages:
+            continue
+            
+        has_t1048 = any(s.technique_id == "T1048.003" and s.host == host_iter for s in stages)
+        if has_t1048:
+            continue
+            
+        t1071_time = t1071_stages[0].timestamp
+        archive_stages = [s for s in stages if s.host == host_iter and s.technique_id in {'T1560', 'T1560.001', 'T1005', 'T1039', 'T1119', 'T1530'}]
+        
+        valid_archive = False
+        if not t1071_time:
+            valid_archive = bool(archive_stages)
+        else:
+            for s in archive_stages:
+                if not s.timestamp or s.timestamp <= t1071_time:
+                    valid_archive = True
+                    break
+                    
+        if valid_archive:
+            stages.append(AttackStage(
+                stage_id=f"S{len(stages)+1:02d}",
+                timestamp=t1071_time,
+                host=host_iter,
+                phase="Exfiltration",
+                technique_id="T1048.003",
+                technique_name="Exfiltration Over Alternative Protocol: Exfiltration Over Unencrypted Non-C2 Protocol",
+                confidence="MEDIUM",
+                status="CONFIRMED",
+                evidence="Arxivdan keyin DNS tunnel: " + str(t1071_stages[0].evidence),
+                iocs=t1071_stages[0].iocs.copy(),
+                source_dataset="correlation"
+            ))
 
     # F1. IOC pivot
     ioc_first = {}
@@ -1849,7 +2338,11 @@ def correlate_incident(raw_events: List[Dict[str, Any]], kb=None, heuristic_fall
         if is_ioc_source:
             continue
             
-        if dst in ioc_first and _is_external(dst) and (not c['src_ip'] or not _is_external(c['src_ip'])) and (ioc_first[dst] == '' or (c['timestamp'] and c['timestamp'] >= ioc_first[dst])):
+        # faqat tarmoq ulanishi hodisalari (Sysmon 3 / WFP 5156 / port / tarmoq dataseti): audit yozuvlaridagi remote IP ulanish emas
+        _eid = str(get_nested(evt, 'event.code') or evt.get('EventID') or evt.get('event_id') or evt.get('event_code') or '').strip()
+        _ds = (c['dataset'] or '').lower()
+        is_conn = _eid in ('3', '5156', '5158') or bool(c['dst_port']) or any(k in _ds for k in ('network', 'conn', 'firewall', 'flow', 'zeek', 'suricata', 'proxy')) or (bool(dst) and dst in (c['cmd'] or ''))
+        if is_conn and dst in ioc_first and _is_external(dst) and (not c['src_ip'] or not _is_external(c['src_ip'])) and (ioc_first[dst] == '' or (c['timestamp'] and c['timestamp'] >= ioc_first[dst])):
             proc_lower = (c['proc_name'] or '').lower()
             proc_base = proc_lower.split('/')[-1].split('\\')[-1].replace('.exe', '')
             cmd = c['cmd'] or ''
@@ -1885,10 +2378,15 @@ def correlate_incident(raw_events: List[Dict[str, Any]], kb=None, heuristic_fall
             
             host = c['host']
             c2_key = (host, dst)
+            same = next((s for s in stages if tech != "T1071.001" and s.technique_id == tech and s.host == host and (s.iocs or {}).get('dst_ip') == dst), None)
             if tech == "T1071.001" and c2_key in c2_seen:
                 st = c2_seen[c2_key]
                 st.iocs['connections'] = st.iocs.get('connections', 1) + 1
                 st.iocs['last_seen'] = c['timestamp']
+            elif same:
+                # (host, IP, texnika) bo'yicha bitta qadam
+                same.iocs['count'] = same.iocs.get('count', 1) + 1
+                same.iocs['last_seen'] = c['timestamp']
             else:
                 stages.append(AttackStage(
                     stage_id=f"S{len(stages)+1:02d}", timestamp=c['timestamp'], host=host, phase=phase,
@@ -1902,6 +2400,67 @@ def correlate_incident(raw_events: List[Dict[str, Any]], kb=None, heuristic_fall
             if host: hosts_involved.add(host)
             attacker_ips.add(dst)
             if tech == "T1041": exfil_ips.add(dst)
+
+    exploit_ips = {}
+    for s in stages:
+        if s.technique_id == "T1190":
+            sip = s.iocs.get('src_ip')
+            if sip and _is_external(sip):
+                if sip not in exploit_ips or (s.timestamp and s.timestamp < exploit_ips[sip]):
+                    exploit_ips[sip] = s.timestamp or ''
+
+    for _i, evt in enumerate(raw_events):
+        c = extract_canonical(evt)
+        # VPN post-exploit
+        ds_lower = (c['dataset'] or '').lower() + ' ' + str(evt.get('channel') or '').lower() + ' ' + (c['proc_name'] or '').lower()
+        if 'vpn' in ds_lower or 'sslvpn' in ds_lower:
+            msg = c['message'] or c['cmd'] or ''
+            if re.search(r'\b(?:login|logon|session|tunnel|auth\w*)\b', msg, re.I):
+                sip = c['src_ip']
+                if sip in exploit_ips:
+                    t1190_ts = exploit_ips[sip]
+                    if t1190_ts == '' or (c['timestamp'] and c['timestamp'] >= t1190_ts):
+                        host = c['host']
+                        
+                        existing_t1133 = next((s for s in stages if s.technique_id == "T1133" and s.host == host and s.iocs.get('src_ip') == sip), None)
+                        if existing_t1133:
+                            existing_t1133.iocs['count'] = existing_t1133.iocs.get('count', 1) + 1
+                        else:
+                            stages.append(AttackStage(
+                                stage_id=f"S{len(stages)+1:02d}", timestamp=c['timestamp'], host=host, phase="Initial Access",
+                                technique_id="T1133", technique_name="External Remote Services", confidence="HIGH", status="CONFIRMED",
+                                evidence=f"VPN login from IP {sip} after T1190 exploit",
+                                iocs=_clean({"src_ip": sip, "count": 1, "user": c['user']}), source_dataset=c['dataset']
+                            ))
+                        
+                        existing_t1078 = next((s for s in stages if s.technique_id == "T1078" and s.host == host and s.iocs.get('src_ip') == sip), None)
+                        if existing_t1078:
+                            existing_t1078.iocs['count'] = existing_t1078.iocs.get('count', 1) + 1
+                        else:
+                            stages.append(AttackStage(
+                                stage_id=f"S{len(stages)+1:02d}", timestamp=c['timestamp'], host=host, phase="Initial Access",
+                                technique_id="T1078", technique_name="Valid Accounts", confidence="HIGH", status="CONFIRMED",
+                                evidence=f"VPN login from IP {sip} after T1190 exploit",
+                                iocs=_clean({"src_ip": sip, "count": 1, "user": c['user']}), source_dataset=c['dataset']
+                            ))
+                        handled_idx.add(_i)
+
+        # Internal spearphishing
+        op = str(evt.get('Operation') or get_nested(evt, 'event.code') or evt.get('EventID') or evt.get('event_id') or get_nested(evt, 'event.action') or '').lower()
+        if op in {'send', 'sendas', 'sendonbehalf'}:
+            usr = c['user']
+            if usr and usr in compromised_users:
+                existing_t1534 = next((s for s in stages if s.technique_id == "T1534" and s.iocs.get('user') == usr), None)
+                if existing_t1534:
+                    existing_t1534.iocs['count'] = existing_t1534.iocs.get('count', 1) + 1
+                else:
+                    stages.append(AttackStage(
+                        stage_id=f"S{len(stages)+1:02d}", timestamp=c['timestamp'], host=c['host'], phase="Lateral Movement",
+                        technique_id="T1534", technique_name="Internal Spearphishing", confidence="MEDIUM", status="CONFIRMED",
+                        evidence=f"Compromised user {usr} sending internal phishing",
+                        iocs=_clean({"user": usr, "count": 1}), source_dataset=c['dataset']
+                    ))
+                handled_idx.add(_i)
 
     if kb is None:
         try:

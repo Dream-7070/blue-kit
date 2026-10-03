@@ -86,5 +86,20 @@ class TestFallbackKey(unittest.TestCase):
         tech_stages = [s for s in result.stages if s.technique_id == self.TECH]
         self.assertEqual(len(tech_stages), 2)
 
+
+    def _rat(self, src, dst):
+        return {'@timestamp': '2026-09-18T10:00:00Z', 'host': {'name': 'H'}, 'process': {'name': 'AnyDesk.exe'},
+                'source': {'ip': src}, 'destination': {'ip': dst}, 'winlog': {'channel': 'Application'},
+                'message': 'AnyDesk incoming session accepted'}
+
+    def test_remote_access_tool_external_is_t1219(self):
+        # fallback ev ga process uzatiladi: jarayon nomi heuristikasi ishlaydi
+        st = [s for s in correlate_incident([self._rat('91.238.50.10', '10.10.20.10')], self.kb).stages if s.technique_id == 'T1219']
+        self.assertEqual(len(st), 1)
+
+    def test_remote_access_tool_internal_only_skipped(self):
+        st = [s for s in correlate_incident([self._rat('10.99.2.9', '10.99.1.1')], self.kb).stages if s.technique_id == 'T1219']
+        self.assertEqual(len(st), 0)
+
 if __name__ == '__main__':
     unittest.main()

@@ -1,0 +1,5 @@
+# Linux skriptlari har doim LF bo'ladi: CRLF bilan bash "command not found" bilan yiqiladi
+*.sh text eol=lf
+# Ikkilik fayllar
+*.exe binary
+*.sqlite binary
