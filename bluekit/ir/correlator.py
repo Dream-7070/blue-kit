@@ -7,6 +7,7 @@ from typing import List, Dict, Any, Tuple, Optional
 from bluekit.ir.models import AttackStage, AttackChain
 from bluekit.ir.webauth import web_auth_stages
 from bluekit.ir.proctree import process_tree_stages
+from bluekit.ir.cloudtrail import cloud_audit_stages
 
 from bluekit.netutil import is_external_ip
 from urllib.parse import unquote_plus
@@ -745,6 +746,16 @@ def correlate_incident(raw_events: List[Dict[str, Any]], kb=None, heuristic_fall
         if st.host:
             hosts_involved.add(st.host)
     handled_idx.update(pt_handled)
+
+    cloud_stages, cloud_handled = cloud_audit_stages(raw_events, extract_canonical, _is_external)
+    for st, ip in cloud_stages:
+        st.stage_id = f"S{len(stages)+1:02d}"
+        stages.append(st)
+        if ip and _is_external(ip):
+            attacker_ips.add(ip)
+        if st.host:
+            hosts_involved.add(st.host)
+    handled_idx.update(cloud_handled)
 
     # DNS pre-scan
     def _dns_label_suspicious(name):

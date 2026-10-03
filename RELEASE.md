@@ -30,7 +30,7 @@ bluekit.siem.cli, bluekit.siem.builder, bluekit.siem.catalog,
 bluekit.siem.dialects, bluekit.siem.fields,
 bluekit.resp.sla, bluekit.resp.scoring, bluekit.resp.servicedoctor,
 bluekit.resp.fraud, bluekit.decode, bluekit.doctor, bluekit.answers, bluekit.tracker, bluekit.tz, bluekit.logs.filter, bluekit.logs.bruteforce, bluekit.kb.cve,
-bluekit.case, bluekit.case.loaders, bluekit.case.solver, bluekit.case.cli
+bluekit.case, bluekit.case.loaders, bluekit.case.solver, bluekit.case.cli, bluekit.ir.webauth, bluekit.ir.proctree, bluekit.ir.cloudtrail, bluekit.netutil, bluekit.web.case_api
 ```
 
 **b) Yangi YAML/resurs fayl qo'shilgan bo'lsa** — `bk.spec` ning `datas`

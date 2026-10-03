@@ -160,6 +160,70 @@ def process_tree_stages(raw_events, extract_canonical):
                         source_dataset=p['dataset']
                     )
                     stages.append((st2, ''))
+                    
+        # Web account interactive command
+        user_raw = str(p.get('user') or '').lower()
+        if '\\' in user_raw:
+            user_clean = user_raw.split('\\', 1)[-1]
+        else:
+            user_clean = user_raw
+            
+        acct_match = False
+        if re.match(r'^(iis_iusrs|iusr|apache|www-data|nginx|httpd|tomcat\d*|network service|w3svc)$', user_clean) or \
+           re.match(r'^iis apppool\\.*$', user_raw) or re.match(r'^iis apppool\\.*$', user_clean):
+            acct_match = True
+            
+        if acct_match:
+            cond_a = bool(re.match(r'^(w3wp|httpd|apache2|nginx|php-fpm|php-cgi|java|tomcat\d*)$', parent, re.I) and \
+                          re.match(r'^(cmd|powershell|pwsh|sh|bash|dash|zsh)(?:\.exe)?$', child, re.I))
+            cond_b = bool(re.match(r'^(whoami|ipconfig|ifconfig|arp|nslookup|netstat|systeminfo|tasklist|hostname|id|uname|net|net1|ip|route|quser|query)(?:\.exe)?$', child, re.I) and \
+                          re.match(r'^(cmd|powershell|pwsh|sh|bash|dash)(?:\.exe)?$', parent, re.I))
+                          
+            if cond_a or cond_b:
+                t1505_id = f"T1505.003_{host}_{user_raw}"
+                if not any(s[0].stage_id == t1505_id for s in stages):
+                    st1505 = AttackStage(
+                        stage_id=t1505_id,
+                        timestamp=p['raw_ts'],
+                        host=host,
+                        phase="Persistence",
+                        technique_id="T1505.003",
+                        technique_name="Web Shell",
+                        confidence="MEDIUM",
+                        status="CONFIRMED",
+                        evidence=f"veb xizmat hisobi {user_raw} dan interaktiv buyruq: {parent} -> {child}",
+                        iocs={'user': user_raw, 'parent': parent, 'process': child},
+                        source_dataset=p['dataset']
+                    )
+                    stages.append((st1505, ''))
+                    
+                sh_name = child if cond_a else parent
+                sh_name = sh_name.lower().replace('.exe', '')
+                t_shell = None
+                if sh_name == 'cmd':
+                    t_shell = "T1059.003"
+                elif sh_name in ['powershell', 'pwsh']:
+                    t_shell = "T1059.001"
+                elif sh_name in ['sh', 'bash', 'dash', 'zsh']:
+                    t_shell = "T1059.004"
+                    
+                if t_shell:
+                    tshell_id = f"{t_shell}_{host}_{user_raw}_{sh_name}"
+                    if not any(s[0].stage_id == tshell_id for s in stages):
+                        st_sh = AttackStage(
+                            stage_id=tshell_id,
+                            timestamp=p['raw_ts'],
+                            host=host,
+                            phase="Execution",
+                            technique_id=t_shell,
+                            technique_name="Command and Scripting Interpreter",
+                            confidence="HIGH",
+                            status="CONFIRMED",
+                            evidence=f"veb xizmat hisobi {user_raw} dan interaktiv buyruq: {parent} -> {child}",
+                            iocs={'user': user_raw, 'parent': parent, 'process': child},
+                            source_dataset=p['dataset']
+                        )
+                        stages.append((st_sh, ''))
 
     for s, _ in stages:
         s.stage_id = "TEMP"

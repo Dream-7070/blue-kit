@@ -1008,3 +1008,82 @@
   - T1059.001
   weight: 0.8
   note: ''
+- name: AWS IAM user/login profile creation
+  pattern: (?i)\beventName=(?:CreateUser|CreateLoginProfile|UpdateLoginProfile)\b
+  techniques:
+  - T1136.003
+  weight: 0.9
+  note: ''
+- name: AWS access key added
+  pattern: (?i)\beventName=(?:CreateAccessKey|UpdateAccessKey)\b
+  techniques:
+  - T1098.001
+  weight: 0.85
+  note: ''
+- name: AWS privilege grant
+  pattern: (?i)\beventName=(?:AttachUserPolicy|AttachRolePolicy|AttachGroupPolicy|PutUserPolicy|PutRolePolicy|PutGroupPolicy|AddUserToGroup|CreatePolicyVersion|SetDefaultPolicyVersion|UpdateAssumeRolePolicy)\b
+  techniques:
+  - T1098.003
+  weight: 0.85
+  note: ''
+- name: Cloud audit logging disabled
+  pattern: (?i)\beventName=(?:StopLogging|DeleteTrail|UpdateTrail|PutEventSelectors|DeleteFlowLogs|DeleteDetector|DisableSecurityHub|DeleteConfigurationRecorder|StopConfigurationRecorder)\b
+  techniques:
+  - T1685.002
+  weight: 0.9
+  note: ''
+- name: Cloud storage listing (ListBuckets)
+  pattern: (?i)\beventName=ListBuckets\b
+  techniques:
+  - T1619
+  weight: 0.7
+  note: ''
+- name: Pass-the-Hash (NTLM network logon, key length 0)
+  pattern: (?i)Logon Type:\s*3\b[^|]{0,160}Authentication Package:\s*NTLM[^|]{0,120}Key Length:\s*0\b|Logon Process:\s*NtLmSsp[^|]{0,240}Key Length:\s*0\b|sekurlsa::pth|\bpth-winexe\b|\bInvoke-TheHash\b
+  techniques:
+  - T1550.002
+  weight: 0.85
+  note: ''
+- name: Sudo shell / su escalation
+  pattern: (?i)\bsudo:\s+\S+\s*:[^|]*?USER=root\s*;\s*COMMAND=(?:/usr)?/bin/(?:ba|da|z|k)?sh\b(?:\s+-\w+)*\s*$|\bsudo:[^|]*COMMAND=(?:/usr)?/bin/su\b|\bsudo\s+(?:-i|-s|su)\b
+  techniques:
+  - T1548.003
+  weight: 0.85
+  note: ''
+- name: Linux log truncation
+  pattern: (?i)\btruncate\s+(?:-\w+\s+\S+\s+)*\S*/var/log/|>\s*/var/log/\S+|\bcat\s+/dev/null\s*>\s*/var/log|\bshred\b[^|;&]*/var/log|\bjournalctl\s+--vacuum
+  techniques:
+  - T1685.006
+  weight: 0.9
+  note: ''
+- name: Shell history deletion
+  pattern: (?i)\brm\s+(?:-\w+\s+)*\S*\.(?:bash_|zsh_)?history\b|\bunset\s+HISTFILE\b|\bHISTFILE=/dev/null\b|\bhistory\s+-[cw]\b
+  techniques:
+  - T1070.003
+  weight: 0.85
+  note: ''
+- name: scp/ssh push to external host
+  pattern: (?i)\bssh\b[^|;&]*@(?!(?:10\.|192\.168\.|172\.(?:1[6-9]|2\d|3[01])\.|127\.))[\w.-]+\s+scp\s+-[tf]\b
+  techniques:
+  - T1048
+  weight: 0.8
+  note: ''
+- name: rundll32 DLL from removable/user path
+  pattern: (?i)\brundll32(?:\.exe)?\s+"?(?:[d-z]:\\|\\\\|c:\\(?:users|programdata)\\|c:\\windows\\temp\\|%(?:temp|appdata|public)%)\S*\.dll\b
+  techniques:
+  - T1218.011
+  - T1204.002
+  weight: 0.85
+  note: ''
+- name: Script dropped into web root upload/temp dir
+  pattern: (?i)File created:\s*\S*[\\/](?:inetpub[\\/]wwwroot|wwwroot|htdocs|public_html|www)[\\/](?:\S*[\\/])?(?:uploads?|images?|img|files|temp|tmp|cache|media|assets|static)[\\/]\S*\.(?:aspx?|ashx|asmx|jspx?|php\d?|cfm)\b
+  techniques:
+  - T1505.003
+  weight: 0.75
+  note: ''
+- name: Network config discovery (arp/route/netsh)
+  pattern: (?i)\barp\s+-a\b|\broute\s+print\b|\bnetsh\s+(?:interface|wlan)\s+\w+\s+show\b
+  techniques:
+  - T1016
+  weight: 0.7
+  note: ''
